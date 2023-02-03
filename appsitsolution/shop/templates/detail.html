@@ -1,0 +1,635 @@
+{% extends 'shop/base.html' %}
+{% load shop_tag %}
+
+{% block content %}
+
+	<!-- End of search overlay -->
+	<div class="wrapper">
+		<nav aria-label="breadcrumb" class="filter_short" style="background: {% if request.session.distributor_checkout %}#FFE28A{% else %}#f7f7f7{% endif %};">
+		<div style="margin-left: 20px;" style="background: {% if request.session.distributor_checkout %}#FFE28A{% else %}#f7f7f7{% endif %};">
+			{% include 'shop/include/top_purchase_center.html' %}
+		</div>
+		</nav>
+		<hr>
+		<!-- shop page content -->
+		<div class="shop-wrapper">
+			<div class="shop-page-content">
+				<div class="container">
+					<a href="/"><h4>⇦ Back</h4></a><br />
+					<div class="row">
+						<div class="col-lg-12">
+							<!-- shop product content -->
+							<div id="detaills">
+							<div class="shop-product">
+								<div class="row pb-100 ">
+
+									<div class="col-lg-6 mb-sm-70">
+												{% if user.is_authenticated and product.distributor_price != 0 %}
+											<div class="new_bedge">
+											<div class="single-product__floating-badges">
+										<span class="onsale">-{{product.distributor_price|floatformat:1}}%</span>
+<!--									<span class="hot">hot</span>-->
+										</div>
+											</div>
+												{% endif%}
+										<!--======= shop product big image gallery =======-->
+										<div class="shop-product__big-image-gallery-wrapper mb-30">
+											<div class="single-product__floating-badges single-product__floating-badges--shop-product">
+<!--												<span class="hot">hot</span>-->
+											</div>
+											<div class="shop-product-rightside-icons">
+												<span class="enlarge-icon">
+													<a class="btn-zoom-popup" href="#"
+														data-tippy="Click to enlarge"
+														data-tippy-placement="left"
+														data-tippy-inertia="true"
+														data-tippy-animation="shift-away"
+														data-tippy-delay="50"
+														data-tippy-arrow="true"
+														data-tippy-theme="sharpborder">
+														<i class="ion-android-expand"></i>
+													</a>
+												</span>
+											</div>
+											<div class="shop-product__big-image-gallery-slider">
+												{% if product.image != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image2 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image2.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image2.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image2.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image2.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image3 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image3.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image3.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image3.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image3.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image4 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image4.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image4.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image4.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image4.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image5 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image5.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image5.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image5.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image5.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image6 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image6.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image6.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image6.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image6.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image7 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image7.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image7.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image7.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image7.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image8 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image8.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image8.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image8.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image8.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image9 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image9.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image9.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image9.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image9.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image10 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image10.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image10.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image10.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image10.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+											</div>
+										</div>
+										<!--======= shop product big image gallery end =======-->
+
+										<!--======= shop product small image gallery =======-->
+										<div class="shop-product__small-image-gallery-wrapper">
+											<div class="shop-product__small-image-gallery-slider">
+												{% if product.image != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image2 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image2.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image2.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image2.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image2.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image3 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image3.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image3.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image3.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image3.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image4 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image4.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image4.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image4.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image4.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image5 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image5.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image5.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image5.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image5.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image6 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image6.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image6.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image6.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image6.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image7 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image7.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image7.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image7.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image7.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image8 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image8.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image8.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image8.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image8.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image9 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image9.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image9.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image9.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image9.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+												{% if product.image10 != '' %}
+												<div class="single-image">
+													<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image10.url }}"
+                                                         srcset ="
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image10.url  }} 320w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image10.url  }} 640w,
+                                                                 /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image10.url  }} 960w,
+                                                                    "
+                                                         class="img-fluid" alt="">
+												</div>
+												{% endif%}
+											</div>
+										</div>
+										<!--======= shop product small image gallery end =======-->
+									</div>
+
+									<div class="col-lg-6">
+										<div class="shop-product__description">
+
+											<div class="shop-product__title mb-15">
+												<h2>{{ product.product_name }}</h2>
+											</div>
+{% if user.is_authenticated and product.distributor_price != 0  %}
+											<div class="shop-product__price mb-30">
+												{% if not request.session.can_use_loyalty_purchase %}
+												<span class="main-price discounted">₹{% check product %}</span>
+												<span class="discounted-price">₹{% dis_price_include_tax product %}</span><br><br>
+												{%else%}
+													<span class="discounted-price">₹{% check product %}</span><br><br>
+												{%endif%}
+												<span class="discounted-price">BV - {% if request.session.can_use_loyalty_purchase %} 0 {% else %}{% business_volue product %}{% endif %}</span><br>
+												<span class="discounted-price">PV - {% if request.session.can_use_loyalty_purchase %} 0 {% else %}{% point_volue product %}{% endif %}</span>
+											</div>
+											{% else %}
+<div class="shop-product__price mb-30">
+
+												<span class="discounted-price">₹{% check product %}</span>
+											</div>
+
+													    {% endif %}
+
+													{% if product.variant_tags.all %}
+											<div class="varient_new">
+												<h4><b>Choose Variant</b></h4>
+											</div>
+
+													{% for i in product.variant_tags.all|sort_of_error:'cat_order' %}
+											<div class="shop-product__block shop-product__block--size mb-20  ">
+												<div class="shop-product__block__title">{{i | title}} </div>
+													{% for k in product.variant_tags.all|hide_product_detail %}
+													{% if k.product.delete == False  and k.variant_based_on == i %}
+												<a href="{% url 'product_detail' k.product.pk  k.product.slug %}" >
+												<div class="shop-product__block__value">
+													<div class="shop-product-size-list {% if product.pk  == k.product.pk %} activaa {% endif %}">
+<!--														<input type="button" class="variant" id="{{k.product.pk}}" value="{{k.product.size}}">-->
+														{{ k.variant_name }}
+													</div>
+												</div>
+												</a>
+												{% endif %}
+												{% endfor %}
+											</div>
+												{% endfor %}
+												{% elif product.product_variant.variant_tag.variant_tags.all %}
+											<div class="varient_new">
+												<h4><b>Choose Variant</b></h4>
+											</div>
+<!--											<div class="shop-product__short-desc mb-50">-->
+<!--												{{ product.description }}-->
+
+													{% for i in product.product_variant.variant_tag.variant_tags.all|sort_of_error:'cat_order' %}
+											<div class="shop-product__block shop-product__block--size mb-20 ">
+												<div class="shop-product__block__title">{{i | title}}</div>
+													{% for k in product.product_variant.variant_tag.variant_tags.all|hide_product_detail %}
+													{% if k.product.delete == False  and k.variant_based_on == i %}
+												<a href="{% url 'product_detail' k.product.pk  k.product.slug %}" >
+												<div class="shop-product__block__value">
+													<div class="shop-product-size-list {% if product.pk == k.product.pk %} activaa {% endif %}">
+<!--														<input type="button" class="variant" id="{{k.product.pk}}" value="{{k.product.size}}">-->
+														{{ k.variant_name }}
+													</div>
+												</div>
+												</a>
+												{% endif %}
+												{% endfor %}
+											</div>
+
+
+												{% endfor %}
+												{% endif %}
+											<form action="{% url 'product_detail' product.id product.slug %}" id="my-form" method="post">
+												{% csrf_token %}
+													{% if group_user_id %}
+												<label for="id_quantity">Quantity:</label>
+												   <input type="number" name="quantity" value="1" required="" id="id_quantity">
+													<br>
+                                                  <div style="display:none;">
+													<label for="id_user">User:</label>
+												<select name="user" id="id_user1">
+                                                    <option value="{{ group_user_id }}"></option>
+                                             </select>
+                                                 </div>
+												  {{ form.product_id }}
+												{% else %}
+													<label for="id_quantity">Quantity:</label>
+												   <input type="number" name="quantity" value="1" required="" id="id_quantity">
+													<br>
+												<div style="display:none;">
+												<select name="user" id="id_user">
+                                                 <option value="{{ request.user.id }}">{{ request.group_user }}</option>
+                                             </select>
+	                                            </div>
+												  {{ form.product_id }}
+													{% endif %}
+
+
+                                            	<spam class="error alert-danger" id='quantity_spam'></spam>
+
+												{% if quantity  %}
+												<div class="shop-product__buttons mb-40">
+													<input class="lezada-button" type="submit" value="Add to cart" class="btn btn-primary" >
+												</div>
+												{% else %}
+												<br />
+												<div class="shop-product__buttons mb-40">
+													<div class="varient_new">
+														Item out of Stock
+													</div>
+												</div>
+												{% endif %}
+											</form>
+
+											<!-- other info table -->
+											<div class="quick-view-other-info pb-0">
+												<table>
+
+													<tr class="single-info">
+														<td class="quickview-title">Categories: </td>
+														<td class="quickview-value">
+															<a href="{% url 'categry_name' product.category.pk product.category.cat_name %}">{{product.category}}</a>
+<!--															<a href="#">Men</a>,-->
+<!--															<a href="#">Sunglasses</a>-->
+														</td>
+													</tr>
+													{% if product.brand %}
+													<tr class="single-info">
+														<td class="quickview-title">Brand: </td>
+														<td class="quickview-value">{{product.brand}}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.colour %}
+													<tr class="single-info">
+														<td class="quickview-title">Colour: </td>
+														<td class="quickview-value">{{product.colour}}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.size %}
+													<tr class="single-info">
+														<td class="quickview-title">Size: </td>
+														<td class="quickview-value">{{product.size}}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.material %}
+													<tr class="single-info">
+														<td class="quickview-title">Material: </td>
+														<td class="quickview-value">{{product.material}}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.flavour %}
+													<tr class="single-info">
+														<td class="quickview-title">Flavour: </td>
+														<td class="quickview-value">{{product.flavour}}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.weight %}
+													<tr class="single-info">
+														<td class="quickview-title">Weight: </td>
+														<td class="quickview-value">{{product.weight}}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.ingredients %}
+													<tr class="single-info">
+														<td class="quickview-title">Ingredients:</td>
+														<td class="quickview-value">{% for i in ingredients %}
+															{{i}}<br>
+															{% endfor %}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.usage %}
+													<tr class="single-info">
+														<td class="quickview-title">Usage:</td>
+														<td class="quickview-value">{% for i in usage %}
+															{{i}}<br>
+															{% endfor %}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.indications %}
+													<tr class="single-info">
+														<td class="quickview-title">Indications:</td>
+														<td class="quickview-value">{% for i in indications %}
+															{{i}}<br>
+															{% endfor %}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.special_feature %}
+													<tr class="single-info">
+														<td class="quickview-title">Special feature:</td>
+														<td >
+															{% for i in special_feature %}
+															{{i}} <br>
+															{% endfor %}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.safety_warning %}
+													<tr class="single-info">
+														<td class="quickview-title">Safety warning:</td>
+														<td class="quickview-value">{% for i in safety_warning %}
+															{{i}} <br>
+															{% endfor %}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.length %}
+													<tr class="single-info">
+														<td class="quickview-title">Length:</td>
+														<td class="quickview-value">{{product.length}}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.width %}
+													<tr class="single-info">
+														<td class="quickview-title">Width:</td>
+														<td class="quickview-value">{{product.width}}
+														</td>
+													</tr>
+													{% endif %}
+													{% if product.height %}
+													<tr class="single-info">
+														<td class="quickview-title">Height:</td>
+														<td class="quickview-value">{{product.height}}
+														</td>
+													</tr>
+													{% endif %}
+													<tr class="single-info">
+														<td class="quickview-title">Share on: </td>
+														<td class="quickview-value">
+															<ul class="quickview-social-icons">
+																<li><a href="https://www.facebook.com/sharer.php?u=https://portal.auretics.com/product/{{product.pk}}/{{product.slug}}/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+																<li><a href="http://twitter.com/share?text=text&url=https://portal.auretics.com/{{product.pk}}/{{product.slug}}/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+																<li><a href="https://api.whatsapp.com/send?phone=&text=https://portal.auretics.com/product/{{product.pk|urlencode}}/{{product.slug|urlencode}}/" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
+<!--																<li><a href="#"><i class="fa fa-pinterest"></i></a></li>-->
+															</ul>
+														</td>
+													</tr>
+												</table>
+											</div>
+											<!-- End of other info table -->
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-12">
+									{% if product.description %}
+										<div class="shop-product__description-tab pt-100">
+											<!-- tab navigation -->
+											<div class="tab-product-navigation tab-product-navigation--product-desc mb-50">
+												<div class="nav nav-tabs justify-content-center" id="nav-tab2" role="tablist">
+													<a class="nav-item nav-link active" id="product-tab-1" data-toggle="tab" href="#product-series-1" role="tab" aria-selected="true">Description</a>
+<!--													<a class="nav-item nav-link" id="product-tab-2" data-toggle="tab" href="#product-series-2" role="tab" aria-selected="false">Reviews (3)</a>-->
+												</div>
+											</div>
+											<!-- tab navigation end -->
+
+											<!-- tab content -->
+											<div class="tab-content" id="nav-tabContent2">
+												<div class="tab-pane fade show active" id="product-series-1" role="tabpanel"
+													aria-labelledby="product-tab-1">
+													<div class="shop-product__long-desc mb-30">
+														{% for i in description %}
+														{{i}}
+														<br>
+														{% endfor %}
+													</div>
+												</div>
+											</div>
+											<!-- tab content end -->
+										</div>
+									{% endif %}
+									</div>
+								</div>
+							</div>
+							</div>
+							<!-- End of shop product content -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- shop page content end -->
+	</div>
+{% endblock %}
+{% block extra_scripts %}
+<script>
+	$(document).ready(function() {
+$(".prodhighlite").click(function () {
+    $(".prodhighlite").removeClass("active");
+    $(".prodhighlite").addClass("activaa");
+});
+});
+</script>
+<script>
+$(document).ready(function() {
+     $("#id_quantity").focusout(function(){
+       var qty = $('#id_quantity').val();
+<!--       alert(qty);-->
+       var product = {{product.pk}}
+       $.ajax({
+        url: '{% url 'ajax_product_quantity' %}',
+        method: 'POST',
+        data: {
+          'product_id': product,
+          'qty': qty,
+        },
+        dataType: 'json',
+        success: function (data) {
+         if (data['result'] == 404 ){
+         $("#quantity_input").val(data['qty'])
+        $("#quantity_spam").html('maximum : ' + data['qty']);
+         }else if(data['result'] == 200 ){
+         $("#quantity_input").val(data['qty'])
+  			}
+         },
+         });
+       });
+       $('#my-form').submit(function(){
+       var qty = $('#id_quantity').val();
+       var highest_qty = $('#quantity_input').val();
+       qty = parseInt(qty);
+<!--       alert(qty);-->
+       highest_qty = parseInt(highest_qty);
+       if (qty < 1){
+<!--       	alert('in first if condition');-->
+       return false;
+       }
+       if (qty > highest_qty){
+       return false;
+       }
+       else{
+       return true;
+       }
+    });
+    });
+</script>
+{% endblock %}

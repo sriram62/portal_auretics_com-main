@@ -1,0 +1,44 @@
+{% load static %}
+{% include "mlm_calculation/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Dashboard Tree View</h2>
+                <h5 class="calc_page_title_1 mb-4">Details of all Downline</h5>
+                <!--<input type="month" for="downline" class="form-control" value="2021-05">-->
+
+                </div>
+                <div class="col-md-12 mt-4">
+                    <div class="after_tree_bot">
+                    <div class="hirera_tree">
+                        <img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                        <h4>{{request.user.profile.first_name}}</h4>
+                        <h4>{{request.user.referralcode.referral_code}}</h4>
+                        <h5>Business Summary</h5>
+                    </div>
+                    </div>
+                        </div>
+                        <div class="col-md-12 mb-5">
+                            <div class="tree_sub_list">
+{% for user in users %}
+                        <div class="hirera_tree hirera_tree_sub">
+                        <img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                        <h4>{{user.user_id.profile.first_name}} {{user.user_id.profile.last_name}}</h4>
+                        <h4>{{user.referral_code}}</h4>
+                        <h5>Business Summary</h5>
+                        </div>
+                                {% endfor %}
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+
+{% include "mlm_calculation/include/footer.html" %}

@@ -1,0 +1,284 @@
+{% load static %}
+                                <tr class="prod_tbl">
+<!--                                <th scope="row">1</th>-->
+                                <td><select class="form-control select2 product" id="edt{{cnt_multiple_product}}"  name="item">
+                            <option value=0>Select Option</option>
+                            {% for i in items %}
+                            <option value={{i.pk}}>{{i.product_name}}</option>
+                            {% endfor %}
+                        </select></td>
+                                <td><select class="form-control batch_class batches select2" id="edtbatch{{cnt_multiple_product}}" name="batch">
+                            <option value=0>Select Option</option>
+                        </select>
+                                <br> <spam class="error alert-danger" id='batch_spam{{cnt_multiple_product}}'></spam></td>
+                                <td><input type="text" class="quantity" id="edtquantity{{cnt_multiple_product}}" name="quaantity_item" value=0><br>  <spam class="error alert-danger" id='quantity_spam{{cnt_multiple_product}}'></spam></td>
+                                <td><input type="text" class="price" id="edtprice{{cnt_multiple_product}}" name="price_item" value=0><br>  <spam class="error alert-danger" id='price_spam{{cnt_multiple_product}}'></spam></td>
+                                <td class="tcgst"><input type="text" class="edtcgst" id="edtcgst{{cnt_multiple_product}}" name="cgst_item" readonly value=0><input type="hidden" class="cgst" id="hide_cgst{{cnt_multiple_product}}" readonly value=0></td>
+                                <td class="tsgst"><input type="text" class="edtsgst" id="edtsgst{{cnt_multiple_product}}" name="sgst_item" readonly value=0><input type="hidden" class="sgst" id="hide_sgst{{cnt_multiple_product}}" readonly value=0></td>
+                                <td class="tigst"><input type="text" class="edtigst" id="edtigst{{cnt_multiple_product}}" name="igst_item" readonly value=0><input type="hidden" class="igst" id="hide_igst{{cnt_multiple_product}}" readonly value=0></td>
+                                <!-- <td><input type="text" class="vat" id="edtvat{{cnt_multiple_product}}" name="vat_item" readonly value=0><input type="hidden" class="vat" id="hide_vat{{cnt_multiple_product}}" readonly value=0></td> -->
+                                <td><input type="text" class="totalamount" name="totalamount_item"  id="edttotalamount{{cnt_multiple_product}}" readonly value=0></td>
+		                        <td>
+			                        <i class="fa fa-trash dailyreport_dataDelete" alt="Delete" title="Delete" onclick="return myFunctiondata({{cnt_multiple_product}})"></i>
+		                        </td>
+                                </tr>
+
+<script>
+
+$('.cgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.sgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.igst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+// $('.vat').keypress(function(event) {
+//   if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+//     event.preventDefault();
+//   }
+// });
+$('.price').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+    $(".quantity").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var quantity = $(".quantity").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+$('.totalamount').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+</script>
+<script>
+  $( ".batches" ).change(function () {
+    var id = $(this).attr('id')
+    var batch = $("#"+id).val()
+    var res = id.slice(8);
+    var product = $("#edt"+res).val();
+    var purchase_type = $("#purchase_type").val();
+    $.ajax({
+          url: '/mlm_admin/purchase_detail_field',
+          data: {
+            'product_id': product,
+            'batch_id':batch,
+            'purchase_type':purchase_type,
+            'myid': id
+          },
+          dataType: 'json',
+        success: function (data) {
+          // $("#price"+res).val(data['price']);
+          $("#hide_cgst"+res).val(data['cgst']);
+          $("#hide_sgst"+res).val(data['sgst']);
+          $("#hide_igst"+res).val(data['igst']);
+          // $("#hide_vat"+res).val(data['vat']);
+        },
+        error: function(data) {
+
+          // $("#price"+res).val(data['']);
+          $("#hide_cgst"+res).val(data['']);
+          $("#hide_sgst"+res).val(data['']);
+          $("#hide_igst"+res).val(data['']);
+          // $("#vat"+res).val(data['']);
+        }
+    });
+  $("#totalamount_item"+res).val(0);
+  $("#quantity"+res).val(0);
+});
+</script>
+	<script src='{% static "/mlm_admin/js/plugins/select2.full.min.js" %}' type="text/javascript"></script>
+	<script>
+		$(".select2").select2({
+			placeholder: "",
+			allowClear: true
+		});
+	</script>
+<script>
+
+$( ".product" ).change(function () {
+    var id = $(this).attr('id')
+    var product = $("#"+id).val()
+    var res = id.slice(3);
+    var batch_id = "#batch"+res
+    $.ajax({
+        url: '/mlm_admin/batch_field',
+        data: {
+          'product_id': product,
+          'cnt_multiple_product':cnt_multiple_product,
+          'myid': id
+        },
+        dataType: 'html',
+        success: function (data) {
+            $(batch_id).html(data);
+        }
+      });
+  });
+
+</script>
+<script>
+
+$(document).ready(function() {
+
+var value = $('#purchase_type').val();
+		if(value=='1') {
+			$(".tigst").show();
+			$(".tsgst").hide();
+			$(".tcgst").hide();
+		} else {
+			$(".tsgst").show();
+			$(".tcgst").show();
+			$(".tigst").hide();
+		}
+    $(document.body).on('change', '#purchase_type', function () {
+		var emval = $('#purchase_type').val();
+		if(emval=='1') {
+			$(".tigst").show();
+			$(".tsgst").hide();
+			$(".tcgst").hide();
+		} else {
+			$(".tsgst").show();
+			$(".tcgst").show();
+			$(".tigst").hide();
+		}
+});
+});
+</script>
+
+<script>
+    $(".price").focusout(function(){
+    var id = $(this).attr('id');
+    var res = id.slice(8);
+    var price = $("#"+id).val();
+    var quantity = $("#edtquantity"+res).val();
+    if (quantity == ''){
+    quantity = 0
+    }
+    if (price == ''){
+    price = 0
+    }
+    quantity = parseFloat(quantity)
+    price = parseFloat(price)
+    var igst = $("#hide_igst"+res).val();
+    igst = parseFloat(igst)
+    var cgst = $("#hide_cgst"+res).val();
+    cgst = parseFloat(cgst)
+    var sgst = $("#hide_sgst"+res).val();
+    sgst = parseFloat(sgst)
+    // var vat = $("#hide_vat"+res).val();
+    // vat = parseFloat(vat)
+    var grand_total = $("#grand_total").val();
+    grand_total = parseFloat(grand_total)
+    grand_total.toPrecision(1);
+    amount = $("#edttotalamount"+res).val();
+    value = parseFloat(amount)
+    grand_total = (grand_total - amount)
+    cgst = (price * (cgst/100))*quantity;
+    sgst = (price * (sgst/100))*quantity;
+    igst = (price * (igst/100))*quantity;
+    // vat = (price * (vat/100))*quantity;
+    var purchase_type = $("#purchase_type").val()
+    if (purchase_type == '0'){
+    var value = quantity * price ;
+    // value = value + cgst + sgst + vat
+    value = value + cgst + sgst
+    }
+    if (purchase_type == '1'){
+    var value = quantity * price;
+    // value = value + igst + vat;
+    value = value + igst;
+    }
+    value = parseFloat(value)
+    value.toFixed(2);
+    $("#edttotalamount"+res).val(value.toFixed(2));
+    $("#grand_total").val((value + grand_total).toFixed(2));
+    $("#edtcgst" + res).val((cgst).toFixed(2));
+    $("#edtsgst" + res).val((sgst).toFixed(2));
+    $("#edtigst" + res).val((igst).toFixed(2));
+    // $("#edtvat" + res).val((vat).toFixed(2));
+    });
+</script>
+<script>
+    $(".quantity").on("keypress keyup blur",function (event) {
+    var id = $(this).attr('id');
+    var res = id.slice(11);
+    var quantity = $("#"+id).val();
+    var price = $("#edtprice"+res).val();
+    var grand_total = $("#grand_total").val();
+    grand_total = parseFloat(grand_total)
+    amount = $("#edttotalamount"+res).val();
+    amount = parseFloat(amount)
+    var igst = $("#hide_igst"+res).val();
+    igst = parseFloat(igst)
+    var cgst = $("#hide_cgst"+res).val();
+    cgst = parseFloat(cgst)
+    var sgst = $("#hide_sgst"+res).val();
+    sgst = parseFloat(sgst)
+    // var vat = $("#hide_vat"+res).val();
+    // vat = parseFloat(vat)
+    if (quantity == ''){
+    quantity = 0
+    }
+    if (price == ''){
+    price = 0
+    }
+    var finat_total = grand_total - amount
+    quantity = parseFloat(quantity)
+    price = parseFloat(price)
+    cgst = (price * (cgst/100)) * quantity ;
+    sgst = (price * (sgst/100)) * quantity;
+    igst = (price * (igst/100)) * quantity;
+    // vat = (price * (vat/100)) * quantity;
+    var purchase_type = $("#purchase_type").val()
+    if (purchase_type == '0'){
+    var value = quantity * price;
+    // value = value + cgst + sgst + vat ;
+    value = value + cgst + sgst;
+    }
+    if (purchase_type == '1'){
+    var value = quantity * price;
+    // value = value + igst + vat ;
+    value = value + igst ;
+    }
+    value = parseFloat(value)
+    $("#edttotalamount"+res).val(value.toFixed(2));
+    $("#grand_total").val((value + finat_total).toFixed(2));
+    $("#edtcgst" + res).val(cgst);
+    $("#edtsgst" + res).val(sgst);
+    $("#edtigst" + res).val(igst);
+    // $("#edtvat" + res).val(vat);
+});
+    </script>
+<script>
+$( ".product" ).change(function () {
+    var id = $(this).attr('id')
+    var res = id.slice(3);
+    var product = $("#edt"+res).val()
+    var batch_id = "#edtbatch"+res
+    $.ajax({
+        url: '/mlm_admin/editbatch_field',
+        data: {
+          'product_id': product,
+          'batch_id': batch_id,
+          'cnt_multiple_product':cnt_multiple_product,
+          'myid': id
+        },
+        dataType: 'html',
+        success: function (data) {
+         $(batch_id).html(data);
+        }
+      });
+      });
+</script>

@@ -1,0 +1,164 @@
+{% load static %}
+{% include "mlm_calculation/include/header.html" %}
+<style>
+    .calc_title {
+    font-size: 20px;
+    padding-bottom: 12px;
+}
+.calc_page_title{
+     text-decoration: underline;
+    font-size: 35px;
+    text-align: center;
+    margin: 0 auto;
+    color: #0073aa;
+}
+.title_advisor {
+    font-size: 15px;
+    color: #000;
+    font-weight: 500;
+}
+.table_over{
+    overflow-x:auto;
+}
+@media screen and (min-width:0) and (max-width:767px){
+.super_plan label{
+    padding-top:20px;
+}
+}
+</style>
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h2 class="calc_page_title">Super Plan</h2>
+           </div>
+            <div class="modal-body">
+                <div class="form-group super_plan">
+                <div class="row">
+                <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Purchase:</h4>
+                       </div>
+                       <div class="col-md-12">
+                           <label>How many PV to be allocated for Super Plan</label>
+<!--                           <input type="text" for="pv" class="form-control" placeholder="type value here...">-->
+                           {{form.purchase_pv}}
+                           </div>
+                       </div>
+                       <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Direct Bonus:</h4>
+                       </div>
+                       <div class="col-md-6">
+                           <label>How many % of BV?</label>
+<!--                           <input type="text" for="bv" class="form-control" placeholder="type value here...">-->
+                           {{form.direct_bonus_bv}}
+                           </div>
+                            <div class="col-md-6">
+                           <label>Capping (Maximum Distribution)</label>
+<!--                           <input type="text" for="capping" class="form-control" placeholder="type value here...">-->
+                                {{form.direct_bonus_capping}}
+                           </div>
+                       </div>
+                        <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Team Building Bonus:</h4>
+                       </div>
+                       <div class="col-md-6">
+                           <label>Capping (Maximum Amount to be Distributed per User) </label>
+<!--                           <input type="text" for="capping_user" class="form-control" placeholder="type value here...">-->
+                           {{form.team_building_bonus_capping}}
+                           </div>
+                            <div class="col-md-6">
+                           <label>Minimum PPV required</label>
+<!--                           <input type="text" for="ppv" class="form-control" placeholder="type value here...">-->
+                                {{form.team_building_bonus_minimum_ppv}}
+                           </div>
+                       </div>
+                       <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Leadership Building Bonus:</h4>
+                       </div>
+                       <div class="col-md-12">
+                        <table class="table">
+                                 <thead class="thead-dark">
+                                    <tr>
+                                    <th scope="col">S.N</th>
+                                    <th scope="col">Particulars </th>
+                                    <th scope="col">% of Bonus</th>
+
+                                 </tr>
+                                </thead>
+                                <tbody>
+                                   <tr>
+                                    <td>1</td>
+                                    <td>For 1st Downline Level</td>
+                                    <td>
+<!--                                        <input type="text" for="advisor" class="form-control" placeholder="type  here...">-->
+                                        {{form.level_1st_downline}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>2</td>
+                                    <td>For 2nd Downline Level</td>
+                                    <td>
+<!--                                        <input type="text" for="Associate Manager" class="form-control" placeholder="type  here...">-->
+                                        {{form.level_2nd_downline}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>3</td>
+                                     <td>For 3rd Downline Level</td>
+                                    <td>
+<!--                                        <input type="text" for="Manager" class="form-control" placeholder="type  here...">-->
+                                        {{form.level_3rd_downline}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>4</td>
+                                     <td>For 4th Downline Level</td>
+                                    <td>
+<!--                                        <input type="text" for="Manager" class="form-control" placeholder="type  here...">-->
+                                        {{form.level_4th_downline}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>5</td>
+                                     <td>For 5th Downline Level</td>
+                                    <td>
+<!--                                        <input type="text" for="Manager" class="form-control" placeholder="type  here...">-->
+                                        {{form.level_5th_downline}}
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                                </div>
+                       </div>
+                        <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Lifestyle Fund:</h4>
+                       </div>
+                       <div class="col-md-12">
+                           <label>How much as a Percent of TBB? </label>
+<!--                           <input type="text" for="tbb" class="form-control" placeholder="type value here...">-->
+                           {{form.life_style_fund_tbb}}
+                           </div>
+
+                       </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Save </button>
+                <button class="btn btn-danger" type="reset"> Clear </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_calculation/include/footer.html" %}
+<script>
+
+$('.percentage').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+  });
+</script>

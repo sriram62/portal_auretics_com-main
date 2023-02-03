@@ -1,0 +1,158 @@
+{% load static %}
+{% include "distributor/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Distributor Inventory Details</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Stock Details</label>
+                          <select class="form-control" id="stock_details" name="stock_details">
+<!--                            <option value=0>Select Products</option>-->
+                            <option value="balance">Balances Only</option>
+                            <option value="detail">Details</option>
+                        </select>
+                </div>
+                </div>
+                </div>
+                 <div class="row" id="weaklyArea">
+<!--                     <div class="col-sm-12" id="weaklyArea"></div>-->
+                 </div>
+                <div class="row">
+                <div class="col-sm-6">
+		       <label class="floating-label" for="mcname">MC Name : </label>
+               <input value="{{material}}" readonly class="form-control">
+               <input type="hidden" value="{{material.pk}}" id="material_center" name="material_center" readonly>
+                </div>
+                    </div>
+                 <div class="row" id="one_mc">
+                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="capti"><h4>Set Value Based ON</h4></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" id="select_all" name="select_all" value="select_all" placeholder="">
+                    <label class="floating-label" for="parent_category">Select All</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="purchase_price" value="purchase_price" placeholder="">
+                    <label class="floating-label" for="parent_category">Purchase Price</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="distributor_price_with_tax" value="distributor_price_with_tax" placeholder="">
+                    <label class="floating-label" for="parent_category">Distributor Price(Include Tax)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="distributor_price_without_tax" value="distributor_price_without_tax" placeholder="">
+                    <label class="floating-label" for="parent_category">Distributor Price(Exclude Tax)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="mrp" value="mrp" placeholder="">
+                    <label class="floating-label" for="parent_category">MRP</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="bussiness_volume" value="bussiness_volume" placeholder="">
+                    <label class="floating-label" for="parent_category">Business Volume(BV)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="point_value" value="point_value" placeholder="">
+                    <label class="floating-label" for="parent_category">Point Value(PV)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="tax_percentage" value="tax_percentage" placeholder="">
+                    <label class="floating-label" for="parent_category">Tax(%)</label>
+                        </div>
+                    </div>
+            </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="capti"><h4>Set Value Based ON Batch</h4></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                <div class="form-group">
+                        <input type="radio" checked  name="batch" value="yes" placeholder="">
+                    <label class="floating-label" for="parent_category">YES</label>
+                </div>
+            </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                        <input type="radio" name="batch"  value="no" placeholder="">
+                    <label class="floating-label" for="parent_category">NO</label>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Filter </button>
+                <button class="btn btn-danger" type="reset"> Clear </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "distributor/include/footer.html" %}
+<script>
+
+$("#stock_details").change(function () {
+  var numInputs = $(this).val();
+  if (numInputs == "balance") {
+  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Date of Entry</label><input type="date" class="form-control" name="blance_date" value={{today}}></div></div></div>')
+  }else if(numInputs == "detail"){
+  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Start Date</label><input type="date" class="form-control" name="detail_start_date" value={{today}}></div></div><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>End Date</label>"<input type="date" class="form-control" name="detail_end_date" value={{today}}></div></div></div>')
+  }
+});
+
+$(document).ready(function(){
+ var numInputs = $("#stock_details").val();
+  if (numInputs == "balance") {
+  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Date of Entry</label><input type="date" class="form-control" name="blance_date" value={{today}}></div></div></div>')
+  }else if(numInputs == "detail"){
+  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Start Date</label><input type="date" class="form-control" name="detail_start_date" value ={{today}}></div></div><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>End Date</label>"<input type="date" class="form-control" name="detail_end_date" value={{today}}></div></div></div>')
+  }
+
+});
+</script>
+<script>
+    $("#select_all").change(function(){  //"select all" change
+   $(".checkbox").prop('checked', $(this).prop("checked"));
+});
+//".checkbox" change
+$('.checkbox').change(function(){
+	//uncheck "select all", if one of the listed checkbox item is unchecked
+    if(false == $(this).prop("checked")){ //if this item is unchecked
+        $("#select_all").prop('checked', false); //change "select all" checked status to false
+    }
+	//check "select all" if all checkbox items are checked
+	if ($('.checkbox:checked').length == $('.checkbox').length ){
+		$("#select_all").prop('checked', true);
+	}
+});
+</script>

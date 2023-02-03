@@ -1,0 +1,151 @@
+{% load static %}
+{% include "business/include/header.html" %}
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Payout Statement</h2>
+                <h5 class="calc_page_title_1 mb-4">Check out your payout details</h5>
+                </div>
+                <div class="col-md-12">
+                    <div class="user_profile_bonus">
+                        <div class="main_downline mt-4 mb-4">
+                            <div><p>Advisor Name: {{referall_code}} {{user_name}}</p></div>
+                        </div>
+                    <!--<h1>Select Plan</h1>-->
+                    <!--<p>Check your payouts by selecting plan, month and year</p>-->
+                    <!--<select id="plan_selector" class="form-control">-->
+                    <!--    <option>Select Plan</option>-->
+                    <!--    <option value="super_plan">Income under Super Plan </option>-->
+                    <!--    <option value="infinity_plan">Income under Infinity Plan</option>-->
+                    <!--    </select>-->
+                        <div class="row">
+                        <div class="col-md-6">
+                        <input type="month" name="month" value="{{input_date|date:'Y-m'}}" id="date_points" class="form-control mt-4">
+                            </div>
+                        <div class="col-md-6">
+                    <input type="submit" value="Submit"  class="form-control mt-4" style="background-color: #222529; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden; color: white;">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <p><h5 class="bonus_director">Data for the Month of: <span>{{month}} - {{year}}</span></h5></p>
+                  </div>
+                    <table><tr><td>
+                        <form method="get" action="{% url 'mlm_admin_user_dashboard_4' %}" accept-charset="utf-8">
+                            {% csrf_token %}
+                        <input type="search" class="form-control" id="q" name="q" placeholder="Enter ARN Number" /></td><td><button type="submit" class="btn  btn-primary">Search</button></form>
+                    </td></tr></table>
+                    <p color="red"><span><strong>{{ msg }}</strong></span></p>
+                    </div>
+                    <div class="col-md-12 mt-4 box_income">
+                    <table class="table user_profile_bonus_1">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Sub-Income Name</th>
+                        <th scope="col">Month & Years</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/bonus.webp' %}"></td>
+                        <td>Direct Bonus</td>
+                        <td>{{direct_bonus_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/group_user.webp' %}"></td>
+                        <td>Team Building Bonus (TBB)</td>
+                        <td>{{tbb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/leadership_building.webp' %}"></td>
+                        <td>Leadership Building Bonus (LBB)</td>
+                        <td>{{lbb_amount}}</td>
+                        </tr>
+                        <tr class="bonus_total">
+                        <td></td>
+                        <td><strong>Total</strong></td>
+                        <td><strong>{{half_total}}</strong></td>
+                        </tr>
+                        <!--<tr class="">
+                        <td></td>
+                        <td><strong>Payment Status</strong></td>
+                        <td><strong>PAID</strong></td>
+                      </tr>-->
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/personal_bonus.webp' %}"></td>
+                        <td>Personal Bonus</td>
+                        <td>{{pb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/fortune_bonus.webp' %}"></td>
+                        <td>Fortune Bonus (10x)</td>
+                        <td>{{fb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/sharing_bonus.webp' %}"></td>
+                        <td>Sharing Bonus</td>
+                        <td>{{sb_amount}}</td>
+                        </tr>
+                         <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/nurturing_bonus.webp' %}"></td>
+                        <td>Nurturing Bonus</td>
+                        <td>{{nb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/business_master.webp' %}"></td>
+                        <td>Business Master Bonus</td>
+                        <td>{{bmb_amount}}</td>
+                        </tr>
+                        <tr class="bonus_total">
+                        <td></td>
+                        <td><strong>Total</strong></td>
+                        <td><strong>{{full_total}}</strong></td>
+                        </tr>
+                        <tr class="bonus_total_1">
+                        <td></td>
+                        <td><strong>Grand Total</strong></td>
+                        <td><strong>{{grand_total}}</strong></td>
+                        </tr>
+                         <tr class="">
+                        <td></td>
+                        <td><strong>Payment Status</strong></td>
+                        <td><strong>{{ payment_status }}</strong></td>
+                        </tr>
+                    <tfoot>
+                        <tr class="">
+                        <td></td>
+                        <td><strong>Tax Deducted at Source (Subject to applicability)</strong></td>
+                        <td><strong>
+                            {% if pan %}
+                                5% of Grand Total
+                            {% else %}
+                                20% of Grand Total.<br />
+                                <sub>Please provide correct PAN details to deduct TDS at 5% rate.</sub>
+                            {% endif %}</strong></td>
+                        </tr>
+                    </tfoot>
+                    </tbody>
+                    </table>
+                    <p>
+                        <b>Please Note:</b> All payments are transferred by 10th of the next month. It may take around 24 to 48 hours for the amount to reflect in your bank account.<br />
+                        Amount will be paid after Tax deducted at Source (TDS) and other statutory deductions.
+                    </p>
+                    </div>
+                    </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+{% include "business/include/footer.html" %}

@@ -1,0 +1,93 @@
+/*-----------------------------------------------------------------------------------
+
+    CSS INDEX
+    ===================
+	
+    01. Theme default CSS
+    02. Header
+    03. Breadcrumb
+    04. Section Title
+    05. Category
+    06. Slider
+    07. Short single product
+    08. Buttons
+    09. Backgrounds
+    10. Lookbook Home
+    11. Countdown Timer
+    12. Blog
+    13. Pagination
+    14. Instagram section
+    15. Shoppable Home
+    16. About
+    17. Widget
+    18. Testimonial
+    19. Brands
+    20. Product List
+    21. Banner
+    22. Filter product
+    23. Fashion home
+    24. Cosmetics home
+    25. Shop
+    26. Shop product
+    27. Order tracking
+    28. My account
+    29. Cart and wishlist
+    30. Checkout
+    31. 404
+    32. Coming soon
+    33. FAQ
+    34. Call to action area
+    35. Contact Us
+    36. Icon box
+    37. Google map
+    38. Team
+    39. Newsletter
+    40. Footer
+    41. Compare
+
+
+-----------------------------------------------------------------------------------*/
+
+@import "variables";
+@import "default";
+@import "elements/container";
+@import "header";
+@import "breadcrumb";
+@import "section-title";
+@import "category";
+@import "slider";
+@import "short-single-product";
+@import "elements/button";
+@import "backgrounds";
+@import "home-lookbook";
+@import "elements/countdown-timer";
+@import "blog";
+@import "elements/pagination";
+@import "elements/instagram-section";
+@import "shoppable-home";
+@import "about";
+@import "widget";
+@import "elements/testimonial";
+@import "elements/brands";
+@import "elements/product-list";
+@import "elements/banner";
+@import "elements/filter-product";
+@import "fashion-home";
+@import "cosmetics-home";
+@import "shop";
+@import "shop-product";
+@import "order-tracking";
+@import "my-account";
+@import "cart-wishlist";
+@import "checkout";
+@import "404";
+@import "coming-soon";
+@import "elements/faq";
+@import "elements/cta";
+@import "contact-us";
+@import "elements/icon-box";
+@import "elements/google-map";
+@import "elements/team";
+@import "elements/newsletter";
+@import "footer";
+@import "compare";

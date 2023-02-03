@@ -1,0 +1,94 @@
+
+/*=============================================
+=            10. Home Lookbook            =
+=============================================*/
+
+
+/*----------  lookbook content  ----------*/
+
+.lookbook-content-wrapper{
+    height: 100vh;
+}
+
+.lookbook-content{
+    p{
+        font-size: 16px;
+        line-height: 36px;
+        color: #fff;
+        font-weight: 600;
+        margin-bottom: 25px;
+    }
+
+    h2{
+        font-size: 72px;
+        line-height: 80px;
+        font-weight: 400;
+        color: #fff;
+        margin-bottom: 70px;
+
+        @media #{$desktop-device}{
+            font-size: 60px;
+            line-height: 70px;
+        }
+
+        @media #{$tablet-device}{
+            font-size: 60px;
+            line-height: 70px;
+        }
+
+        @media #{$large-mobile}{
+            font-size: 60px;
+            line-height: 70px;
+        }
+
+        @media #{$small-mobile}{
+            font-size: 50px;
+            line-height: 60px;
+        }
+
+        @media #{$extra-small-mobile}{
+            font-size: 40px;
+            line-height: 50px;
+        }
+    }
+
+    a{
+
+        &.lookbook-btn{
+            background-color: #fff;
+            color: #333 !important;
+            border-color: #fff;
+            &:hover{
+                background-color: #333;
+                color: #fff !important;
+            }
+        }
+    }
+
+    &--dark{
+        p{
+            color: #333;
+        }
+
+        h2{
+            color: #333;
+        }
+
+        a{
+
+            &.lookbook-btn{
+                background-color: #333;
+                color: #fff !important;
+                border-color: #333;
+                &:hover{
+                    background-color: transparent;
+                    color: #333 !important;
+                }
+            }
+            
+        }
+    }
+}
+
+/*=====  End of 10. Home Lookbook  ======*/
+

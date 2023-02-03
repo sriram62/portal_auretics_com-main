@@ -1,0 +1,84 @@
+{% load static %}
+  	</div>
+</div>
+<!-- [ Main Content ] end -->
+    <!-- Warning Section start -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 11]>
+        <div class="ie-warning">
+            <h1>Warning!!</h1>
+            <p>You are using an outdated version of Internet Explorer, please upgrade
+               <br/>to any of the following web browsers to access this website.
+            </p>
+            <div class="iew-container">
+                <ul class="iew-download">
+                    <li>
+                        <a href="http://www.google.com/chrome/">
+                            <img src="{% static 'mlm_admin/images/browser/chrome.png' %}" alt="Chrome">
+                            <div>Chrome</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.mozilla.org/en-US/firefox/new/">
+                            <img src="{% static 'mlm_admin/images/browser/firefox.png' %}" alt="Firefox">
+                            <div>Firefox</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.opera.com">
+                            <img src="{% static 'mlm_admin/images/browser/opera.png' %}" alt="Opera">
+                            <div>Opera</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.apple.com/safari/">
+                            <img src="{% static 'mlm_admin/images/browser/safari.png' %}" alt="Safari">
+                            <div>Safari</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                            <img src="{% static 'mlm_admin/images/browser/ie.png' %}" alt="">
+                            <div>IE (11 & above)</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <p>Sorry for the inconvenience!</p>
+        </div>
+    <![endif]-->
+    <!-- Warning Section Ends -->
+
+    <!-- Required Js -->
+    <script src="{% static 'mlm_admin/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'mlm_admin/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'mlm_admin/js/pcoded.min.js' %}"></script>
+<!--	<script src="{% static 'mlm_admin/js/menu-setting.min.js' %}"></script>-->
+
+<!-- datatable Js -->
+<script src="{% static 'mlm_admin/js/plugins/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'mlm_admin/js/plugins/dataTables.bootstrap4.min.js' %}"></script>
+<!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+	$('#user-list-table').DataTable();
+</script>
+
+	<script src='{% static "/mlm_admin/js/plugins/select2.full.min.js" %}' type="text/javascript"></script>
+	<script>
+		$(".select2").select2({
+			placeholder: "",
+			allowClear: true
+		});
+	</script>
+<script>
+      $( function() {
+<!--            $( ".datepicker" ).datepicker();-->
+            $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+         } );
+</script>
+
+</body>
+
+</html>

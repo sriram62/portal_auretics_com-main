@@ -1,0 +1,62 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" id="my-form"  enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Template Detail</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+        <div style="padding-left:20px">
+        {{form.as_p}}
+
+        </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Go back </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<!--<script>-->
+<!--    $('document').ready(function(){-->
+<!--        $('#my-form').submit(function(){-->
+<!--          if( document.getElementById("id_image").files.length == 0 ){-->
+<!--                console.log("no files selected");-->
+<!--                alert('Image field is required!');-->
+<!--                return false;-->
+<!--            }-->
+<!--            return true;-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<script>
+    $('document').ready(function(){
+        $('#my-form').submit(function(){
+          if( document.getElementById("id_banner").files.length == 0 ){
+                console.log("no files selected");
+                alert('Image field is required!');
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+<script>
+    $("#id_ranking").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var pincode = $("#id_ranking").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+    if (( pincode >1 )){
+        event.preventDefault();
+    }
+});
+</script>

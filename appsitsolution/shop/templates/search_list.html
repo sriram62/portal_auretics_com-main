@@ -1,0 +1,258 @@
+{% extends 'shop/base.html' %}
+{% load shop_tag %}
+
+{% block content %}
+	{% for post in product_obj %}
+	{% endfor %}
+<div class="wrapper">
+	<nav aria-label="breadcrumb" class="filter_short" style="background: {% if request.session.distributor_checkout %}#FFE28A{% else %}#f7f7f7{% endif %};">
+		<ol class="breadcrumb" style="background: {% if request.session.distributor_checkout %}#FFE28A{% else %}#f7f7f7{% endif %};">
+			<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Products</li>
+		</ol>
+	</nav>
+	<!-- breadcrumb area end -->
+	<!-- shop page content -->
+	<div class="shop-page-wrapper">
+		<!-- shop page header -->
+		<div id="filter-wrapper" class="filter-wrapper filter-icons">
+			<div class="sort-by">
+				<button class="sort-btn" data-toggle="modal" data-target="#sortBy">
+					<i class="ti-arrows-vertical"></i> Sort By
+				</button>
+			</div>
+			<div class="filter-category">
+				<button class="filter-btn" data-toggle="modal" data-target="#filter">
+					<i class="ion-android-funnel"></i> Filter
+				</button>
+			</div>
+		</div>
+		<!-- Sort Modal -->
+		<div class="modal fade sort-modal" id="sortBy" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Sort By</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label class="label-wrapper radiobtn">Price -- Low to High
+							<input class="radio-input" type="radio" name="filter" value="1" checked="checked">
+							<span class="checkmark"></span>
+						</label>
+						<label class="label-wrapper radiobtn">Price -- High to Low
+							<input class="radio-input" type="radio" name="filter" value="2">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Sort Modal end -->
+
+
+		<!-- Filter Modal -->
+		<form id='priceFilter' action=''>
+		<div class="modal fade filter-modal" id="filter" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Filter</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div id="accordion">
+							<div class="card">
+								<div class="card-header">
+									<a class="card-link" data-toggle="collapse" href="#category" aria-expanded="true" role="button">Category</a>
+								</div>
+								<div id="category" class="collapse show" data-parent="#accordion">
+									<div class="card-body">
+										<label class="label-wrapper checkbox">
+											<input class="radio-input2" type="checkbox" name="catcheck" id="selectall" value="allcategories">
+											<span class="checkmark"></span>
+											<span><b>All Categories</b></span>
+										</label>
+										{% for i in category %}
+										<label class="label-wrapper checkbox">
+											<input class="radio-input2 checkboxall" type="checkbox" name="catcheck" id="" value="{{i.cat_name}}">
+											<span class="checkmark"></span>
+											<span><b>{{i.cat_name|title }}</b></span>
+										</label>
+										{% for k in i.category_set.all %}
+										{% if k.delete == False %}
+										<label class="label-wrapper checkbox">
+											<input class="radio-input2 checkboxall" type="checkbox" name="catcheck" id="" value="{{k.cat_name}}">
+											<span class="checkmark"></span>
+											<span>{{k.cat_name|title }}</span>
+										</label>
+										{% endif %}
+										{% endfor %}
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div>
+							<button class="lezada-button" type="reset" id="clear">Clear</button>
+							<button class="lezada-button-outline" type="button" id="apply">Apply</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<!-- Filter Modal end -->
+		<!-- shop page header end -->
+
+		<!-- shop page content -->
+		<div class="shop-page-content">
+			<div class="container" id ="productls">
+				{% if error_msg %}
+			    <div class="alert alert-red alert-dismissible fade show" role="alert">
+                  <strong>Sorry!</strong> No Result Found.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {% endif %}
+				<div class="row product-isotope shop-product-wrap" id="singleProduct">
+					<!-- single product -->
+
+					{% for product in all_products %}
+					<div class="col-sm-6 col-md-3 hot sale">
+						<div class="single-product">
+							<div class="single-product__image">
+								<a class="image-wrap" href="{% url 'product_detail' product.pk product.slug %} target="_blank" onclick='window.open("{% url 'product_detail' product.pk product.slug %}");return false;'">
+                                    <img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url  }}"
+                                         srcset ="
+                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url  }} 320w,
+                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image.url  }} 640w,
+{#                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image.url  }} 960w,#}
+{#<!--                                         /cdn-cgi/image/format=auto,metadata=none,width=1280{{ product.image.url  }} 1280w,-->#}
+{#<!--                                         /cdn-cgi/image/format=auto,metadata=none,width=2560{{ product.image.url  }} 2560w,-->#}
+                                                    "
+                                         class="img-fluid" alt="" />
+								</a>
+			{% if product.distributor_price != 0 %}
+								<div class="single-product__floating-badges">
+									<span class="onsale">-{{product.distributor_price|floatformat:1}}%</span>
+<!--									<span class="hot">hot</span>-->
+								</div>
+			{% endif %}
+
+<!--								<div class="single-product__floating-icons">-->
+<!--									<a class="wishlist" href="{% url 'product_detail' product.pk product.slug %}">-->
+<!--										<i class="ion-android-favorite-outline"></i>-->
+<!--									</a>-->
+<!--								</div>-->
+							</div>
+							<div class="single-product__content">
+								<div class="title">
+									<a href="{% url 'product_detail' product.pk product.slug %} target="_blank" onclick='window.open("{% url 'product_detail' product.pk product.slug %}");return false;'">{{ product.product_name }}</a>
+								</div>
+								{% if user.is_authenticated %}
+								<div class="price">
+									<span class="main-price discounted">₹{% check product %}</span>
+									<span class="discounted-price">₹{% dis_price_include_tax product %}</span><br><br>
+									<span class="discounted-price">BV - ₹{% business_volue product %}</span><br>
+									<span class="discounted-price">PV - ₹{% point_volue product %}</span>
+								</div>
+								{% else %}
+								<div class="price">
+									<span class="discounted-price">₹{% check product %}</span>
+								</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					<!-- End of single product -->
+				</div>
+			</div>
+		</div>
+		<!-- shop page content end -->
+	</div>
+	<!-- shop page content end -->
+</div>
+
+
+
+
+{% endblock %}
+
+{% block extra_scripts %}
+	<script>
+	   $("#selectall").click(function(){
+        if(this.checked){
+            $('.checkboxall').each(function(){
+                $(".checkboxall").prop('checked', true);
+            })
+        }else{
+            $('.checkboxall').each(function(){
+                $(".checkboxall").prop('checked', false);
+            })
+        }
+    });
+     $(".checkboxall").click(function(){
+         if(!this.checked){
+             $("#selectall").prop('checked', false);
+         }
+     });
+$(document).ready(function () {
+	$('.checkboxall').each(function(){
+		$("#selectall").prop('checked', true);
+		$(".checkboxall").prop('checked', true);
+	})
+});
+	</script>
+	{% endblock extra_scripts %}
+
+	<!-- scroll to top -->
+<!--	<a href="#" class="scroll-top"></a>-->
+	<!-- end of scroll to top -->
+
+	<!-- JS -->
+	<!-- jQuery JS -->
+	<script src="assets/js/vendor/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="assets/js/popper.min.js"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="assets/js/bootstrap.min.js"></script>
+
+	<!-- Plugins JS -->
+	<script src="assets/js/plugins.js"></script>
+
+	<!-- Main JS -->
+	<script src="assets/js/main.js"></script>
+
+	<script>
+		$("#signup").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+		});
+
+			$("#signup").modal("hide");
+		});
+
+		$("#login").on('show.bs.modal', function (e) {
+			$("#forgotpwd").modal("hide");
+		});
+
+		$("#forgotpwd").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+		});
+	</script>
+	<script>
+	</script>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'sg2plcpnl0196'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script>
+<script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script>
+</html>

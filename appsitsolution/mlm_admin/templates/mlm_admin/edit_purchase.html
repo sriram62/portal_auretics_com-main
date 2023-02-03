@@ -1,0 +1,601 @@
+<head>
+    <style>
+    .shubh_item input {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 1.25rem + 2px);
+    padding: 0.625rem 1.1875rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-family: "Mada", sans-serif;
+
+}
+.shubh_item textarea {
+    display: block;
+    width: 100%;
+    padding: 0.625rem 1.1875rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-family: "Mada", sans-serif;
+
+}
+
+.shubh_item label {
+    display: block;
+    font-family: "Mada", sans-serif;
+    font-size: 14px;
+    color: #373a3c;
+    font-weight: 400;
+}
+
+.capti {
+    font-size: 18px;
+    padding-bottom: 8px;
+}
+.shubh_item textarea {
+    width: 100%;
+}
+    </style>
+    </head>
+
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Purchase</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+
+    <form method="post" enctype="multipart/form-data" id="my-form">
+    {% csrf_token %}
+	<!--shubh-content-start-->
+	<div class="container">
+		<div class="row shubh_item">
+		   <div class="col-md-6">
+		   <label class="shubh_datee" for="date">Date of Entry</label>
+		   <input type="date" id="date_shubh" name="date_of_Entry" value="{{purchases.created_on|date:'c'}}" disabled>
+		   </div>
+		   <div class="col-md-6">
+		   <label class="shubh_datee" for="date">Bill Date</label>
+		   <input type="date" id="date_shubh" name="date" value="{{purchases.date|date:'c'}}">
+		   </div>
+		   <div class="col-md-6 mt-5">
+		   <label class="shubh_datee" for="date">Party Name</label>
+		   <input type="text" id="party_name" name="party_name" value="{{purchases.party_name}}">
+		   </div>
+		   <div class="col-md-6 mt-5">
+		       <label class="mc_namee" for="mcname">MC Name: </label>
+               <select class="form-control select2" name="mc_name">
+                            {% for i in material_c %}
+                            <option value={{i.pk}} {% if i.pk == purchases.material_name.pk %} selected {% endif %}>{{i.mc_name}}</option>
+                            {% endfor %}
+                        </select>
+		       </div>
+		   <div class="col-md-6 mt-5">
+		       <label class="mc_namee" for="mcname">Purchase Type: </label>
+               <select class="form-control purchase_type" id="purchase_type"  name="purchase_type">
+                            <option value=0  {% if purchases.purchase_type == 0 %} selected {% endif %}>With in State</option>
+                            <option value=1  {% if purchases.purchase_type == 1 %} selected {% endif %}>Inter State</option>
+                        </select>
+		       </div>
+		       <div class="col-md-12 mt-5">
+		      <label class="shubh_narratione" for="narration">Narration: </label>
+		       <textarea id="narration" name="narration" rows="4">{{purchases.narration}}</textarea>
+		           </div>
+		           <div class="col-md-12 mt-5">
+		               <div class="table-responsive-md">
+		                    <div class="capti">Item Details</div>
+		                    <table class="table table-hover" id="Tbl_dailyreport_data">
+		                      <thead>
+                                <tr>
+<!--                                <th scope="col">#</th>-->
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Batch No.</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col" class="tcgst">CGST</th>
+                                <th scope="col" class="tsgst">SGST</th>
+                                <th scope="col" class="tigst">IGST</th>
+                                <!-- <th scope="col">VAT</th> -->
+                                <th scope="col">Total Amount</th>
+                               </tr>
+                             </thead>
+                             <tbody id="">
+                            {% for k in data %}
+                                <tr class="prod_tbl">
+<!--                                <th scope="row">1</th>-->
+                                <td><select class="form-control select2 product" id="edt{{ forloop.counter }}"  name="item">
+                            <option value=0>Select Option</option>
+                            {% for i in items %}
+                            <option value={{i.pk}} {% if i.pk == k.item.pk %} selected {% endif %}  >{{i.product_name}}</option>
+                            {% endfor %}
+                        </select></td>
+                                <td><select class="form-control select2 batch_class batches"  id="edtbatch{{ forloop.counter }}" name="batch">
+                            {% for i in batches %}
+                                      {% if i.product.pk == k.item.pk %}
+                            <option value={{i.pk}}  {% if i.pk == k.batch.pk %} selected {% endif %}>{{i.batch_name}}</option>
+                                    {% endif %}
+
+                            {% endfor %}
+                        </select>
+                                <br> <spam class="error alert-danger" id='batch_spam{{forloop.counter}}'></spam></td>
+                                <td><input type="text" class="quantity" id="edtquantity{{forloop.counter}}" name="quaantity_item" value="{{k.quantity}}"><br>  <spam class="error alert-danger" id='quantity_spam{{forloop.counter}}'></spam></td>
+                                <td><input type="text" class="price" id="edtprice{{forloop.counter}}" name="price_item" value="{{k.price}}"><br>  <spam class="error alert-danger" id='price_spam{{forloop.counter}}'></spam></td>
+                                <td class="tcgst"><input type="text" class="cgst" name="cgst_item" id="edtcgst{{forloop.counter}}" value="{{k.cgst}}" readonly ><input type="hidden" class="cgst" id="hide_cgst{{forloop.counter}}" value={{ k.item.cgst }} readonly ></td>
+                                <td class="tsgst"><input type="text" class="sgst" name="sgst_item" id="edtsgst{{forloop.counter}}" readonly value="{{k.sgst}}" ><input type="hidden" class="sgst" id="hide_sgst{{forloop.counter}}" value={{k.item.sgst}} readonly ></td>
+                                <td class="tigst"><input type="text" class="igst" name="igst_item" id="edtigst{{forloop.counter}}" readonly value="{{k.igst}}" ><input type="hidden" class="igst"  id="hide_igst{{forloop.counter}}" value={% if k.item.vat %}{{k.item.igst}} {% else %} 0 {% endif %} readonly></td>
+                                <!-- <td><input type="text" class="vat" name="vat_item" id="edtvat{{forloop.counter}}" readonly value="{{k.vat}}"><input type="hidden" class="vat" name="vat_item" id="hide_vat{{forloop.counter}}" readonly value={% if k.item.vat %}{{k.item.vat}} {% else %} 0 {% endif %}></td> -->
+                                <td><input type="text" class="totalamount" name="totalamount_item" id="edttotalamount{{forloop.counter}}" value="{{k.total_amount}}" readonly ></td>
+                                    <td>
+			                        <i class="fa fa-trash dailyreport_dataDelete" alt="Delete" title="Delete" onclick="return myFunctiondata({{forloop.counter}})"></i>
+		                        </td>
+                                </tr>
+
+                            {% endfor %}
+                                </tbody>
+		                        </table>
+		                   </div>
+
+		               <button type="button" class="btn btn-secondary float-right" id="Additem_data">Add More</button>
+		               </div>
+
+		   <div class="col-md-6">
+               <label class="shubh_datee" for="date"><h4>Grand Total</h4></label>
+		   <input type="text" id="grand_total" name="grand_total" readonly value="{{purchases.grand_total}}">
+		   </div>
+		  </div>
+		</div>
+		<!--end-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Update </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<script>
+	var cnt_multiple_product=500;
+    $(document.body).on('click', '#Additem_data', function () {
+        var url = '/mlm_admin/edit_column';
+		var $tbody, $row;
+	       $.ajax({
+            type: 'POST',
+            url: url,
+			data:{cnt_multiple_product:cnt_multiple_product},
+			beforeSend: function () {
+            $(".modalLoader").fadeIn("fast");
+        },
+        complete: function () {
+            $(".modalLoader").fadeOut("fast");
+        },
+            success: function (data) {
+			$tbody = $('#Tbl_dailyreport_data.table tbody');
+			$row = $tbody.find('tr:last');
+			$tbody.append(data);
+			cnt_multiple_product = cnt_multiple_product + 1;
+            },
+            error: function (data) {
+            },
+            dataType: 'html'
+        });
+    });
+	$(document.body).on('click', '.dailyreport_dataDelete', function () {
+
+        $(this).closest('tr').remove();
+
+    });
+	 $(document.body).on('keydown', '.quantityval,.rateid,.grossweight', function (event) {
+        if (event.shiftKey == true) {
+            event.preventDefault();
+        }
+
+        if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+            (event.keyCode >= 96 && event.keyCode <= 105) ||
+            event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+            event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190 || event.keyCode == 110) {
+
+        } else {
+            event.preventDefault();
+        }
+
+        if($(this).val().indexOf('.') !== -1 && (event.keyCode == 190 || event.keyCode == 110))
+            event.preventDefault();
+        //if a decimal has been added, disable the "."-button
+
+    });
+
+	$(document.body).on('click', '#datasave', function () {
+
+	var exampleCheck1=   $("#exampleCheck2").val();
+	if (!($('#exampleCheck2').prop('checked')))
+	{
+		$('.help-blockdec').html('* This should be checked !');
+		$('.help-blockdec').css('color','red');
+		return false;
+	}else{
+		$('.help-blockdec').html('');
+	}
+	});
+$( ".product" ).change(function () {
+    var id = $(this).attr('id')
+    var res = id.slice(3);
+    var product = $("#edt"+res).val()
+    var batch_id = "#edtbatch"+res
+    $.ajax({
+        url: '/mlm_admin/editbatch_field',
+        data: {
+          'product_id': product,
+          'batch_id': batch_id,
+          'cnt_multiple_product':cnt_multiple_product,
+          'myid': id
+        },
+        dataType: 'html',
+        success: function (data) {
+         $(batch_id).html(data);
+        }
+      });
+      });
+</script>
+<script>
+
+$('.cgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.sgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.igst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+// $('.vat').keypress(function(event) {
+//   if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+//     event.preventDefault();
+//   }
+// });
+$('.price').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+    $(".quantity").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var quantity = $(".quantity").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+$('.totalamount').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+</script>
+<script>
+    $(".quantity").on("keypress keyup blur",function (event) {
+    var id = $(this).attr('id');
+    var res = id.slice(11);
+    var quantity = $("#edtquantity"+res).val();
+<!--    alert(quantity);-->
+    if (quantity == ''){
+    quantity = 0
+    }
+    quantity = parseFloat(quantity)
+<!--    alert('quantity'+quantity);-->
+    var price = $("#edtprice"+res).val();
+    price = parseFloat(price)
+<!--    alert('price'+price);-->
+    var igst = $("#edtcgst"+res).val();
+    igst = parseFloat(igst)
+<!--    alert('igst'+igst);-->
+    var cgst = $("#edtcgst"+res).val();
+    cgst = parseFloat(cgst)
+<!--    alert('cgst'+cgst);-->
+    var sgst = $("#edtsgst"+res).val();
+    sgst = parseFloat(sgst)
+<!--    alert('sgst'+sgst);-->
+    // var vat = $("#edtvat"+res).val();
+    // vat = parseFloat(vat)
+<!--    alert('vat'+vat);-->
+    var grand_total = $("#grand_total").val();
+    grand_total = parseFloat(grand_total)
+<!--    alert('grand_total'+grand_total);-->
+    amount = $("#edttotalamount"+res).val();
+    value = parseFloat(amount)
+<!--    alert('value'+value);-->
+    grand_total = (grand_total - amount)
+    var purchase_type = $("#purchase_type").val()
+    if (purchase_type == '0'){
+    // var value = quantity * (price + cgst + sgst + vat)
+    var value = quantity * (price + cgst + sgst)
+    }
+    if (purchase_type == '1'){
+    // var value = quantity * (price + igst + vat)
+    var value = quantity * (price + igst)
+    }
+    value = parseFloat(value)
+    $("#edttotalamount"+res).val(value);
+    $("#grand_total").val(value + grand_total);
+});
+    </script>
+<script>
+
+$(document).ready(function() {
+
+var value = $('#purchase_type').val();
+		if(value=='1') {
+			$(".tigst").show();
+			$(".tsgst").hide();
+			$(".tcgst").hide();
+		} else {
+			$(".tsgst").show();
+			$(".tcgst").show();
+			$(".tigst").hide();
+		}
+    $(document.body).on('change', '#purchase_type', function () {
+		var emval = $('#purchase_type').val();
+		if(emval=='1') {
+			$(".tigst").show();
+			$(".tsgst").hide();
+			$(".tcgst").hide();
+		} else {
+			$(".tsgst").show();
+			$(".tcgst").show();
+			$(".tigst").hide();
+		}
+});
+});
+</script>
+<script>
+$( ".product" ).change(function () {
+    var id = $(this).attr('id')
+    var res = id.slice(3);
+    var product = $("#edt"+res).val()
+    var batch_id = "#edtbatch"+res
+    $.ajax({
+        url: '/mlm_admin/editbatch_field',
+        data: {
+          'product_id': product,
+          'cnt_multiple_product':res,
+          'myid': id
+        },
+        dataType: 'html',
+        success: function (data) {
+            $(batch_id).html(data);
+        }
+      });
+  });
+
+</script>
+<script>
+$( ".batches" ).change(function () {
+    var id = $(this).attr('id')
+    var res = id.slice(8);
+    // alert(id);
+    // alert(res);
+    var batch = $("#edtbatch"+res).val()
+    var product = $("#edt"+res).val()
+    var purchase_type = $("#purchase_type").val()
+    var total_amount = $("#edttotalamount"+res).val()
+    var grand_total = $("#grand_total").val()
+    // alert(grand_total);
+    var grand_total = parseFloat(grand_total) - parseFloat(total_amount)
+    $.ajax({
+        url: '/mlm_admin/purchase_detail_field',
+        data: {
+          'product_id': product,
+          'batch_id':batch,
+          'purchase_type':purchase_type,
+          'myid': id
+        },
+        dataType: 'json',
+        success: function (data) {
+        $("#edtprice"+res).val(data['price']);
+        $("#edtcgst"+res).val(data['cgst']);
+        $("#edtsgst"+res).val(data['sgst']);
+        $("#edtigst"+res).val(data['igst']);
+        // $("#edtvat"+res).val(data['vat']);
+        $("#edttotalamount"+res).val(0);
+        $("#edtquantity"+res).val(0);
+        $("#grand_total").val(grand_total);
+        },
+        error: function(data) {
+        // alert(data);
+        $("#price"+res).val(data['']);
+        $("#cgst"+res).val(data['']);
+        $("#sgst"+res).val(data['']);
+        $("#igst"+res).val(data['']);
+        // $("#vat"+res).val(data['']);
+        }
+      });
+        $("#totalamount_item"+res).val(0);
+        $("#quantity"+res).val(0);
+  });
+</script>
+<script type="text/javascript">
+
+		function myFunctiondata(id)
+		{
+            var value = $("#edttotalamount"+id).val();
+            var grand_total = $("#grand_total").val();
+            grand_total = parseFloat(grand_total)
+            value = parseFloat(value)
+            // alert(grand_total);
+            // alert(value);
+            $("#grand_total").val(grand_total - value);
+<!--	  		if(!confirm("Are you sure you want to delete this Category")){-->
+<!--				return false;-->
+<!--	  		}-->
+		}
+
+	</script>
+<script>
+    $(".price").focusout(function(){
+    var id = $(this).attr('id');
+    var res = id.slice(8);
+    var price = $("#"+id).val();
+    var quantity = $("#edtquantity"+res).val();
+    if (quantity == ''){
+    quantity = 0
+    }
+    if (price == ''){
+    price = 0
+    }
+    quantity = parseFloat(quantity)
+    price = parseFloat(price)
+    var igst = $("#hide_igst"+res).val();
+    igst = parseFloat(igst)
+    var cgst = $("#hide_cgst"+res).val();
+    cgst = parseFloat(cgst)
+    var sgst = $("#hide_sgst"+res).val();
+    sgst = parseFloat(sgst)
+    // var vat = $("#hide_vat"+res).val();
+    // vat = parseFloat(vat)
+    var grand_total = $("#grand_total").val();
+    grand_total = parseFloat(grand_total)
+    grand_total.toPrecision(1);
+    amount = $("#edttotalamount"+res).val();
+    value = parseFloat(amount)
+    grand_total = (grand_total - amount)
+    cgst = (price * (cgst/100))*quantity;
+    sgst = (price * (sgst/100))*quantity;
+    igst = (price * (igst/100))*quantity;
+    // vat = (price * (vat/100))*quantity;
+    var purchase_type = $("#purchase_type").val()
+    if (purchase_type == '0'){
+    var value = quantity * price ;
+    // value = value + cgst + sgst + vat
+    value = value + cgst + sgst
+    }
+    if (purchase_type == '1'){
+    var value = quantity * price;
+    // value = value + igst + vat;
+    value = value + igst;
+    }
+    value = parseFloat(value)
+    value.toFixed(2);
+    $("#edttotalamount"+res).val(value.toFixed(2));
+    $("#grand_total").val((value + grand_total).toFixed(2));
+    $("#edtcgst" + res).val((cgst).toFixed(2));
+    $("#edtsgst" + res).val((sgst).toFixed(2));
+    $("#edtigst" + res).val((igst).toFixed(2));
+    // $("#edtvat" + res).val((vat).toFixed(2));
+    });
+</script>
+<script>
+    $(".quantity").on("keypress keyup blur",function (event) {
+    var id = $(this).attr('id');
+    var res = id.slice(11);
+    var quantity = $("#"+id).val();
+    var price = $("#edtprice"+res).val();
+    var grand_total = $("#grand_total").val();
+    grand_total = parseFloat(grand_total)
+    amount = $("#edttotalamount"+res).val();
+    amount = parseFloat(amount)
+    var igst = $("#hide_igst"+res).val();
+    igst = parseFloat(igst)
+    var cgst = $("#hide_cgst"+res).val();
+    cgst = parseFloat(cgst)
+    var sgst = $("#hide_sgst"+res).val();
+    sgst = parseFloat(sgst)
+    // var vat = $("#hide_vat"+res).val();
+    // vat = parseFloat(vat)
+    if (quantity == ''){
+    quantity = 0
+    }
+    if (price == ''){
+    price = 0
+    }
+    var finat_total = grand_total - amount
+    quantity = parseFloat(quantity)
+    price = parseFloat(price)
+    cgst = (price * (cgst/100)) * quantity ;
+    sgst = (price * (sgst/100)) * quantity;
+    igst = (price * (igst/100)) * quantity;
+    // vat = (price * (vat/100)) * quantity;
+    var purchase_type = $("#purchase_type").val()
+    if (purchase_type == '0'){
+    var value = quantity * price;
+    // value = value + cgst + sgst + vat ;
+    value = value + cgst + sgst;
+    }
+    if (purchase_type == '1'){
+    var value = quantity * price;
+    // value = value + igst + vat ;
+    value = value + igst;
+    }
+    value = parseFloat(value)
+    $("#edttotalamount"+res).val(value.toFixed(2));
+    $("#grand_total").val((value + finat_total).toFixed(2));
+    $("#edtcgst" + res).val(cgst);
+    $("#edtsgst" + res).val(sgst);
+    $("#edtigst" + res).val(igst);
+    // $("#edtvat" + res).val(vat);
+});
+    </script>
+
+<script>
+$(document).ready(function() {
+    $('#my-form').submit(function(){
+        var check = true;
+	   $( ".batch_class" ).each(function() {
+       var id_batch = $(this).attr('id');
+       var res = id_batch.slice(8);
+       var batch = $('#'+ id_batch).val();
+       var price = $('#edtprice'+ res).val();
+       var quantity = $('#edtquantity'+ res).val();
+       if (batch == 0){
+       check = false;
+       $("#batch_spam" + res).html('Please Select the Batch! ');
+       }
+       else{
+       $("#batch_spam" + res).html('');
+	   }
+       if (price == '' || price == '0'){
+       check = false;
+       $("#price_spam" + res).html('required!');
+       }
+       else{
+       $("#price_spam" + res).html('');
+	   }
+       if (quantity == '' || quantity == '0'){
+       check = false;
+       $("#quantity_spam" + res).html('required!');
+       }
+       else{
+       $("#quantity_spam" + res).html('');
+	   }
+     });
+     if (check == true){
+	   return true;
+	   }
+	   else{
+	   return false;
+	   }
+    });
+    });
+</script>

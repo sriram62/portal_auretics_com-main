@@ -1,0 +1,82 @@
+{% extends 'checkout.html' %}
+{% load static %}
+{% block content %}
+
+   <body onload="rzp1.open();">
+   <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.loader {
+  border: 16px solid #F3F3F3;
+  border-radius: 50%;
+  border-top: 16px solid #3498DB;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+
+<div class="loader"></div>
+
+</body>
+</html>
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "{{ razorpay_merchant_key }}", // Enter the Key ID generated from the Dashboard
+    "amount": "{{ razorpay_amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Auretics",
+    "description": "Payment Transaction",
+    "image": "{% static 'img/new_logo.png' %}",
+    "callback_url" : "{{ callback_url }}",
+    "order_id": "{{ razorpay_order_id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 2
+    "prefill": {
+        "name": "{{ username }}" ,
+        "email": "{{ email }}",
+        "contact": "{{ phone }}",
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "modal": {
+        "ondismiss": function(){
+             window.location.href= "{% url 'razorpay_failure' %}";
+         },
+    },
+    "receipt": "{{ receipt }}",
+    "theme": {
+        "color": "#3399cc"
+    }
+
+};
+var rzp1 = new Razorpay(options);
+
+rzp1.on('payment.failed', function (response){
+       window.location.href= "{% url 'razorpay_failure' %}";
+});
+
+</script>
+
+  </body>
+{% endblock content %}

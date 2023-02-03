@@ -1,0 +1,189 @@
+{% load static %}
+{% load template_tag %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>{{title | title}}</title>
+	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 11]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="">
+	<meta name="author" content="Codedthemes" />
+<!--for datepicker-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!--	datepicker end-->
+	<link href="{% static '/mlm_admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css' %}" rel="stylesheet" />
+	<!-- Favicon icon -->
+	<link rel="icon" href="{% static 'img/favicon-1.png' %}" type="image/x-icon">
+
+	<!-- data tables css -->
+	<link rel="stylesheet" href="{% static 'mlm_admin/css/plugins/dataTables.bootstrap4.min.css' %}">
+	<!-- vendor css -->
+	<link href='{% static "/mlm_admin/css/plugins/select2.min.css" %}' rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="{% static 'mlm_admin/css/style.css' %}">
+
+		<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKH3YQ37WS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NKH3YQ37WS');
+</script>
+<!-- End Google Analytics -->
+<!-- Zoho PageSense -->
+<script src="https://cdn-in.pagesense.io/js/aureticslimited/6d40503e6c2d4b72809cc9a7046cdb2c.js"></script>
+</head>
+<body class="" onload="replaceScript();">
+	<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+	<!-- [ Pre-loader ] End -->
+	<!-- [ navigation menu ] start -->
+	<nav class="pcoded-navbar menupos-fixed menu-light ">
+		<div class="navbar-wrapper  ">
+			<div class="navbar-content scroll-div " >
+
+				<div class="">
+					<div class="main-menu-header">
+							{%  if request.user.is_anonymous %}
+						<img class="img-radius" src="{% static 'mlm_admin/images/user/avatar-2.jpg' %}" alt="User-Profile-Image">
+						{% else %}
+						<img class="img-radius" src="{{ request.user.profile.avatar.url}}" alt="User-Profile-Image">
+							{% endif %}
+						<div class="user-details">
+							{%  if request.user.is_anonymous %}
+							<span class="mb-0 font-weight-bold">Independent Auretics Distributor</span>{% else %}
+							{% endif %}
+							<span class="mb-0 font-weight-bold"><b>{{request.user.profile.first_name}} {{request.user.profile.last_name}}</b></span>
+
+							<div id="more-details"><small>Independent Distributor<i class="fa fa-chevron-down m-l-5"></i></small></div>
+						</div>
+					</div>
+					<div id="nav-user-link">
+						<ul class="list-inline">
+							<li class="list-inline-item"><a href="{% url 'profile' %}" data-toggle="tooltip" title="View Profile"><i class="feather icon-user"></i></a></li>
+							<li class="list-inline-item"><a href="{% url 'user_change_passcode' %}"><i class="feather icon-lock" data-toggle="tooltip" title="Change Password"></i></a></li>
+							<li class="list-inline-item"><a href="{% url 'logout' %}" data-toggle="tooltip" title="Logout" class="text-danger"><i class="feather icon-power"></i></a></li>
+						</ul>
+					</div>
+
+				</div>
+
+				<ul class="nav pcoded-inner-navbar ">
+					<li class="nav-item pcoded-hasmenu">
+						<a href="{% url 'mlm_admin_user_dashboard_1' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-monitor"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+						<ul class="pcoded-submenu">
+							<li><a href="{% url 'mlm_admin_user_dashboard_1' %}">Dashboard</a></li>
+						</ul>
+					</li>
+                    <li class="nav-item">
+                        <a href="http://portal.auretics.com/accounts/register/?refid={{request.user.referralcode.referral_code}}" class="nav-link " target="_blank"><span class="pcoded-micon"><i class="feather icon-user-plus"></i></span><span class="pcoded-mtext">Add Downline</span></a>
+                    </li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Document</span></a>
+						<ul class="pcoded-submenu">
+                            <li><a href="{% url 'user_welcome_letter' %}" > Welcome Letter </a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_1_download_certificate' %}" target="_blank"> Certificate Download</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_1_download_ID_card' %}" target="_blank"> ID Card Download </a></li>
+                            <li><a href="{% url 'edit_profile' %}" target="_blank"> My KYC </a></li>
+						</ul>
+					</li>
+
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Team</span></a>
+						<ul class="pcoded-submenu">
+							<li><a href="{% url 'mlm_admin_user_dashboard_11' %}">Organisation Structure (Super)</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_12' %}">Generational Structure (Infinity)</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_7' %}">Upline Details</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_8' %}">Downline Details</a></li>
+							<li><a href="{% url 'user_dashboard_8_complete' %}">Downline Group List</a></li>
+							<li><a href="{% url 'user_dashboard_pgxv' %}">Personal Group Details</a></li>
+{#							<li><a href="{% url 'mlm_admin_user_dashboard_9' %}">Circle Details</a></li>#}
+                            <li class="pcoded-hasmenu">
+                            <a href="#!">Line of Sponsorship</a>
+                                <ul class="pcoded-submenu">
+                                    <li><a href="{% url 'mlm_admin_user_dashboard_9_active' %}">Active LOS</a></li>
+                                    <li><a href="{% url 'mlm_admin_user_dashboard_9_tbb' %}">TBB LOS</a></li>
+                                    <li><a href="{% url 'mlm_admin_user_dashboard_9_director' %}">Director LOS</a></li>
+                                </ul>
+					        </li>
+						</ul>
+					</li>
+                    <!--<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-corner-down-right"></i></span><span class="pcoded-mtext">Line of Sponsorship</span></a>
+						<ul class="pcoded-submenu">
+							<li><a href="{% url 'mlm_admin_user_dashboard_9_active' %}">Active LOS</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_9_tbb' %}">TBB LOS</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_9_director' %}">Director LOS</a></li>
+						</ul>
+					</li>-->
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Reports</span></a>
+						<ul class="pcoded-submenu">
+							<li><a href="{% url 'mlm_admin_user_dashboard_2' %}">Business Summary</a></li>
+							<li><a href="{% url 'order_summaries' %}">Order Summary</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_3' %}">Income Statement</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_4' %}">Payout Statement</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_6' %}">Fund Statement</a></li>
+						</ul>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link "><span class="pcoded-micon"><i
+								class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Commission</span></a>
+						<ul class="pcoded-submenu">
+							<li><a href="{% url 'mlm_admin_user_dashboard_10' %}">Wallet</a></li>
+							<li><a href="{% url 'mlm_admin_user_dashboard_5' %}">Loyalty Purchase</a></li>
+						</ul>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link "><span class="pcoded-micon"><i
+								class="feather icon-book"></i></span><span class="pcoded-mtext">Greetings</span></a>
+						<ul class="pcoded-submenu">
+							<li><a href="{% url 'view_greetings' %}"> View personalized greetings </a></li>
+						</ul>
+					</li>
+
+					<li class="nav-item"><a href="{% url 'home' %}" class="nav-link "><span class="pcoded-micon"><i
+							class="feather icon-aperture"></i></span><span
+							class="pcoded-mtext">Back to Portal</span></a></li>
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+	<!-- [ navigation menu ] end -->
+	<!-- [ Header ] start -->
+	<header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
+
+
+				<div class="m-header">
+					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+					<a href="{% url 'home' %}" class="b-brand">
+						<!-- ========   change your logo hear   ============ -->
+						<!-- ========   change your logo hear   ============ -->
+						<img src="{% static 'mlm_admin/images/logo.png' %}" alt="" class="logo">
+					</a>
+					<a href="#!" class="mob-toggler">
+						<i class="feather icon-more-vertical"></i>
+					</a>
+				</div>
+				<div class="collapse navbar-collapse">
+				</div>
+
+
+	</header>
+	<!-- [ Header ] end -->

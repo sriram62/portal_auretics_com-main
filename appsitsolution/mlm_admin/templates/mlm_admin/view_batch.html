@@ -1,0 +1,123 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">View Batch</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Batch Name</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.batch_name}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Print Name</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                        {{form.print_name}}
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Product</label>
+                          <select class="form-control" id="parent_category" name="product" disabled>
+<!--                            <option value=0>Select Products</option>-->
+                            {% for i in products %}
+                            <option value={{i.pk}} {% if i.pk == product_id %} selected {% endif %}>{{i.product_name}}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="description">MRP</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                        {{form.mrp}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Batch Number</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                        {{form.batch_number}}
+                        </div>
+                    </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="category">Date of Manufacture</label>
+                        <input type="date" class="form-control" id="manuf_date" name="manuf_date" disabled value="{{manuf_date|date:'c'}}" placeholder="">
+
+<!--                        {{form.date_of_manufacture}}-->
+                </div>
+                </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="gendar">Date of Expiry</label>
+                        <input type="date" class="form-control" id="exp_date" name="exp_date" placeholder="" disabled value="{{exp_date|date:'c'}}">
+<!--                        {{form.date_of_expiry}}-->
+                </div>
+                </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="brand">Shelf Life</label>
+<!--                        <input type="date" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.shelf_life}}
+                </div>
+                </div>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        alert('helllo');-->
+<!--        $("#exp_date").focusout(function(){-->
+<!--        alert('hello12');-->
+<!--        });-->
+
+<!--    });-->
+<!--</script>-->
+
+
+<!--<script>-->
+
+<!--$('#id_mrp').keypress(function(event) {-->
+<!--  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {-->
+<!--    event.preventDefault();-->
+<!--  }-->
+<!--});-->
+<!--</script>-->
+<!--<script>-->
+<!--    $("#id_shelf_life").on("keypress keyup blur",function (event) {-->
+<!--   $(this).val($(this).val().replace(/[^\d].+/, ""));-->
+<!--   var pincode = $("#id_shelf_life").val().length;-->
+<!--    if ((event.which < 48 || event.which > 57)) {-->
+<!--        event.preventDefault();-->
+<!--    }-->
+<!--});-->
+<!--    $("#id_quantity").on("keypress keyup blur",function (event) {-->
+<!--   $(this).val($(this).val().replace(/[^\d].+/, ""));-->
+<!--   var pincode = $("#id_quantity").val().length;-->
+<!--    if ((event.which < 48 || event.which > 57)) {-->
+<!--        event.preventDefault();-->
+<!--    }-->
+<!--});-->
+<!--</script>-->

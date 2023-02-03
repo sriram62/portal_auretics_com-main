@@ -1,0 +1,145 @@
+{% extends 'shop/base_r_j.html' %}
+
+
+{% block content %}
+<div class="container-fluid text-center">
+    <!--Otp tab -->
+    <div id="OTP" class=" mt-4">
+        <form action="{% url 'new_reg_user_login' %}" method="POST" onsubmit="return submitUserForm();" name="otp_form">
+            {% csrf_token %}
+
+            <!--						  	<form method="post" action="./?next={{ redirect_to }}">{% csrf_token %}-->
+
+            <div class="text-center mb-30  " id="otp-message">
+                <span style="color:green; ">OTP is sent to Your Mobile Number</span>
+            </div>
+            <div class="text-center mb-30" id="otp-error-message">
+                <span id="otp-error" style="color:red"></span>
+            </div>
+            <div class="text-center">
+                <input type="text" name="mobile" readonly value="{{mobile_number}}" id="mobile" placeholder="Mobile No."
+                    required />
+            </div>
+            <div class="text-center mt-40 mb-30">
+                <input type="button" id="otp-button" value="Send Code" onclick="send_otp_message();"
+                    style="padding: 10px" class="lezada-button lezada-button--medium">
+                <a class="lezada-button lezada-button--primary" id="skipp" href="/accounts/profile/edit/">Skip for
+                    now</a>
+            </div>
+
+            <div class="form-group" id="otp-input-field">
+                <input type="text" name="otp" id="otp" placeholder="Mobile OTP" />
+            </div>
+            <div class="text-center mt-40 mb-30" id="otp-captcha">
+                <input type="hidden" name="next" value="{{valuenext}}" />
+                <div class="g-recaptcha mb-20 " data-sitekey="6LeVCKgaAAAAAKELQHJMHeWi1g7k592G_xojVRbe"
+                    data-callback="varifycaptcha"></div>
+                <div id='g-recaptcha-error-otp'></div>
+                <input class="lezada-button lezada-button--medium" type="submit" value="Verify">
+{#                <a class="lezada-button lezada-button--primary" id="skipp" href="/accounts/profile/edit/">Skip for#}
+{#                    now</a>#}
+            </div>
+
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+<!-- Login Modal end -->
+{%endblock%}
+{% block extra_scripts %}
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function submitUserForm() {
+        var response = grecaptcha.getResponse();
+        console.log(response.length);
+        if (response.length == 0) {
+            document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This Field is required </span>';
+            return false;
+        }
+        return true;
+    }
+    function varifycaptcha() {
+        console.log('verified');
+        document.getElementById('g_recaptcha-error').innerHTML = '';
+    }
+</script>
+<script>
+    function submitUserFormForOTP() {
+        grecaptcha.reset();
+        var response = grecaptcha.getResponse(1);
+        console.log(response.length);
+        if (response.length == 0) {
+            document.getElementById('g-recaptcha-error-otp').innerHTML = '<span style="color:red;">This Field is required </span>';
+            return false;
+        }
+        return true;
+    }
+    function varifycaptcha() {
+        console.log('verified');
+        document.getElementById('g_recaptcha-error').innerHTML = '';
+    }
+</script>
+
+<script>
+
+    $("#otp-input-field").hide();
+    $("#otp-message").hide();
+    $("#otp-captcha").hide();
+    $("#otp-error-message").hide()
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function send_otp_message() {
+        var mobile = document.getElementById('mobile').value;
+        const csrftoken = getCookie('csrftoken');
+        var url = "{% url 'send_otp' %}";
+        $.post(url, { 'mobile': mobile, csrfmiddlewaretoken: csrftoken }, function (data, status, xhr) {
+            if (xhr.status == 200) {
+                $("#otp-error-message").hide()
+                $("#otp-input-field").show();
+                $("#otp-message").show();
+                $("#otp-button").hide();
+                $("#otp-captcha").show();
+                document.getElementById("mobile").readOnly = true;
+            }
+        })
+            .fail(function (error) {
+                console.log(error)
+                if (error.status = 400) {
+                    $("#otp-error-message").show();
+                    $('#otp-error').html(error.responseJSON.message);
+                } else {
+                    alert(error.statusText)
+                }
+                $("#otp-input-field").hide();
+                $("#otp-message").hide();
+                $("#otp-captcha").hide()();
+            });
+    }
+</script>
+
+
+{% endblock extra_scripts %}

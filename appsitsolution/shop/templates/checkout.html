@@ -1,0 +1,441 @@
+{% extends 'shop/base.html' %}
+{% load shop_tag %}
+{% load humanize %}
+{% load loyalty_purchase %}
+{% block content %}
+<!-- End of search overlay -->
+<div class="wrapper">
+	<div class="shop-page-wrapper">
+		<div style="margin-left: 20px;">
+			{% include 'shop/include/top_purchase_center.html' %}
+		</div>
+
+		<!-- checkout page content -->
+		<div class="shop-page-content shubhshipping_padd">
+			<div class="checkout-page-area">
+				<div class="container">
+
+					<div class="checkout-page-area">
+						<div class="container">
+
+							<form
+								action="{% if request.session.distributor_checkout %}/checkout_distributor/{{ request.session.distributor_checkout }}/{% else %}{%url 'checkout' %}{% endif %}"
+								method="POST" novalidate>{% csrf_token %}
+								<div class="row">
+									<div class="col-md-7 ship_add_ord_1">
+										<span class="d-block p-2 mb-3" style="background: #2874f0;color: #fff;">
+											<strong>Delivery Address</strong>
+										</span>
+										
+										{% for ad in all_address %}
+										<div class="d-flex justify-content-around mb-2 p-3 border rounded text-dark"
+											id="add_{{ad.id}}_box">
+											
+											{% if ad.default %}
+											<input type="radio" name="order_address" style="height:20px; width:20px; vertical-align: middle;margin-top: 10px" value="{{ad.id}}" checked>
+												
+											{% else %}
+											<input type="radio" name="order_address" style="height:20px; width:20px; vertical-align: middle;margin-top: 10px" value="{{ad.id}}">
+												
+											{% endif %}
+											<div class="container">
+												<div class="row flex-column add_data" style="display: flex;">
+													<span class="col-md-12"><strong>{{ad.name}} ||
+															{{ad.mobile}}</strong></span>
+													<span class="col-md-12">{{ad.get_address}}</span>
+												</div>
+
+												<div class="row add_form" style="display: none;">
+													<input type="hidden" name="id" value="{{ad.id}}">
+													<input type="hidden" name="csrfmiddlewaretoken"
+														value="{{ csrf_token }}">
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_name">Name</label>
+														<input type="text" class="form-control" id="add_{{ad.id}}_name"
+															name='name' placeholder="Name" value="{{ad.name}}">
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_mobile">Mobile</label>
+														<input type="text" class="form-control"
+															id="add_{{ad.id}}_mobile" name='mobile' placeholder="Mobile"
+															value="{{ad.mobile}}">
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_pin">Pincode</label>
+														<input type="text" class="form-control" id="add_{{ad.id}}_pin"
+															name='pincode' placeholder="Enter Pincode"
+															value="{{ad.pincode}}">
+													</div>
+													<div class="col-md-12 mb-2">
+														<label for="add_{{ad.id}}_address">Address (area and
+															street)</label>
+														<textarea class="form-control" id="add_{{ad.id}}_address"
+															name='address_line' rows="3">{{ad.address_line}}</textarea>
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_city">City/District/Town</label>
+														<input type="text" class="form-control" id="add_{{ad.id}}_city"
+															name='city' placeholder="Enter City name"
+															value="{{ad.city}}">
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_state">State Name</label>
+														<select name="state" class="form-control"
+															id="add_{{ad.id}}_state">
+															<option value="" disabled="">--Select State--</option>
+															{% for is in all_states %}
+															{% if ad.state.state_name == is.state_name %}
+															<option value="{{is.state_name}}" selected>{{is.state_name}}
+															</option>
+															{% else %}
+															<option value="{{is.state_name}}">{{is.state_name}}</option>
+															{% endif %}
+															{% endfor %}
+														</select>
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="{{ad.Landmark}}">Landmark (Optional)</label>
+														<input type="text" class="form-control" value="{{ad.Landmark}}"
+															name="Landmark" placeholder="Enter Landmark">
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="{{ad.alternate_mobile}}">Alternate Phone
+															(Optional)</label>
+														<input type="text" class="form-control"
+															value="{{ad.alternate_mobile}}" name='alternate_mobile'
+															placeholder="Alternate Mobile Number">
+													</div>
+													<div class="col-md-12 mb-2">
+														<div class="row">
+															{% if ad.default %}
+															<div class="col-md-6">
+																<input type="checkbox" name="default_{{ad.id}}" checked>
+																<label>Set as Default</label>
+															</div>
+															{% else %}
+															<div class="col-md-6">
+																<input type="checkbox" name="default_{{ad.id}}">
+																<label>Set as Default</label>
+															</div>
+															{% endif %}
+														</div>
+
+													</div>
+													<div class="col-md-6 mb-2">
+														<input type="button" class="lezada-button mobi_but rounded"
+															value="SAVE AND DELIVER HERE" onclick="send_data(this)">
+													</div>
+													<div class="col-md-6 mb-2">
+														<input type="button" class="lezada-button mobi_but rounded"
+															style="background: #007bff;" value="Cancel"
+															onclick="hide_box(this)">
+													</div>
+
+												</div>
+											</div>
+
+											<strong onclick="show_form(this)"
+												style="color:#007bff; cursor:pointer">Edit</strong>
+										</div>
+
+										{% endfor %}
+										<div class="d-flex justify-content-around mb-2 p-2 border rounded font-weight-bold"
+											id="add_new_box">
+											<span style="font-size: 25px;color: #007bff;cursor: pointer;">+</span>
+											<div class="d-flex flex-column align-items-start " style="width: 90%;">
+												{% if all_address %}
+												<strong class="add_data" style="display: flex; color: #007bff;cursor: pointer;"
+													onclick="show_form(this)">Add new address</strong>
+												<div class="row add_form" style="display: none;">
+												{% else %}
+												<strong class="add_data" style="display: none; color: #007bff;cursor: pointer;"
+													onclick="show_form(this)">Add new address</strong>
+												<div class="row add_form" style="display: flex;">
+
+												{%endif%}
+													<input type="hidden" name="id" value="">
+													<input type="hidden" name="csrfmiddlewaretoken"
+														value="{{ csrf_token }}">
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_name">Name</label>
+														<input type="text" class="form-control" name='name' placeholder="Name" value="{{ad.name}}">
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_mobile">Mobile</label>
+														<input type="text" class="form-control" name='mobile' placeholder="Mobile" value="{{ad.mobile}}">
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_pin">Pincode</label>
+														<input type="text" class="form-control" name='pincode' placeholder="Enter Pincode"
+															value="{{ad.pincode}}">
+													</div>
+													<div class="col-md-12 mb-2">
+														<label for="add_{{ad.id}}_address">Address (area and
+															street)</label>
+														<textarea class="form-control" name='address_line' rows="3">{{ad.address_line}}</textarea>
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_city">City/District/Town</label>
+														<input type="text" class="form-control" name='city' placeholder="Enter City name"
+															value="{{ad.city}}">
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="add_{{ad.id}}_state">State Name</label>
+														<select name="state" class="form-control">
+															<option value="" disabled="" selected>--Select State--
+															</option>
+															{% for is in all_states %}
+															<option value="{{is.state_name}}">{{is.state_name}}</option>
+
+															{% endfor %}
+														</select>
+													</div>
+													<div class="col-md-6 mb-2">
+														<label>Landmark (Optional)</label>
+														<input type="text" class="form-control" name="Landmark"
+															placeholder="Enter Landmark">
+													</div>
+													<div class="col-md-6 mb-2">
+														<label for="{{ad.alternate_mobile}}">Alternate Phone
+															(Optional)</label>
+														<input type="text" class="form-control" name='alternate_mobile'
+															placeholder="Alternate Mobile Number">
+													</div>
+													<div class="col-md-12 mb-2">
+														<div class="row">
+															<div class="col-md-6">
+																<input type="checkbox" name="default">
+																<label>Set as Default</label>
+															</div>
+
+														</div>
+
+													</div>
+													<div class="col-md-6 mb-2">
+														<input type="button" class="lezada-button mobi_but rounded"
+															value="SAVE AND DELIVER HERE" onclick="send_data(this)">
+													</div>
+													<div class="col-md-6 mb-2">
+														<input type="button" class="lezada-button mobi_but rounded"
+															style="background: #007bff;" value="Cancel"
+															onclick="hide_box(this)">
+													</div>
+
+
+												</div>
+											</div>
+										</div>
+										<!--<input type="hidden" name="shipping_address" />-->
+									</div>
+									<div id="active_sub" class="col-md-7 mb-40 mt-sm-20" style="display: none;">
+										<div class="submit-form">
+
+
+											<div>
+
+
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-5 ship_add_ord_4 col-md-5 mt-xs-20">
+
+										<!-- Cart Total -->
+										<div class="mb-30 shubhcheck_out">
+											<h4 class="checkout-title pl-sm-10">Cart Total</h4>
+											<div class="checkout-cart-total">
+												<!--														<h4>Product <span>Total</span></h4>-->
+												{% if paid_with_wallet %}
+												<p>Wallet Balance<span>₹
+														{{wallet_balance}}</span>
+
+													{%endif%}
+												</p>
+												<h4>Product <span>Price</span></h4>
+												<ul>
+													{% for item in cart_items_checkout|non_loyalty_items:request %}
+													<li class="d-flex justify-content-between">
+														{{item.product.product_name}} X {{item.quantity}}
+														<span>₹ {% widthratio item.discount_price 1 item.quantity
+															%}</span>
+													</li>
+													<!--															<li class="d-flex justify-content-between">{{item.product.product_name}} X {{item.quantity}} <span>₹{{item.price}}</span></li>-->
+													{% endfor %}
+												</ul>
+												{% if request.session.loyalty_purchase_enabled and cart_items_checkout|loyalty_items:request %}
+												<h4>Loyalty Product <span>Price</span></h4>
+												<ul>
+													{% for item in cart_items_checkout|loyalty_items:request %}
+													<li class="d-flex justify-content-between">
+														{{item.product.product_name}} X {{item.quantity}}
+														<span>₹ {% widthratio item.discount_price 1 item.quantity %}</span>
+													</li>
+													{% endfor %}
+												</ul>
+												{% endif %}
+												<!--														<p>Total <span>₹{{cart_subtotal}}</span>-->
+												{% if paid_with_wallet %}
+												<p>Total <span>₹ {%if pending %}{{ pending }}{%else%}{{a_cart_subtotal}}{%endif%}</span>
+												</p>
+												{%if pending %}<input type="hidden" name="pending" value="{{pending}}">
+												{%endif%}
+												{% if not request.session.distributor_checkout %}
+												<h4>Grand Total <span>₹
+														{%if pending %}{{ pending }}{%else%}{% add_ship_charge_a_user a_cart_subtotal %}{%endif%}</span>
+												</h4>
+												{% else %}
+												<h4>Grand Total <span>₹
+														{%if pending %}{{ pending }}{%else%}{{ a_cart_subtotal
+														}}{%endif%}</span></h4>
+												{% endif %}
+												<p>Total BV <span>{{cart_sub_bv}}</span>
+												</p>
+												<p>Total PV <span>{{cart_sub_pv}}</span>
+												</p>
+
+
+												{% if not request.session.distributor_checkout %}
+												<p>Withdrawn From Wallet <span>₹
+														{{withdrawn}}</span>
+
+
+												</p>
+												{% endif %}
+
+
+
+												<input type="hidden" name="paid_with_wallet" value="paid_with_wallet">
+												<p>Remaining Wallet Balance<span>₹ {{remaining_bal}}</span>
+
+
+												</p>
+
+
+												{%else%}
+												{% if not request.session.distributor_checkout %}
+												<p>Withdrawn From Wallet <span>₹ {{withdrawn}}</span>
+
+
+												</p>
+												{% endif %}
+
+												<p>Total <span>₹ {%if pending %}{{ pending }}{%else%}{{ a_cart_subtotal }}{%endif%}</span>
+												</p>
+												{%if pending %}<input type="hidden" name="pending" value="{{pending}}">
+												{%endif%}
+												{% if not request.session.distributor_checkout %}
+												<h4>Grand Total <span>₹
+														{%if pending %}{{ pending }}{%else%}{% add_ship_charge_a_user a_cart_subtotal %}{%endif%}</span></h4>
+												{% else %}
+												<h4>Grand Total <span>₹
+														{%if pending %}{{ pending }}{%else%}{{ a_cart_subtotal }}{%endif%}</span></h4>
+												{% endif %}
+												<p>Total BV <span>{{cart_sub_bv}}</span>
+												</p>
+												<p>Total PV <span>{{cart_sub_pv}}</span>
+												</p>
+												<br />
+												<p>Please write any special instructions (if any) related to your order
+													here: <br />
+													<textarea name="card_description"></textarea>
+												</p>
+											</div>
+										</div>
+										{%endif%}
+										{% if request.session.distributor_checkout %}
+										<input class="lezada-button mobi_but" type="submit" name="submit"
+											value="Send to Distributor">
+										{% else %}
+										<input class="lezada-button mobi_but" type="submit" name="submit"
+											value="Make Payment">
+										{% endif %}
+									</div>
+								</div>
+							</form>
+
+
+
+
+
+						</div>
+					</div>
+					{% if pending %}
+					<div align="center">
+						<h4>You are going to pay </h4>
+						<h2> {{pending}}</h2>
+					</div>
+					{% endif %}
+				</div>
+				<!-- checkout page content end -->
+
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+	{% block extra_scripts %}
+	<script>
+		function show_form(elem) {
+			box = elem.parentElement;
+			var all_form = document.querySelectorAll('.add_form');
+			for (let i = 0; i < all_form.length; i++) { all_form[i].style.display = 'none' }
+			var all_data = document.querySelectorAll('.add_data');
+			for (let i = 0; i < all_data.length; i++) { all_data[i].style.display = 'flex' }
+			box.querySelector('.add_data').style.display = 'none';
+			box.querySelector('.add_form').style.display = '';
+		};
+		function hide_box(elem) {
+			box = elem.parentElement.parentElement.parentElement;
+			box.querySelector('.add_data').style.display = 'flex';
+			box.querySelector('.add_form').style.display = 'none';
+		};
+		function send_data(elem) {
+			box = elem.parentElement.parentElement.parentElement;
+			var aInp = box.querySelectorAll('input');
+			var data = {};
+			data['address_line'] = box.querySelector('textarea').value;
+			data['state'] = box.querySelector('select').value;
+			for (let i = 0; i < aInp.length; i++) {
+				if (aInp[i].name !== '') {
+					if ((aInp[i].name).search('default') !== -1) {
+						data['default'] = aInp[i].checked
+					}
+					else {
+						data[aInp[i].name] = aInp[i].value
+					}
+				}
+			}
+			// console.log(data)
+			$.ajax({
+				type: 'POST',
+				url: "{% url 'update_address'%}",
+				data: data,
+				success: function (response) {
+					console.log(response)
+					hide_box(elem);
+					location.reload();
+				}
+			});
+		};
+		document.getElementById('billingforms').onclick = function () {
+			toggleSub(this, 'active_sub');
+		};
+
+		// called onclick of checkbox
+		function toggleSub(checkbox, id) {
+			// get reference to related content to display/hide
+			var el = document.getElementById(id);
+			if (checkbox.checked) {
+				$('#shipping_address').prop('checked', false);
+				$('.hideable_shipping_form').hide();
+				el.style.display = 'block';
+			} else {
+				el.style.display = 'none';
+				$('#shipping_address').prop('checked', true);
+				$('.hideable_shipping_form').show();
+			}
+		}
+	</script>
+
+	{% endblock extra_scripts %}
+
+</div>

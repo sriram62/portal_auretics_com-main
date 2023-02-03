@@ -1,0 +1,377 @@
+{% load static %}
+{% load calculation_tag %}
+{% load humanize %}
+{% load l10n %}
+{% include "business/include/header.html" %}
+<style>
+header.navbar.pcoded-header {
+background: #ecf0f5;
+}
+</style>
+<!--AG:: Replacing unwated data-->    
+<script type="text/javascript">
+function replaceScript() {
+//document.body.innerHTML = document.body.innerHTML.replace(/\<p class\=\"td\_spon\"\> \(\)/g, '\<p class\=\"td\_spon\"\>');
+//document.body.innerHTML = document.body.innerHTML.replace(/\<br \/\>\(\)\<br \/\>/g, '\<br \/\>\<br \/\>');
+//document.body.innerHTML = document.body.innerHTML.replace(/Current Month PPV\:\ \<\/p\>/g, '\<p\>');
+}
+</script>
+<div class="pcoded-main-container">
+    <div class="modal-content bg_binary">
+        <form method="post" enctype="multipart/form-data">
+            <div class="container-fluid">
+                <div class="row table_bg_bonus_1">
+                    <div class="col-md-12 mt-4">
+                        <h2 class="calc_page_title mb-2">Organisation Tree View</h2>
+                        <h5 class="calc_page_title_1 mb-4">This page shows details about your both Organisations</h5>
+                        <center>Please Note: These are tentative figures and are subject to increase or decrease.</center>
+{#                        {% if allow_one_level_above %}<div align="right"><h5><right><a href="#">Go One Parent Up</a></right></h5>{% endif %}</div>#}
+                    <table><tr><td align="right">
+                        <form method="get" action="{% url 'mlm_admin_user_dashboard_11'  %}" accept-charset="utf-8">
+                            {% csrf_token %}
+                        <input type="search" class="form-control" id="q" name="q" placeholder="Enter ARN Number" /></td><td><button type="submit" class="btn  btn-primary">Search</button></span></form>
+                    </td></tr></table>
+                    <p color="red"><span><strong>{{ msg }}</strong></span></p>
+                    <div class="card-header">
+                        <h4><center>Organisation Summary</center></h4>
+                    </div>
+                    <table class="table" style="margin-left: auto; margin-right: auto;">
+                        <tbody>
+                        <tr><td><h5>Left Organisation Summary</h5></td><td></td><td></td><td><h5>Right Organisation Summary</h5></td></tr>
+                            <tr>
+                                <td style="width: 25%;">
+                                    <p><strong><u>Last Month Details:</u></strong></p>
+                                    <p>
+                                        Left Users: <strong>{% if not left_users %} 0.00 {% else %}{{ left_users }}{% endif %}</strong><br />
+                                        Brought Forward PV: <strong> {% if not t_user %} 0.00 {% else %} {{t_user.bf_no_of_new_advisor_pv_in_left_position_referred|floatformat:2|intcomma}} {% endif %}</strong><br />
+                                        Earned PV: <strong> {% if not t_user %} 0.00 {% else %} {{t_user.cm_left_pv|floatformat:2|intcomma}} {% endif %}</strong><br />
+                                        Carry Forward PV: <strong> {% if not t_user %} 0.00 {% else %} {{t_user.cm_no_of_new_advisor_pv_in_left_position_referred_carry_forward|floatformat:2|intcomma}} {% endif %}</strong><br />
+                                        <!--Consumed PV: <strong> {% if not t_user %} 0.00 {% else %} {{t_user.total_no_of_new_advisor_pv_in_left_position|floatformat:2|intcomma}} {% endif %}</strong><br />-->
+                                        Consumed PV: <strong> {% if not t_user %} 0.00 {% else %} {{left_consumed|floatformat:2|intcomma}} {% endif %}</strong><br>
+                                        Left Green Users: <strong>{% if not left_green_users %} 0.00 {% else %}{{ left_green_users}}{% endif %}</strong><br>
+                                    </p>
+                                </td>
+                                <td style="border-right: 1px solid #7e7e7e; width: 25%;">
+                                    <p><strong><u>Current Month Details:</u></strong></p>
+                                    <p>
+                                        Brought Forward PV: <strong> {% if not t_user %} 0.00 {% else %} {{t_user.cm_no_of_new_advisor_pv_in_left_position_referred_carry_forward|floatformat:2|intcomma}} {% endif %}</strong><br />
+                                        Left PV: <strong>{{ rt_left_pv_month|floatformat:2|intcomma}}</strong><br />
+                                        Left BV: <strong>{{ rt_left_bv_month|floatformat:2|intcomma}}</strong><br />
+                                        Total PV as on Date: <strong>{{ total_pv_as_on_date_left|floatformat:2|intcomma }}</strong>
+                                    </p>
+                                </td>
+                                <td style="border-left: 1px solid #7e7e7e; width: 25%;">
+                                    <p><strong><u>Current Month Details:</u></strong></p>
+                                    <p>
+                                        Brought Forward PV: <strong> {% if not t_user %} 0.00 {% else %} {{t_user.cm_no_of_new_advisor_pv_in_right_position_referred_carry_forward|floatformat:2|intcomma}} {% endif %}</strong><br />
+                                        Right PV: <strong>{{ rt_right_pv_month|floatformat:2|intcomma}}</strong><br />
+                                        Right BV: <strong>{{ rt_right_bv_month|floatformat:2|intcomma}}</strong><br />
+                                        Total PV as on Date: <strong>{{ total_pv_as_on_date_right|floatformat:2|intcomma }}</strong>
+                                    </p>
+                                </td>
+                                <td style="width: 25%;">
+                                    <p><strong><u>Last Month Details:</u></strong></p>
+                                    <p>
+                                        Right Users: <strong>{% if not right_users %} 0.00 {% else %}{{ right_users }}{% endif %}</strong><br />
+                                        Brought Forward PV: <strong> {% if not t_user %} 0.00 {% else %} {{t_user.bf_no_of_new_advisor_pv_in_right_position_referred|floatformat:2|intcomma}} {% endif %}</strong><br />
+                                        Earned PV: <strong> {% if not t_user %} 0.00 {% else %} {{t_user.cm_right_pv|floatformat:2|intcomma}} {% endif %}</strong><br />
+                                        Carry Forward PV: <strong> {% if not t_user %} 0.00 {% else %} {{t_user.cm_no_of_new_advisor_pv_in_right_position_referred_carry_forward|floatformat:2|intcomma}} {% endif %}</strong><br />
+                                        Consumed PV: <strong> {% if not t_user %} 0.00 {% else %} {{right_consumed|floatformat:2|intcomma}} {% endif %}</strong><br>
+                                        Right Green Users: <strong>{% if not right_green_users %} 0.00 {% else %}{{ right_green_users }}{% endif %}</strong><br>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                     <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="tab_width_binary">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    {% if rt_detail_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif rt_detail_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                    <div class="active_parent">
+                                                        <h2>{{user.profile.first_name}} {{user.profile.last_name}} <br />({{user.referralcode.referral_code}})</h2>
+                                                        <p><strong><u>{{ top_user_title }}</u></strong></p>
+                                                        <h4><span>Sponsor</span> : {{user.referralcode.referal_by.profile.first_name}} {{user.referralcode.referal_by.profile.last_name}} <br />({{user.referralcode.referal_by.referralcode.referral_code}})</h4>
+                                                        <h4><span>Current Month Self BV</span>: {{current_bv|floatformat:2|intcomma}}</h4>
+                                                        <h4><span>Current Month Self PV</span>: {{main_user|floatformat:2|intcomma}}</h4>
+                                                        <h4><span>Last Month Self BV</span>: {{last_bv|floatformat:2|intcomma}}</h4>
+                                                        <h4><span>Last Month Self PV</span>: {{last_pv|floatformat:2|intcomma}}</h4>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="tab_width_binary">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 2%;"></td>
+                                                <td><a  href="{% if user_1_l_pk  %}{% url 'mlm_calculation_binary' user_1_l_pk user_1_l_referral_code %} {% else %} # {% endif %}">
+                                                    {% if user_1_l_title %}
+                                                        {% if user_1_l_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                        {% elif user_1_l_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                        {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_1_l_title %}{{user_1_l_first_name}} ({{user_1_l_referral_code}}){% endif %}<br />
+                                                    {% if user_1_l_title %}({{user_1_l_title}})<br />Current Month PBV: {{user_1_l_pbv}}{% endif %}</p>
+                                                </td>
+                                                <td style="width: 9%;"></td>
+                                                <td><a  href="{% if user_1_r_pk  %}{% url 'mlm_calculation_binary' user_1_r_pk user_1_r_referral_code %} {% else %} # {% endif %}">
+                                                    {% if user_1_r_title %}
+                                                        {% if user_1_r_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                        {% elif user_1_r_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                        {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_1_r_title %}{{user_1_r_first_name}} ({{user_1_r_referral_code}}){% endif %}<br />
+                                                    {% if user_1_r_title %}({{user_1_r_title}})<br />Current Month PBV: {{user_1_r_pbv}}{% endif %}</p>
+                                                </td>
+                                                <td style="width: 2%;"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="binary_padd0">
+                                    <table class="tab_width_binary">
+                                        <tbody>
+                                            <tr>
+                                                <td class="left_binary_width"></td>
+                                                <td class="binary_child_bord"></td>
+                                                <td style="width: 26%;"></td>
+                                                <td class="binary_child_bord"></td>
+                                                <td class="left_binary_width"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="binary_padd0">
+                                    <table class="tab_width_binary">
+                                        <tbody>
+                                            <tr>
+                                                <!--<td style="width: 10px;"></td>-->
+                                                <td><a  href="{% if user_2_l_l_pk  %}{% url 'mlm_calculation_binary' user_2_l_l_pk user_2_l_l_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_2_l_l_title %}
+                                                    {% if user_2_l_l_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_2_l_l_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_2_l_l_title %}{{user_2_l_l_first_name}} ({{user_2_l_l_referral_code}}){% endif %}<br />
+                                                    {% if user_2_l_l_title %}({{user_2_l_l_title}})<br />Current Month PBV: {{user_2_l_l_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td><a  href="{% if user_2_l_r_pk  %}{% url 'mlm_calculation_binary' user_2_l_r_pk user_2_l_r_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_2_l_r_title %}
+                                                    {% if user_2_l_r_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_2_l_r_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_2_l_r_title %}{{user_2_l_r_first_name}} ({{user_2_l_r_referral_code}}){% endif %}
+                                                    <br />{% if user_2_l_r_title %}({{user_2_l_r_title}})<br />Current Month PBV: {{user_2_l_r_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td style="width: 10px;"></td>
+                                                <td><a  href="{% if user_2_r_l_pk  %}{% url 'mlm_calculation_binary' user_2_r_l_pk user_2_r_l_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_2_r_l_title %}
+                                                    {% if user_2_r_l_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_2_r_l_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_2_r_l_title %}{{user_2_r_l_first_name}} ({{user_2_r_l_referral_code}}){% endif %}
+                                                    <br />{% if user_2_r_l_title %}({{user_2_r_l_title}})<br />Current Month PBV: {{user_2_r_l_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td><a  href="{% if user_2_r_r_pk  %}{% url 'mlm_calculation_binary' user_2_r_r_pk user_2_r_r_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_2_r_r_title %}
+                                                    {% if user_2_r_r_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_2_r_r_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_2_r_r_title %}{{user_2_r_r_first_name}} ({{user_2_r_r_referral_code}}){% endif %}
+                                                    <br />{% if user_2_r_r_title %}({{user_2_r_r_title}})<br />Current Month PBV: {{user_2_r_r_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="binary_padd0">
+                                    <table class="tab_width_binary">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 47px;"></td>
+                                                <td class="binary_child_bord_1"></td>
+                                                <td style="width: 84px;"></td>
+                                                <td class="binary_child_bord_1"></td>
+                                                <td style="width: 92px;"></td>
+                                                <td class="binary_child_bord_1"></td>
+                                                <td style="width: 80px;"></td>
+                                                <td class="binary_child_bord_1"></td>
+                                                <td style="width: 40px;"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="binary_padd0">
+                                    <table class="tab_width_binary">
+                                        <tbody>
+                                            <tr>
+                                                <td><a  href="{% if user_3_l_l_l_pk  %}{% url 'mlm_calculation_binary' user_3_l_l_l_pk user_3_l_l_l_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_3_l_l_l_title %}
+                                                    {% if user_3_l_l_l_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_3_l_l_l_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_3_l_l_l_title %}{{user_3_l_l_l_first_name}} ({{user_3_l_l_l_referral_code}}){% endif %}
+                                                    <br />{% if user_3_l_l_l_title %}({{user_3_l_l_l_title}})<br />Current Month PBV: {{user_3_l_l_l_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td style="width: 1px;"></td>
+                                                <td><a  href="{% if user_3_l_l_r_pk  %}{% url 'mlm_calculation_binary' user_3_l_l_r_pk user_3_l_l_r_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_3_l_l_r_title %}
+                                                    {% if user_3_l_l_r_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_3_l_l_r_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_3_l_l_r_title %}{{user_3_l_l_r_first_name}} ({{user_3_l_l_r_referral_code}}){% endif %}
+                                                    <br />{% if user_3_l_l_r_title %}({{user_3_l_l_r_title}})<br />Current Month PBV: {{user_3_l_l_r_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td><a  href="{% if user_3_l_r_l_pk  %}{% url 'mlm_calculation_binary' user_3_l_r_l_pk user_3_l_r_l_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_3_l_r_l_title %}
+                                                    {% if user_3_l_r_l_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_3_l_r_l_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_3_l_r_l_title %}{{user_3_l_r_l_first_name}} ({{user_3_l_r_l_referral_code}}){% endif %}
+                                                    <br />{% if user_3_l_r_l_title %}({{user_3_l_r_l_title}})<br />Current Month PBV: {{user_3_l_r_l_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td style="width: 1px;"></td>
+                                                <td><a  href="{% if user_3_l_r_r_pk  %}{% url 'mlm_calculation_binary' user_3_l_r_r_pk user_3_l_r_r_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_3_l_r_r_title %}
+                                                    {% if user_3_l_r_r_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_3_l_r_r_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_3_l_r_r_title %}{{user_3_l_r_r_first_name}} ({{user_3_l_r_r_referral_code}}){% endif %}
+                                                    <br />{% if user_3_l_r_r_title %}({{user_3_l_r_r_title}})<br />Current Month PBV: {{user_3_l_r_r_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td><a  href="{% if user_3_r_l_l_pk  %}{% url 'mlm_calculation_binary' user_3_r_l_l_pk user_3_r_l_l_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_3_r_l_l_title %}
+                                                    {% if user_3_r_l_l_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_3_r_l_l_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_3_r_l_l_title %}{{user_3_r_l_l_first_name}} ({{user_3_r_l_l_referral_code}}){% endif %}
+                                                    <br />{% if user_3_r_l_l_title %}({{user_3_r_l_l_title}})<br />Current Month PBV: {{user_3_r_l_l_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td style="width: 10px;"></td>
+                                                <td><a  href="{% if user_3_r_l_r_pk  %}{% url 'mlm_calculation_binary' user_3_r_l_r_pk user_3_r_l_r_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_3_r_l_r_title %}
+                                                    {% if user_3_r_l_r_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_3_r_l_r_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_3_r_l_r_title %}{{user_3_r_l_r_first_name}} ({{user_3_r_l_r_referral_code}}){% endif %}
+                                                    <br />{% if user_3_r_l_r_title %}({{user_3_r_l_r_title}})<br />Current Month PBV: {{user_3_r_l_r_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td><a  href="{% if user_3_r_r_l_pk  %}{% url 'mlm_calculation_binary' user_3_r_r_l_pk user_3_r_r_l_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_3_r_r_l_title %}
+                                                    {% if user_3_r_r_l_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_3_r_r_l_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_3_r_r_l_title %}{{user_3_r_r_l_first_name}} ({{user_3_r_r_l_referral_code}}){% endif %}
+                                                    <br />{% if user_3_r_r_l_title %}({{user_3_r_r_l_title}})<br />Current Month PBV: {{user_3_r_r_l_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                                <td><a  href="{% if user_3_r_r_r_pk  %}{% url 'mlm_calculation_binary' user_3_r_r_r_pk user_3_r_r_r_referral_code %} {% else %} # {% endif %}">
+                                                {% if user_3_r_r_r_title %}
+                                                    {% if user_3_r_r_r_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                                    {% elif user_3_r_r_r_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                                    {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                                    {% endif %}
+                                                {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/empty_icon.png">{% endif %}
+                                                    <p class="td_spon">{% if user_3_r_r_r_title %}{{user_3_r_r_r_first_name}} ({{user_3_r_r_r_referral_code}}){% endif %}
+                                                    <br />{% if user_3_r_r_r_title %}({{user_3_r_r_r_title}})<br />Current Month PBV: {{user_3_r_r_r_pbv}}{% endif %}</p>
+                                                </td>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br /><div align=center>
+                    <p><span>Current BV to PV ratio is 10:1. Therefore, if you purchase products worth 1,000BV you will get 100PV</span><br /><span><sup>*BV:PV ratio is subject to change from time to time.</sup></span></p>
+                </div>
+            {% include "business/include/acronym.html" %}
+
+{#<!--Debug-->#}
+{#<div class="card mb-0">#}
+{#<div class="card-header" id="headingOne">#}
+{#<h5 class="mb-0"><a href="#!" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">Debug</a></h5>#}
+{#</div>#}
+{#<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="">#}
+{#<div class="card-body">#}
+{#<p>Report Debugging</p>#}
+{#<p>user_1_l_obj: {{ user_1_l_obj }}: {% if user_1_l  %}found{% else %} not {% endif %}: {{ user_1_l }}: {{ user_1_l.user_id }}</p>#}
+{#<p>user_1_r_obj: {{ user_1_r_obj }}: {% if user_1_r  %}found{% else %} not {% endif %}: {{ user_1_r }}: {{ user_1_l.user_id }}</p>#}
+{#<p>user_2_l_l_obj: {{ user_2_l_l_obj }}: {% if user_2_l_l  %}found{% else %} not {% endif %}: {{ user_2_l_l }}: {{ user_2_l_l.user_id }}</p>#}
+{#<p>user_2_l_r_obj: {{ user_2_l_r_obj }}: {% if user_2_l_r  %}found{% else %} not {% endif %}: {{ user_2_l_r }}: {{ user_2_l_l.user_id }}</p>#}
+{#<p>user_2_r_l_obj: {{ user_2_r_l_obj }}: {% if user_2_r_l  %}found{% else %} not {% endif %}: {{ user_2_r_l }}: {{ user_2_r_l.user_id }}</p>#}
+{#<p>user_2_r_r_obj: {{ user_2_r_r_obj }}: {% if user_2_r_r  %}found{% else %} not {% endif %}: {{ user_2_r_r }}: {{ user_2_r_l.user_id }}</p>#}
+{#<p>user_3_l_l_l_obj: {{ user_3_l_l_l_obj }}: {% if user_3_l_l_l  %}found{% else %} not {% endif %}: {{ user_3_l_l_l }}: {{ user_3_l_l_l.user_id }}</p>#}
+{#<p>user_3_l_l_r_obj: {{ user_3_l_l_r_obj }}: {% if user_3_l_l_r  %}found{% else %} not {% endif %}: {{ user_3_l_l_r }}: {{ user_3_l_l_l.user_id }}</p>#}
+{#<p>user_3_l_r_l_obj: {{ user_3_l_r_l_obj }}: {% if user_3_l_r_l  %}found{% else %} not {% endif %}: {{ user_3_l_r_l }}: {{ user_3_l_r_l.user_id }}</p>#}
+{#<p>user_3_l_r_r_obj: {{ user_3_l_r_r_obj }}: {% if user_3_l_r_r  %}found{% else %} not {% endif %}: {{ user_3_l_r_r }}: {{ user_3_l_r_l.user_id }}</p>#}
+{#<p>user_3_r_l_l_obj: {{ user_3_r_l_l_obj }}: {% if user_3_r_l_l  %}found{% else %} not {% endif %}: {{ user_3_r_l_l }}: {{ user_3_r_l_l.user_id }}</p>#}
+{#<p>user_3_r_l_r_obj: {{ user_3_r_l_r_obj }}: {% if user_3_r_l_r  %}found{% else %} not {% endif %}: {{ user_3_r_l_r }}: {{ user_3_r_l_l.user_id }}</p>#}
+{#<p>user_3_r_r_l_obj: {{ user_3_r_r_l_obj }}: {% if user_3_r_r_l  %}found{% else %} not {% endif %}: {{ user_3_r_r_l }}: {{ user_3_r_r_l.user_id }}</p>#}
+{#<p>user_3_r_r_r_obj: {{ user_3_r_r_r_obj }}: {% if user_3_r_r_r  %}found{% else %} not {% endif %}: {{ user_3_r_r_r }}: {{ user_3_r_r_l.user_id }}</p>#}
+{#-->#}
+{#</div>#}
+{#</div>#}
+{#</div>#}
+{#<!--Debug-->#}
+
+        </form>
+    </div>
+</div>
+{% include "business/include/footer.html" %}

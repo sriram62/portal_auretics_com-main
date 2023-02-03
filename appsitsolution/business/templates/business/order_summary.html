@@ -1,0 +1,82 @@
+{% load static %}
+{% load humanize %}
+{% include "business/include/header.html" %}
+<script src="/static/js/xlsx.full.min.js"></script>
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Order Summary</h2>
+                <h5 class="calc_page_title_1 mb-4">This page shows Total Amount and PV/BV earned (Month-Wise) for orders placed by you personally.</h5>
+                    <div class="main_downline mt-4 mb-4">
+                    <div><p>Order Summary of: {{referall_code}} {{user_name}}</p></div>
+<!--                    <div class="input_search_down">-->
+<!--                <label class="downline_label">Search my Downline</label>-->
+<!--                <input type="text" for="search" class="form-control" placeholder="Search your downline here">-->
+<!--                </div>-->
+                    </div>
+                    <table><tr><td align="right">
+                    <form method="get" action="{% url 'order_summary'  %}" accept-charset="utf-8">
+                        {% csrf_token %}
+                    <input type="search" class="form-control" id="q" name="q" placeholder="Enter ARN Number" /></td><td><button type="submit" class="btn  btn-primary">Search</button></span></form>
+                    </td></tr></table>
+                    <p color="red"><span><strong>{{ msg }}</strong></span></p>
+                    <!-- AG :: Export to excel taken from https://codepedia.info/javascript-export-html-table-data-to-excel -->
+                    <div align="right">
+                    <button onclick="ExportToExcel('xlsx')">Export table to Excel</button><br />
+                    <script>
+                        function ExportToExcel(type, fn, dl) {
+                            var elt = document.getElementById('myTable');
+                            var wb = XLSX.utils.table_to_book(elt, { sheet: "Order Summary" });
+                            return dl ?
+                                XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+                                XLSX.writeFile(wb, fn || ('AureticsOrderSummary.' + (type || 'xlsx')));
+                        }
+                    </script>
+                </div></div>
+                <div class="col-md-12 mt-4">
+                    <table class="table user_profile_bonus_1" id="myTable">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Month</th>
+                        <th scope="col">Grand Total</th>
+                        <th scope="col">Business Volume</th>
+                        <th scope="col">Point Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in order_details %}
+                        <tr>
+                        <td>{{ i.0 }}</td>
+                        <td>₹{{ i.1|floatformat:2|intcomma }}</td>
+                        <td>{{ i.2|floatformat:2|intcomma }}</td>
+                        <td>{{ i.3|floatformat:2|intcomma }}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr></tr>
+                        <tr class="bonus_total">
+                        <td><b>Total</b></td>
+                        <td><b>₹{{ total_order_detail_grand_total|floatformat:2|intcomma }}</b></td>
+                        <td><b>{{ total_order_detail_bv|floatformat:2|intcomma }}</b></td>
+                        <td><b>{{ total_order_detail_pv|floatformat:2|intcomma }}</b></td>
+                        </tr>
+                        <tr><td></td></tr>
+                        <tr class="bonus_total_1">
+                        <td><b>Total Till Date</b></td>
+                        <td><b>₹{{ total_order_detail.0|floatformat:2|intcomma }}</b></td>
+                        <td><b>{{ total_order_detail.1|floatformat:2|intcomma }}</b></td>
+                        <td><b>{{ total_order_detail.2|floatformat:2|intcomma }}</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                        </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+{% include "business/include/footer.html" %}

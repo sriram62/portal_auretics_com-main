@@ -1,0 +1,76 @@
+{% load static %}
+{% load humanize %}
+{% include "business/include/header.html" %}
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        {% for message in messages %}
+                        <div class="alert
+                            alert-{% if message.tags == 'error'%}danger{% else %}{{ message.tags }}{% endif %}"
+                             role="alert">
+                            <div class="text-center">
+                                <strong>{{ message.tags|title }}: </strong> {{ message }}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        {% for error in greeting_form.errors %}
+                        <div class="alert alert-error" role="alert">
+                            <div class="text-center">
+                                <strong>Errors: </strong> {{ error }}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        <h5>Change Your Profile Picture</h5>
+                    </div>
+                    <div class="card-body">
+                        <!--                        <div class="modal-content">-->
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="row" align="center">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <img class="img-thumbnail" src="{{ request.user.profile.avatar.url }}"
+                                                 style="width: 25%; height:25%;">
+                                            <br/>
+                                            <label class="floating-label" for="avatar_image"><small
+                                                    class="text-danger">* </small>Your Profile Picture</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="avatar_image"><small
+                                                    class="text-danger">* </small>Upload Image</label>
+                                            <input type="file" required name="avatar_image" class="form-control"
+                                                   enctype="multipart/form-data" accept="image/*" id="avatar_image">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit"> Save</button>
+                                <button class="btn btn-danger" type="reset"> Clear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% include "business/include/footer.html" %}

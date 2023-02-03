@@ -1,0 +1,32 @@
+from mlm_admin.dv_api import DelhiveryApi
+from shop.models import Order, LineItem, Material_center
+from accounts.models import Profile
+order = Order.objects.get(id='9606')
+test = DelhiveryApi(verbose=True)
+test.make_payload(order)
+
+test.create_order(order)
+
+test.cancel_order('5682010000103')
+
+from mlm_admin.pickrr_api import PickrrApi
+from shop.models import Order, LineItem, Material_center
+from accounts.models import Profile
+order = Order.objects.get(id='9598')
+test = PickrrApi(verbose=True)
+test.create_order(order)
+
+test.track_order('SF220646018PIC')
+test.cancel_order('SF220646018PIC')
+
+
+from mlm_admin.send_to_gs import SendToGS
+from shop.models import Order, LineItem, Material_center
+order = Order.objects.get(id='9598')
+test = SendToGS(verbose=True)
+test.send(order)
+
+
+from mlm_admin.models import Sheet_config
+Sheet_config.objects.create(type="test")
+

@@ -1,0 +1,84 @@
+/*=============================================
+=            03. Breadcrumb            =
+=============================================*/
+
+
+/*----------  backgrounds  ----------*/
+
+
+.breadcrumb-area {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    @media #{$tablet-device}{
+        background-position-x: 10%;
+    }
+
+    @media #{$large-mobile}{
+        background-position-x: 10%;
+    }
+
+    @media #{$small-mobile}{
+        background-position-x: 20%;
+    }
+
+    @media #{$extra-small-mobile}{
+        background-position-x: 35%;
+    }
+}
+
+
+
+/*----------  breadcrumb title  ----------*/
+
+.breadcrumb-title{
+    font-size: 48px;
+    line-height: 1.5;
+    color: #333333;
+    margin-bottom: 20px;
+
+    @media #{$large-mobile}{
+        font-size: 45px;
+    }
+
+    @media #{$small-mobile}{
+        font-size: 42px;
+    }
+
+    @media #{$extra-small-mobile}{
+        font-size: 30px;
+    }
+}
+
+.breadcrumb-list {
+    line-height: 1;
+
+    &__item {
+        display: inline-block;
+        font-size: 14px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        line-height: 1.5;
+        a{
+            color: #999999;
+        }
+
+        &:after{
+            right: 0;
+            content: "/";
+            margin: 0 5px 0 10px;
+            color: #333333;
+        }
+        &--active {
+            color: #333333;
+            text-transform: uppercase;
+            &:after{
+                visibility: hidden;
+                opacity: 0;
+            }
+        }
+    }
+}
+
+/*=====  End of 03. Breadcrumb  ======*/

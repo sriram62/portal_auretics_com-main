@@ -1,0 +1,13 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+<h3>Status: {{status}}</h3>
+<br>
+<h3>Signature: {{signature}}</h3>
+<br>
+<h3>signature_algorithm: {{signature_algorithm}}</h3>
+<br>
+ 
+<a class="btn btn-primary btn-lg" href="{%url 'profile'%}">Go to Profile</a>
+
+{%endblock%}

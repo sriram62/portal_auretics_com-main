@@ -1,0 +1,41 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Shiping Configuration</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Minimum Amount</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.minimum_amount}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Shiping Charges</label>
+<!--                        <select class="form-control" id="is_parent_category" name="is_parent_category">-->
+<!--                            <option value="Yes">Yes</option>-->
+<!--                            <option value="No">No</option>-->
+<!--                        </select>-->
+                        {{form.shiping_charge}}
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Update </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}

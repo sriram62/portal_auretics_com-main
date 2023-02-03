@@ -1,0 +1,82 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">{{title}}</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">MLM Admin</a></li>
+                            <li class="breadcrumb-item"><a href="#menu_greetings">Greetings</a></li>
+                            <li class="breadcrumb-item"><a href="#menu_greetings">{{title}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!--                        <div class="modal-content">-->
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="modal-body">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="token"><small
+                                                class="text-danger">* </small>Wassenger Token</label>
+                                        <input
+                                                type="text" class="form-control" id="token" name="token"
+                                                placeholder="Enter Wassenger token here"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="number"><small
+                                                class="text-danger">* </small>Queue Size</label>
+                                        <input
+                                                type="number" class="form-control" id="number" name="number"
+                                                placeholder="Enter queue size"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "mlm_admin/include/footer.html" %}
+<script>
+    $(document).ready(function () {
+        // Handler for .ready() called.
+        $('html, body').animate({
+            scrollTop: $('#menu_greetings').offset().top
+        }, 'slow');
+    });
+
+
+
+</script>

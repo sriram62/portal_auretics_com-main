@@ -1,0 +1,15 @@
+
+/*----------  container custom style  ----------*/
+
+@media (min-width: 1200px){
+    .container {
+        max-width: 1200px;
+        &.wide{
+            max-width: 95%;
+        }
+        &.full{
+            max-width: 100%;
+            padding: 0;
+        }
+    }
+}

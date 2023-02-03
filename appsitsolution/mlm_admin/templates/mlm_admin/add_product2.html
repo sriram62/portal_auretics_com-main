@@ -1,0 +1,196 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" id="my-form" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Add Product</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Product Name</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.product_name}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Product Code</label>
+<!--                        <select class="form-control" id="is_parent_category" name="is_parent_category">-->
+<!--                            <option value="Yes">Yes</option>-->
+<!--                            <option value="No">No</option>-->
+<!--                        </select>-->
+                        {{form.product_code}}
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Size</label>
+                    {{form.size}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image"><small class="text-danger">* </small>Price</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.price}}
+                </div>
+                </div>
+                    </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="description">MRP</label>
+<!--                            <textarea type="textarea" class="form-control" id="description" name="description" placeholder="Please Enter Description"></textarea>-->
+                            {{form.mrp}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Image</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+                            {{form.image}}
+                        </div>
+                    </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="category"><small class="text-danger">* </small>Category</label>
+                    <select class="form-control" id="category" name="category">
+                            {% for i in cat %}
+                            <option value={{i.pk}}>{{i.cat_name}}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+                </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="gendar"><small class="text-danger">* </small>Gendar</label>
+                    <select class="form-control" id="gendar" name="gendar">
+                            {% for i in gendar %}
+                            <option value={{i.pk}}>{{i.gender_name}}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+                </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="brand"><small class="text-danger">* </small>Brand</label>
+                    <select class="form-control" id="brand" name="brand">
+                            {% for i in brand %}
+                            <option value={{i.pk}}>{{i.brand_name}}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="cgst">CGST</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.cgst}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="sgst">SGST</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.sgst}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">IGST</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.igst}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">HSN Code</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.hsn_code}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">VAT</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.vat}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Discount Price</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.discount_price}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Product Value</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.product_value}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Loyalty Purchase</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.loyalty_purchase}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Loyalty Consume</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.loyalty_consume}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Status</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.status}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">discription</label>
+<!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+<!--                            <option value='Show'>Show</option>-->
+<!--                            <option value='Not Show'>Not Show</option>-->
+<!--                        </select>-->
+                            {{form.description}}
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Save </button>
+                <button class="btn btn-danger" type="reset"> Clear </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<script>
+    $('document').ready(function(){
+        $('#my-form').submit(function(){
+          if( document.getElementById("id_image").files.length == 0 ){
+                console.log("no files selected");
+                alert('Image field is required!');
+                return false;
+            }
+            return true;
+        });
+    });
+</script>

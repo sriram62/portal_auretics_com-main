@@ -1,0 +1,107 @@
+{% load static %}
+{% include "mlm_calculation/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">DASHBOARD</h2>
+                <h5 class="calc_page_title_1 mb-4">Check out your profile and edit details</h5>
+                </div>
+                <div class="col-md-4">
+                    <div class="user_profile">
+                    <img src="https://848271.smushcdn.com/1798447/wp-content/uploads/sites/11/2021/05/Lifestyle-Fund-1.png">
+                    <h1>Profile Details</h1>
+                    <h2><span>Name</span> : {{request.user.profile.first_name}}  {{request.user.profile.last_name}}</h2>
+                    <h3><span>Distributor Id</span> : {{request.user.profile.id}}</h3>
+                    <h5><span>Advisor Level</span> : <strong>Highest Level ever Achieved by the Advisor</strong></h5>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="user_profile">
+                    <img src="https://848271.smushcdn.com/1798447/wp-content/uploads/sites/11/2021/01/retail-1.png">
+                    <h1>Contact Details</h1>
+                    <h2><span>Email Id</span> : {{request.user.email}}</h2>
+                    <h3><span>Mobile</span> : +91-{{request.user.profile.phone_number}}</h3>
+                    <h5><span>Address</span> : <strong>{{request.user.profile.shipping_address.city}}, {{request.user.profile.shipping_address.state}}, India</strong></h5>
+                    </div>
+                    </div>
+                     <div class="col-md-4">
+                    <div class="user_profile">
+                    <img src="https://848271.smushcdn.com/1798447/wp-content/uploads/sites/11/2021/01/retail-1.png">
+                    <h1>Bank Details</h1>
+                    <h2><span>Bank Name</span> : {{request.user.bankaccountdetails.bank_name}}</h2>
+                    <h3><span>Branch Name</span> : {{request.user.bankaccountdetails.branch_name}}</h3>
+                    <h5><span>Account Number</span> : <strong>{{request.user.bankaccountdetails.account_number}}</strong></h5>
+                    <h5><span>IFSC Code</span> : <strong>{{request.user.bankaccountdetails.ifsc_code}}</strong></h5>
+                    <h5><span>PAN No</span> : <strong>{{request.user.bankaccountdetails.}}</strong></h5>
+                    </div>
+                    </div>
+                <div class="col-md-4 active_status mt-5">
+                     <div class="user_profile_1">
+                    <h1>Registration Status</h1>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Complete
+                    </label>
+                    <label class="btn btn-secondary disable">
+                    <input type="radio" name="options" id="option2" autocomplete="off"> Pending
+                    </label>
+
+                </div>
+                </div>
+                    </div>
+
+                    <div class="col-md-4 active_status mt-5">
+                        <div class="user_profile_1">
+                    <h1>Note</h1>
+                    <p>In case any change is required, please contact support at: <a href="mailto:support@auretics.com">support@auretics.com</a> or <br>call <a href="tel:9090900247">+91 90 90 90 0 247</a></p>
+                    </div>
+                    </div>
+                    <div class="col-md-4 active_status mt-5">
+                    <div class="user_profile_1">
+                    <h1>Total PPV earned in the Current Month</h1>
+                    <p><strong>PPV</strong> : 100000/-</p>
+                    <p>Advisor Status</p>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                    </label>
+                    <label class="btn btn-secondary disable">
+                    <input type="radio" name="options" id="option2" autocomplete="off"> Inactive
+                    </label>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-4 active_status mt-4">
+                    <div class="user_profile_1">
+                    <h1>Total PBV earned in the Current Month</h1>
+                    <p><strong>PBV</strong> : 100000/-</p>
+                    <p>Director Status</p>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                    </label>
+                    <label class="btn btn-secondary disable">
+                    <input type="radio" name="options" id="option2" autocomplete="off"> Inactive
+                    </label>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <!--<div class="modal-footer">-->
+            <!--    <button class="btn btn-primary" type="submit"> Edit </button>-->
+
+            <!--</div>-->
+            </div>
+    </form>
+
+</div>
+{% include "mlm_calculation/include/footer.html" %}

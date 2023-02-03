@@ -1,0 +1,1072 @@
+{% load static %}
+{% include "mlm_calculation/include/header.html" %}
+<style>
+    .calc_title {
+    font-size: 20px;
+    padding-bottom: 12px;
+}
+.calc_page_title{
+     text-decoration: underline;
+    font-size: 35px;
+    text-align: center;
+    margin: 0 auto;
+    color: #0073aa;
+}
+.title_advisor {
+    font-size: 15px;
+    color: #000;
+    font-weight: 500;
+}
+.table_over{
+    overflow-x:auto;
+}
+.dark_head{
+    text-align:center;
+}
+@media screen and (min-width:0) and (max-width:767px){
+.super_plan label{
+    padding-top:20px;
+}
+.table_super_plan{
+    overflow-x:auto;
+}
+}
+</style>
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h2 class="calc_page_title">Infinity Plan</h2>
+           </div>
+            <div class="modal-body">
+                <div class="form-group super_plan">
+                <div class="row">
+                <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Retail Margin(Note: Retail Margin is not paid but only calculated & showed):</h4>
+                       </div>
+                       <div class="col-md-12">
+                           <label>Calculate and Show to Advisors?</label>
+<!--                           <select class="form-control">-->
+<!--                               <option>Yes-->
+<!--                                </option>-->
+<!--                                <option>No-->
+<!--                                </option>-->
+<!--                               </select>-->
+                           {{form.show_to_advisor}}
+                           </div>
+                       </div>
+                       <div class="row mt-5">
+                            <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Personal Bonus:</h4>
+                       </div>
+                         <div class="col-md-12 table_super_plan">
+                        <table class="table">
+                                 <thead class="thead-dark">
+                                    <tr>
+                                    <th scope="col">S.N</th>
+                                    <th scope="col">TITLES </th>
+                                    <th scope="col">PB Incentive Percent</th>
+
+                                 </tr>
+                                </thead>
+                                <tbody>
+                                   <tr>
+                                    <td>1</td>
+                                    <td>Associate Advisor</td>
+                                    <td>
+<!--                                        <input type="text" for="associate_advisor" class="form-control" placeholder="type  here...">-->
+                                        {{form.associate_advisor_percent}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>2</td>
+                                    <td>Advisor</td>
+                                    <td>
+<!--                                        <input type="text" for="advisor" class="form-control" placeholder="type  here...">-->
+                                        {{form.advisor_percent}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>3</td>
+                                     <td>Associate Manager</td>
+                                    <td>
+<!--                                        <input type="text" for="associate_manager" class="form-control" placeholder="type  here...">-->
+                                        {{form.associate_manager_percent}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>4</td>
+                                     <td>Manager</td>
+                                    <td>
+<!--                                        <input type="text" for="Manager" class="form-control" placeholder="type  here...">-->
+                                        {{form.manager_percent}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>5</td>
+                                     <td>Associate Director and Above</td>
+                                    <td>
+<!--                                        <input type="text" for="associate_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.associate_director_above_percent}}
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                                </div>
+                                </div>
+                                       <div class="row">
+                                        <div class="col-md-12">
+                           <label>Differential Bonus – Calculated Differential Bonus? (Boolean)</label>
+<!--                           <select class="form-control">-->
+<!--                               <option>Yes-->
+<!--                                </option>-->
+<!--                                <option>No-->
+<!--                                </option>-->
+<!--                               </select>-->
+                                            {{form.calculate_differential_bonus}}
+                           </div>
+                       </div>
+                       <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Fast Track:</h4>
+                       </div>
+                       <div class="col-md-6">
+                           <label>Advisor – PV to achieve this? </label>
+<!--                           <input type="text" for="pv" class="form-control" placeholder="type value here...">-->
+                           {{form.advisor_pv}}
+                           </div>
+                            <div class="col-md-6">
+                           <label>Director – PV to achieve this?</label>
+<!--                           <input type="text" for="director-pv" class="form-control" placeholder="type value here...">-->
+                                {{form.director_pv}}
+                           </div>
+                       </div>
+                        <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Fortune Bonus:</h4>
+                       </div>
+                       <div class="col-md-6">
+                           <label>How many Advisors to Select (In Percent)?</label>
+<!--                           <input type="text" for="many_advisor" class="form-control" placeholder="type value here...">-->
+                           {{form.how_many_advisor_select}}
+                           </div>
+                            <div class="col-md-6">
+                           <label>How much of PB to give (In Percent)?</label>
+<!--                           <input type="text" for="pb_percent" class="form-control" placeholder="type value here...">-->
+                                {{form.how_much_pv_give}}
+                           </div>
+                       </div>
+                       <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Sharing Bonus:</h4>
+                       </div>
+                        <div class="col-md-6">
+                           <label>How many Points per Self-PGBV to allocate?</label>
+<!--                           <input type="text" for="pgpb_self" class="form-control" placeholder="type value here...">-->
+                            {{form.how_many_point_per_self_pgbv_allocate}}
+                       </div>
+                       <div class="col-md-6">
+                           <label>Sharing Bonus Pool</label>
+<!--                           <input type="text" for="pgpb_self" class="form-control" placeholder="type value here...">-->
+                            {{form.sb_bonus_pool}}
+                       </div>
+                       </div>
+                        <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Nurturing Bonus:</h4>
+                       </div>
+                       <div class="col-md-12 table_super_plan">
+                                <table class="table">
+                                 <thead class="thead-dark">
+                                    <tr>
+                                    <th scope="col">S.N</th>
+                                    <th scope="col">QUALIFICATION LEVEL </th>
+                                    <th scope="col">CIRCLE</th>
+                                    <th scope="col">Percentage of Personal Bonus of downline on which Nurturing Bonus will be Paid</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   <tr>
+                                    <td>1</td>
+                                    <td>Black Diamond Director</td>
+                                    <td>
+<!--                                        <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                        {{form.black_diamond_direct_circle}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>2</td>
+                                    <td>Diamond Director</td>
+                                    <td>
+<!--                                        <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                        {{form.diamond_direct_circle}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="diamond_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.diamond_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>3</td>
+                                     <td>Crown Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.crown_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="crown_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.crown_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>4</td>
+                                     <td>Jade Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.jade_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="jade_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.jade_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>5</td>
+                                     <td>Emerald Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.emerald_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="emerald_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.emerald_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>6</td>
+                                     <td>Sapphire Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.sapphire_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="sapphire_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.sapphire_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>7</td>
+                                     <td>Titanium Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.titanium_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="titanium_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.titanium_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>8</td>
+                                     <td>Platinum Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.platinum_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="platinum_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.platinum_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>9</td>
+                                     <td>Gold Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.gold_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="gold_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.gold_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>10</td>
+                                     <td>Silver Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.silver_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="silver_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.silver_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>11</td>
+                                     <td>Bronze Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.bronze_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="bronze_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.bronze_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>12</td>
+                                     <td>Associate Director</td>
+                                     <td>
+<!--                                         <select class="form-control"><option>Lead Circle</option><option>Influence Circle</option><option>None</option></select>-->
+                                         {{form.associate_direct_circle}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="associate_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.associate_percentage_personal_bonus_downline_on_which_nurturing_bonus_paid}}
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                           </div>
+
+                       </div>
+
+                        <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Business Master Bonus:</h4>
+                       <h5>Table-wise points that an Advisor will earn:</h5>
+                       </div>
+                       <div class="col-md-12 table_super_plan">
+                                <table class="table">
+                                 <thead class="thead-dark dark_head">
+                                    <tr>
+                                    <th scope="col">S.N</th>
+                                    <th scope="col">QUALIFICATION LEVEL </th>
+                                    <th scope="col">SELF</th>
+                                    <th scope="col">1</th>
+                                    <th scope="col">2</th>
+                                    <th scope="col">3</th>
+                                    <th scope="col">4</th>
+                                    <th scope="col">5</th>
+                                    <th scope="col">6</th>
+                                    <th scope="col">7</th>
+                                    <th scope="col">8</th>
+                                    <th scope="col">9</th>
+                                    <th scope="col">10</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   <tr>
+                                    <td>1</td>
+                                    <td>Black Diamond Director</td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_self}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_1}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_2}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_3}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_4}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                    {{form.black_diamond_direct_5}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_6}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_7}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_8}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_9}}
+                                    </td>
+                                    <td>
+<!--                                        <input type="text" for="black_diamond_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.black_diamond_direct_10}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>2</td>
+                                    <td>Diamond Director</td>
+                                    <td>
+<!--                                        <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                        {{form.diamond_direct_self}}
+                                    </td>
+                                     <td>
+<!--                                         <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.diamond_direct_1}}
+                                     </td>
+                                      <td>
+<!--                                          <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                          {{form.diamond_direct_2}}
+                                      </td>
+                                       <td>
+<!--                                           <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                           {{form.diamond_direct_3}}
+                                       </td>
+                                        <td>
+<!--                                            <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                            {{form.diamond_direct_4}}
+                                        </td>
+                                         <td>
+<!--                                             <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                             {{form.diamond_direct_5}}
+                                         </td>
+                                          <td>
+<!--                                              <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                              {{form.diamond_direct_6}}
+                                          </td>
+                                           <td>
+<!--                                               <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                               {{form.diamond_direct_7}}
+                                           </td>
+                                            <td>
+<!--                                                <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                                {{form.diamond_direct_8}}
+                                            </td>
+                                             <td>
+<!--                                                 <input type="text" for="diamond_self" class="form-control" placeholder="type  here...">-->
+                                                 {{form.diamond_direct_9}}
+                                             </td>
+
+                                    <td>
+<!--                                        <input type="text" for="diamond_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.diamond_direct_10}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>3</td>
+                                     <td>Crown Director</td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_4}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_5}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="crown_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.crown_direct_9}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="crown_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.crown_direct_10}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>4</td>
+                                     <td>Jade Director</td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.jade_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.jade_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.jade_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.jade_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.jade_direct_4}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.jade_direct_5}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.jade_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                     {{form.jade_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.jade_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="jade_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.jade_direct_9}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="jade_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.jade_direct_10}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>5</td>
+                                     <td>Emerald Director</td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_4}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_5}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_9}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="emerald_director" class="form-control" placeholder="type  here...">-->
+                                         {{form.emerald_direct_10}}
+                                     </td>
+                                    </tr>
+                                    <tr>
+                                    <td>6</td>
+                                     <td>Sapphire Director</td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_4}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_5}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="sapphire_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.sapphire_direct_9}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="sapphire_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.sapphire_direct_10}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>7</td>
+                                     <td>Titanium Director</td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_4}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_5}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_9}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="titanium_director" class="form-control" placeholder="type  here...">-->
+                                         {{form.titanium_direct_10}}
+                                     </td>
+                                    </tr>
+                                    <tr>
+                                    <td>8</td>
+                                     <td>Platinum Director</td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_4}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_5}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_9}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="platinum_director" class="form-control" placeholder="type  here...">-->
+                                         {{form.platinum_direct_10}}
+                                     </td>
+                                    </tr>
+                                    <tr>
+                                    <td>9</td>
+                                     <td>Gold Director</td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_4}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_5}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="gold_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.gold_direct_9}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="gold_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.gold_direct_10}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>10</td>
+                                     <td>Silver Director</td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_4}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_5}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_9}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="silver_director" class="form-control" placeholder="type  here...">-->
+                                         {{form.silver_direct_10}}
+                                     </td>
+                                    </tr>
+                                    <tr>
+                                    <td>11</td>
+                                     <td>Bronze Director</td>
+                                     <td>
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.bronze_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.bronze_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.bronze_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.bronze_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.bronze_direct_4}}
+                                     </td>
+                                     <td>
+                                         {{form.bronze_direct_5}}
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.bronze_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.bronze_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.bronze_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="bronze_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.bronze_direct_9}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="bronze_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.bronze_direct_10}}
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>12</td>
+                                     <td>Associate Director</td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_self}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_1}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_2}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_3}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_4}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_5}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_6}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_7}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_8}}
+                                     </td>
+                                     <td>
+<!--                                         <input type="text" for="associate_self" class="form-control" placeholder="type  here...">-->
+                                         {{form.associate_direct_9}}
+                                     </td>
+                                    <td>
+<!--                                        <input type="text" for="associate_director" class="form-control" placeholder="type  here...">-->
+                                        {{form.associate_direct_10}}
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                           </div>
+
+                       </div>
+
+                         <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Vacation Fund:</h4>
+                       </div>
+                        <div class="col-md-6">
+                           <label>Qualified Director Level and Above who will receive it</label>
+<!--                           <select class="form-control">-->
+<!--                            <option>Black Diamond Director</option>-->
+<!--                            <option>Diamond Director</option>-->
+<!--                            <oprion>Crown Director</oprion>-->
+<!--                            <option>Jade Director</option>-->
+<!--                            <option>Emerald Director</option>-->
+<!--                            <option>Sapphire Director</option>-->
+<!--                            <option>Sapphire Director</option>-->
+<!--                            <option>Platinum Director</option>-->
+<!--                            <option>Gold Director</option>-->
+<!--                            <option>Silver Director</option>-->
+<!--                            <option>Bronze Director</option>-->
+<!--                            <option>Associate Director</option>-->
+<!--                           </select>-->
+                            {{form.vacation_fund_qualified_direct_level}}
+                           </div>
+                           <div class="col-md-6">
+                           <label>Percentage of PB + SB + NB + BMB to be given when qualified: </label>
+<!--                           <input type="text" for="pb+sb" class="form-control" placeholder="type value here...">-->
+                               {{form.vacation_fund_percentage_pb_sb_nb_bmb}}
+                           </div>
+                       </div>
+                        <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Vehicle Fund:</h4>
+                       </div>
+                        <div class="col-md-6">
+                           <label>Qualified Director Level and Above who will receive it</label>
+<!--                           <select class="form-control">-->
+<!--                            <option>Black Diamond Director</option>-->
+<!--                            <option>Diamond Director</option>-->
+<!--                            <oprion>Crown Director</oprion>-->
+<!--                            <option>Jade Director</option>-->
+<!--                            <option>Emerald Director</option>-->
+<!--                            <option>Sapphire Director</option>-->
+<!--                            <option>Sapphire Director</option>-->
+<!--                            <option>Platinum Director</option>-->
+<!--                            <option>Gold Director</option>-->
+<!--                            <option>Silver Director</option>-->
+<!--                            <option>Bronze Director</option>-->
+<!--                            <option>Associate Director</option>-->
+<!--                           </select>-->
+                            {{form.vehicle_fund_qualified_direct_level}}
+                           </div>
+                           <div class="col-md-6">
+                           <label>Percentage of PB + SB + NB + BMB to be given when qualified: </label>
+<!--                           <input type="text" for="pb+sb+nb_bmb" class="form-control" placeholder="type value here...">-->
+                               {{form.vehicle_fund_percentage_pb_sb_nb_bmb}}
+                           </div>
+                       </div>
+                       <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Shelter Fund:</h4>
+                       </div>
+                        <div class="col-md-6">
+                           <label>Qualified Director Level and Above who will receive it</label>
+<!--                           <select class="form-control">-->
+<!--                            <option>Black Diamond Director</option>-->
+<!--                            <option>Diamond Director</option>-->
+<!--                            <oprion>Crown Director</oprion>-->
+<!--                            <option>Jade Director</option>-->
+<!--                            <option>Emerald Director</option>-->
+<!--                            <option>Sapphire Director</option>-->
+<!--                            <option>Sapphire Director</option>-->
+<!--                            <option>Platinum Director</option>-->
+<!--                            <option>Gold Director</option>-->
+<!--                            <option>Silver Director</option>-->
+<!--                            <option>Bronze Director</option>-->
+<!--                            <option>Associate Director</option>-->
+<!--                           </select>-->
+                            {{form.shelter_fund_qualified_direct_level}}
+                           </div>
+                           <div class="col-md-6">
+                           <label>Percentage of PB + SB + NB + BMB to be given when qualified: </label>
+<!--                           <input type="text" for="pb" class="form-control" placeholder="type value here...">-->
+                               {{form.shelter_fund_percentage_pb_sb_nb_bmb}}
+                           </div>
+                       </div>
+                    <div class="row">
+                        <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Consistent Retailer’s Income:</h4>
+                       </div>
+                       <div class="col-md-3">
+                           <label>Is this Income Enabled? </label>
+<!--                            <select class="form-control">-->
+<!--                            <option>Yes</option>-->
+<!--                            <option>No</option>-->
+<!--                            </select>-->
+                           {{form.consistent_retailers_enabled_income}}
+                           </div>
+                           <div class="col-md-3">
+                               <label>Minimum Purchase in Earning Month (In PPV)</label>
+<!--                               <input type="text" for="minimun_purchase" class="form-control" placeholder="type value here...">-->
+                               {{form.minimum_purchase_in_earning_month}}
+                               </div>
+                               <div class="col-md-3">
+                               <label>Minimum Purchase in Redeeming Month (In PPV)</label>
+<!--                               <input type="text" for="minimun_redeeming" class="form-control" placeholder="type value here...">-->
+                                   {{form.minimum_purchase_in_redeeming_month}}
+                               </div>
+                               <div class="col-md-3">
+                               <label>Cap on Maximum Purchase?</label>
+<!--                               <select class="form-control">-->
+<!--                                <option>Yes</option>-->
+<!--                                <option>No</option>-->
+<!--                                </select>-->
+                                   {{form.cap_on_maximum_purchase}}
+                               </div>
+                       </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Save </button>
+                <button class="btn btn-danger" type="reset"> Clear </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_calculation/include/footer.html" %}

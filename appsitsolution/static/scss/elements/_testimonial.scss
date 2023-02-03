@@ -1,0 +1,157 @@
+
+/*=============================================
+=            18. Testimonial            =
+=============================================*/
+
+
+/*----------  multi testimonial single item  ----------*/
+
+.multi-testimonial-single-item{
+    &__text{
+        font-size: 18px;
+        line-height: 36px;
+        padding-bottom: 40px;
+    }
+
+    &__author-info{
+        display: flex; 
+
+        .image{
+            flex-basis: 80px;
+            width: 80px;
+            height: 80px;
+            img{
+                border-radius: 500px;
+                width: 100%;
+            }
+        }   
+
+        .content{
+            flex-basis: calc(100% - 80px);
+            padding-left: 25px;
+            margin-top: 10px;
+
+            .name{
+                font-size: 18px;
+                line-height: 25px;
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 0;
+            }
+
+            .designation{
+                font-size: 16px;
+                line-height: 22px;
+                color: #7e7e7e;
+            }
+        }
+    }
+}
+
+
+
+/*----------  single testimonial single item  ----------*/
+
+.single-testimonial-single-item{
+
+    display: flex;
+    align-items: center;
+
+    @media #{$large-mobile}{
+        flex-direction: column;
+    }
+
+    &__image{
+        flex-basis: 300px;
+        padding-left: 30px;
+
+        @media #{$tablet-device}{
+            padding-left: 0;
+        }
+
+        @media #{$large-mobile}{
+            padding-left: 0;
+        }
+    }   
+    &__content {
+        flex-basis: calc(100% - 300px);
+        padding: 0 30px;
+        padding-left: 50px;
+
+        @media #{$tablet-device}{
+            padding: 0;
+        }
+
+        @media #{$large-mobile}{
+            padding: 0;
+        }
+
+        .text{
+            font-size: 24px;
+            line-height: 40px;
+            color: #333;
+            font-weight: 300;
+        }
+
+        .client-info{
+            .name{
+                font-size: 18px;
+                line-height: 25px;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .designation{
+                font-size: 16px;
+                line-height: 22px;
+                color: #7e7e7e;
+            }
+        }
+    }   
+
+    &--no-thumb{
+        .single-testimonial-single-item__content{
+            flex-basis: 100%;
+            color: $white;
+            padding: 0 100px;
+
+            @media #{$large-mobile}{
+                padding: 0 30px;
+            }
+
+            .text{
+                color: $white;
+            }
+
+            .client-info{
+                p, span{
+                    color: $white;
+                }
+            }
+
+            &--dark{
+                color: #333;
+                .text{
+                    color: #333;
+                }
+                .client-info{
+                    p, span{
+                        color: #333;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.single-item-testimonial-area{
+    &.dark-grey-bg{
+        & *{
+            color: $white !important;
+        }
+    }
+}
+
+
+/*=====  End of 18. Testimonial  ======*/
+

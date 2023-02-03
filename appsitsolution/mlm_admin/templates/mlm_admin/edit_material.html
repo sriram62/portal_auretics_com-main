@@ -1,0 +1,474 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data"  id="my-form">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Material</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="category_name"><small class="text-danger">* </small>MC
+                                Name</label>
+                            <!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.mc_name}}
+                            <input type="hidden" class="form-control" id="check_mc_name" value="200">
+                            <div class="error alert-error" id="err_mc_name" style="display:none;"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Print
+                                Name</label>
+                            {{form.print_name}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Address</label>
+                            <!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.address}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="parent_category">Address Line 2</label>
+                            <!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.address_line_2}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="description"><small
+                                    class="text-danger">* </small>City</label>
+                            <!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.city}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission"><small class="text-danger">* </small>State</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+<!--                            {{form.state}}-->
+                            <select class="form-control select2" id="state" name="state">
+                            {% for s in all_states %}
+                            <option value="{{s.state_name}}" {% if selected_state == s.state_name %} selected {% endif %} >{{s.state_name}}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="category"><small class="text-danger">* </small>PIN Code</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.pin_code}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="mobile">Mobile Number</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.mobile}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="mc_type">MC Type</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.mc_type}}
+                </div>
+                </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="gendar"><small class="text-danger">* </small>GST Number</label>
+<!--                        <input type="date" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.gst_number}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="brand"><small class="text-danger">* </small>Is Company Depot</label>
+<!--                        <input type="date" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.company_depot}}
+                </div>
+                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page"><small class="text-danger">* </small>Is
+                                Advisory Owned Distributor</label>
+                            {{form.advisory_owned}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div>
+            <div class="col-sm-6" id="states_area">
+                <div class="form-group"><label class="floating-label" for="state"><small
+                        class="text-danger"> </small>Associated states</label>
+                    <select
+                            class="form-control select2" id="states" multiple name="associated_states">
+                        {% for s in states %}
+                        <option value="{{s.pk}}">{{s.state_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row weaklyArea" id="weaklyArea">
+            <!--                     <div class="col-sm-12" id="weaklyArea"></div>-->
+            <div class="col-sm-6" id="weaklyArea1" style="display:none;">
+                <div class="form-group">
+                    <label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor
+                        Name</label>
+                    {{form.advisor_name}}
+                </div>
+            </div>
+            <div class="col-sm-6" id="weaklyArea2" style="display:none;">
+                <div class="form-group">
+                    <label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor
+                        Registration Number</label>
+                    <select id="id_advisor_registration_number" name="advisor_registration_number" class="form-control">
+                        <option value="{% if valid_user.pk %} {{valid_user.pk}} {% else %}0{% endif %}" selected>
+                            {{valid_user.referralcode.referral_code}}-{{valid_user.email}}
+                        </option>
+                        {% for i in user %}
+                        <option value="{{i.pk}}">{{i.referralcode.referral_code}}-{{i.email}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div class="error alert-error" id="err_referral_code" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group fill">
+                    <label class="floating-label" for="show_on_home_page"><small class="text-danger">* </small>Is Cash
+                        and Carry Allowed</label>
+                    <!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.cash}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page"><small class="text-danger">* </small>Is Billing Allowed</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.billing_allowed}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page"><small class="text-danger">* </small>Status</label>
+                            {{form.status}}
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Save </button>
+                <button class="btn btn-danger" type="reset"> Clear </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<!--<script>-->
+<!--$(document).ready(function(){-->
+<!--$("#id_advisory_owned").change(function () {-->
+<!--  var numInputs = $(this).val();-->
+<!--  if (numInputs == "NO") {-->
+<!--  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"></div>')-->
+<!--  }else if(numInputs == "YES"){-->
+<!--  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Name</label>{{form.advisor_name}}</div></div><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Registration Number</label>"{{form.advisor_registration_number}}</div></div></div>')-->
+<!--  }-->
+<!--});-->
+<!--});-->
+<!--</script>-->
+
+<!--<script>-->
+<!--$(document).ready(function(){-->
+<!--  var numInputs = $(id_advisory_owned).val();-->
+<!--  if (numInputs == "NO") {-->
+<!--  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"></div>')-->
+<!--  }else if(numInputs == "YES"){-->
+<!--  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Name</label>{{form.advisor_name}}</div></div><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Registration Number</label>"{{form.advisor_registration_number}}</div></div></div>')-->
+<!--  }-->
+<!--});-->
+<!--</script>-->
+
+<script>
+    function numberOnly(id) {
+    // Get element by id which passed as parameter within HTML element event
+    var element = document.getElementById(id);
+    // Use numbers only pattern, from 0 to 9
+    var regex = /[^0-9]/gi;
+    // This removes any other character but numbers as entered by user
+    element.value = element.value.replace(regex, "");
+}
+</script>
+<script>
+    $("#id_pin_code").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var pincode = $("#id_pin_code").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+    if (( pincode >5 )){
+        event.preventDefault();
+    }
+});
+</script>
+<script>
+
+$("#id_mc_name").keyup(function(){
+        var Text = $(this).val();
+        $("#id_print_name").val(Text);
+});
+</script>
+
+<script>
+$('#id_advisor_registration_number').focusout(function () {
+    var referall_code = $(this).val();
+    $("#err_referral_code").hide()
+    let aa='';
+    $.ajax({
+    url: '/mlm_admin/material_reff',
+    data: {
+        'referall_code': referall_code,
+        'company_depot': $('#id_company_depot').val(),
+        'advisory_owned': $('#id_advisory_owned').val()
+    },
+    dataType: 'json',
+    success: function(data){
+<!--        alert(data.refer_by);-->
+        console.log(data.refer_by)
+        if (data.code === 200) {
+            aa = data.refer_by
+            $("#referral_code_id").hide();
+            $("#referral_user").css("display", "block");
+            $("#id_advisor_name").val(aa);
+        }else if(data.code === 404){
+            $('#err_referral_code').html('Reference Not matched');
+            $("#err_referral_code").css("display", "block");
+            $("#err_referral_code").show()
+            $('#submit').attr('disabled',true);
+        }else{
+            $('#err_referral_code').html('Reference Not matched');
+            $("#err_referral_code").css("display", "block");
+            $("#err_referral_code").show();
+            $('#submit').attr('disabled',true);
+        }
+    },
+    error: function (error) {
+            console.log(error);
+        }
+    });
+});
+</script>
+
+<script>
+    $('document').ready(function(){
+    $("#id_advisory_owned").change(function () {
+        var numInputs = $('#id_advisory_owned').val();
+
+
+    if(numInputs == 'YES'){
+<!--        $('#weaklyArea').show();-->
+<!--        $('#weaklyArea').css({pointerEvents: "block"});-->
+<!--        $('#weaklyArea').css('pointer-events', 'block');-->
+
+$("#weaklyArea1").css("display", "block");
+$("#weaklyArea2").css("display", "block");
+<!--         alert(numInputs);-->
+    }
+    else{
+<!--        $('#weaklyArea').hide();-->
+<!--        $('#weaklyArea').css('pointer-events', 'none');-->
+<!--        $('#weaklyArea').css({pointerEvents: "none"});-->
+    $("#weaklyArea1").css("display", "none");
+    $("#weaklyArea2").css("display", "none");
+    $("#id_advisor_name").val('');
+    $("#id_advisor_registration_number").val('');
+        $('#id_advisor_registration_number').removeAttr('required');
+        $('#id_advisor_name').removeAttr('required');
+    }
+    });
+    });
+
+</script>
+<script>
+function setInitialStates(){
+var s2 = $("#states").select2({
+placeholder: "Choose states",
+tags: true
+});
+var vals = {{selected_states|safe}};
+console.log('The selected states ' + vals);
+s2.val(vals).trigger("change");
+}
+
+function setDistributorData(){
+var data = {{distributor_user_list|safe}};
+var state_data = {{states_for_advisory_owned|safe}};
+console.log(data);
+var selector = $("#id_advisor_registration_number");
+var selector_state = $("#states");
+selector.empty();
+selector_state.empty();
+for (var i = 0; i < data.length; i++ ) {
+selector.append("<option value='" + data[i].value + "'>" + data[i].key + "</option>");
+}
+for (var i = 0; i < state_data.length; i++ ) {
+selector_state.append("<option value='" + state_data[i].pk + "'>" + state_data[i].name + "</option>");
+}
+setInitialStates();
+var selector_state = $("#states_area");
+selector_state.css({
+  display: "none",
+});
+}
+function setCnFData(){
+var data = {{cnf_user_list|safe}};
+var state_data = {{states_for_company_depot|safe}};
+
+console.log(data);
+var selector_state = $("#states_area");
+selector_state.css({
+  display: "block",
+});
+var selector = $("#id_advisor_registration_number");
+var selector_state = $("#states");
+selector.empty();
+selector_state.empty();
+for (var i = 0; i < data.length; i++ ) {
+selector.append("<option value='" + data[i].value + "'>" + data[i].key + "</option>");
+}
+for (var i = 0; i < state_data.length; i++ ) {
+selector_state.append("<option value='" + state_data[i].pk + "'>" + state_data[i].name + "</option>");
+}
+
+setInitialStates();
+}
+
+function setAppropriateData(distributor, company_depot){
+ if(distributor == 'YES') setDistributorData();
+ if(company_depot == 'YES') setCnFData();
+}
+ function triggerChange()  {
+        var numInputs = $('#id_advisory_owned').val();
+        var companyDepot = $('#id_company_depot').val();
+    setAppropriateData(numInputs,companyDepot);
+    if(numInputs == 'YES' || companyDepot == 'YES'  ){
+        $("#weaklyArea1").css("display", "block");
+        $("#weaklyArea2").css("display", "block");
+    }
+    else{
+
+    $("#weaklyArea1").css("display", "none");
+    $("#weaklyArea2").css("display", "none");
+    $("#id_advisor_name").val('');
+    $("#id_advisor_registration_number").val('');
+    $('#id_advisor_registration_number').removeAttr('required');
+    $('#id_advisor_name').removeAttr('required');
+    }
+    }
+    $('document').ready(function(){
+    $("#id_advisory_owned").change(triggerChange);
+    $("#id_company_depot").change(triggerChange);
+    var numInputs = $('#id_advisory_owned').val();
+    var companyDepot = $('#id_company_depot').val();
+    setAppropriateData(numInputs,companyDepot);
+       console.log(numInputs);
+       console.log(companyDepot);
+    if(numInputs == 'YES' || companyDepot == 'YES'  ){
+        $("#weaklyArea1").css("display", "block");
+        $("#weaklyArea2").css("display", "block");
+    }
+   else{
+        $("#weaklyArea1").css("display", "none");
+        $("#weaklyArea2").css("display", "none");
+        $("#id_advisor_name").val('');
+        $("#id_advisor_registration_number").val('');
+        $('#id_advisor_registration_number').removeAttr('required');
+        $('#id_advisor_name').removeAttr('required');
+    }
+    });
+
+</script>
+
+<!-- this is the code to restrict the submition for the page code start here-->
+<script>
+$(document).ready(function() {
+    $('#my-form').submit(function(){
+       var id_advisory_owned = $('#id_advisory_owned').val();
+       var id_advisor_registration_number = $('#id_advisor_registration_number').val();
+       var mc_code = $('#check_mc_name').val();
+       if (id_advisory_owned == 'YES'){
+       if (id_advisor_registration_number == '0' || id_advisor_registration_number == null || id_advisor_registration_number == NULL ){
+       alert('Please select Advisor Registration Number');
+        return false;
+      }
+      }
+      if ( mc_code == '404'){
+      return false;
+      }
+    });
+    });
+</script>
+<!-- this is the code to restrict the submition for the page code end here-->
+<!-- this is the code to focus out material name the submition for the page code end here-->
+<script>
+$('#id_mc_name').focusout(function () {
+    var mc_name = $(this).val();
+    var actual_mc_name = '{{actual_mc_name}}';
+    $("#err_mc_name").hide()
+    if(actual_mc_name != mc_name){
+    $.ajax({
+    url: '/mlm_admin/material_name',
+    data: {
+        'mc_name': mc_name
+    },
+    dataType: 'json',
+    success: function(data){
+        console.log(data.code)
+        if (data.code === 200) {
+            $("#err_mc_name").hide();
+            $("#check_mc_name").val(data.code);
+        }else if(data.code === 404){
+            $('#err_mc_name').html('Material Name already exist');
+            $("#err_mc_name").show()
+            $("#check_mc_name").val(data.code);
+        }
+    },
+    error: function (error) {
+            console.log(error);
+        }
+    });
+    }
+    else{
+        $("#check_mc_name").val('200');
+    }
+});
+
+
+
+</script>
+<script>
+var s2 = $("#states").select2({
+placeholder: "Choose states",
+tags: true
+});
+var vals = {{selected_states|safe}};
+console.log(vals);
+s2.val(vals).trigger("change");
+</script>
+<!-- this is the code to focusout material name the submition for the page code end here-->

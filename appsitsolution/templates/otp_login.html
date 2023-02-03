@@ -1,0 +1,55 @@
+<style>
+  .input-group.email_forget {
+    max-width: 600px;
+    margin: 0 auto;
+}
+</style>
+{% extends 'shop/base_r_j.html' %}
+{% block content %}
+<div class="login-area">
+  <div class="submit-form login-form">
+    <form action="#" method="POST"  onsubmit="return submitUserForm();"> {% csrf_token %}
+      <div class="section-title--login text-center ">
+        <h2 class="heading">Forgot Password</h2>
+        <p>Enter Your E-mail ID!</p>
+      <!-- <p>Do'nt be panic, reset password here!</p>-->
+      <div class="form-group">
+        <div class="input-group ">
+
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <div class="input-group email_forget label_forget">
+          <label for="id_email">Email:</label> <input type="text" name="username"  maxlength="254" required="" id="id_email">
+        </div>
+        <div class="input-group"> </div>
+      </div>
+      <div class="form-group text-center mt-40">
+        <div class="g-recaptcha" data-sitekey="6LeVCKgaAAAAAKELQHJMHeWi1g7k592G_xojVRbe" data-callback = "varifycaptcha"></div>
+        <div id ='g-recaptcha-error'></div>
+        <input type="submit" class="lezada-button lezada-button--medium"  name="Submit" value="Submit">
+      </div>
+    </form>
+  </div>
+</div>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+  function submitUserForm(){
+    var response = grecaptcha.getResponse();
+    console.log(response.length);
+    if(response.length == 0) {
+      document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This Field is required </span>';
+<!--      alert('we are in respnse.length 0');-->
+      return false;
+    }
+    return true;
+  }
+  function varifycaptcha() {
+  console.log('verified');
+  document.getElementById('g_recaptcha-error').innerHTML = '';
+  }
+</script>
+{% endblock %}

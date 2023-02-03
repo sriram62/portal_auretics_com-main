@@ -1,0 +1,354 @@
+{% load static %}
+{% include "mlm_calculation/include/header.html" %}
+<style>
+    .calc_title {
+    font-size: 20px;
+    padding-bottom: 12px;
+}
+.calc_page_title{
+     text-decoration: underline;
+    font-size: 35px;
+    text-align: center;
+    margin: 0 auto;
+    color: #0073aa;
+}
+.title_advisor {
+    font-size: 15px;
+    color: #000;
+    font-weight: 500;
+}
+.table_over{
+    overflow-x:auto;
+}
+</style>
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h2 class="calc_page_title">Hierarchy</h2>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                <div class="row">
+                <div class="col-md-12 table_over">
+                    <h4 class="calc_title">Advisor:</h4>
+                      <!--<label for="advisor_title" class="title_advisor">TITLES</label>-->
+                      <!--  <select class="form-control">-->
+                      <!--     <option>-->
+                      <!--         Associate Advisor-->
+                      <!--     </option>-->
+                      <!--      <option>-->
+                      <!--         Advisor-->
+                      <!--     </option>-->
+                      <!--      <option>-->
+                      <!--         Associate Manager-->
+                      <!--     </option>-->
+                      <!--      <option>-->
+                      <!--         Manager-->
+                      <!--     </option>-->
+                      <!--  </select>-->
+                                <table class="table">
+                                 <thead class="thead-dark">
+                                    <tr>
+                                    <th scope="col">S.N</th>
+                                    <th scope="col">TITLES</th>
+                                    <th scope="col">Accumulated PGPV</th>
+                                    <th scope="col">Percent</th>
+                                 </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <th scope="row">1</th>
+                                    <td>Associate Advisor</td>
+<!--                                    <td><input type="text" for="associate_advisor" class="form-control accumulated_pgpv" placeholder="type  here..."></td>-->
+<!--                                    <td><input type="text" for="Manager" class="form-control percentage" placeholder="type  here..."></td>-->
+                                    <td>{{ form.associate_advisor_accumulated_pgpv }}</td>
+                                    <td>{{ form.associate_advisor_percent }}</td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">2</th>
+                                    <td>Advisor</td>
+<!--                                    <td><input type="text" for="advisor" class="form-control accumulated_pgpv" placeholder="type  here..."></td>-->
+<!--                                    <td><input type="text" for="Manager" class="form-control percentage" placeholder="type  here..."></td>-->
+                                    <td>{{ form.advisor_accumulated_pgpv }}</td>
+                                    <td>{{ form.advisor_percent }}</td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">3</th>
+                                    <td>Associate Manager</td>
+<!--                                    <td><input type="text" for="Associate Manager" class="form-control accumulated_pgpv" placeholder="type  here..."></td>-->
+<!--                                    <td><input type="text" for="Manager" class="form-control percentage" placeholder="type  here..."></td>-->
+                                        <td>{{form.associate_manager_accumulated_pgpv}}</td>
+                                        <td>{{form.associate_manager_percent}}</td>
+                                    </tr>
+                                    <tr>
+                                     <th scope="row">4</th>
+                                     <td>Manager</td>
+<!--                                    <td><input type="text" for="Manager" class="form-control accumulated_pgpv" placeholder="type  here..."></td>-->
+<!--                                    <td><input type="text" for="Manager" class="form-control percentage" placeholder="type  here..."></td>-->
+                                        <td>{{form.manager_accumulated_pgpv}}</td>
+                                        <td>{{form.manager_percent}}</td>
+                                    </tr>
+                                    <tr>
+                                     <th scope="row">5</th>
+                                     <td>Associate Director</td>
+<!--                                    <td><input type="text" for="Manager" class="form-control accumulated_pgpv" placeholder="type  here..."></td>-->
+<!--                                    <td><input type="text" for="Manager" class="form-control percentage" placeholder="type  here..."></td>-->
+                                        <td>{{form.associate_director_accumulated_pgpv}}</td>
+                                        <td>{{form.associate_director_percent}}</td>
+                                    </tr>
+                                </tbody>
+                                </table>
+
+                </div>
+                    <div class="col-md-12 mt-4">
+                       <h4 class="calc_title">Director:</h4>
+                       </div>
+                <div class="col-md-12 table_over">
+                    <!--<label for="director_title" class="title_advisor">TITLES</label>-->
+                  <!--<select class="form-control">-->
+                  <!--         <option>-->
+                  <!--             Associate Director-->
+                  <!--         </option>-->
+                  <!--          <option>-->
+                  <!--             Bronze Director-->
+                  <!--         </option>-->
+                  <!--          <option>-->
+                  <!--             Silver Director-->
+                  <!--         </option>-->
+                  <!--          <option>-->
+                  <!--             Gold Director-->
+                  <!--         </option>-->
+
+                  <!--      <option>-->
+                  <!--             Platinum Director-->
+                  <!--         </option>-->
+                  <!--         <option>-->
+                  <!--             Titanium Director-->
+                  <!--         </option>-->
+                  <!--          </select>-->
+                  <table class="table">
+                                 <thead class="thead-dark">
+                                    <tr>
+                                    <th scope="col">S.N</th>
+                                    <th scope="col">TITLES</th>
+                                    <th scope="col">PPV</th>
+                                    <th scope="col">PGPV</th>
+                                    <th scope="col">Director Legs</th>
+                                 </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <th scope="row">1</th>
+                                    <td>Associate Director</td>
+<!--                                    <td><input type="text" for="ppv" class="form-control accumulated_pgpv" placeholder="type min ppv percent here"></td>-->
+<!--                                    <td><input type="text" for="pgpv" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                        <td>{{ form.associate_director_ppv }}</td>
+                                        <td>{{ form.associate_director_pgpv }}</td>
+                                        <td>{{ form.associate_director_legs }}</td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bronze Director</td>
+<!--                                    <td><input type="text" for="ppv_1" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_1" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_1" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                        <td>{{form.bronze_director_ppv}}</td>
+                                        <td>{{form.bronze_director_pgpv}}</td>
+                                        <td>{{form.bronze_director_legs}}</td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">3</th>
+                                    <td>Silver Director</td>
+<!--                                    <td><input type="text" for="ppv_2" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_2" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_2" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                        <td>{{form.silver_director_ppv}}</td>
+                                        <td>{{form.silver_director_pgpv}}</td>
+                                        <td>{{form.silver_director_legs}}</td>
+                                    </tr>
+                                    <tr>
+                                     <th scope="row">4</th>
+                                     <td>Gold Director</td>
+<!--                                    <td><input type="text" for="ppv_3" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_3" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_3" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                        <td>{{form.gold_director_ppv}}</td>
+                                        <td>{{form.gold_director_pgpv}}</td>
+                                        <td>{{form.gold_director_legs}}</td>
+                                    </tr>
+                                    <tr>
+                                     <th scope="row">5</th>
+                                     <td>Platinum Director</td>
+<!--                                    <td><input type="text" for="ppv_3" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_3" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_3" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                        <td>{{form.platinum_director_ppv}}</td>
+                                        <td>{{form.platinum_director_pgpv}}</td>
+                                        <td>{{form.platinum_director_legs}}</td>
+                                    </tr>
+                                    <tr>
+                                     <th scope="row">6</th>
+                                     <td>Titanium Director</td>
+<!--                                    <td><input type="text" for="ppv_3" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_3" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_3" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                        <td>{{form.titanium_director_ppv}}</td>
+                                        <td>{{form.titanium_director_pgpv}}</td>
+                                        <td>{{form.titanium_director_legs}}</td>
+                                    </tr>
+                                     <tr>
+                                     <th scope="row">6</th>
+                                     <td>Sapphire Director</td>
+<!--                                    <td><input type="text" for="ppv_3" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_3" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_3" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                        <td>{{form.sapphire_director_ppv}}</td>
+                                        <td>{{form.sapphire_director_pgpv}}</td>
+                                        <td>{{form.sapphire_director_legs}}</td>
+                                    </tr>
+                                    <tr>
+                                     <th scope="row">9</th>
+                                     <td>Emerald Director</td>
+<!--                                    <td><input type="text" for="ppv_3" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_3" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_3" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                         <td>{{form.emerald_director_ppv}}</td>
+                                        <td>{{form.emerald_director_pgpv}}</td>
+                                        <td>{{form.emerald_director_legs}}</td>
+                                    </tr>
+                                     <tr>
+                                     <th scope="row">7</th>
+                                     <td>Jade Director</td>
+<!--                                    <td><input type="text" for="ppv_3" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_3" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_3" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                         <td>{{form.jade_director_ppv}}</td>
+                                        <td>{{form.jade_director_pgpv}}</td>
+                                        <td>{{form.jade_director_legs}}</td>
+                                    </tr>
+                                    <tr>
+                                     <th scope="row">8</th>
+                                     <td>Crown Director</td>
+<!--                                    <td><input type="text" for="ppv_3" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_3" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_3" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                         <td>{{form.crown_director_ppv}}</td>
+                                        <td>{{form.crown_director_pgpv}}</td>
+                                        <td>{{form.crown_director_legs}}</td>
+                                    </tr>
+                                    <tr>
+                                     <th scope="row">10</th>
+                                     <td>Diamond Director</td>
+<!--                                    <td><input type="text" for="ppv_3" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_3" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_3" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                         <td>{{form.diamond_director_ppv}}</td>
+                                        <td>{{form.diamond_director_pgpv}}</td>
+                                        <td>{{form.diamond_director_legs}}</td>
+                                    </tr>
+                                    <tr>
+                                     <th scope="row">11</th>
+                                     <td>Black Diamond Director</td>
+<!--                                    <td><input type="text" for="ppv_3" class="form-control accumulated_pgpv" placeholder="type min ppv here"></td>-->
+<!--                                    <td><input type="text" for="pgpv_3" class="form-control accumulated_pgpv" placeholder="type min pgpv percent here"></td>-->
+<!--                                    <td><input type="text" for="director_leg_3" class="form-control accumulated_pgpv" placeholder="type min director legs required here"></td>-->
+                                         <td>{{form.black_diamond_director_ppv}}</td>
+                                        <td>{{form.black_diamond_director_pgpv}}</td>
+                                        <td>{{form.black_diamond_director_legs}}</td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                    </div>
+                    <!--<div class="col-md-3">-->
+                    <!--    <label for="ppv_title" class="title_advisor">PPV</label>-->
+                    <!--    <input type="text" for="ppv" class="form-control">-->
+                    <!--    </div>-->
+
+                    <!--    <div class="col-md-3">-->
+                    <!--    <label for="pgpv_title" class="title_advisor">PGPV</label>-->
+                    <!--    <input type="text" for="pgpv" class="form-control">-->
+                    <!--    </div>-->
+
+                    <!--    <div class="col-md-2">-->
+                    <!--    <label for="pgpv_title" class="title_advisor">Director Legs</label>-->
+                    <!--    <input type="text" for="pgpv" class="form-control">-->
+                    <!--    </div>-->
+
+                        <div class="col-md-6 mt-3">
+                            <label for="perform_roll" class="title_advisor">Perform Roll Up?</label>
+<!--                            <select class="form-control">-->
+<!--                                <option>Yes</option>-->
+<!--                                <option>No</option>-->
+<!--                            </select>-->
+                            {{form.perform_roll_up}}
+                            </div>
+                            <div class="col-md-6 mt-3">
+                            <label for="perform_roll" class="title_advisor">Perform Dynamic Compression (Actives)? </label>
+<!--                            <select class="form-control">-->
+<!--                                <option>Yes</option>-->
+<!--                                <option>No</option>-->
+<!--                            </select>-->
+                                {{form.perform_dynamic_compression_actives}}
+                            </div>
+                            <div class="col-md-6 mt-3">
+                            <label for="perform_roll" class="title_advisor">Perform Dynamic Compression (Directors)?  </label>
+<!--                            <select class="form-control">-->
+<!--                                <option>Yes</option>-->
+<!--                                <option>No</option>-->
+<!--                            </select>-->
+                                {{form.perform_dynamic_compression_directors}}
+                            </div>
+                            <div class="col-md-6 mt-3">
+                            <label for="perform_roll" class="title_advisor">Minimum Monthly Purchase To Become Active  </label>
+<!--                            <select class="form-control">-->
+<!--                                <option>Yes</option>-->
+<!--                                <option>No</option>-->
+<!--                            </select>-->
+                                {{form.minimum_monthly_purchase_to_become_active}}
+                            </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Save </button>
+                <button class="btn btn-danger" type="reset"> Clear </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_calculation/include/footer.html" %}
+
+<script>
+$('.accumulated_pgpv').focusout(function () {
+    var len = $(this).val()
+    priceval=parseFloat(len)
+    if ( priceval == parseFloat('a')  || $(this).val().indexOf('.') != -1 ){
+    $(this).val(0)
+    }
+});
+$('.percentage').focusout(function () {
+    var len = $(this).val()
+    priceval=parseFloat(len)
+    if ( priceval == parseFloat('')  || $(this).val().indexOf('.') != -1 ){
+    $(this).val(0)
+    }else if( priceval > 100 ){
+    $(this).val(0)
+    }
+});
+$('.accumulated_pgpv').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.percentage').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+</script>

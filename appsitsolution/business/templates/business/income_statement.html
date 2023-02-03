@@ -1,0 +1,173 @@
+{% load static %}
+{% include "business/include/header.html" %}
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Income Statement</h2>
+                <h5 class="calc_page_title_1 mb-4">Check out your income details</h5>
+                </div>
+                <div class="col-md-12">
+                    <div class="user_profile_bonus">
+                        <div class="main_downline mt-4 mb-4">
+                            <div><p>Advisor Name: {{referall_code}} {{user_name}}</p></div>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-6">
+                        <input type="month" name="month" value="{{input_date|date:'Y-m'}}" id="date_points" class="form-control mt-4">
+                            </div>
+                        <div class="col-md-6">
+                    <input type="submit" value="Submit"  class="form-control mt-4" style="background-color: #222529; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden; color: white;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                <p><h5 class="bonus_director">Data for the Month of: <span>{{month}} - {{year}}</span></h5></p>
+              </div>
+                    <table><tr><td>
+                        <form method="get" action="{% url 'mlm_admin_user_dashboard_3' %}" accept-charset="utf-8">
+                            {% csrf_token %}
+                        <input type="search" class="form-control" id="q" name="q" placeholder="Enter ARN Number" /></td><td><button type="submit" class="btn  btn-primary">Search</button></form>
+                    </td></tr></table>
+                    <p color="red"><span><strong>{{ msg }}</strong></span></p>
+                    <div class="col-md-12 mt-4 box_income">
+                    <table class="table user_profile_bonus_1">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Sub-Income Name</th>
+                        <th scope="col">Month & Years</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/bonus.webp' %}"></td>
+                        <td><a href="{% url 'income_statement_details' 'Direct Bonus' %}"/>Direct Bonus</a></td>
+                        <td>{{direct_bonus_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/group_user.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Team Building Bonus' %}"/>Team Building
+                                Bonus (TBB)</a></td>
+                        <td>{{tbb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/leadership_building.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Leadership Building Bonus' %}"/>Leadership
+                                Building Bonus (LBB)</a></td>
+                        <td>{{lbb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/lifestyle_fund.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Lifestyle Fund' %}"/>Lifestyle Fund</a></td>
+                        <td>{{lifestyle_amount}}</td>
+                        </tr>
+                        <tr class="bonus_total">
+                        <td></td>
+                        <td><strong>Total</strong></td>
+                        <td><strong>{{half_total}}</strong></td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/retail.webp' %}"></td>
+                        <td>Retail Margin</td>
+                        <td>{{retail_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/personal_bonus.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Personal Bonus' %}"/>Personal Bonus</a></td>
+                        <td>{{pb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/fortune_bonus.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Fortune Bonus' %}"/>Fortune Bonus (10x)</a>
+                            </td>
+                        <td>{{fb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/sharing_bonus.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Sharing Bonus' %}"/>Sharing Bonus</a></td>
+                        <td>{{sb_amount}}</td>
+                        </tr>
+                         <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/nurturing_bonus.webp' %}"></td>
+                             <td><a href="{% url 'income_statement_details' 'Nurturing Bonus' %}"/>Nurturing Bonus</a>
+                             </td>
+                        <td>{{nb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/business_master.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Business Master Bonus' %}"/>Business Master
+                                Bonus</a></td>
+                        <td>{{bmb_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/vacationfund.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Vacation Fund' %}"/>Vacation Fund</a></td>
+                        <td>{{vacation_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/automobilefund.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Automobile Fund' %}"/>Automobile Fund</a>
+                            </td>
+                        <td>{{automobile_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/shelter_fund.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Shelter Fund' %}"/>Shelter Fund</a></td>
+                        <td>{{shelter_amount}}</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/consistent_retailer_income.webp' %}"></td>
+                            <td><a href="{% url 'income_statement_details' 'Consistent Retailer’s Income' %}"/>Consistent
+                                Retailer’s Income</a></td>
+                        <td>{{cri_amount}}</td>
+                        </tr>
+                        <tr class="bonus_total">
+                        <td></td>
+                        <td><strong>Total</strong></td>
+                        <td><strong>{{full_total}}</strong></td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td><a href="{% url 'mlm_admin_user_dashboard_4' %}"><sub><b>Note:</b> This is not your Payout.</sub><br /><sub><b>नोट:</b> यह आपका पेआउट नहीं है।</sub></a></td>
+                        </tr>
+                        <tr class="bonus_total_1">
+                        <td></td>
+                        <td><strong>Grand Total</strong></td>
+                        <td><strong>{{grand_total}}</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<!--                <script>-->
+<!--   jQuery(document).ready(function(){-->
+<!--    jQuery("select").change(function(){-->
+<!--        jQuery(this).find("option:selected").each(function(){-->
+<!--            var optionValue = jQuery(this).attr("value");-->
+<!--            if(optionValue){-->
+<!--                jQuery(".box_income").not("." + optionValue).hide();-->
+<!--                $("." + optionValue).show();-->
+<!--            } else{-->
+<!--                jQuery(".box_income").hide();-->
+<!--            }-->
+<!--        });-->
+<!--    }).change();-->
+<!--});-->
+<!--                </script>-->
+{% include "business/include/footer.html" %}

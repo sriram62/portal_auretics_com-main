@@ -1,0 +1,141 @@
+<style>
+    .cart-table th{
+       border: 1px solid #efefef;
+    }
+    .cart-table td{
+        border: 1px solid #efefef;
+    }
+    .cart-table th:last-child {
+    border: 1px solid transparent;
+}
+</style>
+{% extends 'shop/base.html' %}
+<!-- {% for i in order_list %}
+{{ i.order.id }}
+{{ i.product }}
+{% endfor %} -->
+
+
+
+
+
+{% block content %}
+
+<body>
+	<div class="wrapper">
+		<!-- shop page content -->
+		<div class="shop-page-wrapper">
+			<!-- shop page content -->
+			<div class="shop-page-content">
+				<div class="shopping-cart-area">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<!-- cart table -->
+								<div class="cart-table-container">
+								    <table class="cart-table">
+										<thead>
+											<tr>
+												<th class="product-name">Order Code</th>
+												<!--<th class="product-name">Order By</th>
+												<th class="product-price">Size</th>-->
+<!--												<th class="product-subtotal">Address</th>-->
+												<th class="product-quantity">Date</th>
+												<th class="product-quantity">Grand Total</th>
+												<th class="product-quantity">BV</th>
+												<th class="product-quantity">PV</th>
+												<th class="product-quantity">Order Summary</th>
+												<th class="product-quantity">Track Order</th>
+
+												<th class="product-remove">&nbsp;</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for item in order_list %}
+											<tr>
+												<td class="product-price" >
+<!--													<a href="{% url 'order_details' item.email %}" >-->
+<!--													#nipur code start-->
+													<a href="{% url 'order_details' item.pk %}" >
+<!--														nipur code end-->
+<!--													<span class="price" style="color:blue;">dmlm-{{item.date|date:'c'}}&#45;&#45;{{ item.transction_id }}</span></a>-->
+<!--													nipur code start-->
+													<span class="price" style="color:blue;">{{ item.order_id1 }}</span></a>
+<!--													nipur code end-->
+												</td>
+												<!--<td class="product-price">
+													<span class="price">{{ item.size }}</span>
+												</td>
+												<td class="product-price">
+													<span class="price">{{ item.name }}</span>
+												</td>-->
+<!--												{% if item.shipping_address %}-->
+<!--												<td class="product-price">-->
+<!--													<span class="price">House No.{{ item.shipping_address.house_number }}<br>-->
+<!--														Landmark:{{ item.shipping_address.Landmark }}<br>-->
+<!--														City:{{ item.shipping_address.city }}<br>-->
+<!--														Pincode:{{ item.shipping_address.pin }}<br>-->
+<!--														Mobile:{{ item.shipping_address.mobile }}<br>-->
+<!--														Alternate Mobile:{{ item.shipping_address.alternate_mobile }}<br>-->
+<!--														<address></address></span>-->
+<!--												</td>-->
+<!--												{% else %}-->
+<!--												<td class="product-price">-->
+<!--													<span class="price">House No.{{ item.billing_address.house_number }}<br>-->
+<!--														Landmark:{{ item.billing_address.Landmark }}<br>-->
+<!--														City:{{ item.billing_address.city }}<br>-->
+<!--														Pincode:{{ item.billing_address.pin }}<br>-->
+<!--														Mobile:{{ item.billing_address.mobile }}<br>-->
+<!--														Alternate Mobile:{{ item.billing_address.alternate_mobile }}<br>-->
+<!--														<address></address></span>-->
+<!--												</td>-->
+<!--												{% endif %}-->
+                                                <td class="product-price">
+													<span class="price">{{ item.date|date:'d-M-Y' }}</span>
+												</td>
+                                                <td class="product-price">
+													<span class="price">{{ item.grand_total }}</span>
+												</td>
+                                                <td class="product-price">
+													<span class="price">{{ item.bv }}</span>
+												</td>
+                                                <td class="product-price">
+													<span class="price">{{ item.pv }}</span>
+												</td>
+                                                <td class="product-price">
+
+												<a class="btn  btn-primary btn-action" href="{% url 'shop_invoice_check' item.pk %}">
+												<button type="button" class="btn btn-icon btn-primary"><i class="fa fa-download"></i></button>
+												</a>
+												</td>
+												<td class="">
+
+													<a class=" btn btn-link " href="{% url 'track_order' item.pk%}">
+													 Track Order
+													</a>
+													</td>
+											</tr>
+
+											{% endfor %}
+										</tbody>
+									</table>
+
+
+						</div>
+								<!-- End of cart table -->
+
+								<!-- coupon area -->
+
+								<!-- End of coupon area -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- cart page content end -->
+	</div>
+
+
+	{% endblock %}

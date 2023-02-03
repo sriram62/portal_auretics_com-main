@@ -1,0 +1,978 @@
+
+
+{% extends 'shop/base_r_j.html' %}
+{% block extra_styles %}
+<style>
+    .regi_inpu select {
+    width: 100%;
+    padding: 14px 11px;
+    border: 1px solid #e5e5e5;
+}
+.shubh_terms a{
+    color:#000;
+    text-decoration:underline;
+}
+.shubh_terms a:hover{
+    text-decoration:underline !important;
+}
+</style>
+{% endblock extra_styles %}
+
+{% block content %}
+<!-- End of search overlay -->
+<div class="container">
+    <!-- personal details start-->
+    <div class="row regi_header">
+        <div class="col-md-12">
+            <p>Registration</p>
+        </div>
+    </div>
+    <form method="POST" name='registrationform' id="my-form"  enctype="multipart/form-data" novalidate   onsubmit="return submitUserForm();">
+        {% csrf_token %}
+    <div class="row regibg_bg">
+        <div class="col-md-12">
+            <div class="head_new mt-40"> Personal Details </div>
+        </div>
+          <div class="col-md-6">
+            <label for="firstname" class="regi_lab">First name*</label>
+            <input type="text" id="id_firstname" name="firstname" class="regi_inpu" value="{{ request.user.firstname }}" placeholder="Enter first name" required="required">
+              <div class="error alert-danger"  id="e_fname" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="lastname" class="regi_lab">Last name</label>
+            <input type="text" id="id_lastname" name="lastname" class="regi_inpu" placeholder="Enter last name" value="{{ request.user.lastname }}">
+        </div>
+        <div class="col-md-12 mt-4">
+            <input type="checkbox" class="regi_lab" id="email_check_box" name="email_check_box"><span class="regi_inpu ml-4"> I do not have Email account</span>
+        </div>
+        <div class="col-md-12 div_email">
+            <label for="email" class="regi_lab">Email Id*</label>
+            <input type="email" name="email" class="regi_inpu" id="id_email" placeholder="Enter email id">
+            <div class="error alert-error"  id="errr_email" style="display:none;" ></div>
+            <div class="error alert-danger" id="e_email"></div>
+        </div>
+
+
+        <!--<div class="col-md-6">-->
+        <!--    <label for="referral_code" class="regi_lab">Referrer *</label>-->
+        <!--    <input type="text" id="id_referral" name="referral" class="regi_inpu" placeholder="Enter Referrer">-->
+        <!--</div>-->
+
+        <div class="col-md-6">
+            <label for="password" class="regi_lab">Password*</label>
+            <input type="password" id="id_password" name="password" class="regi_inpu" placeholder="Enter your password">
+            <div class="error alert-error" id="err_password" style="display:none;"></div>
+            <div class="error alert-danger" id="e_pass"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="confirmPassword" class="regi_lab">Re Enter Password*</label>
+            <input type="password" id="id_confirmPassword" name='confirmPassword' class="regi_inpu" placeholder="Re Enter Password">
+            <div class="error alert-error" id="err_confirmPassword" style="display:none;"></div>
+            <div class="error alert-danger" id="e_cnfpass"></div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="birthday" class="regi_lab">Birthday*</label>
+            <input type="date" id="id_birthday" value="1997-01-21" name ='birthday' class="regi_inpu" placeholder="choose your dob" >
+            <div class="error alert-error" id="err_birthday" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="co-applicant" class="regi_lab"> Co-Applicant’s Name (if Co-Applying)</label>
+            <input type="text" id="id_co-applicant" name="co_applicant"  class="regi_inpu" placeholder="Enter co-applicant name">
+            <div class="error alert-error" id="err_coapplicant" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="birthday" class="regi_lab">Blood Group*</label>
+            <select class="regi_inpu" name="blood_group">
+                            <option value="I don't know">I don't Know</option>
+                            <option value='A'>A</option>
+                            <option value='B'>B</option>
+                            <option value='AB'>AB</option>
+                            <option value='O'>O</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="birthday" class="regi_lab">Blood RH Factor*</label>
+            <select class="regi_inpu" name="blood_rh_factor">
+                            <option value="I don't know">I don't Know</option>
+                            <option value='positive'>Positive(+)</option>
+                            <option value='negative'>Negative(-)</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="birthday" class="regi_lab">Gender*</label>
+            <select class="regi_inpu" name="gender">
+                            <option value='Other' {% if profile.gender == 'Other' %} selected {% endif %}>Other</option>
+                            <option value='Male' {% if profile.gender == 'Male' %} selected {% endif %}>Male</option>
+                            <option value="Female" {% if profile.gender == "Female" %} selected {% endif %}>Female</option>
+            </select>
+    </div>
+    </div>
+    <!-- personal details end-->
+
+    <!--referral code-start-->
+
+    <!--referral-end-->
+       <div class="row reff_bg pt-20">
+            <div class="col-md-12">
+              <div class="head_new">
+                Referral Details
+              </div>
+             </div>
+             <div class="col-md-6" id="referral_code_id">
+            <label for="referral_code" class="regi_lab">Referral Code*</label>
+            <input type="text" id="id_referral_code" name="referral_code" class="regi_inpu" placeholder="Enter Referral Code" value="{{refid}}">
+                 <div class="error alert-error"  id="err_referral_code" style="display:none;" ></div>
+            </div>
+             <div class="col-md-6" id='referral_user' style="display:none;">
+            <label for="referral_code" class="regi_lab">Refer By:</label>
+<span id="id_referral_user" style="color:green;" class="ion-android-done-all"> </span>
+</div>
+             <div class="col-md-6" >
+            <label  class="regi_lab">Position*</label>
+            <select class="regi_inpu" id="position" name="position">
+                            <option value="0">Select Position</option>
+                            <option value='LEFT'>LEFT</option>
+                            <option value='RIGHT'>RIGHT</option>
+            </select>
+            <div class="error alert-error" id="err_position" style="display:none;"></div>
+            </div>
+</div>
+    <!-- Address-start -->
+    <div class="row addbg_bg">
+        <div class="col-md-12">
+            <div class="head_new">
+                Address Details
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="house" class="regi_lab">House Number* </label>
+            <input type="text" id="house" class="regi_inpu" name="house" placeholder="Enter house number" maxlength="100">
+            <div class="error alert-error" id="err_house" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="confirm-password" class="regi_lab">Street</label>
+            <input type="street" class="regi_inpu" name="street" id="street" placeholder="Enter street name" maxlength="100">
+            <div class="error alert-error" id="err_street" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="address2" class="regi_lab">Address line 2 </label>
+            <input type="text" id="address2" name="address2" class="regi_inpu" placeholder="Enter address" maxlength="140">
+            <div class="error alert-error" id="err_address2" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="confirm-password" class="regi_lab">Landmark</label>
+            <input type="landmark" class="regi_inpu" name="landmark" id="landmark" placeholder="Enter landmark" maxlength="100">
+            <div class="error alert-error" id="err_landmark" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="pincode" class="regi_lab">Pin Code*</label>
+            <input type="pincode" class="regi_inpu" id="pincode" name="pincode" placeholder="Enter pincode" maxlength="10">
+            <div class="error alert-error" id="err_pincode" style="display:none;"></div>
+        </div>
+        <div class="col-md-6 regi_inpu regi_lab">
+            <label for="id_pan_file" class=""> </label>
+
+        </div>
+        <div class="col-md-6">
+            <label for="city" class="regi_lab">City*</label>
+            <input type="text" id="city" class="regi_inpu" name="city" placeholder="Enter city">
+            <div class="error alert-error" id="err_city" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="city" class="regi_lab">State*</label>
+
+            <select class="regi_inpu" name="state" id="state">
+                <option value="0">Select State</option>
+            {% for i in state %}
+                <option value="{{i.pk}}">{{i.state_name}}</option>
+            {% endfor %}
+            </select>
+            <div class="error alert-error" id="err_state" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="mobile" class="regi_lab">Mobile No*</label>
+            <input type="text" id="mobile" class="regi_inpu" name="phone" placeholder="Enter mobile no" maxlength="13">
+            <div class="error alert-error" id="err_mobile" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="altmobile" class="regi_lab">Alternate Mobile No.</label>
+            <input type="number" class="regi_inpu" name="altphone" id="altmob" placeholder="Enter Alternate Mobile" maxlength="13">
+            <div class="error alert-error" id="alterr_phone" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!--address-end-->
+
+
+    <!-- 12/10/2021 arjun gupta and naresh discussed the registration page is fully length so
+    they are hiding the KYC details -->
+    <!-- kyc details start-->
+    <div class="row kycbg-bg">
+        <div class="col-md-12">
+            <div class="head_new">
+                KYC Details
+            </div>
+        </div>
+         <!--remove data  -->
+        <div class="container">
+
+            <from method="POST" enctype="multipart/form-data">
+                <div class="row">
+                <div class="col-md-6">
+
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.non_field_errors }}
+                    {{ form.source.errors }}
+                    {{ form.source }}
+
+
+                </div>
+
+{#                <div class="col-md-6 regi_inpu regi_lab">#}
+{#                    <label for="panno" class="">Manual Verification</label>#}
+{#                     #}
+{#                    <select class="form-control" id="is_parent_category" name="manual_verify">#}
+{#                        <option value="No">No</option>                          #}
+{#                        <option value="Yes">Yes</option>#}
+{#                                               #}
+{#                                           </select>#}
+{#                     <div class="error alert-error" id="kyc_pan_no" style="display:none;"></div>#}
+{#                </div>#}
+{#                <div class="col-md-6 regi_inpu regi_lab">#}
+{#                    <label for="id_pan_file" class=""> </label>#}
+{#                      #}
+{#                </div>#}
+ 
+                <div class="col-md-6 regi_inpu regi_lab">
+                    <label for="pan_number" class="">PAN No.</label>
+                    {{ form.pan_number.errors }}
+                    <div class="regi_inpu"> {{ form.pan_number }}</div>
+                     <div class="error alert-error" id="kyc_pan_no" style="display:none;"></div>
+                </div>
+{#                <div class="col-md-6 regi_inpu regi_lab">#}
+{#                    <label for="id_pan_file" class="">Upload Pan Card</label>#}
+{#                    {{ form.pan_file }}#}
+{#                     <div class="error alert-error" id="kyc_pan_file" style="display:none;"></div>#}
+{#                </div>#}
+{#                <div class="col-md-6 regi_inpu regi_lab">#}
+{#                    <label class="">ID Proof Type</label>#}
+{#                    {{ form.id_proof_type}}#}
+{##}
+{#                </div>#}
+{#                <div class="col-md-6 regi_inpu regi_lab">#}
+{#                    <label for="id_id_proof_file" class="">Upload Id Proof</label><br>#}
+{#                    {{ form.id_proof_file }}#}
+{#                     <div class="error alert-error" id="kyc_id_proof" style="display:none;"></div>#}
+{#                </div>#}
+{##}
+{#                <div class="col-md-6 regi_inpu regi_lab">#}
+{#                    <label class="">Address Proof Type</label>#}
+{#                    {{ form.address_proof_type }}#}
+{##}
+{#                </div>#}
+{#                <div class="col-md-6 regi_inpu regi_lab">#}
+{#                    <label for="id_address_proof_file" class="">Address Proof Upload</label><br>#}
+{#                    {{ form.address_proof_file }}#}
+{#                     <div class="error alert-error" id="kyc_address_proof" style="display:none;"></div>#}
+{#                </div>#}
+                </div>
+            <!-- {{ form }} -->
+        </from>
+        </div>
+    </div>
+    <!--kyc details end-->
+
+    <!-- bank details start-->
+{#    <div class="row bankbg_bg">#}
+{#        <!--{{ bank_form }}-->#}
+{#        <div class="col-md-12">#}
+{#            <div class="head_new">#}
+{#                Bank Account Details#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-6 regi_inpu regi_lab">#}
+{#            <label for="Distributor" class="">Distributor’s Name in Bank Account</label>#}
+{#            {{ bank_form.distributors_name_in_bank_account }}#}
+{#            <div class="error alert-error" id="bank_account_holder" style="display:none;"></div>#}
+{#            <!--<input type="text" id="Distributor" class="regi_inpu" placeholder="Enter Distributor name">-->#}
+{#        </div>#}
+{#        <div class="col-md-6 regi_inpu regi_lab">#}
+{#            <label for="ifsccode" class="">IFSC Code</label>#}
+{#            {{ bank_form.ifsc_code }}#}
+{#            <div class="error alert-error" id="bank_ifsc_code" style="display:none;"></div>#}
+{#            <!--<input type="text" id="IFSCCode" class="regi_inpu" placeholder="Enter ifsc name">-->#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-6 regi_inpu regi_lab">#}
+{#            <label for="birthday" class="">Bank Name</label>#}
+{#            {{ bank_form.bank_name }}#}
+{#            <div class="error alert-error" id="bank_bank_name" style="display:none;"></div>#}
+{#            <!--<input type="bankname" id="bankname" class="regi_inpu" placeholder="Enter bank name">-->#}
+{#        </div>#}
+{#        <div class="col-md-6 regi_inpu regi_lab">#}
+{#            <label for="Branchname" class=""> Branch Name</label>#}
+{#            {{ bank_form.branch_name }}#}
+{#            <div class="error alert-error" id="bank_branch_name" style="display:none;"></div>#}
+{#            <!--<input type="text" id="Branch name" class="regi_inpu" placeholder="Enter branch name">-->#}
+{#        </div>#}
+{#        <div class="col-md-6 regi_inpu regi_lab">#}
+{#            <label for="birthday" class="">Patron ID</label>#}
+{#            {{ bank_form.patron_id }}#}
+{#            <div class="error alert-error" id="bank_bank_name" style="display:none;"></div>#}
+{#            <!--<input type="bankname" id="bankname" class="regi_inpu" placeholder="Enter bank name">-->#}
+{#        </div>#}
+{#        <div class="col-md-6 regi_inpu regi_lab">#}
+{#            <label for="Branchname" class="">Name Fuzzy</label>#}
+{#            {{ bank_form.nameFuzzy }}#}
+{#            <div class="error alert-error" id="bank_branch_name" style="display:none;"></div>#}
+{#            <!--<input type="text" id="Branch name" class="regi_inpu" placeholder="Enter branch name">-->#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-6 regi_inpu regi_lab">#}
+{#            <label for="birthday" class="">Account Number</label>#}
+{#             {{ bank_form.account_number }}#}
+{#            <div class="error alert-error" id="bank_account_number" style="display:none;"></div>#}
+{#            <!--<input type="account" id="accountno" class="regi_inpu" placeholder="Enter Account number">-->#}
+{#        </div>#}
+{#        <div class="col-md-6 regi_inpu regi_lab">#}
+{#            <label for="Cheque" class="">Cheque Photo</label><br>#}
+{#            {{ bank_form.cheque_photo }}#}
+{#            <div class="error alert-error" id="bank_cheque_photo" style="display:none;"></div>#}
+{#            <!--<input type="file" id="choose-cheque-id" size="80">-->#}
+{#        </div>#}
+{##}
+{#    </div>#}
+    <!--bank details end-->
+
+    <!--terms & conditions start-->
+    <div class="row terms_condi">
+        <div class="col-md-12">
+            <label>{{ bank_form.age_confirmation}} I am at-least 18 year old</label>
+            <!--<input type="checkbox" value="age">-->
+        </div>
+
+        <div class="col-md-12 shubh_terms">
+            <label>{{ bank_form.self_declaration}} I Accept All the <a href="javascript:void(0)">Terms &amp;
+                    Conditions</a></label>
+        </div>
+        <div class="col-md-12 shubh_terms">
+            <label><input type="checkbox" id="declaration" value="age"> I understand that becoming a part of this business is free of charge, and there is no need to pay any joining fee or purchase any specific amount of products, and all the money expended by me is for purchasing of goods and not for any form of Investment. I have taken and understood the orientation program (either online or in-person) and best practises for Direct Selling Marketeer. I have also read and understood the “Guidelines on Direct Selling” issued by the Government.</label>
+        </div>
+            <div class="col-md-12 error alert-error " id="alert_required" style="display:none;"></div>
+    </div>
+    <!--terms & conditions end-->
+    <!--submit-->
+
+    <div class="row form-footer">
+        <div class="col-md-12">
+            <span style="align: right">Fields marked with * are required</span>
+{#            <div class="form-group text-center mt-40">#}
+{#        <div class="g-recaptcha" data-sitekey="6LeVCKgaAAAAAKELQHJMHeWi1g7k592G_xojVRbe" data-callback = "varifycaptcha"></div>#}
+{#        <div id ='g-recaptcha-error' style="float: center;"></div>#}
+{#<!--        <input type="submit" class="lezada-button lezada-button&#45;&#45;medium"  name="Submit">-->#}
+{#      </div>#}
+            <input type="submit" class="btn btn-secondary btn-lg pull-right regibtn_btn" name="submit" id="submit" value="Complete Registration" onclick="a();">
+            <!-- <button type="button" class="btn btn-secondary btn-lg pull-right regibtn_btn">Complete Registration</button> -->
+        </div>
+    </div>
+    <!--end-->
+    <!--here we are adding code for recaptchr-->
+
+    <!--end-->
+    </form>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+  function submitUserForm(){
+    var response = grecaptcha.getResponse();
+    console.log(response.length);
+    if(response.length == 0) {
+      document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This Field is required </span>';
+      return false;
+    }
+    return true;
+  }
+  function varifycaptcha() {
+  console.log('verified');
+  document.getElementById('g_recaptcha-error').innerHTML = '';
+  }
+</script>
+
+<script>
+ $('document').ready(function(){
+ var mobile_state = false;
+ var email_state = false;
+ $('#mobile').on('blur', function(){
+  var mobile = $('#mobile').val();
+  if (mobile == '') {
+  	mobile_state = false;
+  	return;
+  }
+  $.ajax({
+    url: '/ajax/validate_mobile/',
+    type: 'get',
+    data: {
+    	'mobile' : mobile,
+    },
+    success: function(response){
+      if (response.code == 200 ) {
+      	mobile_state = false;
+      	$('#err_mobile').html('Mobile Number already exists.');
+		$("#err_mobile").css("display", "block");
+		$('#err_mobile').fadeIn();
+		$('#err_mobile').show();
+      }else if (response.code == 400) {
+<!--        alert('response code 400 h');-->
+        $('#err_mobile').hide();
+      	mobile_state = true;
+      }
+    }
+  });
+ });
+ $("#id_email").focusout(function(){
+ 	var email = $('#id_email').val();
+    var mailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+ 	if (email == '') {
+ 		email_state = false;
+ 		return;
+ 	}
+    if ( mailPattern.test(email) && email !== '') {
+        $("#errr_email").hide();
+    } else {
+        $("#errr_email").html("invalid Email");
+        $("#errr_email").show();
+        error_email = true;
+        return;
+    }
+ 	$.ajax({
+      url: '/ajax/validate_email/',
+      type: 'get',
+      data: {
+      	'email' : email,
+      },
+      success: function(response){
+      	if (response.code == 200 ) {
+          email_state = false;
+          $('#errr_email').html('A user with this username already exists.');
+		  $("#errr_email").css("display", "block");
+	      $('#errr_email').fadeIn();
+		  $('#errr_email').show();
+        } else if (response.code == 500) {
+            email_state = false;
+            console.log(response);
+            $('#errr_email').html(response.message);
+            $("#errr_email").css("display", "block");
+            $('#errr_email').fadeIn();
+            $('#errr_email').show();
+      	}else{
+      	    $('#errr_email').hide();
+            email_state = true;
+      	}
+      }
+ 	});
+ });
+
+ $('#my-form').submit(function(){
+     var error_fname = false;
+     var error_birthday = false;
+     var error_email = false;
+     var error_house = false;
+     var error_pass = false;
+     var error_city = false;
+     var error_state = false;
+     var error_pincode = false;
+     var error_mobile = false;
+     var error_email_check = false;
+     var error_mobile_check = false;
+     var data1 = true;
+     var error_declaration = false;
+     var error_ageid = false;
+     var error_deid = false;
+     var error_pan_no = false;
+     var error_pan_card_file = false;
+     var error_id_proof = false;
+     var error_address_proof = false;
+     var error_account_holder_name = false;
+     var error_ifsc_code = false;
+     var error_bank_name = false;
+     var error_branch_name = false;
+     var error_account_number = false;
+     var error_cheque_photo = false;
+     var error_position = false;
+    if ($('#email_check_box').is(":checked")) {
+        email_state = true;
+    }
+
+     if(!$('#ageid').is(':checked')){
+      error_ageid = false;
+      $('#alert_required').html('All The Checked Box Required.');
+      $("#alert_required").css("display", "block");
+      $('#alert_required').fadeIn();
+      $('#alert_required').show();
+  } else {
+         error_ageid = true;
+      }
+     if(!$('#declaration').is(':checked')){
+      error_declaration = false;
+      $('#alert_required').html('All The Checked Box Required.');
+      $("#alert_required").css("display", "block");
+      $('#alert_required').fadeIn();
+      $('#alert_required').show();
+  } else {
+         error_declaration = true;
+      }
+     if(!$('#deid').is(':checked')){
+      error_deid = false;
+      $('#alert_required').html('All The Checked Box Required.');
+      $("#alert_required").css("display", "block");
+      $('#alert_required').fadeIn();
+      $('#alert_required').show();
+  } else {
+         error_deid = true;
+      }
+      var fname = $("#id_firstname").val()
+      if ( fname !== '') {
+      $("#e_fname").hide();
+      } else {
+         $("#e_fname").html("This field is required");
+         $("#e_fname").show();
+         error_fname = true;
+      }
+      var birthday = $("#id_birthday").val().length;
+      if (birthday != '' ) {
+      $("#err_birthday").hide();
+      } else {
+         $("#err_birthday").html("This field is required");
+         $("#err_birthday").show();
+         error_birthday = true;
+      }
+      var house = $("#house").val()
+      if (house !== '') {
+         $("#err_house").hide();
+      } else {
+         $("#err_house").html("This field is required");
+         $("#err_house").show();
+         error_house = true;
+      }
+      var referral_code = $("#id_referral_code").val()
+      if (referral_code !== '') {
+      $("#err_referral_code").hide();
+      } else {
+         $("#err_referral_code").html("This field is required");
+         $("#err_referral_code").show();
+         error_referral_code = true;
+      }
+      var position = $("#position").val()
+      if (position !== '0') {
+         $("#err_position").hide();
+      } else {
+         $("#err_position").html("This field is required");
+         $("#err_position").show();
+         error_position = true;
+      }
+      var house = $("#house").val()
+      if (house !== '') {
+         $("#err_house").hide();
+      } else {
+         $("#err_house").html("This field is required");
+         $("#err_house").show();
+         error_house = true;
+      }
+      var pass_length = $("#id_password").val().length;
+      if(pass_length < 8) {
+         $("#e_pass").html("Atleast 8 Characters");
+         $("#e_pass").show();
+         error_pass = true;
+      } else {
+         $("#e_pass").hide();
+         }
+      var pass = $("#id_password").val().length;
+      var cnfpass = $("#id_confirmPassword").val().length;
+      if(pass != cnfpass) {
+         $("#e_cnfpass").html("Password is not match");
+         $("#e_cnfpass").show();
+         error_pass = true;
+      } else {
+         $("#e_cnfpass").hide();
+         }
+      var city = $("#city").val()
+      if (city !== '') {
+         $("#err_city").hide();
+      } else {
+         $("#err_city").html("This field is required");
+         $("#err_city").show();
+         error_city = true;
+      }
+      var state = $("#state").val()
+      if (state !== '0') {
+         $("#err_state").hide();
+      } else {
+         $("#err_state").html("This field is required");
+         $("#err_state").show();
+         error_state = true;
+      }
+      var pincode = $("#pincode").val()
+      if (pincode !== '') {
+      $("#err_pincode").hide();
+      } else {
+         $("#err_pincode").html("This field is required");
+         $("#err_pincode").show();
+         error_pincode = true;
+      }
+      var mobile = $("#mobile").val().length;
+      if (mobile < 11 && mobile > 9) {
+         $("#err_mobile").hide();
+      } else {
+         $("#err_mobile").html("Mobile number must contain 10 digit");
+         $("#err_mobile").show();
+         error_mobile = true;
+      }
+      if (error_ageid == true & error_deid == true & error_declaration == true){
+      $("#alert_required").hide();
+      }
+ 	if (error_ageid == false || error_deid == false || error_declaration == false || mobile_state == false || email_state == false || error_fname === true || error_birthday === true || error_email === true  || error_house === true || error_pass == true || error_city === true|| error_state === true || error_position === true || error_pincode === true) {
+	   $('body, html').animate({scrollTop:$('#my-form').offset().top}, 'slow');
+
+          if (mobile_state == false ) {
+            $('#err_mobile').html('Please re-enter Mobile Number!');
+            $("#err_mobile").css("display", "block");
+            $('#err_mobile').fadeIn();
+            $('#err_mobile').show();
+            }
+          if (email_state == false ) {
+          $('#errr_email').html('Please re-enter email!');
+		  $("#errr_email").css("display", "block");
+	      $('#errr_email').fadeIn();
+		  $('#errr_email').show();
+            }
+	   return false;
+	}else{
+      // proceed with form submission
+       return true;
+ 	}
+ });
+});
+</script>
+
+<script>
+$("#pincode").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var pincode = $("#pincode").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+    if (( pincode > 5)){
+        event.preventDefault();
+    }
+});
+</script>
+<script>
+$("#mobile").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var mobile = $("#mobile").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+    if (( mobile > 9)){
+        event.preventDefault();
+    }
+});
+</script>
+<!--<script>-->
+<!--$(document).ready(function() {-->
+<!--    $( "#ageid").prop('checked', true);-->
+<!--    $( "#deid").prop('checked', true);-->
+<!--    $( "#declaration").prop('checked', true);-->
+<!--});-->
+<!--</script>-->
+<script>
+$('#id_referral_code').change(function () {
+			$('#erro_referral_code').hide();
+			var erro_referral_code = false;
+				var ref_legth = $('#id_referral_code').val().length;
+				var referral_code = $(this).val();
+				if (ref_legth == 0) {
+					$('#erro_referral_code').html('please enter name');
+					$("#erro_referral_code").css("display", "block");
+					$('#erro_referral_code').fadeIn();
+					$('#erro_referral_code').show();
+					var erro_firstname = true;
+					$('#submit').attr('disabled',true);
+				}
+				else {
+					$('#erro_referral_code').hide();
+					$('#submit').attr('disabled',false);
+				}
+				$.ajax({
+				url: '/ajax/validate_ref/',
+				data: {
+					'referral_code': referral_code
+				},
+				dataType: 'json',
+				success: function (data) {
+					if (data.ref_by) {
+						// alert("A user with this username already exists.");
+						$('#error_firstname').html('');
+					$("#error_firstname").css("display", "block");
+					$('#error_firstname').fadeIn();
+					$('#error_firstname').show();
+					var erro_firstname = true;
+					$('#submit').attr('disabled',true);
+					}
+				}
+			});
+			});
+
+			$('#id_referral_code').focusout(function () {
+				var referall_code = $(this).val();
+				$("#err_referral_code").hide()
+				let aa='';
+				$.ajax({
+				url: '/ajax/validate_ref/',
+				data: {
+					'referall_code': referall_code
+				},
+				dataType: 'json',
+				success: function(data){
+				    console.log(data.refer_by)
+					if (data.code === 200) {
+					    aa = data.refer_by
+				        $("#referral_code_id").hide();
+				        $("#referral_user").css("display", "block");
+				        $("#id_referral_user").append(aa);
+					}else if(data.code === 404){
+						$('#err_referral_code').html('Reference Not matched');
+					    $("#err_referral_code").css("display", "block");
+					    $("#err_referral_code").show()
+					    $('#submit').attr('disabled',true);
+
+					}else{
+					    $('#err_referral_code').html('Reference Not matched');
+					    $("#err_referral_code").css("display", "block");
+					    $("#err_referral_code").show();
+					    $('#submit').attr('disabled',true);
+					}
+
+
+				},
+				error: function (error) {
+						console.log(error);
+
+					}
+				});
+			});
+
+	</script>
+<script>
+
+   $("#id_firstname").focusout(function(){
+   check_fname();
+   });
+   $("#id_birthday").focusout(function(){
+   check_birthday();
+   });
+   // $("#id_email").focusout(function(){
+   // check_email();
+   // });
+   $("#id_referral_code").focusout(function(){
+   check_referral_code();
+   });
+   $("#house").focusout(function(){
+   check_house();
+   });
+   $("#id_password").focusout(function() {
+   check_pass();
+   });
+   $("#id_confirmPassword").focusout(function() {
+   check_cnfpass();
+   });
+   $("#city").focusout(function() {
+   check_city();
+   });
+   $("#pincode").focusout(function() {
+   check_pincode();
+   });
+   $("#mobile").focusout(function() {
+   check_mobile();
+   });
+
+   function check_fname() {
+      var fname = $("#id_firstname").val()
+      if ( fname !== '') {
+      $("#e_fname").hide();
+      } else {
+         $("#e_fname").html("This field is required");
+         $("#e_fname").show();
+         error_fname = true;
+      }
+   }
+   function check_birthday() {
+      var birthday = $("#id_birthday").val().length;
+      if (birthday != '' ) {
+      $("#err_birthday").hide();
+      } else {
+         $("#err_birthday").html("This field is required");
+         $("#err_birthday").show();
+         error_birthday = true;
+      }
+   }
+   function check_house() {
+      var house = $("#house").val()
+      if (house !== '') {
+         $("#err_house").hide();
+      } else {
+         $("#err_house").html("This field is required");
+         $("#err_house").show();
+         error_house = true;
+      }
+   }
+   function check_city() {
+      var city = $("#city").val()
+      if (city !== '') {
+         $("#err_city").hide();
+      } else {
+         $("#err_city").html("This field is required");
+         $("#err_city").show();
+         error_city = true;
+      }
+   }
+   function check_mobile() {
+      var mobile = $("#mobile").val().length;
+      if (mobile < 11 && mobile > 9) {
+         $("#err_mobile").hide();
+      } else {
+         $("#err_mobile").html("Mobile number must contain 10 digit");
+         $("#err_mobile").show();
+         error_mobile = true;
+      }
+   }
+   function check_referral_code() {
+      var referral_code = $("#id_referral_code").val()
+      if (referral_code !== '') {
+      $("#err_referral_code").hide();
+      } else {
+         $("#err_referral_code").html("This field is required");
+         $("#err_referral_code").show();
+         error_referral_code = true;
+      }
+   }
+   function check_pincode() {
+      var pincode = $("#pincode").val()
+      if (pincode !== '') {
+      $("#err_pincode").hide();
+      } else {
+         $("#err_pincode").html("This field is required");
+         $("#err_pincode").show();
+         error_pincode = true;
+      }
+   }
+   // function check_email() {
+   //  var pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+   //  var email = $("#id_email").val();
+   //  if ( pattern.test(email) && email !== '') {
+   //    $("#errr_email").hide();
+   //    } else {
+   //    $("#errr_email").html("invalid Email");
+   //    $("#errr_email").show();
+   //    error_email = true;
+   //  }
+   // }
+    function check_pass() {
+      var pass_length = $("#id_password").val().length;
+      if(pass_length < 8) {
+         $("#e_pass").html("Atleast 8 Characters");
+         $("#e_pass").show();
+         error_pass = true;
+      } else {
+         $("#e_pass").hide();
+         }
+      }
+    function check_cnfpass() {
+      var pass = $("#id_password").val().length;
+      var cnfpass = $("#id_confirmPassword").val().length;
+      if(pass != cnfpass) {
+         $("#e_cnfpass").html("Password is not match");
+         $("#e_cnfpass").show();
+         error_pass = true;
+      } else {
+         $("#e_cnfpass").hide();
+         }
+      }
+</script>
+<script>
+$(document).ready(function() {
+    var referall_code = $('#id_referral_code').val();
+				$("#err_referral_code").hide()
+				let aa='';
+				$.ajax({
+				url: '/ajax/validate_ref/',
+				data: {
+					'referall_code': referall_code
+				},
+				dataType: 'json',
+				success: function(data){
+				    console.log(data.refer_by)
+					if (data.code === 200) {
+					    aa = data.refer_by
+				        $("#referral_code_id").hide();
+				        $("#referral_user").css("display", "block");
+				        $("#id_referral_user").append(aa);
+					}else if(data.code === 404){
+                        if (referall_code != ''){
+						$('#err_referral_code').html('Reference Not matched');
+					    $("#err_referral_code").css("display", "block");
+					    $("#err_referral_code").show()
+					    $('#submit').attr('disabled',true);
+					    }
+
+					}else{
+					    $('#err_referral_code').html('Reference Not matched');
+					    $("#err_referral_code").css("display", "block");
+					    $("#err_referral_code").show();
+					    $('#submit').attr('disabled',true);
+					}
+
+
+				},
+				error: function (error) {
+						console.log(error);
+
+					}
+				});
+				});
+	$("#mobile").focusout(function(){
+ 	var mobile = $('#mobile').val();
+ 	var email_check_box = $('#email_check_box').val();
+ 	if (mobile == '') {
+ 		email_state = false;
+ 		return;
+ 	}
+ 	else if ($('#email_check_box').is(":checked")){
+ 	email_value = mobile + '@mywebstay.com'
+ 	$('#id_email').val(email_value);
+ 	}
+ });
+            $(function () {
+                $("#email_check_box").click(function () {
+                    if ($(this).is(":checked")) {
+                        $(".div_email").hide();
+                        if ($('#email_check_box').is(":checked")){
+ 	                        var mobile = $('#mobile').val();
+                            var email_value = mobile + '@mywebstay.com';
+                            $('#id_email').val(email_value);
+                            }
+                    } else {
+                        $(".div_email").show();
+                    }
+                });
+            });
+
+</script>
+{% endblock extra_scripts %}

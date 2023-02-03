@@ -1,0 +1,296 @@
+
+/*=============================================
+=            04. Section title            =
+=============================================*/
+
+
+/*----------  default style  ----------*/
+
+
+
+.section-title{
+    margin-bottom: -5px;
+    h1{
+        font-size: 48px;
+        line-height: 64px;
+        margin-top: -13px;
+        margin-bottom: 15px;
+
+        @media #{$tablet-device}{
+            font-size: 40px;
+            line-height: 56px;
+        }
+
+        @media #{$large-mobile}{
+            font-size: 36px;
+            line-height: 52px;
+        }
+
+        @media #{$small-mobile}{
+            font-size: 32px;
+            line-height: 48px;
+        }
+
+        @media #{$extra-small-mobile}{
+            font-size: 25px;
+            line-height: 41px;
+        }
+
+        a{
+            color: #333; 
+            display: inline-block;
+
+            
+            &:hover{
+                opacity: 0.85;
+            }
+        }
+    }
+
+    p{
+        line-height: 26px;
+
+        &.subtitle{
+            &--deep{
+                font-size: 14px;
+                color: #333;
+                font-weight: 500;
+                margin-bottom: 35px;
+                line-height: 24px;
+                letter-spacing: 1px;
+                margin-top: -5px;
+            }
+
+            &--trending-home{
+                font-size: 18px;
+                line-height: 28px;
+                font-weight: 400;
+                margin-bottom: 0;
+
+                @media #{$large-mobile}{
+                    font-size: 16px;
+                    line-height: 26px;
+                }
+
+                @media #{$small-mobile}{
+                    font-size: 14px;
+                    line-height: 24px;
+                }
+            }
+        }
+    }
+
+    &--concepthome{
+            h1{
+                @media #{$desktop-device}{
+                    font-size: 40px;
+                }
+                @media #{$extra-small-mobile}{
+                    font-size: 40px;
+                }
+            }
+    }
+
+    &__label{
+        p{
+            font-size: 14px;
+            line-height: 24px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 0;
+
+            span{
+                &:before{
+                    display: inline-block;
+                    content: '';
+                    width: 50px;
+                    height: 1px;
+                    background-color: #cccccc;
+                    margin: 0 15px 5px 15px;
+                }
+            }
+        }
+
+        &--left{
+            position: absolute;
+            transform: rotate(90deg) translate(30%, 300%);
+            
+        }
+
+        &--right{
+            position: absolute;
+            transform: rotate(-90deg);
+            right: -15px;
+        }
+
+
+    }
+
+    &__label-style2{
+        p{
+            font-weight: 500;
+        }
+
+        &--left{
+            position: absolute;
+            top: 250px;
+            
+        }
+
+        &--right{
+            position: absolute;
+            top: 250px;
+        }
+    }
+
+    &__label-style3{
+        p{
+            font-weight: 500;
+        }
+
+        &--left{
+            position: static;
+            transform: none;
+        }
+
+        &--right{
+            position: static;
+            transform: none;
+        }
+    }
+
+    &--one{
+        &--collectionhome{
+            font-size: 18px;
+            line-height: 28px;
+            color: #333;
+        }
+
+        &--spectral{
+            h1{
+                font-family: $spectral-font;
+                font-weight: 500;
+            }
+        }
+       
+    }
+
+    &--login{
+        h2{
+            font-size: 34px;
+            line-height: 48px;
+            color: #333;
+        }
+
+        p{
+            font-size: 16px;
+            line-height: 28px;
+        }
+    }
+
+    .title-blue{
+        font-size: 50px;
+        line-height: 1.3;
+        font-family: $spectral-font;
+        font-style: normal;
+        color: #404969;
+        font-weight: 400;
+
+        @media #{$large-mobile}{
+            font-size: 40px;
+        }
+    }
+
+    &--full-border{
+        font-size: 17px;
+        color: #404969;
+        line-height: 20px;
+        text-align: center;
+        font-weight: 600;
+        font-style: normal;
+        letter-spacing: 2px;
+        position: relative;
+        span{
+            display: inline-block;
+            z-index: 9;
+            padding: 0 20px;
+            background-color: $white;
+        }
+        &:before{
+            content: '';
+            background-color: rgb(236, 234, 234);
+            height: 1px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+
+        }
+    }
+}
+
+
+
+/*----------  slider title  ----------*/
+
+.widget-slider-title{
+    font-size: 20px;
+    line-height: 22px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 35px;
+    position: relative;
+    padding-right: 60px;
+}
+
+
+/*----------  section label  ----------*/
+
+.section-label{
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 0;
+}
+
+
+/*----------  instagram title  ----------*/
+
+.instagram-title-container{
+    .title{
+        font-size: 17px;
+        color: rgba(51, 51, 51, 0.35);
+        line-height: 1.3;
+        font-weight: 600;
+        font-style: normal;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+    }
+
+    .subtitle{
+        font-size: 50px;
+        font-weight: 300;
+        line-height: 1.3;
+        color: #333;
+        font-style: italic;
+        font-family: $spectral-font;
+
+        @media #{$large-mobile}{
+            font-size: 40px;
+        }
+
+        &--blue{
+            font-style: normal;
+            color: #404969;
+            font-weight: 400;
+        }
+    }
+}
+
+/*=====  End of 04. Section title  ======*/
+

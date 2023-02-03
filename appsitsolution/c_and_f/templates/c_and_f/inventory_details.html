@@ -1,0 +1,228 @@
+{% load static %}
+{% if page == 'cnf'%}
+{% include "c_and_f/include/header.html" %}
+{%else%}
+{% include "mlm_admin/include/header.html" %}
+{%endif%}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Inventory Details</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Stock Details</label>
+                          <select class="form-control" id="stock_details" name="stock_details">
+<!--                            <option value=0>Select Products</option>-->
+                            <option value="balance">Balances Only</option>
+                            <option value="detail">Details</option>
+                        </select>
+                </div>
+                </div>
+                </div>
+                 <div class="row" id="weaklyArea">
+<!--                     <div class="col-sm-12" id="weaklyArea"></div>-->
+                 </div>
+                {% if page != 'cnf' %}
+                <div class="row">
+                <div class="col-sm-4">
+                <div class="form-group">
+                        <input type="radio" checked  name="m_center" value="all_mc" placeholder="">
+                    <label class="floating-label" for="parent_category">All Material Center</label>
+                </div>
+            </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="radio" name="m_center"  value="o_mc" placeholder="">
+                    <label class="floating-label" for="parent_category">One Material Center</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="radio"  name="m_center" value="s_mc" placeholder="">
+                        <label class="floating-label" for="parent_category">Selected Material Center</label>
+                        </div>
+                    </div>
+                    </div>
+                {%endif%}
+                 <div class="row" id="one_mc">
+                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="capti"><h4>Set Value Based ON</h4></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" id="select_all" name="select_all" value="select_all" placeholder="">
+                    <label class="floating-label" for="parent_category">Select All</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="purchase_price" value="purchase_price" placeholder="">
+                    <label class="floating-label" for="parent_category">Purchase Price</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="distributor_price_with_tax" value="distributor_price_with_tax" placeholder="">
+                    <label class="floating-label" for="parent_category">Distributor Price(Include Tax)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="distributor_price_without_tax" value="distributor_price_without_tax" placeholder="">
+                    <label class="floating-label" for="parent_category">Distributor Price(Exclude Tax)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="mrp" value="mrp" placeholder="">
+                    <label class="floating-label" for="parent_category">MRP</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="bussiness_volume" value="bussiness_volume" placeholder="">
+                    <label class="floating-label" for="parent_category">Business Volume(BV)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="point_value" value="point_value" placeholder="">
+                    <label class="floating-label" for="parent_category">Point Value(PV)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <input type="checkbox" class="checkbox" name="tax_percentage" value="tax_percentage" placeholder="">
+                    <label class="floating-label" for="parent_category">Tax(%)</label>
+                        </div>
+                    </div>
+            </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="capti"><h4>Batch-Wise Details</h4></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                <div class="form-group">
+                        <input type="radio" checked  name="batch" value="yes" placeholder="">
+                    <label class="floating-label" for="parent_category">YES</label>
+                </div>
+            </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                        <input type="radio" name="batch"  value="no" placeholder="">
+                    <label class="floating-label" for="parent_category">NO</label>
+                        </div>
+                    </div>
+            </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="capti"><h4>Show Zero Stock Items</h4></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                <div class="form-group">
+                        <input type="radio" checked  name="stock" value="yes" placeholder="">
+                    <label class="floating-label" for="parent_category">YES</label>
+                </div>
+            </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                        <input type="radio" name="stock"  value="no" placeholder="">
+                    <label class="floating-label" for="parent_category">NO</label>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Filter </button>
+                <button class="btn btn-danger" type="reset"> Clear </button>
+            </div>
+        </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<script>
+
+$("#stock_details").change(function () {
+  var numInputs = $(this).val();
+  if (numInputs == "balance") {
+  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Date of Entry</label><input type="date" class="form-control" name="blance_date" value={{today}}></div></div></div>')
+  }else if(numInputs == "detail"){
+  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Start Date</label><input type="date" class="form-control" name="detail_start_date" value={{today}}></div></div><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>End Date</label>"<input type="date" class="form-control" name="detail_end_date" value={{today}}></div></div></div>')
+  }
+});
+
+$(document).ready(function(){
+ var numInputs = $("#stock_details").val();
+  if (numInputs == "balance") {
+  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Date of Entry</label><input type="date" class="form-control" name="blance_date" value={{today}}></div></div></div>')
+  }else if(numInputs == "detail"){
+  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Start Date</label><input type="date" class="form-control" name="detail_start_date" value ={{today}}></div></div><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>End Date</label>"<input type="date" class="form-control" name="detail_end_date" value={{today}}></div></div></div>')
+  }
+
+});
+</script>
+<script>
+$('input[type=radio][name=m_center]').on('change', function() {
+  switch ($(this).val()) {
+    case 'o_mc':
+        $("#one_mc").replaceWith('<div class="row" id="one_mc"><div class="col-sm-6"><div class="form-group"><label class="floating-label" for="category"><small class="text-danger">* </small>Material Center</label><select class="form-control select2"  name="o_material_center">{% for i in material %}<option value={{i.pk}} {% if i.pk == cat_id %} selected {% endif %}>{{i.mc_name}}</option>{% endfor %}</select></div></div></div>')
+        $(".select2").select2({
+			placeholder: "",
+			allowClear: true
+		});
+                     break;
+    case 's_mc':
+      $("#one_mc").replaceWith('<div class="row" id="one_mc"> <div class="col-sm-6"> <div class="form-group"><label class="floating-label" for="state"><small class="text-danger">* </small>Material Center</label> <select class="form-control select2" id="state" multiple  name="s_material_center">{% for i in material %} <option value="{{i.pk}}">{{i.mc_name}}</option>{% endfor %}</select></div> </div></div>')
+      $(".select2").select2({
+			placeholder: "",
+			allowClear: true
+		});
+	  $("#id_pin_code").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var pincode = $("#id_pin_code").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+    if (( pincode >5 )){
+        event.preventDefault();
+    }
+});
+      break;
+    case 'all_mc':
+    $("#one_mc").replaceWith('<div class="row" id="one_mc"></div>')
+
+  }
+});
+</script>
+<script>
+    $("#select_all").change(function(){  //"select all" change
+   $(".checkbox").prop('checked', $(this).prop("checked"));
+});
+//".checkbox" change
+$('.checkbox').change(function(){
+	//uncheck "select all", if one of the listed checkbox item is unchecked
+    if(false == $(this).prop("checked")){ //if this item is unchecked
+        $("#select_all").prop('checked', false); //change "select all" checked status to false
+    }
+	//check "select all" if all checkbox items are checked
+	if ($('.checkbox:checked').length == $('.checkbox').length ){
+		$("#select_all").prop('checked', true);
+	}
+});
+</script>

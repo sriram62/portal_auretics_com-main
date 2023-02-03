@@ -1,0 +1,60 @@
+
+/*=============================================
+=            33. FAQ            =
+=============================================*/
+
+.faq-title{
+    font-size: 35px;
+    line-height: 38px;
+
+    @media #{$small-mobile}{
+        font-size: 25px;
+        line-height: 32px;
+    }
+}
+
+.single-faq{
+
+    .card{
+        border: none;
+    }
+
+    .card-header{
+        background-color: transparent;
+        border-bottom: none;
+        h5{
+            button{
+                font-size: 24px;
+                line-height: 30px;
+                color: #333;
+                padding-left: 0;
+                overflow-wrap: break-word;
+                white-space: normal;
+                text-align: left;                   
+
+                &:hover, &:focus{
+                    text-decoration: none;
+                }
+
+                @media #{$small-mobile}{
+                    font-size: 18px;
+                    line-height: 26px;
+                }
+
+            }
+        }
+    }
+
+    .card-body{
+        p{
+            font-size: 15px;
+            line-height: 24px;
+            color: #777;
+        }
+    }
+
+    
+}
+
+/*=====  End of 33. FAQ  ======*/
+

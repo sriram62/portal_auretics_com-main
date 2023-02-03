@@ -1,0 +1,126 @@
+
+/*=============================================
+=            32. Coming soon            =
+=============================================*/
+
+.coming-soon-content{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.coming-soon-subtitle{
+    font-size: 24px;
+    line-height: 36px;
+    color: #7e7e7e;
+
+    @media #{$extra-small-mobile}{
+        font-size: 18px;
+        line-height: 26px;
+    }
+}
+
+.coming-soon-title{
+    font-size: 72px;
+    line-height: 86px;
+    color: #333333;
+
+    @media #{$laptop-device}{
+        font-size: 62px;
+        line-height: 76px;
+    }
+
+    @media #{$desktop-device}{
+        font-size: 56px;
+        line-height: 66px;
+    }
+
+    @media #{$tablet-device}{
+        font-size: 58px;
+        line-height: 66px;
+    }
+
+    @media #{$large-mobile}{
+        font-size: 48px;
+        line-height: 56px;
+    }
+
+    @media #{$small-mobile}{
+        font-size: 42px;
+        line-height: 56px;
+    }
+
+    @media #{$extra-small-mobile}{
+        font-size: 32px;
+        line-height: 46px;
+    }
+}
+
+.coming-soon-subscribe-form{
+        position: relative;
+        width: 80%;
+
+        @media #{$small-mobile}{
+            width: 100%;
+        }
+
+        &:hover{
+            input{
+                border-bottom-color: #333;
+            }
+        }
+        
+        input{
+            background: none;
+            border: none;
+            border-bottom: 2px solid #cccccc;
+            padding: 10px 0;
+            width: 100%;
+            padding-right: 40px;
+            &:focus{
+                border-bottom-color: #333; 
+            }
+
+        }
+
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #777777;
+            opacity: 1; /* Firefox */
+        }
+        
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #777777;
+        }
+        
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            color: #777777;
+        }   
+
+        button{
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none; 
+            color: #333;
+            font-size: 14px;
+            padding: 0; 
+            &:hover{
+                color: #333;
+            }
+        }
+}
+
+
+.coming-soon-deal-countdown{
+    .single-countdown__time::after{
+        @media #{$extra-small-mobile}{
+            left: 100%;
+        }
+    }
+}
+/*=====  End of 33. Coming soon  ======*/
+

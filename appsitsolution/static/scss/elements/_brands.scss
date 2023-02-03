@@ -1,0 +1,60 @@
+
+/*=============================================
+=            19. Brands            =
+=============================================*/
+
+.single-brand{
+    text-align: center;
+
+    a{
+        img{
+            opacity: 0.85;
+        }
+
+        &:hover{
+            img{
+                opacity: 1;
+            }
+        }
+    }
+
+    &--light{
+        a{
+            img{
+                opacity: 0.3;
+            }
+        }
+    }
+}
+
+
+.brand-carousel-content{
+    &__title{
+        font-size: 17px;
+        color: rgba(51,51,51,0.35);
+        line-height: 1.3;
+        font-weight: 600;
+        font-style: normal;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+    }
+
+    &__text{
+        font-size: 32px;
+        line-height: 1.3;
+        font-weight: 200;
+        font-style: italic;
+        font-family: $spectral-font;
+        color: #333;
+        width: 730px;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+
+        @media #{$small-mobile}{
+            font-size: 25px;
+        }
+    }
+}
+/*=====  End of 19. Brands  ======*/
+

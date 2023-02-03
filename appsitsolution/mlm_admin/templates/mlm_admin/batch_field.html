@@ -1,0 +1,14 @@
+<select class="form-control batch_class batches select2 " id="batch{{cnt_multiple_product}}" name="batch" required>
+    <option value=0>Select Option</option>
+    {% for i in batch %}
+        {% if forloop.first %}
+            <option value={{i.pk}}>{{i.batch_name}}</option>
+        {% else %}
+            <option value={{i.pk}}>{{i.batch_name}}</option>
+        {% endif %}
+    {% endfor %}
+</select>
+
+{#<script type="text/javascript">#}
+{#document.getElementById("batch{{cnt_multiple_product}}").selectedIndex = 1;#}
+{#</script>#}

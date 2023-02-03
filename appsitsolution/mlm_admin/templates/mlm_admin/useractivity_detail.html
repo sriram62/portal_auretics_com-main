@@ -1,0 +1,87 @@
+
+  <style>
+    .arju_tab {
+    width: 100%;
+}
+</style>
+{% load static %}
+{% load shop_tag %}
+{% include "mlm_admin/include/header.html" %}
+<div class="pcoded-main-container">
+    {% for message in messages   %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+      <div class="text-center">
+      <strong>Messages: </strong> {{ message }}
+         </div>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    {% endfor %}
+    
+
+    <div class="modal-content">
+ 
+    {% csrf_token %}
+        <div class="modal-header">
+            <h5 class="modal-title">User Activity Logs</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+        </div>
+     
+        <br>
+        
+        <div class="modal-body">
+             <h3 class="text-center">User Activity Logs</h3>
+            <br>
+            <h4 class="text-center">
+                
+            User IP: <strong>{{useractivity.login_IP}}</strong></h4>
+             
+             <div class="row"> 
+          
+            
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="category_name"> ID</label>
+                       <input type="text" value=" {{useractivity.id}}" class="form-control" id="category_name" name="category_name" readonly placeholder="">
+                       
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="is_parent_category">Username</label>
+                    <input type="text" value=" {{useractivity.login_username}}" class="form-control" id="category_name" name="category_name" readonly placeholder="">
+
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="category_name"> Date Time</label>
+                       <input type="text" value=" {{useractivity.login_datetime}}" class="form-control" id="category_name" name="category_name" readonly placeholder="">
+                       
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="is_parent_category"> Status</label>
+<input type="text" value="{%if useractivity.status == 'S'%}Success{%else%}Failed{%endif%}   " class="form-control"  name="agent fetail" readonly />                 
+ 
+                </div>
+            </div>
+
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="is_parent_category"> User Agent Details</label>
+<textarea type="text" class="form-control"  name="agent fetail" readonly >   {{useractivity.user_agent_info}} </textarea>                  
+ 
+                </div>
+            </div>
+            </div>
+
+        </div>
+
+    </div>       

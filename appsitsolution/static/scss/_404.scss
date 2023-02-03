@@ -1,0 +1,60 @@
+
+/*=============================================
+=            31. 404 page            =
+=============================================*/
+
+.nothing-found-content{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1{
+        font-size: 72px;
+        line-height: 100px;
+        color: #333;
+
+        @media #{$desktop-device}{
+            font-size: 50px;
+            line-height: 80px;
+        }
+
+        @media #{$large-mobile}{
+            font-size: 50px;
+            line-height: 80px;
+        }
+
+        @media #{$extra-small-mobile}{
+            font-size: 35px;
+            line-height: 60px;
+        }
+    }
+
+    p{
+        font-size: 14px;
+        line-height: 24px;
+        color: #696969;
+        font-weight: 600;
+        letter-spacing: 4px;
+
+        @media #{$extra-small-mobile}{
+            text-align: center;
+        }
+
+        a{
+            letter-spacing: 1px;
+            font-weight: 500;
+            color: #333;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+
+            &:hover{
+                color: #d3122a;
+            }
+        }
+    }
+}
+
+/*=====  End of 31. 404 page  ======*/
+

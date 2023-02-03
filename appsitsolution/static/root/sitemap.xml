@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://portal.auretics.com/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/static/html/profile.html</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/products/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/static/html/contact.html</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/accounts/register/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/accounts/password-reset/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/search/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/category/6/Fitness</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/category/10/Immunity</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/category/17/Kitchenware</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/disclaimer</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/refund-policy</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/sale-marketing-policy</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/shipping_payment_policy</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/privacy_policy</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/7/relax-antacid-powder/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/10/throat-lozenges/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/43/white-petroleum-jelly-ecopack-perfumed-25-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/9/laxative-tablets/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/41/lip-guardbalm-blister-pack/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/15/pain-relieving-balm/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/33/moisturizing-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/36/perfumed-petroleum-jelly-50-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/185/inhaler/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/34/moisturizing-body-lotion/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/11/gripe-water/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/172/prickly-heat-powder-lavender/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/120/neem-soap/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/21/glucose-d-200-gm/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/18/pain-relieving-roll-on/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/170/vitalyte-liquid-electrolyte-concentrate/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/183/rose-soap/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/17/vaporizing-rub/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/4/no-buzz-oil-mosquito-repellent-fabric-roll-on/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/46/white-petroleum-jelly-_non-perfumed_-100ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/40/suman-natural-perfumed-petroleum-jelly-100-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/14/dextrose-vitaminc-zinc-powder/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/30/pain-care-gel/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/81/glycerin-with-rose-oil/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/1/laxative-powder-churna/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/149/herbal-eye-drop/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/93/herbal-face-wash/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/155/dizee-oil/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/189/aureticspen/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/171/pink-care-hand-sanitizer/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/122/nuraclear-acne-pimple-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/95/aqua-fresh-energy-face-wash/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/102/aloevera-and-vitamin-e-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/94/skin-rejuvenating-face-wash/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/82/glow-face-pack/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/115/nurantacid-syrup/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/24/pain-care-oil-50ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/92/anti-acne-face-wash/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/104/moisturizing-cream-blue/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/150/swiss-itch-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/89/grape-seed-face-scrub/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/133/brenofast-syrup/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/132/aantacid-tablets/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/96/foot-care-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/3/immuno-syrup/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/90/honey-papaya-face-scrub/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/116/tulsi-drops/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/2/keshambar-hair-oil/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/148/glam-mantra-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/125/kabzral-tablets/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/62/anti-dandruff-scalp-care-shampoo-200-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/91/charcoal-face-scrub/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/80/sun-screen-lotion-spf30-plus/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/113/immural-syrup/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/167/teaammrit-detox-drink-with-immunity-boosting-agents/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/29/glucogainc-lemon-500-gm/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/77/refreshing-body-lotion/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/151/ultra-shine-facewash-aloe-vera-neem/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/144/immunem-syrup/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/154/eve-wash/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/126/neem-tablet/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/174/foaming-face-wash/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/107/ashwagandha-capsule/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/101/skin-lightening-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/131/fastheal-capsules/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/145/swisspure-hand-wash-with-pump/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/79/skin-cleansing-lotion-500-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/52/premium-onion-hair-oil/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/54/premium-hair-oil/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/130/full-force-capsules/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/51/hair-serum-100-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/118/neem-karela-jamun-ras/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/12/glucose-candy-250-pcs-jar/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/119/aloevera-ras/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/135/vitatotal-syrup-450-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/175/melochem3-tablets/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/108/diaboral-capsules/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/137/swissoaj-juice/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/136/swissplat-juice/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/166/turbo-chopper-2-in-1-big/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/124/amalaki-ras/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/123/giloy-guduchi-ras/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/111/nurafit-capsules/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/66/pro-sense-conditioner-500-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/69/moisturizing-body-lotion-with-grape-seed-oil-and-wheat-germ-oil-500-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/57/silky-shine-conditioning-shampoo-500-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/169/vitalyte-immunity-booster-cookies/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/128/spirulina-tablet/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/19/pain-care-triple-action-pack/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/138/noni-with-garcinia-juice/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/129/wheat-grass-tablet/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/49/moroccan-argan-premium-hair-serum-100-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/83/ocean-cool-shower-gel/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/85/lavender-shower-gel/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/84/tangerine-orange-shower-gel/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/97/hair-cream-caffeine-keratin-argan-oil/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/98/hair-cream-vitamins-proteins/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/165/handy-chopper-2-in-1-jumbo/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/63/premium-onion-shampoo/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/105/anti-ageing-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/106/night-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/100/hair-cream-organic-onion/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/99/hair-cream-anti-dandruff-lemon/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/164/space-saver-spice-rack-6-in-1/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/117/noni-aloevera-ras/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/110/immural-capsule/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/86/vitaminc-facial-serum/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/88/pure-retinol-vitamina-facial-serum/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/87/pure-hyaluronic-facial-serum/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/103/marvel-pearl-skin-lightening-cream/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/163/spice-rack-12-piece-revolving/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/6/digestive-candy-green-mango-tamarind-750-pcs-jar/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/13/glucose-candy-750-pcs-jar/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/143/immunem-chyavanaprash/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/156/belly-trim-slimming-capsule/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/161/food-processor-11-in-1/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/177/lbp-care-low-blood-pressure-management/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/176/hbp-care-high-blood-pressure-management/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/178/madhurodhi-diabates-management/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/158/master-chopper-16-in-1/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/192/auretics-tshirt-white/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/188/auretics-tshirt-black/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/159/salad-king-chopper-20-in-1-chopper/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/181/1000-bv-kit/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/180/4000-bv-kit/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/168/trolley-cabin-bag/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/55/silky-shine-conditioning-shampoo-100-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/64/pro-sense-conditioner-100-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/58/spa-concept-nourishing-shampoo-100-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/61/anti-dandruff-scalp-care-shampoo-100-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/50/hair-serum-50-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/65/pro-sense-conditioner-200-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/56/silky-shine-conditioning-shampoo-200-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/59/spa-concept-nourishing-shampoo-200-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/48/moroccan-argan-premium-hair-serum-50-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/60/spa-concept-nourishing-shampoo-500-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/78/skin-cleansing-lotion-245-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/152/ultra-shine-facewash-haldi-chandan/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/35/perfumed-petroleum-jelly-25-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/39/suman-natural-perfumed-petroleum-jelly-50-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/44/white-petroleum-jelly-ecopack-perfumed-50-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/22/prickly-heat-powder-lime/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/184/prickly-heat-powder-sandal/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/67/moisturizing-body-lotion-with-grape-seed-oil-and-wheat-germ-oil-100-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/45/white-petroleum-jelly-ecopack-perfumed-100-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/47/white-petroleum-jelly-non-perfumed-200ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/71/moisturizing-body-lotion-with-green-apple-200-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/68/moisturizing-body-lotion-with-grape-seed-oil-and-wheat-germ-oil-200-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/75/daily-moisturizing-body-lotion-with-olive-oil-245-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/73/daily-moisturizing-body-lotion-with-argan-oil-245-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/20/glucose-d-100-gm/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/25/glucogainc-orange-100-gm/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/27/glucogainc-lemon-100-gm/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/26/glucogainc-orange-200-gm/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/28/glucogainc-lemon-200-gm/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/173/glucogain-chewable-energy-tablets-strawberry/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/31/glucogain-chewable-energy-tablets-orange/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/5/digestive-candy-green-mango-tamarind-250-pcs-jar/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/23/pain-care-oil-25ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://portal.auretics.com/product/134/vitatotal-syrup-200-ml/</loc>
+  <lastmod>2021-09-24T11:41:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+</urlset>

@@ -1,0 +1,224 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+        .task-data i {
+            color: #ffffff !important;
+            font-family: 'fontawesome';
+        }
+
+        .subhtask_tab .dataTables_filter {
+            float: right;
+            margin-bottom: 20px;
+        }
+
+        .subhtask_tab .dataTables_length {
+            white-space: nowrap;
+            line-height: 70px;
+        }
+
+    </style>
+</head>
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+
+
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">List of Verifired Users</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <!-- <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li> -->
+                            <li class="breadcrumb-item"><a href="#!">MLM Admin</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Users Kyc Status</a></li>
+                            <li class="breadcrumb-item"><a href="#!">All verified users</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ task-list ] start -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        {% for message in messages   %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            <div class="text-center">
+                                <strong>Messages: </strong> {{ message }}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        <h5>List All Verified Users</h5>
+                        <!--                        ---------------------------------------Search dynamic------------------------------------------>
+                        <div class="col-md-6 pull-right">
+                            <form>
+                                <div class="input-group">
+                                    <input type="text" name="q" class="form-control form-control-lg"
+                                        placeholder="Search" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-dark btn-lg" type="submit"
+                                            id="button-adding2">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--                        ---------------------------------------Search dynamic------------------------------------------>
+
+                    </div>
+                    <div class="card-body task-data hide_table_row">
+                        <div class="table-responsive form-material subhtask_tab">
+                            <table id="simpletable"
+                                class="table dt-responsive task-list-table table-striped table-bordered nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Username</th>
+
+
+
+                                        <th class="text-center">Verified</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="task-page">
+                                    {% for i in verified_users %}
+                                    <tr>
+                                        <th> {{ i.id }}</a></th>
+                                        <td>
+                                            {{ i.kyc_user.username }}
+                                        </td>
+
+
+
+                                        <!--                                        <td>-->
+                                        <!--                                            <div class="form-group form-primary mb-0">-->
+                                        <!--                                                <input type="date" class="form-control" disabled value="{{i.startdate|date:'c'}}" />-->
+                                        <!--                                                <span class="form-bar"></span>-->
+                                        <!--                                            </div>-->
+                                        <!--                                        </td>-->
+                                        <td>
+
+                                            {{i.kyc_verification_type}}
+                                        </td>
+                                        <!--                                        <td>-->
+                                        <!--                                            <a href="#!"><img class="img-fluid img-radius mr-1" src='{% static "tms/images/user/avatar-1.jpg" %}' alt=""></a>-->
+                                        <!--                                            <a href="#!"><img class="img-fluid img-radius" src='{% static "tms/images/user/avatar-2.jpg" %}' alt=""></a>-->
+                                        <!--                                            <a href="#!"><i class="fas fa-plus f-w-600 m-l-5"></i></a>-->
+                                        <!--                                        </td>-->
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--  ---------------------------------------Pagination dynamic------------------------------------------>
+                        <nav class="my-3 container">
+                            <ul class="pagination">
+                                {% if verified_users.has_previous %}
+                                <li class="page-item"><a class="page-link"
+                                        href="?q={{q}}&page={{verified_users.previous_page_number}}">Previous</a>
+                                </li>
+                                {% endif %}
+                                {% for i in verified_users.paginator.page_range %}
+                                {% if verified_users.number == i %}
+                                <li class="page-item active"><a class="page-link" href="?q={{q}}&page={{i}}">{{i}}</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item"><a class="page-link" href="?q={{q}}&page={{i}}">{{i}}</a> </li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if verified_users.has_next %}
+                                <li class="page-item"><a class="page-link"
+                                        href="?q={{q}}&page={{verified_users.next_page_number}}">Next</a> </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                        <!--  ---------------------------------------Pagination dynamic------------------------------------------>
+                    </div>
+                </div>
+                <!-- [ task-list ] end -->
+            </div>
+            <!-- [ Main Content ] end -->
+</section>
+<!-- [ Main Content ] end -->
+<!-- Warning Section start -->
+<!-- Older IE warning message -->
+<!--[if lt IE 11]>
+            <div class="ie-warning">
+                <h1>Warning!!</h1>
+                <p>You are using an outdated version of Internet Explorer, please upgrade
+                   <br/>to any of the following web browsers to access this website.
+                </p>
+                <div class="iew-container">
+                    <ul class="iew-download">
+                        <li>
+                            <a href="http://www.google.com/chrome/">
+                                <img src='{% static "tms/images/browser/chrome.png" %}' alt="Chrome">
+                                <div>Chrome</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mozilla.org/en-US/firefox/new/">
+                                <img src='{% static "tms/images/browser/firefox.png" %}' alt="Firefox">
+                                <div>Firefox</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.opera.com">
+                                <img src='{% static "tms/images/browser/opera.png" %}' alt="Opera">
+                                <div>Opera</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.apple.com/safari/">
+                                <img src='{% static "tms/images/browser/safari.png" %}' alt="Safari">
+                                <div>Safari</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                                <img src='{% static "tms/images/browser/ie.png" %}' alt="">
+                                <div>IE (11 & above)</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <p>Sorry for the inconvenience!</p>
+            </div>
+        <![endif]-->
+<!-- Warning Section Ends -->
+
+{% include "mlm_admin/include/footer.html" %}
+<script src='{% static "tms/js/plugins/jquery.dataTables.min.js" %}'></script>
+<script src='{% static "tms/js/plugins/dataTables.bootstrap4.min.js" %}'></script>
+<script type="text/javascript">
+    setTimeout(function () {
+        $('#simpletable').DataTable();
+    }, 600);
+</script>
+<script type="text/javascript">
+
+    function myFunctiondata() {
+
+        if (!confirm("Are you sure you want to delete this record")) {
+            return false;
+        }
+    }
+</script>
+<script>
+    // DataTable start
+    $('#report-table').DataTable();
+        // DataTable end
+</script>

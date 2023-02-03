@@ -1,0 +1,87 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data" id="my-form">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Re-Building Cron</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+
+            {% if messages %}
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for message in messages %}
+                    <div class="alert alert-blue alert-dismissible fade show text-center" role="alert">
+                        {% if message.tags == "error" %}
+                            <p style="color: red"> {{ message|safe }} </p>
+                        {% elif message.tags == "success" %}
+                            <p style="color: green"> {{ message|safe }} </p>
+                        {% else %}
+                            <p> {{ message|safe }} </p>
+                        {% endif %}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+             <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="floating-label" for="category_name" style="color: red;">Latest Rebuilding was done on: {{latest_built|date:'c'}}</label><br />
+                        </div>
+                    </div>
+                </div>
+               <!-- <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="category_name"><small class="text-danger">* </small>Re-Building Start Date</label>
+                            <input type="date" class="form-control" id="rebuildingStartdate" name="rebuildingStartdate" value="{{today|date:'c'}}"  placeholder="" max="{{today|date:'c'}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="category_name"><small class="text-danger">* </small>Re-Building End Date</label>
+                            <input type="date" class="form-control" id="rebuildingEnddate" name="rebuildingEnddate" value="{{today|date:'c'}}"  placeholder="" max="{{today|date:'c'}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="form-check-label" for="gridCheck1"><small class="text-danger"> </small>Fast Rebuilding</label>
+                            <input class="" type="checkbox" id="fast" name="fast" value="fast">
+                            <p><sub>Note: Fast Inventory Calculation works for today() only.</sub></p>
+                        </div>
+                    </div>
+                </div>-->
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Re-Building </button>
+            </div>
+        </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        alert('helllo');-->
+<!--        $("#exp_date").focusout(function(){-->
+<!--        alert('hello12');-->
+<!--        });-->
+
+<!--    });-->
+<!--</script>-->

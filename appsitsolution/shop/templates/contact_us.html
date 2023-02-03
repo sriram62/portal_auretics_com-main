@@ -1,0 +1,111 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="wrapper">
+    <!-- breadcrumb area -->
+    <div class="breadcrumb-area" style="background-image:url( '/static/img/banner/banner-2.jpg' ); ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="breadcrumb-title">Contact Us</h1>
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-list__item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-list__item breadcrumb-list__item--active">About Us</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+    <div class="inner-wrapper">
+		<div class="icon-box-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5">
+						<div class="mb-45">
+							<div class="single-icon-box">
+								<div class="icon-box-icon">
+									<i class="ion-location"></i>
+								</div>
+								<div class="icon-box-content">
+									<h3 class="title">ADDRESS</h3>
+									<p class="content">Dummy</p>
+								</div>
+							</div>
+						</div>
+						<div class="mb-45">
+							<div class="single-icon-box mb-10">
+								<div class="icon-box-icon">
+									<i class="ion-ios-telephone"></i>
+								</div>
+								<div class="icon-box-content">
+									<h3 class="title">CONTACT</h3>
+									<p class="content">
+										<span>Mobile: (+91) – 9876543210</span>
+										<span>Mobile: (+91) – 9876543210</span>
+									</p>
+								</div>
+							</div>
+
+							<div class="single-icon-box">
+								<div class="icon-box-icon">
+									<i class="ion-ios-email"></i>
+								</div>
+								<div class="icon-box-content">
+									<p class="content">Mail: info@abc.com</p>
+								</div>
+							</div>
+						</div>
+						<div class="mb-45">
+							<div class="single-icon-box">
+								<div class="icon-box-icon">
+									<i class="ion-ios-clock"></i>
+								</div>
+								<div class="icon-box-content">
+									<h3 class="title">HOUR OF OPERATION</h3>
+									<p class="content">Monday – Friday : 09:00 – 20:00<span>Sunday & Saturday: 10:30 – 22:00</span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-6 offset-md-1">
+						<div class="section-title text-center mb-45">
+							<h1>Get in touch</h1>
+						</div>
+						<div class="contact-form-area">
+							<div class="submit-form contact-form">
+								<form action="" method="post">
+									<div class="row">
+										<div class="col-md-6 mb-40">
+											<input type="text" placeholder="First Name *" required />
+										</div>
+										<div class="col-md-6 mb-40">
+											<input type="email" placeholder="Email *" required />
+										</div>
+										<div class="col-md-12 mb-40">
+											<input type="text" placeholder="Subject" />
+										</div>
+										<div class="col-md-12 mb-40">
+											<textarea rows="4" placeholder="Message"></textarea>
+										</div>
+										<div class="col-md-12 text-center">
+											<button type="submit" class="lezada-button">submit</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block js%}
+{% endblock %}

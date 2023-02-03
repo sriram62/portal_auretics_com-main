@@ -1,0 +1,144 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+<body>
+    <div class="wrapper">
+        <div class="inner-wrapper profile shubhinner_marg">
+            <div class="container">
+                <div class="row profilebord_top">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                        <div class="section-title section-title--one mb-50 mb-sm-30">
+                            <h2>Edit Address </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="shubhprop_bord pt-10">
+                        <div class="profile-detail">
+                            <div class="profile-img">
+                                <img src="{{ request.user.profile.avatar.url }}" alt="Profile Picture">
+                            </div>
+                            <div class="profile-content mt-20">
+                                <p><b>Name: {{ request.user|capfirst  }} {{ request.lastname|capfirst  }}</b></p>
+                                <!--<p>Email: {{ request.user.profile.email }}</p>-->
+                                <ul class="shubhord">
+                                    <li><a href="{% url 'order_summary' %}">Order <i class="fa fa-shopping-bag"></i></a>
+
+                                    </li>
+                                    <!--<li>Wishlist</li>-->
+                                    <li><a href="{% url 'show_cart' %}">Go to Cart <i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <form method="POST">{% csrf_token %}
+                            <div class="row submit-form">
+                                {{ form.non_field_errors }}
+
+                                {{ form.source.errors }}
+                                {{ form.source }}
+
+
+
+                                <div class="form-group col-6">
+                                    {{ address_form.street_address.label_tag }}
+                                    {{ address_form.street_address.errors }}
+                                    {{ address_form.street_address }}
+                                </div>
+                                <div class="form-group col-6">
+                                    {{ address_form.apartment_address.label_tag }}
+                                    {{ address_form.apartment_address.errors }}
+                                    {{ address_form.apartment_address }}
+                                </div>
+
+                                 <div class="form-group col-6">
+                                    <!--{{ form }}-->
+                                    <!--{{ address_form }}-->
+                                   <label for="id_house_no">HOUSE NUMBER:</label>
+
+                                    {{ address_form.house_number.errors }}
+                                    {{ address_form.house_number }}
+
+                                </div>
+                                <div class="form-group col-6">
+                                   <label for="id_address">ADDRESS LINE:</label>
+
+                                    {{ address_form.address_line.errors }}
+                                    {{ address_form.address_line }}
+                                </div>
+
+                                <div class="form-group col-6">
+                                   <label for="id_street">STREET:</label>
+
+                                    {{ address_form.street.errors }}
+                                    {{ address_form.street }}
+
+                                </div>
+
+                                <div class="form-group col-6">
+                                   <label for="id_landmark">LANDMARK:</label>
+
+                                    {{ address_form.Landmark.errors }}
+                                    {{ address_form.Landmark }}
+
+                                </div>
+                                <div class="form-group col-6">
+                                   <label for="id_city">CITY:</label>
+
+                                    {{ address_form.city.errors }}
+                                    {{ address_form.city }}
+
+                                </div>
+
+                                <div class="form-group col-6">
+                                   <label for="id_country">COUNTRY:</label>
+                                   {{ address_form.country }}
+
+
+                                </div>
+
+                                <div class="form-group col-6">
+                                   <label for="id_pincode">PINCODE:</label>
+                                    {{ address_form.pin.errors }}
+                                    {{ address_form.pin }}
+                                </div>
+                                <div class="form-group col-6">
+                                   <label for="id_mobile">MOBILE:</label>
+                                    {{ address_form.mobile.errors }}
+                                    {{ address_form.mobile }}
+                                </div>
+                                <div class="form-group col-6">
+                                   <label for="id_alternate_mobile">ALTERNATE MOBILE:</label>
+                                     {{ address_form.alternate_mobile.errors }}
+                                    {{ address_form.alternate_mobile }}
+                                </div>
+                                <div class="form-group col-6">
+                                   <label for="id_mobile">ADDRESS TYPE:</label>
+                                   <select name="address_type" id="id_address_type">
+                                        <option value="B" selected="">Billing</option>
+
+                                        <option value="S">Shipping</option>
+
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    {{ address_form.default.label_tag }}
+                                    {{ address_form.default.errors }}
+                                    {{ address_form.default }}
+                                </div>
+
+                                <div class="form-group col-12 mt-40">
+                                    <button class="lezada-button lezada-button--medium">Save Profile</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   {% endblock %}

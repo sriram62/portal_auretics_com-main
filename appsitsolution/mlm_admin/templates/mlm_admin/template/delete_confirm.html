@@ -1,0 +1,14 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+
+<div class="pcoded-main-container" style="padding-left:20px;">
+        <div class="modal-content">
+        <form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <input type="submit" value="Confirm">
+    <input type="submit" value="Cancel" name="cancel">
+</form>
+        </div>
+</div>
+
+{% include "mlm_admin/include/footer.html" %}

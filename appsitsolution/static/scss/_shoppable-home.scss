@@ -1,0 +1,223 @@
+
+/*=============================================
+=            15. Shoppable home style            =
+=============================================*/
+
+
+/*----------  shoppable category   ----------*/
+
+.single-shoppable{
+    position: relative;
+
+    img{
+        width: 100%;
+    }
+
+ 
+
+    /*----------  shoppable content  ----------*/
+    
+    .shoppable-content{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%);
+        max-width: 800px;
+
+        @media #{$large-mobile}{
+            position: static;
+            transform: none;
+            max-width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            margin-top: -10px;
+        }
+
+        p{
+            font-size: 16px;
+            color: #333333;
+            line-height: 36px;
+            text-align: center;
+            font-family: Work Sans;
+            font-weight: 600;
+            font-style: normal;
+            margin-bottom: 0;
+
+            @media #{$desktop-device}{
+                font-size: 14px;
+                line-height: 32px;
+            }
+
+            @media #{$tablet-device}{
+                font-size: 14px;
+                line-height: 28px;
+            }
+        }
+
+        h2{
+            font-size: 72px;
+            color: #333333;
+            line-height: 100px;
+            text-align: center;
+            font-family: Work Sans;
+            font-weight: 600;
+            font-style: normal;
+            max-width: 500px;
+            margin-bottom: 0;
+
+            @media #{$desktop-device}{
+                font-size: 60px;
+                line-height: 90px;
+            }
+
+            @media #{$tablet-device}{
+                font-size: 30px;
+                line-height: 60px;
+            }
+
+            @media #{$large-mobile}{
+                max-width: 100%;
+                font-size: 30px;
+                line-height: 45px; 
+            }
+        }
+
+        a{
+            border-radius: 100%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            color: #333333;
+            background-color: transparent;
+            border: 1px solid #C7C2B8;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 30px;
+
+            &:hover{
+                background-color: #333;
+                border-color: #333;
+                color: #fff;            }
+        }
+
+        &--playicon{
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            max-width: 800px;
+            a{
+                width: auto;
+                height: auto;
+                border: none;
+                transition: 0.6s;
+                margin-top: 0;
+
+                @media #{$extra-small-mobile}{
+                    width: 50px;
+                    height: 50px;
+                }
+
+                &:hover{
+                    background: none;
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+
+    
+    /*----------  cloth tag  ----------*/
+    
+    .cloth-tag{
+        position: absolute;
+        top: 0;
+        max-width: 400px;
+        width: 100%;
+
+        &__icon{
+            background-color: #ffffff;
+            color: #333333;
+            font-size: 15px;
+            font-weight: 700;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            display: inline-block;
+            border-radius: 100%;
+            text-align: center;
+            cursor: pointer;
+            margin-left: -12.5px;
+
+            &:hover{
+                background-color: #d3122a;
+                color: #ffffff;
+            }
+
+            &.active{
+                background-color: #d3122a;
+                color: #ffffff;
+            }
+        }
+
+        &__content{
+
+            &.active{
+                animation: fadeIn 0.3s forwards;
+            }
+
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 14px rgba(0,0,0,.2);
+            position: absolute;
+            min-width: 300px;
+            max-width: 500px;
+            transform: translateX(-50%);
+            z-index: 5;
+
+
+            &__image{
+                flex-basis: 100px;
+            }
+
+            &__content{
+                flex-basis: calc(100% - 100px);
+                padding-left: 30px;
+
+                h1{
+                    font-size: 18px;
+                    line-height: 22px;
+                    font-weight: 500;
+                }
+
+                p{
+                    &.price{
+                        font-size: 16px;
+                        line-height: 28px;
+                        font-weight: 700;
+                        color: #333333;
+        
+                        .discounted{
+                            color: #9b9b9b;
+                            font-size: 12px;
+                            line-height: 28px;
+                            font-weight: 300;
+                            text-decoration: line-through;
+                            padding-right: 10px;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+
+/*=====  End of 15. Shoppable home style  ======*/
+

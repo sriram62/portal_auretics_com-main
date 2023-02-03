@@ -1,0 +1,7 @@
+
+<select class="form-control batches select2" id="batch{{cnt_multiple_product}}" name="batch">
+                            <option value=0>Select Option</option>
+                            {% for i in batches %}
+                            <option value='{{i.pk}}'>{{i.batch_name}}</option>
+                            {% endfor %}
+    </select>

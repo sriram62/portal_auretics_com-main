@@ -1,0 +1,139 @@
+
+/*----------  header box topbar  ----------*/
+
+.header-box-topbar {
+  &:before {
+    position: absolute;
+    top: -3px;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    content: "";
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  @media #{$tablet-device} {
+    &::before {
+      display: none;
+    }
+  }
+
+  @media #{$large-mobile} {
+    &::before {
+      display: none;
+    }
+  }
+
+  &.is-sticky {
+    &::before {
+      display: none;
+    }
+
+    .header-bottom {
+      padding-top: 0 !important;
+      @media #{$tablet-device,
+      $large-mobile} {
+        padding-top: 40px !important;
+      }
+    }
+  }
+
+
+  &.is-sticky {
+    .header-bottom-container {
+      .language-currency-change-container {
+        display: none;
+      }
+
+      .logo-with-offcanvas {
+        flex-basis: 20%;
+        order: 1;
+
+        text-align: left;
+        @media #{$tablet-device,
+        $large-mobile} {
+          flex-basis: 40%;
+        }
+      }
+
+      .header-bottom-navigation {
+        flex-basis: 60%;
+        order: 2;
+
+        margin-top: 0;
+      }
+
+      .header-right-container {
+        flex-basis: 20%;
+        order: 3;
+        @media #{$tablet-device,
+        $large-mobile} {
+          flex-basis: 60%;
+        }
+      }
+    }
+  }
+
+  .header-bottom-container {
+    display: flex;
+    flex-wrap: wrap;
+    .language-currency-change-container {
+      display: flex;
+      flex-basis: 30%;
+
+      @media #{$tablet-device} {
+        display: none;
+      }
+
+      @media #{$large-mobile} {
+        display: none;
+      }
+
+      .header-separator {
+        margin: 0 20px;
+      }
+    }
+
+    .logo-with-offcanvas {
+      flex-basis: 40%;
+
+      text-align: center;
+
+      @media #{$tablet-device} {
+        text-align: left;
+      }
+
+      @media #{$large-mobile} {
+        text-align: left;
+      }
+    }
+
+    .header-right-container {
+      flex-basis: 30%;
+      @media #{$tablet-device} {
+        flex-basis: 60%;
+      }
+
+      @media #{$large-mobile} {
+        flex-basis: 60%;
+      }
+    }
+
+    .header-bottom-navigation {
+      flex-basis: 100%;
+
+      margin-top: 40px;
+
+      @media #{$tablet-device} {
+        display: none;
+      }
+
+      @media #{$large-mobile} {
+        display: none;
+      }
+    }
+  }
+}

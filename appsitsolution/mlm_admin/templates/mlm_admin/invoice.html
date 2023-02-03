@@ -1,0 +1,296 @@
+{% load shop_tag %}
+{% load static %}
+<!DOCTYPE html>
+                        <html>
+                            <head>
+                                <meta charset='utf-8'>
+                                <meta name='viewport' content='width=device-width, initial-scale=1'>
+                                <title>Invoice</title>
+                                <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+                                <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+<style>
+.card-header .pull-center {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.mt-100 {
+    margin-top: 50px
+}
+
+.mb-100 {
+    margin-bottom: 50px
+}
+
+.card {
+    border-radius: 1px !important
+}
+
+.card-header {
+    background-color: #fff
+}
+
+.card-header:first-child {
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0
+}
+
+.btn-sm,
+.btn-group-sm>.btn {
+    padding: .25rem .5rem;
+    font-size: .765625rem;
+    line-height: 1.5;
+    border-radius: .2rem
+}
+.cent_head p {
+    width: 400px;
+    margin: 0 auto;
+}
+.cent_head {
+    text-align: center;
+}
+/*.first_table tbody {
+    border: 1px solid #dee2e6 !important;
+}*/
+.first_table td{
+    width:50%;
+    border-top:0 !important;
+    border-right: 1px solid #dee2e6;
+}
+.first_table .table thead th {
+    border-bottom: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+}
+.first_table .table {
+    border: 1px solid #dee2e6 !important;
+}
+.first_table .table thead th p {
+    font-weight: 400;
+}
+.table thead th {
+    vertical-align: top;
+ }
+ @media screen and (min-width:0) and (max-width:767px){
+    .cent_head p {
+    width: 100%;
+}
+ }
+</style>
+
+<script type='text/javascript'></script>
+</head>
+<body oncontextmenu='return false' class='snippet-body'>
+<div class="container-fluid mt-100 mb-100">
+    <form method="post">
+        {% csrf_token %}
+    <div id="ui-view">
+        <div>
+            <div class="card container">
+                <div class="card-header"> GSTIN<strong>: {{sale.material_center.gst_number}}</strong>
+                    <div class="pull-center"> <img src="{% static 'img/new_logo.png' %}" class="img-fluid" alt="" style="width:100px;" /></div>
+                    <div class="pull-right"><span>Orignal Copy</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                
+                        <div class="col-sm-12">
+                            <div class="cent_head">
+                            <div style="text-decoration: underline;"><strong>TAX INVOICE/BILL OF SUPPLY/CASH MEMO</strong></div>
+                            <div><strong>{{sale.material_center.print_name}}</strong></div>
+                            <div><p>{{sale.material_center.address}}<br>
+                            <div><p>{{sale.material_center.address_line_2}}<br>
+                            Phone: + 91{{sale.sale_user_id.profile.phone_number}} <br>
+                            Email: {{sale.sale_user_id.email}}</p></div>
+                        </div>
+                        </div>
+                        
+                    </div>
+                    <!-- <div class="row bord_invoice">
+                        <div class="col-md-6">
+                            <p>Invoice : 12345678</p>
+                            <p>28-04-2021</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Plaace of supply : Delhi(07)</p>
+                            <p>Reverse Charge : N</p>
+                        </div>
+                    </div> -->
+                    <div class="table-responsive-sm first_table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th><p><strong>Invoice</strong> : {{sale.order.order_id1}}</p>
+                                        <p><strong>Dated</strong> : {{sale.date|date:'d-m-Y'}}</p>
+                                    </th>
+                                    <th><p><strong>Place of supply</strong> : {{sale.material_center.city}}</p>
+                                        <p><strong>Reverse Charge</strong> : N</p>
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="left"><strong>Billed to</strong> :  {{sale.shipping_address.user.profile.first_name}} {{sale.shipping_address.user.profile.last_name}}
+                                        <br>{{sale.advisor_distributor_name.profile.shipping_address.house_number}},<br>{{sale.advisor_distributor_name.profile.shipping_address.address_line}},<br>{{sale.advisor_distributor_name.profile.shipping_address.Landmark}},{{sale.advisor_distributor_name.profile.shipping_address.city}}<br>
+                                {% if sale.advisor_distributor_name.profile.shipping_address.user.profile.shipping_address.state.state_name %}{{sale.advisor_distributor_name.profile.shipping_address.user.profile.shipping_address.state.state_name}}
+                                {% endif %}<br>{{sale.advisor_distributor_name.profile.shipping_address.pin}}<br>Party Mobile No. : +91-{{sale.advisor_distributor_name.profile.shipping_address.user.profile.phone_number}}</td>
+                                    <td class="left"><strong>Auretics Registration Number (ARN)</strong> :  {{sale.advisor_distributor_name.profile.shipping_address.user.referralcode.referral_code}}
+                                        <br>Party Email Id : {{sale.advisor_distributor_name.profile.shipping_address.user.email}}<br>Party Mobile No. : +91-{{sale.advisor_distributor_name.profile.shipping_address.mobile}}</td>
+                                </tr>
+<!--                                <tr>-->
+<!--                                    <td class="left">{{sale.shipping_address.house_number}},<br>{{sale.shipping_address.address_line}},<br>{{sale.shipping_address.Landmark}},{{sale.shipping_address.city}}<br>-->
+
+<!--                                {% if sale.shipping_address.user.profile.shipping_address.state.state_name %}{{sale.shipping_address.user.profile.shipping_address.state.state_name}}-->
+<!--                                {% endif %}<br>{{sale.shipping_address.pin}}</td>-->
+<!--                                    <td class="left">Party Email Id : {{sale.shipping_address.user.email}}</td>-->
+<!--                                </tr>-->
+<!--                                {% if sale.shipping_address.user.profile.shipping_address.state.state_name %}-->
+<!--                                <tr>-->
+<!--&lt;!&ndash;                                    <td class="left">State : {{sale.shipping_address.user.profile.shipping_address.state.state_name}}</td>&ndash;&gt;-->
+<!--                                    <td class="left">State : {{sale.shipping_address.user.profile.shipping_address.state.state_name}}</td>-->
+<!--                                </tr>-->
+<!--                                {% endif %}-->
+<!--                                 <tr>-->
+<!--&lt;!&ndash;                                    <td class="left">Party Pincode : {{sale.shipping_address.pin}}</td>&ndash;&gt;-->
+<!--                                    <td class="left">Party Pincode : {{sale.shipping_address.pin}}</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="left">Party Mobile No. : +91-{{sale.shipping_address.user.profile.phone_number}}</td>-->
+<!--                                    <td class="left">Party Mobile No. : +91-{{sale.shipping_address.mobile}}</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td class="left">GSTIN / UIN : {% get_gst_number %}</td>-->
+<!--                                    <td class="left">GSTIN / UIN : {% get_gst_number %}</td>-->
+<!--                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive-sm">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>S.N</th>
+                                    <th>Description of Goods</th>
+                                    
+                                    <th class="right">HSN / SAC Code</th>
+                                    <th class="right">Qty.</th>
+                                    
+<!--                                    <th class="right">MRP</th>-->
+                                    <th class="right">Distributor's Price Excluding Tax (DP)</th>
+                                    <th class="right">CGST Amount</th>
+                                    <th class="right">CGST Rate(%)</th>
+                                    <th class="right">SGST Amount</th>
+                                    <th class="right">SGST Rate</th>
+<!--                                    <th class="right">IGST Amount</th>-->
+<!--                                    <th class="right">IGST Rate(%)</th>-->
+                                    <th class="right">Amount(₹)</th>
+                                    <th class="right">Business Volume</th>
+                                    <th class="right">Point Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in order.lineitem_set.all %}
+                                <tr>
+                                    
+                                    <td class="left">{{forloop.counter}}</td>
+                                    <td class="left">{{i.product.product_name}}</td>
+                                    <td class="right">{{i.product.hsn_code}}</td>
+                                    <td class="right">{{i.quantity}}</td>
+                                    
+<!--                                    <td class="right">₹{{i.batch.mrp}}</td>-->
+                                    <td class="right">₹{% invoice_ex_tax  i.price i.total_igst i.quantity %}</td>
+                                    <td class="right">₹{{i.total_cgst}}</td>
+                                    <td class="right">{{i.cgst|floatformat:2}}%</td>
+                                    <td class="right">₹{{i.total_sgst}}</td>
+                                    <td class="right">{{i.sgst|floatformat:2}}%</td>
+<!--                                    <td class="right">₹{{i.total_igst}}</td>-->
+<!--                                    <td class="right">{{i.igst|floatformat:2}}%</td>-->
+                                    <td class="right">₹{{i.cost}}</td>
+                                    <td class="right">{{i.bv}}</td>
+                                    <td class="right">{{i.pv}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7 col-sm-5"><h5>Terms & Conditions</h5>
+                            <span>1. Subject to ‘Delhi’ Jurisdiction only.<br />
+                            2. Please check complete content including items and quantity before accepting this Invoice.<br />
+                            3. In case any product is damaged during transit, please write damage goods details in the receiving/POB.<br />
+                            4. Payment of this Invoice is due Immediately.<br />
+                            5. The product carries only manufacturer’s warranty.<br />
+                            6. Refunds, refunds & exchange will be made as per company’s refund policy.<br />
+                            7. E.&O.E.<br />
+                            8. Whether tax is payable under Reverse Charge - No<br /></span><br><br><br>
+                            <div class="">
+                                <p><strong>Receiver's Signature</strong> : </p>
+                                <p><strong>{{sale.material_center.print_name}}</br>
+                                    Authorised Signatory
+                                </strong> : </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-sm-5 ml-auto">
+                            <table class="table table-clear">
+                                <tbody>
+                                    <tr>
+                                        <td class="left"><strong>Shipping Charges</strong></td>
+                                        <td class="right">₹{{order.shiping_charge}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>Subtotal (GST Extra)</strong></td>
+                                        <td class="right">₹{% invoice_ex_tax  order.grand_total order.igst_amount %}</td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td class="left"><strong>Tax Rate </strong></td>
+                                        <td class="right">18%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>Taxable Amt.</strong></td>
+                                        <td class="right">₹150</td>
+                                    </tr> -->
+                                    <tr>
+                                        <td class="left"><strong>CGST Amt.</strong></td>
+                                        <td class="right">₹{{order.cgst_amount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>SGST Amt.</strong></td>
+                                        <td class="right">₹{{order.sgst_amount}}</td>
+                                    </tr>
+<!--                                    <tr>-->
+<!--                                        <td class="left"><strong>IGST Amt.</strong></td>-->
+<!--                                        <td class="right">₹{{sale.igst_amount}}</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="left"><strong>Total Tax</strong></td>-->
+<!--                                        <td class="right">₹{{sale.grand_total}}</td>-->
+<!--                                    </tr>-->
+                                    <tr>
+                                        <td class="left"><strong>Grant Total</strong></td>
+                                        <td class="right">₹{{order.grand_total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>Total Business Volume</strong></td>
+                                        <td class="right">{{order.bv}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>Total Point Value</strong></td>
+                                        <td class="right">{{order.pv}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div style="text-align:center; margin-top: 10px;">
+    <input type="submit" value="Send to distributor">
+       </div>
+    </form>
+    </div>
+</div>
+                            </body>
+                        </html>

@@ -1,0 +1,84 @@
+{% load static %}
+{% load bsiness_tag %}
+{% load humanize %}
+{% include "business/include/header.html" %}
+<!--<script src="https://www.w3schools.com/lib/w3.js"></script>-->
+<script src="/static/js/sort.js"></script>
+<script src="/static/js/xlsx.full.min.js"></script>
+
+<div class="pcoded-main-container">
+<div class="pcoded-content">
+
+
+<div class="row">
+
+<div class="col-sm-12">
+<div class="card">
+<div class="card-header">
+<h5>Congratulations and Welcome to Auretics Limited!</h5>
+<div class="card-header-right">
+<div class="btn-group card-option">
+<button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<i class="feather icon-more-horizontal"></i>
+</button>
+<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+<li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+<li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+<li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+<li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="card-body" style="text-align: justify;text-justify: inter-word; ">
+    <p>{{ request.user.profile.created_on.date }}</p>
+    <p>Dear {{ request.user.profile.first_name|title }} {{ request.user.profile.last_name|title }} (ARN: {{ request.user.referralcode.referral_code }}),</p>
+    <p>Congratulations! You have successfully registered with Auretics Limited. Welcome to Auretics Family, A Team of stout-hearted professionals! You are joining a revolution in the era of wellness as an independent distributor who would utilize Auretics unique products for their own good health and financial prosperity. Auretics business structure allows your enthusiasm and energy to define your success. We encourage your talent by supporting your ambitions for financial independence and personal growth – whether it’s a part-time or on full-time basis.</p>
+    <p>Your Auretics Registration Number (ARN) is {{ request.user.referralcode.referral_code }}. You shall mention your ARN in all official correspondence made henceforth with the company.</p>
+    <p>With a Distinctive Blend of Herbal Formulations and Modern Science, Auretics stands alone in its level of quality and production methods that maintain the nature’s gift of good health. Our partner's FDA-approved manufacturing facilities utilize a cold-pressure production process that preserves the core extract herbal value of its hand-gathered organic products. Unless otherwise mentioned, our products contain no artificial colourings or flavourings, sugar, starch or animal products. No heat, moisture or chemicals are used in preparation of our products. Our team of scientists continually monitor the effectiveness of our products, while utilizing leading edge technology in the development and formulation of the best products available anywhere!</p>
+    <p>I, along with our entire Team at Auretics Limited, believe that our products shall transcend in the marketplace – Wellness Industry! This belief is growing stronger ever since due to the exquisite quality, purity and overwhelming response and reviews received by the people who have experienced these products first hand- during clinical trials. With your commitment and determination, people across the globe will achieve better health by using our safe, organic and effective products. With us you will earn the satisfaction of providing people with a proven path to better health, lifestyle and your opportunity to gain financial peace of mind – the most gratifying concept of being rewarded for helping others.</p>
+    <p>What will you achieve?</p>
+    <p>As an Advisor you will be benefitted as mentioned below: <br />
+
+    <li>Upto 25% margin on the entire range of high quality products.</li>
+    <li>You can order products online to be delivered to your home! You can either pay online through Credit/Debit Card, Net banking, UPI, etc or pick-up from a Distributor Point.</li>
+    <li>You get cashbacks in form of Personal Bonus by earning business volumes (BV).</li>
+    <li>You get monthly loyalty equivalent to Personal Business Volume done by you.</li>
+    <li>Fortune Bonus which increases your Personal Bonus to 10 times.</li>
+    <li>100% Satisfaction Money Back Guarantee</li>
+    <li>You get benefits when you share the Auretics opportunity with others and promote Auretics products within your team.</li>
+    <li>You have an opportunity to avail Sales Action Promotions/Discount Offers, whenever available.</li>
+    <li>Monthly Bonuses every month: You get eligible under our Incentive Scheme just after activating your ID and for being active every month.</li>
+    <li>You decide when and how much you want to work. The only investment needed to build your own business with Auretics is some 10-20 catalogues for circulation among your friends, neighbours, relatives and your time and passion to achieve something great in life.</li>
+    <li>Being Auretics advisor is a lot of fun. You will have the opportunity to meet new people, participate & enjoy in our events and get exciting activities.</li>
+    <li>You can travel around the world with Auretics if you choose the Auretics career path and become Manager or Director with Auretics.</li>
+    <li>Unlimited and life time income: You can build your income unlimited and life time depends upon your passion and efforts.</li>
+    <li>We are proud to welcome you into our Auretics family – A Dream to Become Healthier, Smarter and prosper in exponential ways! WE STOP AT NOTHING! And we believe in Excellence in Everything</li></p>
+
+    <p>Best Regards<br /></p>
+    <p>Arjun Gupta<br />
+        CEO - Auretics Limited<br />
+        Location: Delhi                            <span style="float:right;">Applicant Signature: _____________________ </span>
+</p>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+                <script>
+                $(document).ready(function(){
+                $(".view_downline").click(function(){
+                $(".box_income_down").hide();
+                $(".box_income_down_1").show();
+                });
+                 $(".view_downline_1").click(function(){
+                $(".box_income_down_1").hide();
+                $(".box_income_down_2").show();
+                });
+                 });
+                </script>
+{% include "business/include/footer.html" %}

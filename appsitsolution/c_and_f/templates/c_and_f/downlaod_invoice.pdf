@@ -1,0 +1,86 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+5 0 obj
+<<
+/Outlines 7 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
+>>
+endobj
+6 0 obj
+<<
+/Author () /CreationDate (D:20210427115204-05'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20210427115204-05'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title (Django HTMLtoPDF Tutorial) /Trapped /False
+>>
+endobj
+7 0 obj
+<<
+/Count 1 /First 8 0 R /Last 8 0 R /Type /Outlines
+>>
+endobj
+8 0 obj
+<<
+/Dest [ 4 0 R /Fit ] /Parent 7 0 R /Title (HTML To PDF)
+>>
+endobj
+9 0 obj
+<<
+/Count 1 /Kids [ 4 0 R ] /Type /Pages
+>>
+endobj
+10 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 722
+>>
+stream
+GatU/b>R(K']%q&:00\.&Wn(]@FZ6%D5M$F'JJ.\[VQ=^.@"J's1VPE6\$VdNaE^hhXcoS0rKqjn%8\H;k.08n-E_7^0h>E>?n"g5Ed%4piCSbB(9?@=CQE=Yd7oZWV=pua6\)+SZUmoZpm8'@/e$^kDVq$4@\%T-S/El-j`;>f25Y.f;g1dcc=4/3<#6CfHR`uFa8CeoH*8[+R3PQFn:0kq1>^n)LNfI23.iVs'MN[[T3]mQcWouZ\,"fHfo!^e0+(A/sN?^bA<K$<YeUJ_M_RUe>"i3]3U>t%2G6(_Glh\`e3mC.k:%Zd!EL`Z$#8(Bq=^On59d@-W=j./$36U/Dr*0Br%Lm['l*9E_"Y3Hn@I6PLqm,]QCL..;9,P0PkU&npiq6M*lu+#pO)^Kg'1^]LJm-C`.RGXL5!D&(-Jjap.7OSm1e7SOYKoC"u3e$=)BCL,B",E]MV"5(r2d<nP'#aPW<dCeEdc&9(C0W's@MI;QA[?Afh\7j/8'm.Z7LmL9EBT@V4UedG+tNG!0;#IIAeTnVnc=<qal`:#FUXiT_Q=oDX>CI9]q,t1[(-`<2gmAbKDO,7HRgV$#T?pYpU'LeSGcAt8OE>tV+5UG9sI`8WB"4@cu:am<ZQ#O+2^*X!5:.Lh,8l$oYLa0EDT=oo8?4>ipYb//i@r@8["%j3`3Cto50Ac@.lte=\g$,/G<ZSIS/F9#/+!uI<U.@Iu~>endstream
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000073 00000 n 
+0000000114 00000 n 
+0000000221 00000 n 
+0000000333 00000 n 
+0000000537 00000 n 
+0000000621 00000 n 
+0000000898 00000 n 
+0000000969 00000 n 
+0000001046 00000 n 
+0000001105 00000 n 
+trailer
+<<
+/ID 
+[<142e001730dda3d553627c87e920df81><142e001730dda3d553627c87e920df81>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 6 0 R
+/Root 5 0 R
+/Size 11
+>>
+startxref
+1918
+%%EOF

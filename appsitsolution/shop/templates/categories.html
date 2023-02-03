@@ -1,0 +1,202 @@
+{% extends 'shop/base.html' %}
+{% load shop_tag %}
+
+{% block content %}
+<div class="wrapper">
+	<nav aria-label="breadcrumb" class="filter_short" style="background: {% if request.session.distributor_checkout %}#FFE28A{% else %}#f7f7f7{% endif %};">
+		<ol class="breadcrumb" style="background: {% if request.session.distributor_checkout %}#FFE28A{% else %}#f7f7f7{% endif %};">
+{#			<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>#}
+{#			<li class="breadcrumb-item active" aria-current="page">Category</li>#}
+		</ol>
+
+		{% include 'shop/include/top_purchase_center.html' %}
+		<div id="filter-wrapper" class="filter-wrapper filter-icons">
+			<div class="sort-by">
+				<!--<button class="sort-btn" data-toggle="modal" data-target="#sortBy">
+					<i class="ti-arrows-vertical"></i> Sort By
+				</button>-->
+			</div>
+			<div class="filter-category">
+				<!--<button class="filter-btn" data-toggle="modal" data-target="#filter">
+					<i class="ion-android-funnel"></i> Filter
+				</button>-->
+			</div>
+		</div>
+	</nav>
+
+
+	<!-- breadcrumb area end -->
+
+	<!-- shop page content -->
+	<div class="shop-page-wrapper">
+		<!-- Sort Modal -->
+		<div class="modal fade sort-modal" id="sortBy" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Sort By</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label class="label-wrapper radiobtn">Price -- Low to High
+							<input class="radio-input" type="radio" name="filter" value="1" checked="checked">
+							<span class="checkmark"></span>
+						</label>
+						<label class="label-wrapper radiobtn">Price -- High to Low
+							<input class="radio-input" type="radio" name="filter" value="2">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Sort Modal end -->
+
+		<!-- shop page content -->
+		<div class="shop-page-content" style="vertical-align: top;padding: 0px">
+        {% if user.is_authenticated %}
+			<div class="row">
+				<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 embed-responsive ag_slider_common ag_slider_responsive">
+					<embed class="embed-responsive-item overflow-hidden second-row" src="/static/revslider/slider.html" allowfullscreen frameborder="0" style="position:absolute;">
+				</div>
+			</div>
+		{% endif %}
+			<div class="container" id ="productls">
+				<div class="row product-isotope shop-product-wrap" id="singleProduct">
+					<!-- single product -->
+
+					{% for category in all_category %}
+					{% if category.category_set.all and category.show_on_home_page == 'show' and category.status == 'Active' %}
+                    <div class="col-md-12 cate_head_bord mt-4">
+					<h3><b>{{category.cat_name | title}}</b></h3>
+					</div>
+					{% for cat in category.category_set.all|sort_by:'cat_order' %}
+					{% if cat.show_on_home_page == 'show' and cat.status == 'Active' %}
+					<div class="col-sm-6 col-md-3 hot sale">
+						<div class="single-product">
+							<div class="single-product__image">
+								<a class="image-wrap" href="{% url 'categry_name' cat.pk cat.cat_name %}">
+									<img class="no-resize" src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ cat.imag_path.url  }}" class="img-fluid" alt=""
+                                    srcset ="
+                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ cat.imag_path.url }} 320w,
+{#                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ cat.imag_path.url }} 640w,#}
+{#                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ cat.imag_path.url }} 960w,#}
+{#<!--                                         /cdn-cgi/image/format=auto,metadata=none,width=1280{{ cat.imag_path.url }} 1280w,-->#}
+{#<!--                                         /cdn-cgi/image/format=auto,metadata=none,width=2560{{ cat.imag_path.url }} 2560w,-->#}
+                                                    " height=auto width=auto class="img-fluid" alt="" />
+								</a>
+							</div>
+							<div class="single-product__content">
+								<div class="title">
+									<a href="{% url 'categry_name' cat.pk cat.cat_name %}">{{ cat.cat_name }}</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					{% endfor %}
+
+					{% endif %}
+					{% endfor %}
+					<!-- End of single product -->
+
+
+				</div>
+			</div>
+		</div>
+		<!-- shop page content end -->
+	</div>
+	<!-- shop page content end -->
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+	<script>
+
+	   $("#selectall").click(function(){
+
+        if(this.checked){
+            $('.checkboxall').each(function(){
+                $(".checkboxall").prop('checked', true);
+            })
+        }else{
+            $('.checkboxall').each(function(){
+                $(".checkboxall").prop('checked', false);
+            })
+        }
+
+    });
+
+     $(".checkboxall").click(function(){
+
+         if(!this.checked){
+             $("#selectall").prop('checked', false);
+         }
+
+     });
+
+$(document).ready(function () {
+	$('.checkboxall').each(function(){
+		$("#selectall").prop('checked', true);
+		$(".checkboxall").prop('checked', true);
+	})
+});
+	</script>
+	<script>
+ $('document').ready(function(){
+$(function() {
+ $('#refr').click(function() {
+ $(this).focus();
+ $(this).select();
+ document.execCommand('copy');
+ });
+});
+});
+	</script>
+	{% endblock extra_scripts %}
+
+	<!-- scroll to top -->
+<!--	<a href="#" class="scroll-top"></a>-->
+	<!-- end of scroll to top -->
+
+	<!-- JS -->
+
+
+	<!-- jQuery JS -->
+	<script src="assets/js/vendor/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="assets/js/popper.min.js"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="assets/js/bootstrap.min.js"></script>
+
+	<!-- Plugins JS -->
+	<script src="assets/js/plugins.js"></script>
+
+	<!-- Main JS -->
+	<script src="assets/js/main.js"></script
+
+	<script>
+		$("#signup").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+		});
+
+			$("#signup").modal("hide");
+		});
+
+		$("#login").on('show.bs.modal', function (e) {
+			$("#forgotpwd").modal("hide");
+		});
+
+		$("#forgotpwd").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+		});
+	</script>
+<br> </br/>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'sg2plcpnl0196'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script>
+<script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script>
+</html>

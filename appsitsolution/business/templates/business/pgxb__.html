@@ -1,0 +1,149 @@
+{% load static %}
+{% load bsiness_tag %}
+{% load humanize %}
+{% include "business/include/header.html" %}
+<!--<script src="https://www.w3schools.com/lib/w3.js"></script>-->
+<script src="/static/js/sort.js"></script>
+<script src="/static/js/xlsx.full.min.js"></script>
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Downline Details</h2>
+                <h5 class="calc_page_title_1 mb-4">Please note: This page will show details of only those downlines, where either they have made any purchase or their respective downlines have made any purchase in the selected month.</h5>
+<!--                <input type="month" for="downline" class="form-control" value="2021-05">-->
+                </div>
+                <div class="col-md-12 mt-4 box_income box_income_down">
+                    <div class="main_downline mt-4 mb-4">
+                    <div><p>Downline of: {{referall_code}} {{user_name}}</p></div>
+<!--                    <div class="input_search_down">-->
+<!--                <label class="downline_label">Search my Downline</label>-->
+<!--                <input type="text" for="search" class="form-control" placeholder="Search your downline here">-->
+<!--                </div>-->
+                    </div>
+                <form method="post">
+                    {% csrf_token %}
+            <div class="col-md-12 mt-4">
+                <div class="user_profile_bonus">
+                    <div class="row">
+                    <div class="col-md-6">
+                <input type="month" value="{{input_date|date:'Y-m'}}" name="month" id="date_points" class="form-control">
+                        </div>
+                    <div class="col-md-6">
+                <input type="submit" value="Submit" class="form-control" style="background-color: #222529; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden; color: white;">
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                <p><h5 class="bonus_director">Data for the Month of: <span>{{month}} - {{year}}</span></h5></p>
+              </div>
+                </div>
+              </form>
+                <!--<table><tr><td>
+                    <form method="get" action="{% if report_type == 'dyn_active' %}{% url 'mlm_admin_user_dashboard_9_active' %}{% elif report_type == 'dyn_director' %}{% url 'mlm_admin_user_dashboard_9_director' %}{% elif report_type == 'dyn_tbb' %}{% url 'mlm_admin_user_dashboard_9_tbb' %}{% else %}{% url 'mlm_admin_user_dashboard_8' %}{% endif %}" accept-charset="utf-8">
+                        {% csrf_token %}
+                    <input type="search" class="form-control" id="q" name="q" placeholder="Enter ARN Number" /></td><td><button type="submit" class="btn  btn-primary">Search</button></form>
+                </td></tr></table>-->
+
+                <p color="red"><span><strong>{{ msg }}</strong></span></p>
+                <!-- AG :: Export to excel taken from https://codepedia.info/javascript-export-html-table-data-to-excel -->
+                <div align="right">
+                    <button onclick="ExportToExcel('xlsx')">Export table to Excel</button><br />
+                    <script>
+                        function ExportToExcel(type, fn, dl) {
+                            var elt = document.getElementById('myTable');
+                            var wb = XLSX.utils.table_to_book(elt, { sheet: "Downline Details" });
+                            return dl ?
+                                XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+                                XLSX.writeFile(wb, fn || ('AureticsDownlineDetail.' + (type || 'xlsx')));
+                        }
+                    </script>
+                    {% if pv %}<a href="{{ bv_path }}">Show Details in Business Volume (BV){% else %}<a href="{{ pv_path }}">Show Details in Point Value (PV){% endif %}</a>
+                </div><br />
+                    <table class="table user_profile_bonus_1" id="myTable">
+                        <thead class="thead-dark">
+                          <tr>
+                            <td colspan="{% if pv %}4{% else %}5{% endif %}">ADVISOR DETAILS</td>
+                            <td colspan="{% if pv %}3{% else %}3{% endif %}">SUPER</td>
+                            <td colspan="{% if pv %}4{% else %}2{% endif %}">INFINITY</td>
+                          </tr>
+                        <tr>
+                        <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(1)')" style="cursor:pointer">Name of the Person</th>
+                        <!--<th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(2)')" style="cursor:pointer">Qualification Level</th>-->
+                        <th>ARN No.</th>
+                        <!--<th>E-Mail Address</th>-->
+                        <th>Mobile Number</th>
+                        {% if pv %}     <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(3)')" style="cursor:pointer">PPV</th>           {% endif %}
+                        {% if not pv %} <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(3)')" style="cursor:pointer">PBV</th>           {% endif %}
+                        {% if not pv %} <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(4)')" style="cursor:pointer">TBV</th>           {% endif %}
+                        {% if pv %}     <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(5)')" style="cursor:pointer">Left PV</th>       {% endif %}
+                        {% if not pv %} <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(5)')" style="cursor:pointer">Left BV</th>       {% endif %}
+                        {% if pv %}     <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(6)')" style="cursor:pointer">Right PV</th>      {% endif %}
+                        {% if not pv %} <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(6)')" style="cursor:pointer">Right BV</th>      {% endif %}
+                        {% if not pv %} <!--<th>PGPV/PGBV</th>-->{% endif %}
+                        {% if pv %}     <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(7)')" style="cursor:pointer">Super PV</th>      {% endif %}
+                        {% if not pv %} <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(7)')" style="cursor:pointer">Super BV</th>      {% endif %}
+                        {% if pv %}     <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(8)')" style="cursor:pointer">Infinity PV</th>   {% endif %}
+                        {% if not pv %} <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(8)')" style="cursor:pointer">Infinity BV</th>   {% endif %}
+                        {% if pv %}     <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(9)')" style="cursor:pointer">GPV</th>           {% endif %}
+                        {% if not pv %} <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(9)')" style="cursor:pointer">GBV</th>           {% endif %}
+                        <!--<th>Income</th>-->
+                        <!--<th>Downline</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        
+
+   {% for user in users %}   
+                        <tr class="item" >
+                        <td><a href="{% url 'user_dashboard_8_add' user.user_id.id %}?month={{int_month}}&year={{year}}">{{user.user_id.profile.first_name}} {{user.user_id.profile.last_name}}</a></td>
+                        <!--<td>{{title.current_month_qualification}}</td>-->
+                        <td>{{user.user_id.referralcode.referral_code}}</td>
+                        <!--<td>{{user.user.email}}</td>-->
+                        <td>+91-{{user.user.profile.phone_number}}</td>
+                        {% if pv %}     <td>{{user.rt_ppv|intcomma}}</td>                   {% endif %}
+                        {% if not pv %} <td>{{user.rt_pbv|intcomma}}</td>                   {% endif %}
+                        {% if not pv %} <td>{{user.rt_tbv_month|intcomma}}</td>             {% endif %}
+                        {% if pv %}     <td>{{user.rt_left_pv_month|intcomma}}</td>         {% endif %}
+                        {% if not pv %} <td>{{user.rt_left_bv_month|intcomma}}</td>         {% endif %}
+                        {% if pv %}     <td>{{user.rt_right_pv_month|intcomma}}</td>        {% endif %}
+                        {% if not pv %} <td>{{user.rt_right_bv_month|intcomma}}</td>        {% endif %}
+                        {% if pv %}     <td>{{user.rt_user_super_ppv|intcomma}}</td>        {% endif %}
+                        {% if not pv %} <td>{{user.rt_user_super_pbv|intcomma}}</td>        {% endif %}
+                        {% if pv %}     <td>{{user.rt_user_infinity_ppv|intcomma}}</td>     {% endif %}
+                        {% if not pv %} <td>{{user.rt_user_infinity_pbv|intcomma}}</td>     {% endif %}
+                        {% if not pv %} <!--<td>{{user.pgpv|intcomma}}/{{user.pgbv|intcomma}}</td>-->       {% endif %}
+                        {% if pv %}     <td>{{user.rt_gpv_month|intcomma}}</td>             {% endif %}
+                        {% if not pv %} <td>{{user.rt_gbv_month|intcomma}}</td>             {% endif %}
+                        <!--<td>{% income user.date_model user.user %}</td>-->
+                        <!--<td><a href="{% url 'user_dashboard_8_add' user.user_id.id %}">View</a></td>-->
+                        </tr>
+      {% endfor %}
+                        </tbody>
+                        </table>
+                        {% include "business/include/acronym.html" %}
+                        </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+                <script>
+                $(document).ready(function(){
+                $(".view_downline").click(function(){
+                $(".box_income_down").hide();
+                $(".box_income_down_1").show();
+                });
+                 $(".view_downline_1").click(function(){
+                $(".box_income_down_1").hide();
+                $(".box_income_down_2").show();
+                });
+                 });
+                </script>
+{% include "business/include/footer.html" %}

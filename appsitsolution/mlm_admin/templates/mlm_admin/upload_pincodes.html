@@ -1,0 +1,55 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<!--{% if messages %}-->
+<!--{% for message in messages %}-->
+<!--    <dive class=" alert alert-{{ message.tags }}" role="alert">-->
+<!--        <p {% if message.tags %} class=""{% endif %}> {{message}}</p>-->
+<!--    </dive>-->
+<!--{%endfor%}-->
+<!--{%endif%}-->
+<!--    <form method="post" enctype="multipart/form-data">-->
+<!--        {% csrf_token %}-->
+<!--        <input type="file" name="pincodes">-->
+<!--        <button type="submit"> Upload</button>-->
+<!--        <h2> Upload pincode excel files Only</h2>-->
+<!--    </form>-->
+
+<html>
+    <head>
+        <title>
+            Excel file upload and Pincodes codes processing
+        </title>
+    </head>
+    <body>
+        <div align="center">
+            <br><b><h3>Upload Pincode Excel files</h3></b></br>
+            <form action="{% url 'pincode_upload_excel' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file"
+
+                   title="Upload excel file"
+                   name="myfile"
+                   style="border: 50px solid black; padding: 50px;"
+                   required="required">
+                <p>
+                <input type="submit"
+                   value="Upload"
+                   style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+                </p>
+            </form>
+            <center><b><h3>Upload Pincode Excel files</h3></b></center>
+
+        </div>
+       <p></p>
+        <hr>
+        {% for row in excel_data %}
+            {% for cell in row %}
+                {{ cell }}&nbsp;&nbsp;
+            {% endfor %}
+            <br>
+        {% endfor %}
+{% include "mlm_admin/include/footer.html" %}
+    </body>
+</html>
+
+

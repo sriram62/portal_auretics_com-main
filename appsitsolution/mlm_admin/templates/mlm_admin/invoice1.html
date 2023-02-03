@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+                        <html>
+                            <head>
+                                <meta charset='utf-8'>
+                                <meta name='viewport' content='width=device-width, initial-scale=1'>
+                                <title>Invoice</title>
+                                <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+                                <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+<style>
+
+
+.mt-100 {
+    margin-top: 50px
+}
+
+.mb-100 {
+    margin-bottom: 50px
+}
+
+.card {
+    border-radius: 1px !important
+}
+
+.card-header {
+    background-color: #fff
+}
+
+.card-header:first-child {
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0
+}
+
+.btn-sm,
+.btn-group-sm>.btn {
+    padding: .25rem .5rem;
+    font-size: .765625rem;
+    line-height: 1.5;
+    border-radius: .2rem
+}
+.cent_head p {
+    width: 400px;
+    margin: 0 auto;
+}
+.cent_head {
+    text-align: center;
+}
+/*.first_table tbody {
+    border: 1px solid #dee2e6 !important;
+}*/
+.first_table td{
+    width:50%;
+    border-top:0 !important;
+    border-right: 1px solid #dee2e6;
+}
+.first_table .table thead th {
+    border-bottom: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+}
+.first_table .table {
+    border: 1px solid #dee2e6 !important;
+}
+.first_table .table thead th p {
+    font-weight: 400;
+}
+.table thead th {
+    vertical-align: top;
+ }
+ @media screen and (min-width:0) and (max-width:767px){
+    .cent_head p {
+    width: 100%;
+}
+ }
+</style>
+
+<script type='text/javascript'></script>
+</head>
+<body oncontextmenu='return false' class='snippet-body'>
+<div class="container-fluid mt-100 mb-100">
+    <form method="post">
+        {% csrf_token %}
+    <div id="ui-view">
+        <div>
+            <div class="card container">
+                <div class="card-header"><table width = 100% style="vertical-align: top;"><tbody><tr><td style="vertical-align: top;">GSTIN<strong>: {{sale.material_center.gst_number}}</strong></td><td>
+                    <div class="pull-center"> <img src="{% static 'img/new_logo.png' %}" class="img-fluid" alt="" style="width:100px; display: block; margin-left: auto; margin-right: auto;" /></div>
+                    </td><td style="vertical-align: top;"><div class="pull-right"><span>Original Copy</span>
+                    </div>
+                </td></tr></tbody></table></div>
+                <div class="card-body">
+
+                        <div class="col-sm-12">
+                            <div class="cent_head">
+                            <div style="text-decoration: underline;"><strong>TAX INVOICE</strong></div>
+                            <div><strong>{{sale.material_center.print_name}}</strong></div>
+                            <div><p>{{sale.material_center.address}}<br>
+                            {{sale.material_center.address_line_2}}<br>
+                            Phone: + 91 {{sale.sale_user_id.profile.phone_number}}<br>
+                            Email: {{sale.sale_user_id.email}}</p></div>
+                        </div>
+                        </div>
+
+                    </div>
+                    <!-- <div class="row bord_invoice">
+                        <div class="col-md-6">
+                            <p>Invoice : 12345678</p>
+                            <p>28-04-2021</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Plaace of supply : Delhi(07)</p>
+                            <p>Reverse Charge : N</p>
+                        </div>
+                    </div> -->
+                    <div class="table-responsive-sm first_table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th><p><strong>Invoice</strong> : {{sale.order.order_id1}}</p>
+                                        <p><strong>Dated</strong> : {{sale.created_on}}</p>
+                                    </th>
+                                    <th><p><strong>Place of supply</strong> : {{sale.material_center.city}}</p>
+                                        <p><strong>Reverse Charge</strong> : N</p>
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="left"><strong>Billed to</strong> : {{sale.advisor_distributor_name.profile.first_name}} {{sale.advisor_distributor_name.profile.last_name}}</td>
+                                    <td class="left"><strong>Shipped to</strong> : {{sale.advisor_distributor_name.profile.first_name}} {{sale.advisor_distributor_name.profile.last_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="left">Party Email Id : {{sale.advisor_distributor_name.email}}</td>
+                                    <td class="left">Party Email Id : {{sale.advisor_distributor_name.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="left">Party Mobile No. : +91-{{sale.advisor_distributor_name.profile.phone_number}}</td>
+                                    <td class="left">Party Mobile No. : +91-{{sale.advisor_distributor_name.profile.phone_number}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="left">State : {{sale.advisor_distributor_name.profile.shipping_address.state.state_name}}</td>
+                                    <td class="left">State : {{sale.advisor_distributor_name.profile.shipping_address.state.state_name}}</td>
+                                </tr>
+                                 <tr>
+                                    <td class="left">Party Pincode : {{sale.advisor_distributor_name.profile.shipping_address.pin}}</td>
+                                    <td class="left">Party Pincode : {{sale.advisor_distributor_name.profile.shipping_address.pin}}</td>
+                                </tr>
+<!--                                <tr>-->
+<!--                                    <td class="left">GSTIN / UIN : {{sale.material_center.gst_number}}</td>-->
+<!--                                    <td class="left">GSTIN / UIN : {{sale.material_center.gst_number}}</td>-->
+<!--                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive-sm">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>S.N</th>
+                                    <th>Description of Goods</th>
+
+                                    <th class="right">HSN / SAC Code</th>
+                                    <th class="right">Qty.</th>
+
+                                    <th class="right">MRP</th>
+                                    <th class="right">Distributor's Price (DP)</th>
+                                    <th class="right">CGST Amount</th>
+                                    <th class="right">CGST Rate(%)</th>
+                                    <th class="right">SGST Amount</th>
+                                    <th class="right">SGST Rate</th>
+                                    <th class="right">IGST Amount</th>
+                                    <th class="right">IGST Rate(%)</th>
+                                    <th class="right">Amount(₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in sale.distributor_sale_itemdetails_set.all %}
+                                <tr>
+
+                                    <td class="left">{{forloop.counter}}</td>
+                                    <td class="left">{{i.item.product_name}}</td>
+                                    <td class="right">{{i.item.hsn_code}}</td>
+                                    <td class="right">{{i.quantity}}</td>
+
+                                    <td class="right">₹{{i.batch.mrp}}</td>
+                                    <td class="right">₹{{i.distributor_price}}</td>
+                                    <td class="right">₹{{i.total_cgst}}</td>
+                                    <td class="right">{{i.per_cgst}}%</td>
+                                    <td class="right">₹{{i.total_sgst}}</td>
+                                    <td class="right">{{i.per_sgst}}%</td>
+                                    <td class="right">₹{{i.total_igst}}</td>
+                                    <td class="right">{{i.per_igst}}%</td>
+                                    <td class="right">{{i.total_amount}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7 col-sm-5"><h5>Terms & Conditions</h5>
+                            <p>1st condition</p>
+                            <p>1st condition</p>
+                            <p>1st condition</p>
+                            <p>1st condition</p>
+                            <div class="">
+                                <p><strong>Receiver's Signature</strong> : </p>
+                                <p><strong>{{sale.material_center.print_name}}</br>
+                                    Authorised Signatory
+                                </strong> : </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-sm-5 ml-auto">
+                            <table class="table table-clear">
+                                <tbody>
+                                    <tr>
+                                        <td class="left"><strong>Subtotal</strong></td>
+                                        <td class="right">₹{{sale.subtotal}}</td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td class="left"><strong>Tax Rate </strong></td>
+                                        <td class="right">18%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>Taxable Amt.</strong></td>
+                                        <td class="right">₹150</td>
+                                    </tr> -->
+                                    <tr>
+                                        <td class="left"><strong>CGST Amt.</strong></td>
+                                        <td class="right">₹{{sale.cgst_amount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>SGST Amt.</strong></td>
+                                        <td class="right">₹{{sale.sgst_amount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>IGST Amt.</strong></td>
+                                        <td class="right">₹{{sale.igst_amount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>Total Tax</strong></td>
+                                        <td class="right">₹{{sale.total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left"><strong>Grant Total</strong></td>
+                                        <td class="right">₹{{sale.grand_total}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div style="text-align:center; margin-top: 10px;">
+    <input type="submit" value="Send to distributor">
+       </div>
+    </form>
+    </div>
+</div>
+                            </body>
+                        </html>

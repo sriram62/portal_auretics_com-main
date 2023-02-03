@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page_type == 'structure' %}Instant Calculation{% else %}Realtime Calculation{% endif %}</title>
+</head>
+<body>
+    <h1>Real time calculation</h1>
+    <div id="real-form" style="width: max-content;">
+        <fieldset>
+            <legend>{% if page_type == 'structure' %}Continue Structure Formation{% else %}Real Time Calculation{% endif %}</legend>
+            <form action="#" method="POST">{% csrf_token %}
+                <table>
+                    <tr>
+                        <td><label for="compute">Click to start {% if page_type == 'structure' %}Structure Formation for new users{% else %}realtime calculation for this month{% endif %}: </label></td>
+                        <td><input type="submit" class="btn" value="Compute" name="compute"></td>
+                    </tr>
+                </table>
+            </form>
+        </fieldset>
+    </div>
+    <br>
+    <div id="form-rebuilding" style="width: max-content;">
+        <fieldset>
+            <legend>{% if page_type == 'structure' %}Remove everything and rebuild structure{% else %}Rebuilding{% endif %}</legend>
+            <form action="#" method="POST">{% csrf_token %}
+                <table>
+                    <tr>
+                        {% if page_type == 'structure' %}
+                            <td>Rebuild structure:
+                        {% endif %}
+                        <td><label for="month">Select month: </label></td>
+                        <td>
+                            <select name="month" id="month">
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                        </td>
+                        <td><label for="year">Select a valid year: </label></td>
+                        <td><input type="text" name="year" size="8"></td>
+                    </tr>
+                {% if page_type == 'structure' %}
+                <tr>
+                    <td><input type="submit" class="btn" value="Create Details" name="create_detail"></td>
+                </tr>
+                <tr><td>Rebuild the whole structure: <td><input type="submit" class="btn" value="Rebuild Structure" name="inputbtn"></td></td></tr>
+                {% else %}
+                    <tr><td><input type="submit" class="btn" value="Rebuild" name="inputbtn"></td></tr>
+                {% endif %}
+                </table>
+            </form>
+        </fieldset>
+    <br /><br />
+        {% if page_type == 'structure' %}
+            Generational Structure Prepared till: {{ latest_gen_pk }} <br />
+            Organisation Structure Prepared till: {{ latest_org_pk }} <br />
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+{% load static %}
+{% include "mlm_calculation/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Commission Wallet</h2>
+                <h5 class="calc_page_title_1 mb-4">Details of all Downline within Lead and Influence Circle is displayed here</h5>
+                <input type="month" for="downline" class="form-control" value="2021-05">
+
+                </div>
+                <div class="col-md-12 mt-4 mb-4 box_income">
+                    <table class="table user_profile_bonus_1">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th>Date</th>
+                        <th>Particulars</th>
+                        <th>Amount IN</th>
+                        <th>Amount OUT</th>
+                        <th>Balance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>28-05-21</td>
+                        <td>-----</td>
+                        <td>1300</td>
+                        <td>1500</td>
+                        <td>2800</td>
+                        </tr>
+                        <tr>
+                        <td>28-05-21</td>
+                        <td>-----</td>
+                        <td>1300</td>
+                        <td>1500</td>
+                        <td>2800</td>
+                        </tr>
+                        <tr>
+                        <td>28-05-21</td>
+                        <td>-----</td>
+                        <td>1300</td>
+                        <td>1500</td>
+                        <td>2800</td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                        <tr class="bonus_total">
+                        <td></td>
+                        <td>Total</td>
+                        <td>1300</td>
+                        <td>1500</td>
+                        <td>2800</td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                        <tr class="bonus_total_1">
+                        <td></td>
+                        <td>Balance</td>
+                        <td>1300</td>
+                        <td>1500</td>
+                        <td>2800</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+
+{% include "mlm_calculation/include/footer.html" %}

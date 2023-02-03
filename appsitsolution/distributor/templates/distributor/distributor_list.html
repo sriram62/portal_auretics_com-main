@@ -1,0 +1,64 @@
+{% extends 'shop/base.html' %}
+{% load shop_tag %}
+
+{% block extra_styles %}
+	<style>
+		table td {
+	 	   padding: 6px 10px 6px 0;
+    		border-top: 1px solid #ededed;
+    	}
+	</style>
+{% endblock extra_styles %}
+
+{% block content %}
+<div class="wrapper">
+	<nav aria-label="breadcrumb"  class="filter_short">
+		<h2>List of Distribution Centers</h2>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">List of Distribution Centers</li>
+		</ol>
+	</nav>
+
+
+	<!-- breadcrumb area end -->
+
+	<!-- shop page content -->
+	<div class="shop-page-wrapper">
+		<!-- shop page content -->
+		<div class="shop-page-content">
+			<div class="container" id ="productls">
+				<div class="wpb_text_column wpb_content_element ">
+					<div class="wpb_wrapper">
+					<table width="100%" cellspacing="0" cellpadding="0" border="0">
+					<colgroup>
+					<col width="145">
+					<col width="503">
+					<col width="123">
+					<col width="146">
+					<col width="124"></colgroup>
+					<tbody>
+						{% for distributor in object_list %}
+                            {% if distributor.cash == "YES" %}
+							<tr>
+                                <td class="oa2" style="text-align: center;" width="146"><a href="{% url 'set-distributor-checkout' pk=distributor.id %}" class="lezada-button lezada-button--medium">Select</a></td>
+								<td class="oa2" style="text-align: center;" width="145" height="54">{{ distributor.mc_name }}</td>
+								<td class="oa2" style="text-align: center;" width="403">{{ distributor.address }}{% if distributor.address_line_2 %}, {{ distributor.address_line_2 }}{% endif %}, {{ distributor.city }} {{ distributor.state }}-{{ distributor.pin_code }}</td>
+								<td class="oa2" style="text-align: center;" width="123">{% if distributor.advisor_name %}{{ distributor.advisor_name }}{% else %}-{% endif %}</td>
+							</tr>
+                            {% endif %}
+						{% endfor %}
+					</tbody>
+					</table>
+					</div>
+					</div>
+								</div>
+							</div>
+							<!-- shop page content end -->
+						</div>
+						<!-- shop page content end -->
+					</div>
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock extra_scripts %}

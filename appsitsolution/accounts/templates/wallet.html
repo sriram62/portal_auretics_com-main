@@ -1,0 +1,166 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+<body>
+    <div class="wrapper">
+        <div class="inner-wrapper profile shubhinner_marg">
+            <div class="container">
+                <div class="row profilebord_top">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                        <div class="section-title section-title--one mb-20">
+                            <h2 class="profi_font">Wallet Details</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="shubhprop_bord mt-10">
+                        <div class="profile-detail mt-20">
+                            <div class="profile-img">
+                                <img src="{{ request.user.profile.avatar.url }}" alt="Profile Picture">
+                            </div>
+                            <div class="profile-content">
+                                <p><b>Name: {{ request.user.profile.first_name }} {{ request.user.profile.last_name }}</b><br><p><b>Username: {{ request.user|capfirst  }}</b><br><b>Referal Code: {{ request.user.referralcode.referral_code|capfirst  }}</b><br><a href="{% url 'edit_profile' %}" class="shubhedit_prof">view-profile <i class="fa fa-edit"></i></a></p>
+                                <!--<p>Email: {{ profile.email }}</p>-->
+                                <ul class="shubhord">
+                                    <li><a href="{% url 'order_summary' %}">Order <i class="fa fa-shopping-bag"></i></a>
+
+                                    </li>
+                                    <!--<li>Wishlist</li>-->
+                                <li><a href="{% url 'show_cart' %}">Go to Cart <i class="fa fa-shopping-cart"></i></a></li>
+                              </ul>
+                            </div>
+                            <!--<div class="address-content mt-50 shubhpro_add">-->
+                            <!--    <h3> Address </h3>-->
+                            <!--    <div class="row">-->
+                            <!--        <div class="col-md-6">-->
+                            <!--    <p><b>Name: {{ request.user|capfirst  }}</b></p>-->
+                            <!--        </div>-->
+                            <!--         <div class="col-md-6">-->
+                            <!--        <p>Email: {{ profile.email }}</p>-->
+                            <!--         </div>-->
+                            <!--    </div>-->
+                            <!--    <div class="row">-->
+                            <!--       <div class="col-md-6">-->
+                            <!--    <p>House Number: {{ profile.shipping_address.house_number }}</p>-->
+                            <!--    </div>-->
+                            <!--    <div class="col-md-6">-->
+                            <!--    <p>Address: {{ profile.shipping_address.address_line }}</p>-->
+                            <!--     </div>-->
+                            <!--     </div>-->
+                            <!--     <div class="row">-->
+                            <!--         <div class="col-md-6">-->
+                            <!--    <p>Landmark: {{ profile.shipping_address.Landmark }}</p>-->
+                            <!--    </div>-->
+                            <!--    <div class="col-md-6">-->
+                            <!--    <p>City: {{ profile.shipping_address.city }}</p>-->
+                            <!--    </div>-->
+                            <!--    </div>-->
+                            <!--    <div class="row">-->
+                            <!--      <div class="col-md-6">-->
+                            <!--    <p>Street: {{ profile.shipping_address.street }}</p>-->
+                            <!--    </div>-->
+                            <!--    <div class="col-md-6">-->
+                            <!--    <p>country: {{ profile.shipping_address.country }}</p>-->
+                            <!--    </div>-->
+                            <!--    </div>-->
+                            <!--    <div class="row">-->
+                            <!--        <div class="col-md-6">-->
+                            <!--    <p>mobile: {{ profile.shipping_address.mobile }}</p>-->
+                            <!--    </div>-->
+                            <!--    <div class="col-md-6">-->
+                            <!--    <p>alternate_mobile: {{ profile.shipping_address.alternate_mobile }}</p>-->
+                            <!--    </div>-->
+                            <!--    </div>-->
+                            <!--    <div class="row">-->
+                            <!--        <div class="col-md-6">-->
+                            <!--    <p>Pin: {{ profile.shipping_address.pin }}</p>-->
+                            <!--    </div>-->
+                            <!--    <div class="col-md-6">-->
+                            <!--        <p>Contact No: 011-2211338</p>-->
+                            <!--        </div>-->
+                            <!--        </div>-->
+
+
+                            <!--</div>-->
+                        </div>
+                        </div>
+                         <div class="shubhprop_bord mt-10">
+                             <div class="profile-content">
+                               <!-- AG Shout :: Click to Copy-->
+                               <script src="/scripts/snippet-javascript-console.min.js?v=1"></script><style type="text/css">.as-console-wrapper { position: fixed; bottom: 0; left: 0; right: 0; max-height: 150px; overflow-y: scroll; overflow-x: hidden; border-top: 1px solid #000; display: none; }
+.as-console { background: #e9e9e9; border: 1px solid #ccc; display: table; width: 100%; border-collapse: collapse; }
+.as-console-row { display: table-row; font-family: monospace; font-size: 13px; }
+.as-console-row:after { display: table-cell; padding: 3px 6px; color: rgba(0,0,0,.35); border: 1px solid #ccc; content: attr(data-date); vertical-align: top; }
+.as-console-row + .as-console-row > * { border: 1px solid #ccc; }
+.as-console-row-code { width: 100%; white-space: pre-wrap; padding: 3px 5px; display: table-cell; font-family: monospace; font-size: 13px; vertical-align: middle; }
+.as-console-error:before { content: 'Error: '; color: #f00; }
+.as-console-assert:before { content: 'Assertion failed: '; color: #f00; }
+.as-console-info:before { content: 'Info: '; color: #00f; }
+.as-console-warning:before { content: 'Warning: '; color: #e90 }
+@-webkit-keyframes flash { 0% { background: rgba(255,240,0,.25); } 100% { background: none; } }
+@-moz-keyframes flash { 0% { background: rgba(255,240,0,.25); } 100% { background: none; } }
+@-ms-keyframes flash { 0% { background: rgba(255,240,0,.25); } 100% { background: none; } }
+@keyframes flash { 0% { background: rgba(255,240,0,.25); } 100% { background: none; } }
+.as-console-row-code, .as-console-row:after { -webkit-animation: flash 1s; -moz-animation: flash 1s; -ms-animation: flash 1s; animation: flash 1s; }</style>
+
+                        <b>Your Direct Sign-Up Link:</b>
+                        <span id="pwd_spn" class="password-span">https://portal.auretics.com/accounts/register/?refid={{request.user.referralcode.referral_code}}</span>
+                        <br />
+                        <div class="tm-shortcode lezada-button button wpb_animate_when_almost_visible wpb_move-up move-up small tm-animation move-up wpb_start_animation animated" align="center">
+                        <table width=100% align="center"><tr><td width=100% align="center"><button id="cp_btn" style="background-color: Transparent; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden;"><b>COPY LINK</b></button><br /></td></tr></table>
+                        </div>
+
+    <script type="text/javascript">
+        document.getElementById("cp_btn").addEventListener("click", copy_password);
+
+function copy_password() {
+    var copyText = document.getElementById("pwd_spn");
+    var textArea = document.createElement("textarea");
+    textArea.value = copyText.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("Copy");
+    textArea.remove();
+}
+    </script>
+
+                            </div>
+                            </div>
+                    </div>
+
+
+                    <div class="col-md-9">
+
+                        <div class="address-content shubhpro_add">
+
+                                <form method="post" action="{%url 'recharge'%}">
+                                    {%csrf_token%}
+                                <div class="border row p-2" style="border-radius:3px">
+                                  <div class="col">
+                                  <h3><strong>Balance</strong></h3>
+                                  </div>
+                                  <div class="col">
+                                   <h3><strong>{{wallet.current_balance}}</strong></h3>
+                                  </div>
+
+
+
+                    </div>
+                    <br>
+                    <br>
+                    <form method="post" action="{%url 'recharge'%}">
+                    <div class="border row p-3" style="border-radius:3px">
+                        <div class="col">
+                    <input class="m-1" Style="width:100%;" type="number" name="recharge"  placeholder=" Enter amount">
+                    </div>
+                      <div class="col">
+                    <button Style="width:80%;" class="btn btn-secondary" type="submit" name="button">Recharge</button>
+                    </div>
+                    </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

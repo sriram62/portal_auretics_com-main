@@ -1,0 +1,147 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" id="my-form" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">View Referral</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Name</label>
+                        <input type="text" class="form-control" id="category_name" name="category_name" value="{{name}}" placeholder="" disabled>
+                    </div>
+                </div>
+<!--                <div class="col-sm-6">-->
+<!--                    <div class="form-group">-->
+<!--                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Referral Id</label>-->
+<!--&lt;!&ndash;                        <select class="form-control" id="is_parent_category" name="is_parent_category">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <option value="Yes">Yes</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <option value="No">No</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </select>&ndash;&gt;-->
+<!--                        {{form.referal_id}}-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Referral Code</label>
+                    {{form.referral_code}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Upline</label>
+                            <input class="form-control" id="upline" name="discount" disabled value="{{upline.referal_by.profile.first_name}} {{upline.referal_by.profile.last_name}}">
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Upline Code</label>
+                            <input class="form-control" id="UplineCode" name="discount" disabled value="{{upline.referal_by.referralcode.referral_code}}">
+                </div>
+                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Status</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            <input class="form-control" disabled value="{{upline.user_id.profile.status}}">
+
+<!--                            {{form.status}}-->
+                        </div>
+                    </div>
+            </div>
+                        <div class="row">
+            <div class="col-sm-12">
+
+<!--        show krne walla yha se start h-->
+{% if referral %}
+	<div class="wrapper">
+		<!-- shop page content -->
+		<div class="shop-page-wrapper">
+			<!-- shop page content -->
+			<div class="shop-page-content">
+				<div class="shopping-cart-area">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<!-- cart table -->
+								<div class="cart-table-container">
+
+									<table class="cart-table arju_tab referral_width">
+										<thead>
+											<tr>
+<!--											    <th class="product-id">Order Id</th>-->
+												<th class="product-name referral_name" colspan="2">Downline</th>
+												<th class="product-price s">Downline Code</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for i in referral %}
+											<!--{{order_list.name}}-->
+											<!--	{{order_list.email}}-->
+											<tr>
+<!--											    <td class="product-price">-->
+<!--													<span class="price">{{ item.order_id }}</span>-->
+<!--												</td>-->
+<!--												<td class="product-thumbnail">-->
+<!--													{{i.referralcode.referral_code}}-->
+<!--												</td>-->
+												<td class="product-name referral_by  referral_name" colspan="2">
+													{{ i.user_id.username }}
+												</td>
+
+												<td class="product-price referral_code ">
+													{{ i.referral_code }}
+												</td>
+
+											</tr>
+
+											{% endfor %}
+										</tbody>
+									</table>
+
+
+
+						</div>
+								<!-- End of cart table -->
+
+								<!-- coupon area -->
+
+								<!-- End of coupon area -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- cart page content end -->
+	</div>
+                {% endif %}
+<!--        show krne walla yha per end h-->
+            </div>
+        </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<script>
+    $('document').ready(function(){
+        $('#my-form').submit(function(){
+          if( document.getElementById("id_image").files.length == 0 ){
+                console.log("no files selected");
+                alert('Image field is required!');
+                return false;
+            }
+            return true;
+        });
+    });
+</script>

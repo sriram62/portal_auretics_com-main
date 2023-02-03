@@ -1,0 +1,24 @@
+
+<style>
+  .input-group.email_forget {
+    max-width: 600px;
+    margin: 0 auto;
+}
+</style>
+{% extends 'shop/base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="login-area">
+  <div class="submit-form login-form">
+      <div class="section-title--login text-center ">
+      <img src="{% static 'img/success.png' %}">
+        <h1>Payment Success</h1>
+          <p>We received your purchase request;<br/> we'll be in touch shortly!</p>
+
+      </div>
+  </div>
+</div>
+
+{% endblock %}
+

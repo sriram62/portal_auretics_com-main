@@ -1,0 +1,224 @@
+
+{% extends 'shop/base.html' %}
+{% load shop_tag %}
+
+
+
+
+
+
+{% block content %}
+
+<body>
+	<div class="wrapper">
+		<!-- shop page content -->
+		<div class="shop-page-wrapper">
+			<!-- shop page content -->
+			<div class="shop-page-content">
+				<div class="shopping-cart-area">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12">
+								<!-- cart table -->
+								<div class="cart-table-container">
+									<table class="cart-table">
+										<thead>
+											<tr>
+											    <th class="product-id">Order Code</th>
+												<th class="product-subtotal">Order Date</th>
+												<th class="product-remove">Person</th>
+												<th class="product-remove">Billing Address</th>
+												<th class="product-remove">Shipping Address</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!--{{order_list.name}}-->
+											<!--	{{order_list.email}}-->
+											<tr>
+											    <td class="product-price">
+													<span class="price">{{ order_other_details.order_id1 }}</span>
+												</td>
+												<td class="total-price">
+													<span class="price">{{ order_other_details.date|date:"D,d-M-y" }}</span>
+												</td>
+												<td>
+													{% if order_other_details.billing_address.user.profile.first_name %}
+													<span class="price"><b>{{ order_other_details.billing_address.user.profile.first_name}}</b></span>
+													{% else %}
+													<span class="price"><b>{{ order_other_details.shipping_address.user.profile.first_name}}</b></span>
+													{% endif %}
+												</td>
+
+												{% if order_other_details.billing_address %}
+												<td class="product-price">
+													<span class="price">House No.{{ order_other_details.billing_address.house_number }}<br>
+														Landmark:{{ order_other_details.billing_address.Landmark }}<br>
+														City:{{ order_other_details.billing_address.city }}<br>
+														Pincode:{{ order_other_details.billing_address.pin }}<br>
+														Mobile:{{ order_other_details.billing_address.mobile }}<br>
+														Alternate Mobile:{{ order_other_details.billing_address.alternate_mobile }}<br>
+														<address></address></span>
+												</td>
+												{% else %}
+												<td class="product-price">
+													<span class="price">House No.{{ order_other_details.shipping_address.house_number }}<br>
+														Landmark:{{ order_other_details.shipping_address.Landmark }}<br>
+														City:{{ order_other_details.shipping_address.city }}<br>
+														Pincode:{{ order_other_details.shipping_address.pin }}<br>
+														Mobile:{{ order_other_details.shipping_address.mobile }}<br>
+														Alternate Mobile:{{ order_other_details.shipping_address.alternate_mobile }}<br>
+														<address></address></span>
+												</td>
+												{% endif %}
+												{% if order_other_details.shipping_address %}
+												<td class="product-price">
+													<span class="price">House No.{{ order_other_details.shipping_address.house_number }}<br>
+														Landmark:{{ order_other_details.shipping_address.Landmark }}<br>
+														City:{{ order_other_details.shipping_address.city }}<br>
+														Pincode:{{ order_other_details.shipping_address.pin }}<br>
+														Mobile:{{ order_other_details.shipping_address.mobile }}<br>
+														Alternate Mobile:{{ order_other_details.shipping_address.alternate_mobile }}<br>
+														<address></address></span>
+												</td>
+												{% else %}
+												<td class="product-price">
+													<span class="price">House No.{{ order_other_details.billing_address.house_number }}<br>
+														Landmark:{{ order_other_details.billing_address.Landmark }}<br>
+														City:{{ order_other_details.billing_address.city }}<br>
+														Pincode:{{ order_other_details.billing_address.pin }}<br>
+														Mobile:{{ order_other_details.billing_address.mobile }}<br>
+														Alternate Mobile:{{ order_other_details.billing_address.alternate_mobile }}<br>
+														<address></address></span>
+												</td>
+												{% endif %}
+
+											</tr>
+										</tbody>
+									</table>
+
+
+
+						</div>
+								<!-- End of cart table -->
+
+								<!-- coupon area -->
+
+								<!-- End of coupon area -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- cart page content end -->
+	</div>
+	<div class="wrapper">
+		<!-- shop page content -->
+		<div class="shop-page-wrapper">
+			<!-- shop page content -->
+			<div class="shop-page-content">
+				<div class="shopping-cart-area">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12">
+								<!-- cart table -->
+								<div class="cart-table-container">
+									<table class="cart-table">
+										<thead>
+											<tr>
+												<th class="product-name" colspan="2">Product</th>
+												<th class="product-price">Price</th>
+												<th class="product-quantity">Quantity</th>
+												<th class="product-subtotal">Total</th>
+												<th class="product-subtotal">Size</th>
+												<th class="product-subtotal">BV</th>
+												<th class="product-subtotal">PV</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for item in order_list %}
+											<!--{{order_list.name}}-->
+											<!--	{{order_list.email}}-->
+											<tr>
+<!--											    <td class="product-price">-->
+<!--													<span class="price">{{ item.order.order_id1 }}</span>-->
+<!--												</td>-->
+												<td class="product-thumbnail">
+													<a href="{% url 'product_detail' item.product.pk item.product.slug %}">
+														<img src="{{ item.product.image.url }}" class="img-fluid" alt="">
+													</a>
+												</td>
+												<td class="product-name">
+													<a href="{% url 'product_detail' item.product.pk item.product.slug %}">{{ item.product.product_name }}</a>
+													<span class="product-variation">Color: {{item.product.colour}}</span>
+												</td>
+												<td class="product-price">
+<!--													<span class="price">₹{% dis_price_include_tax item.product %}</span>-->
+													<span class="price">₹{{item.price|floatformat:2}}</span>
+												</td>
+												<td class="product-quantity">
+                                                    {{ item.quantity }}
+												</td>
+
+												<td class="total-price">
+													<span class="price">₹{% total_of_particular_iteam_price item.price item.quantity %}</span>
+												</td>
+												<td class="total-price">
+													<span class="price">{{item.product.size}}</span>
+												</td>
+												<td class="total-price">
+													<span class="price">{{item.bv}}</span>
+												</td>
+												<td class="total-price">
+													<span class="price">{{item.pv}}</span>
+												</td>
+
+											</tr>
+
+											{% endfor %}
+										</tbody>
+									</table>
+
+
+
+						</div><br />
+		   <div class="col-md-6 mt-10" >
+               <label class="shubh_datee" for="date"><h4>Shipping Charge:</h4></label>
+		   <input style="font-size:18px; text-align: right;" type="text" id="grand_total" name="grand_total" value="{{ order_other_details.shiping_charge|floatformat:2  }}" readonly>
+		   </div>
+			{% if D_sale != False %}
+		   <div class="col-md-6 mt-10" >
+               <label class="shubh_datee" for="date"><h4>TAX</h4></label>
+		   <input style="font-size:18px; text-align: right;" type="text" id="grand_total" name="grand_total" value="{{ order_other_details.tax_amount|floatformat:2  }}" readonly>
+		   </div>
+			{% endif %}
+		   <div class="col-md-6 mt-10" >
+               <label class="shubh_datee" for="date"><h4>Grand Total:  </h4></label>
+		   <input style="font-size:18px; text-align: right;" type="text" id="grand_total" name="grand_total" value="{{ order_other_details.grand_total|floatformat:2  }}" readonly>
+		   </div>
+		   <div class="col-md-6 mt-10" >
+			   <label class="shubh_datee" for="date"><h4>Grand Total BV:</h4></label>
+		   <input style="font-size:18px; text-align: right;" type="text" id="grand_total" name="grand_total" value="{{ order_other_details.bv|floatformat:2  }}" readonly>
+		   </div>
+		   <div class="col-md-6 mt-10" >
+               <label class="shubh_datee" for="date"><h4>Grand Total PV:</h4></label>
+		   <input style="font-size:18px; text-align: right;" type="text" id="grand_total" name="grand_total" value="{{ order_other_details.pv|floatformat:2  }}" readonly>
+		   </div>
+								<!-- End of cart table -->
+
+								<!-- coupon area -->
+
+								<!-- End of coupon area -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- cart page content end -->
+	</div>
+
+</body>
+{% endblock  %}

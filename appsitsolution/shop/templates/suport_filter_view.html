@@ -1,0 +1,51 @@
+
+{% load shop_tag %}
+<div class="row">
+{% for product in all_products|price_product:aa %}
+<div class="col-sm-6 col-md-3 hot sale">
+    <div class="single-product">
+        <div class="single-product__image">
+            <a class="image-wrap" href= "/product/{{product.id}}/{{product.slug}}/">
+                <img src="/media/{{product.image}}"class="img-fluid" alt=""/>
+            </a>
+			{% if product.distributor_price != 0 %}
+            <div class="single-product__floating-badges">
+                <span class="onsale">-{{product.distributor_price|floatformat:1}}%</span>
+<!--                <span class="hot">hot</span>-->
+            </div>
+		{% endif%}
+            <div class="single-product__floating-icons">
+<!--            <a class="wishlist" href="/product/{{product.id}}/{{product.slug}}/">-->
+<!--                <i class="ion-android-favorite-outline"></i>-->
+<!--            </a>-->
+        </div>
+        </div>
+        <div class="single-product__content">
+            <div class="title">
+                <a id="productName"href="/product/{{product.id}}/ {{product.slug}}/">{{ product.product_name}}</a>
+            </div>
+								{% if user.is_authenticated and product.distributor_price != 0  %}
+            <div class="price">
+                <span class="main-price discounted">₹ {% check product %}</span>
+                <span class="discounted-price">₹{% dis_price_include_tax product %}</span></span><br><br>
+                <span class="discounted-price">BV - ₹{% business_volue product %}</span><br>
+                <span class="discounted-price">PV - ₹{% point_volue product %}</span>
+            </div>
+            {% else %}
+            <div class="price">
+                <span class="discounted-price">₹{% check product %}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+<script>
+    $(document).ready(function () {
+	$('.checkboxall').each(function(){
+		$("#selectall").prop('checked', true);
+		$(".checkboxall").prop('checked', true);
+	})
+});
+</script>
+    </div>

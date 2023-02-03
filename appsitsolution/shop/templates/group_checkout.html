@@ -1,0 +1,98 @@
+{% extends 'shop/base.html' %}
+{% load shop_tag %}
+{% load humanize %}
+{% block content %}
+<!-- End of search overlay -->
+<div class="wrapper">
+	<div class="shop-page-wrapper">
+			<div style="margin-left: 20px;">
+				{% include 'shop/include/top_purchase_center.html' %}
+			</div>
+
+<!-- checkout page content -->
+<div class="shop-page-content shubhshipping_padd">
+			<div class="checkout-page-area">
+				<div class="container">
+
+			<div class="checkout-page-area">
+				<div class="container">
+
+						<div style="margin-left: 20px;margin-bottom: 20px;">
+							<form action="{% url 'new-items-group-checkout' %}" method="post" name="group-checkout-form">
+								{% csrf_token %}
+								<br><br>
+								<div class="row">
+									<div class="col-md-12"><label>Enter user email or Referral Code or <br>
+										Phone Number for group checkout:</label> <!--{{temp.house_number}}-->
+										<div class="shubh_ship min_inp_height"><input type='text'  required="required" name="group-user" class="min_inp_height" style="width: 28%;">
+											<button type="submit" class="lezada-button">Submit</button>
+										</div>
+
+							    	</div>
+								</div>
+								<br>
+								<h4><b>Group Users</b></h4>
+						<table>
+
+								  <tr>
+									<td colspan="5">
+							{% for username, items in cart_items.items %}
+								{% if is_group_checkout %}
+										<tr>
+
+											<td><h4><b></b>{{ username.profile.first_name }}
+													</h4></td>
+									<td><div class="col-md-12 shubhp_edit mt-sm-20 ship_add_ord_2">
+													<p><a href="{% url 'product_list' user_id=username.pk %}">Add Product</a></p>
+											 </div></td>
+								  </tr>
+								{% endif %}
+							{% endfor %}
+								</table>
+
+
+							</form>
+						</div>
+
+				</div>
+			</div>
+	{% if pending %}
+			<div align="center">
+			<h4>You are going to pay </h4><h2> {{pending}}</h2>
+			</div>
+	{% endif %}
+		</div>
+		<!-- checkout page content end -->
+
+	</div>
+</div>
+	</div>
+	{% endblock %}
+	{% block extra_scripts %}
+	<script>
+document.getElementById('billingforms').onclick = function() {
+   toggleSub(this, 'active_sub');
+};
+
+// called onclick of checkbox
+function toggleSub(checkbox, id) {
+    // get reference to related content to display/hide
+    var el = document.getElementById(id);
+<!--    alert(el);-->
+    if ( checkbox.checked ) {
+        $('#shipping_address').prop('checked', false);
+        $('.hideable_shipping_form').hide();
+        el.style.display = 'block';
+    } else {
+        el.style.display = 'none';
+        $('#shipping_address').prop('checked', true);
+        $('.hideable_shipping_form').show();
+    }
+}
+</script>
+
+{% endblock extra_scripts %}
+
+
+
+</div>

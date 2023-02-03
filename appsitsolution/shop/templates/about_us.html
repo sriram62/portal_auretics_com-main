@@ -1,0 +1,284 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="wrapper">
+    <!-- breadcrumb area -->
+    <div class="breadcrumb-area" style="background-image:url( '/static/img/banner/banner-2.jpg' ); ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="breadcrumb-title">About Us</h1>
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-list__item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-list__item breadcrumb-list__item--active">About Us</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+    <div class="inner-wrapper">
+        <!-- about us page content -->
+        <div class="about-page-content mb-80 mb-sm-45">
+            <div class="container wide">
+                <div class="row">
+                    <div class="col-md-6 mb-sm-30">
+                        <div class="about-image">
+                            <img src="{% static 'img/about/about-us.jpg' %}" class="img-fluid" alt="" />
+                        </div>
+                    </div>
+
+                    <div class="offset-md-1 col-md-5">
+                        <div class="about-page-text">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur cing elit. Suspe ndisse suscipit sagittis leo sit estibulum issim Lorem ipsum dolor sit amet, consectetur cing elit. ipsum dolor sit amet, consectetur cing elit. Suspe ndisse suscipit sagittis leo sit es.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-page-content mb-80 mb-sm-45">
+            <div class="container wide">
+                <div class="row">
+                    <div class="order-2 order-md-1 col-md-5">
+                        <div class="about-page-text">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur cing elit. Suspe ndisse suscipit sagittis leo sit estibulum issim Lorem ipsum dolor sit amet, consectetur cing elit. ipsum dolor sit amet, consectetur cing elit. Suspe ndisse suscipit sagittis leo sit es.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="order-1 offset-md-1 col-md-6 mb-sm-30">
+                        <div class="about-page-2-image">
+                            <img src="{% static 'img/about/about-us.jpg' %}" class="img-fluid" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of about us page content -->
+
+        <!-- single item testimonial area -->
+        <div class="lezada-testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- testmonial slider container -->
+                        <div
+                            class="lezada-slick-slider multi-testimonial-slider-container"
+                            data-slick-setting='{
+                                    "slidesToShow": 1,
+                                    "arrows": true,
+                                    "autoplay": true,
+                                    "autoplaySpeed": 5000,
+                                    "speed": 1000,
+                                    "prevArrow": {"buttonClass": "slick-prev", "iconClass": "ti-angle-left" },
+                                    "nextArrow": {"buttonClass": "slick-next", "iconClass": "ti-angle-right" }
+                                }'
+                            data-slick-responsive='[
+                                    {"breakpoint":1501, "settings": {"slidesToShow": 1} },
+                                    {"breakpoint":1199, "settings": {"slidesToShow": 1} },
+                                    {"breakpoint":991, "settings": {"slidesToShow": 1, "arrows": false} },
+                                    {"breakpoint":767, "settings": {"slidesToShow": 1, "arrows": false} },
+                                    {"breakpoint":575, "settings": {"slidesToShow": 1, "arrows": false} },
+                                    {"breakpoint":479, "settings": {"slidesToShow": 1, "arrows": false} }
+                                ]'
+                        >
+                            <!-- single testimonial -->
+                            <div class="col">
+                                <div class="testimonial-item single-testimonial-single-item">
+                                    <div class="single-testimonial-single-item__image mb-sm-45">
+                                        <img src="{% static 'img/testimonial/testimonial-1.png' %}" class="img-fluid" alt="" />
+                                    </div>
+
+                                    <div class="single-testimonial-single-item__content text-center">
+                                        <div class="quote-icon d-inline-block mb-30">
+                                            <img src="{% static 'img/icons/quote.png' %}" class="img-fluid" alt="" />
+                                        </div>
+
+                                        <div class="text mb-40">
+                                            I can say your dedication is second to none. I like the fact that you are strongly proud of your work in every way.
+                                        </div>
+
+                                        <div class="client-info">
+                                            <p class="name">Sally Ramsey</p>
+                                            <span class="designation">/ Reporter</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of single testimonial -->
+
+                            <!-- single testimonial -->
+                            <div class="col">
+                                <div class="testimonial-item single-testimonial-single-item">
+                                    <div class="single-testimonial-single-item__image mb-sm-45">
+                                        <img src="{% static 'img/testimonial/testimonial-2.jpg' %}" class="img-fluid" alt="" />
+                                    </div>
+
+                                    <div class="single-testimonial-single-item__content text-center">
+                                        <div class="quote-icon d-inline-block mb-30">
+                                            <img src="{% static 'img/icons/quote.png' %}" class="img-fluid" alt="" />
+                                        </div>
+
+                                        <div class="text mb-40">
+                                            This has already been my fifth-time purchasing their theme. I have been highly satisfied with their work.
+                                        </div>
+
+                                        <div class="client-info">
+                                            <p class="name">Lois Thompson</p>
+                                            <span class="designation">/ Model</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of single testimonial -->
+
+                            <!-- single testimonial -->
+                            <div class="col">
+                                <div class="testimonial-item single-testimonial-single-item">
+                                    <div class="single-testimonial-single-item__image mb-sm-45">
+                                        <img src="{% static 'img/testimonial/testimonial-3.jpg' %}" class="img-fluid" alt="" />
+                                    </div>
+
+                                    <div class="single-testimonial-single-item__content text-center">
+                                        <div class="quote-icon d-inline-block mb-30">
+                                            <img src="{% static 'img/icons/quote.png' %}" class="img-fluid" alt="" />
+                                        </div>
+
+                                        <div class="text mb-40">
+                                            There's nothing would satisfy me much more than a worry-free clean and responsive theme for my high-traffic site.
+                                        </div>
+
+                                        <div class="client-info">
+                                            <p class="name">Florence Pittman</p>
+                                            <span class="designation">/ Actor</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of single testimonial -->
+                        </div>
+                        <!-- End of testmonial slider container -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of single item testimonial area -->
+
+        <!-- blog area -->
+        <div class="blog-post-area mb-80 mb-sm-45">
+            <div class="section-title-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="section-title section-title--one text-center">
+                                <h1>Our Latest Blogs</h1>
+                                <p class="subtitle subtitle--deep mb-0">Lorem ipsum</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <!-- blog-post-wrapper -->
+                <div class="row blog-post-wrapper">
+                    <div class="col-md-6 col-lg-4 mb-50">
+                        <div class="single-slider-post">
+                            <div class="single-slider-post__image mb-30">
+                                <a href="#">
+                                    <img src="{% static 'img/blog/img-1.png' %}" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <div class="single-slider-post__content">
+                                <div class="post-date">
+                                    <i class="ion-android-calendar"></i>
+                                    <a href="#"> june 5, 2020</a>
+                                </div>
+                                <h2 class="post-title"><a href="#">Chic Fashion Phenomenon</a></h2>
+                                <p class="post-excerpt">Michele seemed to say, was the 21st-century Gucci girl, an eccentric,
+                                    fresh-faced weirdo who wasn’t afraid to wear backless fur-lined loafers, to personify the idea of
+                                    “ugly pretty.”</p>
+                                <a href="#" class="blog-readmore-btn">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-50">
+                        <div class="single-slider-post">
+                            <div class="single-slider-post__image mb-30">
+                                <a href="#">
+                                    <img src="{% static 'img/blog/img-2.png' %}" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <div class="single-slider-post__content">
+                                <div class="post-date">
+                                    <i class="ion-android-calendar"></i>
+                                    <a href="#"> june 5, 2020</a>
+                                </div>
+                                <h2 class="post-title"><a href="#">Chic Fashion Phenomenon</a></h2>
+                                <p class="post-excerpt">Michele seemed to say, was the 21st-century Gucci girl, an eccentric,
+                                    fresh-faced weirdo who wasn’t afraid to wear backless fur-lined loafers, to personify the idea of
+                                    “ugly pretty.”</p>
+                                <a href="#" class="blog-readmore-btn">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-50">
+                        <div class="single-slider-post">
+                            <div class="single-slider-post__image mb-30">
+                                <a href="#">
+                                    <img src="{% static 'img/blog/img-3.png' %}" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <div class="single-slider-post__content">
+                                <div class="post-date">
+                                    <i class="ion-android-calendar"></i>
+                                    <a href="#"> june 5, 2020</a>
+                                </div>
+                                <h2 class="post-title"><a href="#">Chic Fashion Phenomenon</a></h2>
+                                <p class="post-excerpt">Michele seemed to say, was the 21st-century Gucci girl, an eccentric,
+                                    fresh-faced weirdo who wasn’t afraid to wear backless fur-lined loafers, to personify the idea of
+                                    “ugly pretty.”</p>
+                                <a href="#" class="blog-readmore-btn">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of blog-post-wrapper -->
+            </div>
+        </div>
+        <!-- blog area end -->
+
+        <!-- instagram slider area -->
+        <div class="instagram-slider-area mb-80 mb-sm-45">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 order-2 order-lg-1">
+                        <div class="instagram-image-slider-area">
+                            <div class="instagram-image-slider-container">
+                                <div class="instagram-feed-thumb">
+                                    <div id="instagramFeedThree" class="instagram-carousel"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 order-1 order-lg-2">
+                        <div class="instagram-section-intro pl-50 pl-lg-50 pl-md-0 pl-sm-0 pl-xs-0 pl-xxs-0 mb-0 mb-lg-0 mb-md-50 mb-sm-45 mb-xs-50 mb-xxs-50">
+                            <p><a href="#">@lezada_shop</a></p>
+                            <h3>Follow us on Instagram</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- instagram slider area end -->
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js%}
+{% endblock %}

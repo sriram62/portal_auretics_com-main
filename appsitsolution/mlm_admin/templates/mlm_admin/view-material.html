@@ -1,0 +1,235 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">View Material</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>MC Name</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.mc_name}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Print Name</label>
+                        {{form.print_name}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Address</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.address}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category">Address Line 2</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.address_line_2}}
+                </div>
+                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="description"><small class="text-danger">* </small>City</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.city}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission"><small class="text-danger">* </small>State</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.state}}
+                        </div>
+                    </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="category"><small class="text-danger">* </small>PIN Code</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.pin_code}}
+                </div>
+                </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="gendar">GST Number</label>
+<!--                        <input type="date" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.gst_number}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="brand"><small class="text-danger">* </small>Is Company Depot</label>
+<!--                        <input type="date" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                    {{form.company_depot}}
+                </div>
+                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page"><small class="text-danger">* </small>Is Advisory Owned Distributor</label>
+                            {{form.advisory_owned}}
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="row weaklyArea" id="weaklyArea">
+<!--                     <div class="col-sm-12" id="weaklyArea"></div>-->
+                     <div class = "col-sm-6"  id="weaklyArea1"  style="display:none;">
+                         <div class = "form-group">
+                             <label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Name</label>
+                             {{form.advisor_name}}
+                         </div>
+                     </div>
+                     <div class = "col-sm-6"  id="weaklyArea2"  style="display:none;">
+                         <div class = "form-group">
+                             <label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Registration Number</label>
+                             <select id="id_advisor_registration_number" name="advisor_registration_number" class="form-control"disabled>
+                                 <option value="{{valid_user.pk}}" selected>{{valid_user.referralcode.referral_code}}-{{valid_user.email}} </option>
+                             </select>
+
+                             <div class="error alert-error"  id="err_referral_code" style="display:none;" ></div>
+                         </div>
+                     </div>
+                 </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page"><small class="text-danger">* </small>Is Cash and Carry Allowed</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.cash}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page"><small class="text-danger">* </small>Is Billing Allowed</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.billing_allowed}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page"><small class="text-danger">* </small>Status</label>
+                            {{form.status}}
+                        </div>
+                    </div>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<!--<script>-->
+<!--$(document).ready(function(){-->
+<!--$("#id_advisory_owned").change(function () {-->
+<!--  var numInputs = $(this).val();-->
+<!--  if (numInputs == "NO") {-->
+<!--  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"></div>')-->
+<!--  }else if(numInputs == "YES"){-->
+<!--  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Name</label>{{form.advisor_name}}</div></div><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Registration Number</label>"<select id="id_advisor_registration_number" name="advisor_registration_number" class="form-control"><option value="{{valid_user.pk}}" selected>{{valid_user.referralcode.referral_code}}-{{valid_user.email}} </option></select></div></div></div>')-->
+<!--  }-->
+<!--});-->
+<!--});-->
+<!--</script>-->
+
+<!--<script>-->
+<!--$(document).ready(function(){-->
+<!--  var numInputs = $(id_advisory_owned).val();-->
+<!--  if (numInputs == "NO") {-->
+<!--  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"></div>')-->
+<!--  }else if(numInputs == "YES"){-->
+<!--  $("#weaklyArea").replaceWith('<div class="row" id="weaklyArea"><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Name</label>{{form.advisor_name}}</div></div><div class = "col-sm-6" ><div class = "form-group"><label class="floating-label" for="task_date"><small class="text-danger">* </small>Advisor Registration Number</label>"{{form.advisor_registration_number}}</div></div></div>')-->
+<!--  }-->
+<!--});-->
+<!--</script>-->
+
+<script>
+    function numberOnly(id) {
+    // Get element by id which passed as parameter within HTML element event
+    var element = document.getElementById(id);
+    // Use numbers only pattern, from 0 to 9
+    var regex = /[^0-9]/gi;
+    // This removes any other character but numbers as entered by user
+    element.value = element.value.replace(regex, "");
+}
+</script>
+<script>
+    $("#id_pin_code").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var pincode = $("#id_pin_code").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+    if (( pincode >5 )){
+        event.preventDefault();
+    }
+});
+</script>
+<script>
+    $('document').ready(function(){
+    $("#id_advisory_owned").change(function () {
+        var numInputs = $('#id_advisory_owned').val();
+
+
+    if(numInputs == 'YES'){
+<!--        $('#weaklyArea').show();-->
+<!--        $('#weaklyArea').css({pointerEvents: "block"});-->
+<!--        $('#weaklyArea').css('pointer-events', 'block');-->
+
+$("#weaklyArea1").css("display", "block");
+$("#weaklyArea2").css("display", "block");
+<!--         alert(numInputs);-->
+    }
+    else{
+<!--        $('#weaklyArea').hide();-->
+<!--        $('#weaklyArea').css('pointer-events', 'none');-->
+<!--        $('#weaklyArea').css({pointerEvents: "none"});-->
+    $("#weaklyArea1").css("display", "none");
+    $("#weaklyArea2").css("display", "none");
+    $("#id_advisor_name").val('');
+    $("#id_advisor_registration_number").val('');
+        $('#id_advisor_registration_number').removeAttr('required');
+        $('#id_advisor_name').removeAttr('required');
+    }
+    });
+    });
+
+</script>
+
+<script>
+$('document').ready(function(){
+    var numInputs = $('#id_advisory_owned').val();
+
+
+    if(numInputs == 'YES'){
+<!--        $('#weaklyArea').show();-->
+<!--        $('#weaklyArea').css({pointerEvents: "block"});-->
+<!--        $('#weaklyArea').css('pointer-events', 'block');-->
+
+$("#weaklyArea1").css("display", "block");
+$("#weaklyArea2").css("display", "block");
+<!--         alert(numInputs);-->
+    }
+    else{
+<!--        $('#weaklyArea').hide();-->
+<!--        $('#weaklyArea').css('pointer-events', 'none');-->
+<!--        $('#weaklyArea').css({pointerEvents: "none"});-->
+    $("#weaklyArea1").css("display", "none");
+    $("#weaklyArea2").css("display", "none");
+    $("#id_advisor_name").val('');
+    $("#id_advisor_registration_number").val('');
+        $('#id_advisor_registration_number').removeAttr('required');
+        $('#id_advisor_name').removeAttr('required');
+    }
+    });
+</script>

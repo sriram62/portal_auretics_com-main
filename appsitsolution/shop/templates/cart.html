@@ -1,0 +1,302 @@
+{% extends 'shop/base.html' %}
+{% load shop_tag %}
+{% load humanize %}
+{% block content %}
+
+{% load loyalty_purchase %}
+
+	<div class="wrapper">
+		<!-- shop page content -->
+		<div class="shop-page-wrapper">
+			<div style="margin-left: 20px;">
+				{% include 'shop/include/top_purchase_center.html' %}
+			</div>
+			<!-- shop page content -->
+			<div class="shop-page-content">
+				<div class="shopping-cart-area">
+					<div class="container">
+						<a href="/"><h4>⇦ Back</h4></a>
+						<div class="row">
+							{% if cart_items_count %}
+							<div class="col-lg-8 shubhcart_bord">
+                            <center><a href="{% url 'cart_clear' %}"><input type="submit" name="submit" class="shubhcart_upbtn" value="Clear Cart" style="position: absolute;
+right: 80px;" type="submit" name="Clear Cart" value="Clear Cart"></a></center>
+
+								<!-- cart table -->
+								<div class="cart-table-container">
+
+                                <br />
+									<table class="cart-table">
+										<thead>
+											<tr>
+												<th class="product-name" colspan="2">Product</th>
+												<th class="product-price">Price</th>
+												<th class="product-quantity">Quantity</th>
+												<th class="product-quantity">Business Volume</th>
+												<th class="product-quantity">Point Value</th>
+												<th class="product-subtotal">Total</th>
+												<th class="product-remove">&nbsp;</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for username, items in cart_items.items %}
+											{% if is_group_checkout %}
+												<tr>
+													<td colspan="5">
+                                                   <div class="col-md-12 shubhp_edit mt-sm-20 ship_add_ord_2">
+														<h4>{{ username.profile.first_name }}'s cart products
+
+															<p><a href="{% url 'product_list' user_id=username.pk %}">Add Product</a></p>
+
+													</h4>
+	                                                  </div>
+													</td>
+												</tr>
+											{% endif %}
+											{% for item in items|non_loyalty_items:request %}
+											<tr>
+												<td class="product-thumbnail">
+													<a href="{% url 'product_detail' item.product.pk item.product.slug %}">
+														<img src="{{ item.product.image.url }}" class="img-fluid" alt="">
+													</a>
+												</td>
+												<td class="product-name">
+													<a href="{% url 'product_detail' item.product.pk item.product.slug %}">{{ item.product.product_name }}</a>
+													<span class="product-variation">Color: {{item.product.colour}}</span>
+												</td>
+												<td class="product-price">
+<!-- 													<span class="price">₹{% check item.product %}</span> -->
+													<span class="price">₹{% if user.is_authenticated %}{{  item.discount_price|floatformat:2 }}{% else %}{{  item.price|floatformat:2 }}{% endif %}</span>
+												</td>
+												<td class="product-quantity">
+												<!-- <div class="pro-qty d-inline-block mx-0">
+													<input type="text" value="1">
+												</div> -->
+												<form action="" method="post">
+													{% csrf_token %}
+													<input type="text" name="quantity" class="shubhcart_quan" value="{{ item.quantity|floatformat:0  }}">
+													<input type="hidden" name="item_id" value="{{ item.id }}">
+													{% if item.in_stock == False %}
+													<span style="color:red">maximum : {% maximum_product_qty item.product  user  material  distributor_checkout %}</span>
+													{% endif %}
+												<td class="total-price shubh_price">
+													<span class="price">{{  item.total_bv|floatformat:2 }}</span>
+												</td>
+												<td class="total-price shubh_price">
+													<span class="price">{{  item.total_pv|floatformat:2 }}</span>
+												</td>
+
+												<td class="total-price shubh_price">
+													<span class="price">₹{% if user.is_authenticated %}{{  item.total_discount_cost|floatformat:2 }}{% else %}{{ item.total_cost|floatformat:2 }}{% endif %}</span>
+												</td>
+												<td><input type="submit" name="submit" class="shubhcart_upbtn" value="Update"></td>
+												</form>
+												<td class="product-remove shubh_pos">
+													<form action="" method="post">
+														{% csrf_token %}
+														<input type="hidden" name="item_id" value="{{ item.id }}">
+														<input class="ion-android-close shubhcart_upbtn" type="submit" name="submit" value="Remove">
+													</form>
+													<!-- <a href="#">
+														<i class="ion-android-close"></i>
+													</a> -->
+												</td>
+											</tr>
+											{% endfor %}
+										{% endfor %}
+										</tbody>
+									</table>
+									{% if loyalty_cart_items_count %}
+									<h2>Loyalty items</h2>
+									<table class="cart-table">
+										<thead>
+											<tr>
+												<th class="product-name" colspan="2">Product</th>
+												<th class="product-price">Price</th>
+												<th class="product-quantity">Quantity</th>
+												<th class="product-subtotal">Total</th>
+												<th class="product-remove">&nbsp;</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for username, items in cart_items.items %}
+											{% if is_group_checkout %}
+												<tr>
+													<td colspan="5">
+														<h4>{{ username }}'s cart products
+															<a class="shubhcart_upbtn" href="{% url 'product_list' %}">Add Product</a>
+													</h4>
+													</td>
+												</tr>
+											{% endif %}
+											{% for item in items|loyalty_items:request %}
+											<tr>
+												<td class="product-thumbnail">
+													<a href="{% url 'product_detail' item.product.pk item.product.slug %}">
+														<img src="{{ item.product.image.url }}" class="img-fluid" alt="">
+													</a>
+												</td>
+												<td class="product-name">
+													<a href="{% url 'product_detail' item.product.pk item.product.slug %}">{{ item.product.product_name }}</a>
+													<span class="product-variation">Color: {{item.product.colour}}</span>
+												</td>
+												<td class="product-price">
+<!-- 													<span class="price">₹{% check item.product %}</span> -->
+													<span class="price">₹{% if user.is_authenticated %}{{  item.mrp|floatformat:2 }}{% else %}{{  item.mrp|floatformat:2 }}{% endif %}</span>
+												</td>
+												<td class="product-quantity">
+												<!-- <div class="pro-qty d-inline-block mx-0">
+													<input type="text" value="1">
+												</div> -->
+												<form action="" method="post">
+													{% csrf_token %}
+													<input type="text" name="quantity" class="shubhcart_quan" value="{{ item.quantity|floatformat:0  }}">
+													<input type="hidden" name="item_id" value="{{ item.id }}">
+													{% if item.in_stock == False %}
+													<span style="color:red">maximum : {% maximum_product_qty item.product  user  material  distributor_checkout %}</span>
+													{% endif %}
+
+												<td class="total-price shubh_price">
+													<span class="price">₹{% if user.is_authenticated %}{{  item.total_mrp|floatformat:2 }}{% else %}{{ item.total_mrp|floatformat:2 }}{% endif %}</span>
+												</td>
+												<td><input type="submit" name="submit" class="shubhcart_upbtn" value="Update"></td>
+												</form>
+												<td class="product-remove shubh_pos">
+													<form action="" method="post">
+														{% csrf_token %}
+														<input type="hidden" name="item_id" value="{{ item.id }}">
+														<input class="ion-android-close shubhcart_upbtn" type="submit" name="submit" value="Remove">
+													</form>
+													<!-- <a href="#">
+														<i class="ion-android-close"></i>
+													</a> -->
+												</td>
+											</tr>
+											{% endfor %}
+										{% endfor %}
+										</tbody>
+									</table>
+<!--									<br> </br/>-->
+<!--									{{products}}-->
+									{% endif %}
+								</div>
+								<!-- End of cart table -->
+
+                            <!-- AG:: DO NOT DELETE as we might need coupon area in the future -->
+								<!-- coupon area -->
+<!--								<div class="cart-coupon-area pt-30 pb-30">-->
+<!--									<div class="row align-items-center">-->
+<!--										<div class="col-lg-8 mb-md-30 mb-sm-30">-->
+<!--											&lt;!&ndash; coupon form &ndash;&gt;-->
+<!--											<div class="submit-form coupon-form">-->
+<!--												<form action="#">-->
+<!--													<div class="row">-->
+<!--														<div class="col-sm-6 mb-sm-10">-->
+<!--															<input type="text" placeholder="Enter your coupon code">-->
+<!--														</div>-->
+<!--														<div class="col-sm-6">-->
+<!--															<a class="lezada-button" href="#">apply coupon</a>-->
+<!--														</div>-->
+<!--													</div>-->
+<!--												</form>-->
+<!--											</div>-->
+<!--											&lt;!&ndash; End of coupon form &ndash;&gt;-->
+<!--										</div>-->
+<!--										&lt;!&ndash;<div class="col-lg-4 text-left text-lg-right">&ndash;&gt;-->
+<!--										&lt;!&ndash;	<a class="lezada-button-outline" href="#">update cart</a>&ndash;&gt;-->
+<!--										&lt;!&ndash;</div>&ndash;&gt;-->
+<!--									</div>-->
+<!--								</div>-->
+								<!-- End of coupon area -->
+							</div>
+							<div class="col-lg-4">
+								<div class="cart-calculation-area">
+									<h2 class="heading">Cart total</h2>
+									<table class="cart-calculation-table mb-30">
+										<tr>
+											<th>SUBTOTAL</th>
+											<td class="subtotal">₹{% if user.is_authenticated %}{{a_cart_subtotal|floatformat:2}}{% else %}{{ cart_subtotal|floatformat:2 }}{% endif %}</td>
+										</tr>
+										{% if not request.session.distributor_checkout %}
+											<tr>
+												<th>SHIPPING FEE</th>
+												<td class="subtotal">₹{% if user.is_authenticated %}{% shiping_fee_check a_cart_subtotal %}{% else %}{% shiping_fee_check %}{% endif %}</td>
+											</tr>
+										{% endif %}
+										{% if not request.session.distributor_checkout %}
+											<tr>
+												<th>FINAL TOTAL</th>
+												<td class="total">₹{% if user.is_authenticated %}{% add_ship_charge_a_user a_cart_subtotal %}{% else %}{% add_ship_charge_n_user cart_subtotal %}{% endif %}</td>
+											</tr>
+										{% else %}
+											<tr>
+												<th>FINAL TOTAL</th>
+												<td class="total">₹{% if user.is_authenticated %}{{ a_cart_subtotal }}{% else %}{{ cart_subtotal }}{% endif %}</td>
+											</tr>
+										{% endif %}
+										<tr>
+											<th>Total BV</th>
+											<td class="subtotal">{{ cart_sub_bv|floatformat:2 }}</td>
+										</tr>
+										<tr>
+											<th>Total PV</th>
+											<td class="subtotal">{{ cart_sub_pv|floatformat:2 }}</td>
+										</tr>
+									</table>
+									{% if loyalty_cart_items_count %}
+									<h2 class="heading">Loyalty Cart total</h2>
+									<table class="cart-calculation-table mb-30">
+										<tr>
+											<th>Total</th>
+											<td class="subtotal">₹{% if user.is_authenticated %}{{a_cart_loyalty_subtotal|floatformat:2}}{% else %}{{ cart_loyalty_subtotal|floatformat:2 }}{% endif %}</td>
+										</tr>
+
+									</table>
+									{% endif %}
+
+									<div class="cart-calculation-button text-center">
+					{% if user.is_authenticated %}
+
+                    <td>
+						{% if wallet == 'ON' %}
+						<div class="row"><div class="col"><form action="{%url 'withdraw_checkout'  %}" method="post" >{%csrf_token%} <input type="hidden" name="amountt" value="{% if user.is_authenticated %}{% add_ship_charge_a_user a_cart_subtotal %}{% else %}{% add_ship_charge_n_user cart_subtotal %}{% endif %}"><button class="lezada-button"  type="submit">Pay with Wallet</button></form></div>
+						{%endif%}
+											<div class="col"><a href="{% url 'checkout' %}" class="lezada-button">Checkout</a></div></div>
+
+										</td>
+                    {% else %}
+                    <input type="hidden" name="next" value="{{valuenext}}"/>
+                    <a class="links lezada-button" data-toggle="modal" href="#login">
+											<i class="mdi mdi-login-variant "></i> Checkout </a>
+                    {% endif %}
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					{% else %}
+					<div class="bg-light text-lg-center"><p>Cart Empty</p></div>
+					{% endif %}
+						<div class="row">
+							<br>
+							<div class="col-lg-12 text-center" style="margin-top: 30px;">
+                                <!-- AG Group Checkout -->
+								{% if GROUP_CHECKOUT %}
+								<a href="{% url 'group-checkout' %}" class="links lezada-button">
+									<i class="mdi mdi-login-variant "></i> Group Checkout </a>
+								{% endif %}
+								</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- cart page content end -->
+	</div>
+
+
+	{% endblock %}

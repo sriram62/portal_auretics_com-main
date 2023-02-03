@@ -1,0 +1,1493 @@
+{% load static %}
+{% load shop_tag %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<base target="_parent">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>{{ title }}</title>
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url }}" />
+    {% if product.description %}
+    <meta property="og:description" content="{{ product.description }}" />
+    {% endif %}
+	<meta name="description" content="{{ product.description|slice:":150" }}" />
+    <meta property="og:site_name" content="Auretics" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="{{ product.description|slice:":65" }}" />
+    <meta property="og:image" content="{{ product.image.url }}" />
+    <meta property="og:type" content="website" />
+	<!-- Favicon -->
+	<link rel="icon" href="{% static 'img/favicon-1.png' %}" />
+
+	<!-- CSS -->
+	<!-- Bootstrap CSS -->
+	<link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet" />
+
+	<!-- Font CSS -->
+	<link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/css/ionicons.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/css/themify-icons.css' %}" rel="stylesheet" />
+
+	<!-- Plugins CSS -->
+	<link href="{% static 'assets/css/plugins.css' %}" rel="stylesheet" />
+
+	<!-- Helper CSS -->
+	<link href="{% static 'assets/css/helper.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/css/formstyle.css' %}" rel="stylesheet" />
+
+	<!-- Main CSS -->
+	<link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/css/custom.css' %}" rel="stylesheet" />
+
+	<!-- Modernizer JS -->
+	<script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+	<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKH3YQ37WS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NKH3YQ37WS');
+</script>
+<!-- End Google Analytics -->
+<style>
+  .shubh_log {
+    display: block;
+    margin-left: -8px;
+    line-height: 14px;
+    text-align: left;
+	}
+
+	.shubh_icon_log {
+	    line-height: 14px !important;
+	}
+
+	.tab {
+		overflow: hidden;
+		border: 1px solid #ccc;
+		background-color: #f1f1f1;
+	}
+
+	/* Style the buttons inside the tab */
+	.tab button {
+	  background-color: inherit;
+	  float: left;
+	  border: none;
+	  outline: none;
+	  cursor: pointer;
+	  padding: 14px 16px;
+	  transition: 0.3s;
+	  font-size: 17px;
+	}
+
+	/* Change background color of buttons on hover */
+	.tab button:hover {
+	  background-color: #ddd;
+	}
+
+	/* Create an active/current tablink class */
+	.tab button.active {
+	  background-color: #ccc;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+	  display: none;
+	  /*padding: 6px 12px;*/
+	  /*border: 1px solid #ccc;*/
+	  /*border-top: none;*/
+	}
+</style>
+<style>
+    .ag_slider_common {
+        position: relative;
+        width: 100%;!important
+        height: 0;
+        padding-bottom: 63%;
+        display:block;
+        margin:0px
+    }
+    @media only screen and (max-width: 3840px) {
+    .ag_slider_responsive {
+      padding-bottom: 63%;
+       }
+    }
+    @media only screen and (max-width: 1920px) {
+    .ag_slider_responsive {
+      padding-bottom: 63%;
+       }
+    }
+    @media only screen and (max-width: 1366px) {
+    .ag_slider_responsive {
+      padding-bottom: 63%;
+       }
+    }
+    @media only screen and (max-width: 1280px) {
+    .ag_slider_responsive {
+      padding-bottom: 63%;
+       }
+    }
+    @media only screen and (max-width: 1112px) {
+    .ag_slider_responsive {
+      padding-bottom: 63%;
+       }
+    }
+    @media only screen and (max-width: 1024px) {
+    .ag_slider_responsive {
+      padding-bottom: 75%;
+       }
+    }
+    @media only screen and (max-width: 834px) {
+    .ag_slider_responsive {
+      padding-bottom: 75%;
+       }
+    }
+    @media only screen and (max-width: 800px) {
+    .ag_slider_responsive {
+      padding-bottom: 123%;
+       }
+    }
+    @media only screen and (max-width: 778px) {
+    .ag_slider_responsive {
+      padding-bottom: 123%;
+       }
+    }
+    @media only screen and (max-width: 768px) {
+    .ag_slider_responsive {
+      padding-bottom: 123%;
+       }
+    }
+    @media only screen and (max-width: 736px) {
+    .ag_slider_responsive {
+      padding-bottom: 121%;
+       }
+    }
+    @media only screen and (max-width: 720px) {
+    .ag_slider_responsive {
+      padding-bottom: 123%;
+       }
+    }
+    @media only screen and (max-width: 667px) {
+    .ag_slider_responsive {
+      padding-bottom: 120%;
+       }
+    }
+    @media only screen and (max-width: 568px) {
+    .ag_slider_responsive {
+      padding-bottom: 120%;
+       }
+    }
+    @media only screen and (max-width: 480px) {
+    .ag_slider_responsive {
+      padding-bottom: 143%;
+       }
+    }
+    @media only screen and (max-width: 414px) {
+    .ag_slider_responsive {
+      padding-bottom: 143%;
+       }
+    }
+    @media only screen and (max-width: 375px) {
+    .ag_slider_responsive {
+      padding-bottom: 142%;
+       }
+    }
+    @media only screen and (max-width: 320px) {
+    .ag_slider_responsive {
+      padding-bottom: 140%;
+       }
+    }
+
+</style>
+
+	{% block extra_styles %}
+    {% endblock extra_styles %}
+<style>
+.pagination {
+<!--  display: inline-block;-->
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  font-size: 22px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
+<!-- Zoho PageSense -->
+<script src="https://cdn-in.pagesense.io/js/aureticslimited/6d40503e6c2d4b72809cc9a7046cdb2c.js"></script>
+</head>
+
+<body>
+	<!-- Header without topbar -->
+		<header class="header header-without-topbar header-sticky">
+		<div class="header-bottom pt-md-40 pb-md-40 pt-sm-40 pb-sm-40">
+			<div class="container-fluid wide">
+				<div class="header-bottom-container">
+					<!-- logo with off canvas -->
+					<div class="logo-with-offcanvas d-flex new_logo">
+						<div class="logo">
+							<a href="{% url 'home' %}">
+								<img src="{% static 'img/new_logo.png' %}" class="img-fluid" alt="" />
+							</a>
+						</div>
+					</div>
+					<!-- End of logo with off canvas -->
+
+					<!-- header bottom navigation -->
+					<div class="header-bottom-navigation">
+						<div class="site-main-nav d-none d-lg-block">
+							<nav class="site-nav center-menu">
+								<ul>
+									<li id="menu-item-14766" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14766"><a href="https://portal.auretics.com/static/html/profile.html">About Us</a></li>
+									{% if user.is_authenticated %}
+									{% else %}
+									{% endif %}
+                                        <li class="menu-item-has-children">
+										<a href="{% url 'product_list' %}">Products</a>
+										<ul class="sub-menu mega-menu mega-menu-column-4 ecom_head_shubh">
+											{% for i in category %}
+												{% if i.delete == False and i.status == 'Active' %}
+											<li>
+												<a href="javascript:void(0)" class="mega-column-title">{{i.cat_name}}</a>
+												<ul class="mega-sub-menu">
+											{% for k in i.category_set.all|sort_by:'cat_order' %}
+												{% if k.delete == False and k.status == 'Active' %}
+													<li>
+														<a href="/category/{{i.cat_name}}/{{k.cat_name}}">{{k.cat_name}}</a>
+													</li>
+												{% endif%}
+											{% endfor%}
+												</ul>
+											</li>
+											{% endif%}
+											{% endfor %}
+										</ul>
+									</li>
+
+									{% if user.is_authenticated %}
+                                    <li class="menu-item-has-children">
+                                        <a class="links" data-toggle="modal" href="{% url 'profile' %}">My Profile</a>
+                                        <ul class="sub-menu mega-menu mega-menu-column-4 ecom_head_shubh">
+                                        <li><a href="javascript:void(0)" class="mega-column-title">Profile Details</a>
+                                        <ul class="mega-sub-menu">
+                                            <li>
+                                                <a class="links" href="{% url 'profile' %}">Profile</a>
+                                            </li>
+                                            <li>
+                                                <a class="links" href="{% url 'edit_profile' %}">Update Profile</a>
+                                            </li>
+                                            <li>
+                                                <a class="links" href="{% url 'user_change_passcode' %}">
+                                                    <i href=""></i> Change Password</a>
+                                            </li>
+                                        </ul>
+                                        </li>
+                                        <li><a href="javascript:void(0)" class="mega-column-title">Dashboard</a>
+                                        <ul class="mega-sub-menu">
+                                            <li>
+                                            {% if request.user.profile.distributor %}
+                                            <li>
+                                                <a class="links" href="{% url 'distributor_pending_purchase' %}">
+                                                    <i href=""></i> Distributor Dashboard</a>
+                                            </li>
+                                            {% endif %}
+                                            {% if request.user.profile.c_and_f_admin %}
+                                            <li>
+                                                <a class="links" href="{% url 'cnf_pending_purchase' %}">
+                                                    <i href=""></i> C&F Dashboard</a>
+                                            </li>
+                                            {% endif %}
+                                            <li>
+                                                <a class="links" href="{% url 'mlm_admin_user_dashboard_1' %}">
+                                                    <i href=""></i> Business Dashboard</a>
+                                            </li>
+                                        </ul>
+                                        </li>
+                                        <li><a href="javascript:void(0)" class="mega-column-title">Order Information</a><ul class="mega-sub-menu">
+                                            <li>
+                                                <a class="links" href="{% url 'order_summary' %}">Order List</a>
+                                            </li>
+
+                                            {% if cart_items_count %}
+                                            <li>
+                                                <a href="javascript:void(0)" id="offcanvas-cart-icon">Cart<sup><span class="count"> ({{ cart_items_count }} Items)</span></sup></a>
+                                            </li>
+                                            {% else %}
+                                            <li>
+                                                <a href="#">Your Cart is Empty</a>
+                                            </li>
+                                            {% endif %}
+                                        </li></ul>
+                                        </ul>
+                                    </li>
+									{% else %}
+                                    <li id="menu-item-15038" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15038"><a class="links" data-toggle="modal" href="#login">Login</a></li>
+                                    <li id="menu-item-15038" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15038"><a type=""  href="{% url 'register' %}">Join Now</a></li>
+									{% endif %}
+									<li id="menu-item-15038" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15038"><a href="https://portal.auretics.com/static/html/contact.html">Contact Us</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li id="menu-item-15038" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15038"><a href="{% url 'logout' %}">Log Out</a></li>
+                                    {% endif %}
+								</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!-- End of header bottom navigation -->
+
+					<!-- headeer right container -->
+					<div class="header-right-container">
+						<div class="header-right-icons d-flex justify-content-end align-items-center h-100">
+							<div class="single-icon search">
+								<a href="javascript:void(0)" id="search-icon">
+									<i class="ion-ios-search-strong"></i>
+								</a>
+							</div>
+							{% if user.is_authenticated %}
+							<div class="dropdown single-icon">
+								<a href="#" class="dropdown-toggle menu" data-toggle="dropdown">
+									{{ request.user.profile.first_name|truncatechars:7 }} {{ request.user.profile.last_name|truncatechars:5 }}
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="links" href="{% url 'profile' %}">
+											<i class="mdi mdi-help-circle-outline"></i> Profile</a>
+									</li>
+									{%if wallet%}
+									<li>
+										<a class="links" href="{% url 'wallet' %}">
+											<i class="mdi mdi-help-circle-outline"></i> Wallet</a>
+									</li>
+									{%endif%}
+									<li>
+										<a class="links" href="{% url 'edit_profile' %}">
+											<i class="mdi mdi-help-circle-outline"></i> Update Profile</a>
+									</li>
+									<li>
+										<a class="links" href="{% url 'order_summary' %}">
+											<i href=""></i> Order List</a>
+									</li>
+									{% if request.user.profile.distributor %}
+									<li>
+										<a class="links" href="{% url 'distributor_pending_purchase' %}">
+											<i href=""></i> Distributor Dashboard</a>
+									</li>
+									{% endif %}
+									{% if request.user.profile.c_and_f_admin %}
+									<li>
+										<a class="links" href="{% url 'cnf_pending_purchase' %}">
+											<i href=""></i> C&F Dashboard</a>
+									</li>
+									{% endif %}
+									<li>
+										<a class="links" href="{% url 'mlm_admin_user_dashboard_1' %}">
+											<i href=""></i> Business Dashboard</a>
+									</li>
+									<li>
+										<a class="links" href="{% url 'user_change_passcode' %}">
+											<i href=""></i> Change Password</a>
+									</li>
+									<li>
+									    <a type="button" href="{% url 'logout' %}">
+											<i class="ion-log-out"></i> &nbsp;Log Out </a>
+									</li>
+								</ul>
+							</div>
+							{% else %}
+							<div class="single-icon user-login shubh_icon_log">
+                                <a class="links" data-toggle="modal" href="#login">
+											<i class="mdi mdi-login-variant"></i></a>
+
+								<a type="" data-toggle="modal" data-target="#login">
+									<i class="ion-android-person"></i>
+									<div class="shubh_log">Login / Join Now</div>
+                                </a>
+							</div>
+
+							{% endif %}
+	                   {% if user.is_authenticated %}
+							{% if cart_items_count %}
+							<div class="single-icon cart">
+								<a href="javascript:void(0)" id="offcanvas-cart-icon">
+									<i class="ion-ios-cart"></i>
+									<span class="count">{{ cart_items_count }}</span>
+								</a>
+							</div>
+
+							{% endif %}
+							{% else %}
+
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				<!-- End of header bottom container -->
+
+				<!-- Mobile Navigation Start Here -->
+				<div class="site-mobile-navigation d-block d-lg-none">
+					<div id="dl-menu" class="dl-menuwrapper site-mobile-nav">
+						<!--Site Mobile Menu Toggle Start-->
+						<button class="dl-trigger hamburger hamburger--spin">
+							<span class="hamburger-box">
+								<span class="hamburger-inner"></span>
+							</span>
+						</button>
+						<!--Site Mobile Menu Toggle End-->
+						<ul class="dl-menu dl-menu-toggle">
+						    	<li>
+								<a href="https://portal.auretics.com/static/html/profile.html">About Us</a>
+								</li>
+							<li>
+								<a href="{% url 'product_list' %}">Product List</a>
+								<ul class="dl-submenu">
+									{% for i in category %}
+									{% if not user.is_authenticated and i.is_hide == "True" %}<!--{% endif%}
+											{% if i.delete == False  and i.status == 'Active' %}
+											<li>
+												<a href="javascript:void(0)" class="mega-column-title">{{i.cat_name}}</a>
+												<ul class="dl-submenu">
+												{% for k in i.category_set.all|sort_by:'cat_order' %}
+												{% if k.delete == False and k.status == 'Active' %}
+												<li>
+													<a href="/category/{{i.cat_name}}/{{k.cat_name}}">{{k.cat_name}}</a>
+												</li>
+												{% endif%}
+												{% endfor%}
+												</ul>
+											</li>
+											{% endif%}
+										{% if not user.is_authenticated and i.is_hide == "True" %}-->{% endif%}
+									{% endfor %}
+								</ul>
+							</li>
+
+							{% if user.is_authenticated %}
+								<li>
+									<a class="links" data-toggle="modal" href="{% url 'profile' %}">My Profile</a>
+									<ul class="dl-submenu">
+									<li><a href="javascript:void(0)" class="mega-column-title">Profile Details</a>
+									<ul ul class="dl-submenu">
+										<li>
+											<a class="links" href="{% url 'profile' %}">Profile</a>
+										</li>
+										<li>
+											<a class="links" href="{% url 'edit_profile' %}">Update Profile</a>
+										</li>
+										<li>
+											<a class="links" href="{% url 'user_change_passcode' %}">
+												<i href=""></i> Change Password</a>
+										</li>
+									</ul>
+									</li>
+									<li><a href="javascript:void(0)" class="mega-column-title">Dashboard</a>
+									<ul ul class="dl-submenu">
+										<li>
+										{% if request.user.profile.distributor %}
+										<li>
+											<a class="links" href="{% url 'distributor_pending_purchase' %}">
+												<i href=""></i> Distributor Dashboard</a>
+										</li>
+										{% endif %}
+										{% if request.user.profile.c_and_f_admin %}
+										<li>
+											<a class="links" href="{% url 'cnf_pending_purchase' %}">
+												<i href=""></i> C&F Dashboard</a>
+										</li>
+										{% endif %}
+										<li>
+											<a class="links" href="{% url 'mlm_admin_user_dashboard_1' %}">
+												<i href=""></i> Business Dashboard</a>
+										</li>
+									</ul>
+									</li>
+									<li><a href="javascript:void(0)" class="mega-column-title">Order Information</a>
+										<ul ul class="dl-submenu">
+										<li>
+											<a class="links" href="{% url 'order_summary' %}">Order List</a>
+										</li>
+										{% if cart_items_count %}
+										<li>
+											<a href="javascript:void(0)" id="offcanvas-cart-icon">Cart<sup><span class="count"> ({{ cart_items_count }} Items)</span></sup></a>
+										</li>
+										{% else %}
+										<li>
+											<a href="#">Your Cart is Empty</a>
+										</li>
+										{% endif %}
+									</ul>
+									</li>
+									</ul>
+								</li>
+							</li>
+							{% else %}
+							<li id="menu-item-15038" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15038"><a class="links" data-toggle="modal" href="#login">Login</a></li>
+							<li id="menu-item-15038" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15038"><a type=""  href="{% url 'register' %}">Join Now</a></li>
+							{% endif %}
+							<li>
+								<a href="https://auretics.com/contact-us/">Contact Us</a>
+							</li>
+							{% if user.is_authenticated %}
+                                <li>
+                                    <a class="links" href="{% url 'logout' %}">Log Out</a>
+                                </li>
+                            {% endif %}
+						</ul>
+					</div>
+				</div>
+				<!-- Mobile Navigation End Here -->
+			</div>
+		</div>
+		<!-- End of header bottom -->
+	</header>
+	<!-- Header without topbar end -->
+
+	<!-- Login Modal -->
+	<div class="modal fade" id="login" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 0px">
+					<div class="tab col-lg-12" style="padding: 0px;">
+
+					  <button class="tablinks col-lg-6" id="defaultOpen" onclick="openLogin(event, 'PASSWORD')" style="padding-left:0px"><a href='/login/?next={{ request.path }}'>Login with Password</a></button>
+
+					  <button class="tablinks col-lg-6" onclick="openLogin(event, 'OTP')">Login with OTP</button>
+					</div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="submit-form login-form" style="padding: 15px;">
+						<!--login tab -->
+						<div id="PASSWORD" class="tabcontent mt-4">
+						  <form action="{% url 'login' %}" method="POST" onsubmit="return submitUserForm();" name="login_form">{% csrf_token %}
+<!--								<form method="post" action="./?next={{ redirect_to }}">{% csrf_token %}-->
+
+							  <div class="form-group">
+									<input type="text" name="username" id="username" placeholder="Email ID / Mobile No. / ARN NO." required />
+								</div>
+								<div class="form-group">
+									<input type="password" name="password" id="password2" placeholder="Password" required />
+								</div>
+								<div class="text-center mt-40 mb-30">
+	                <input type="hidden" name="next" value="{{valuenext}}"/>
+									<div class="g-recaptcha mb-20 " data-sitekey="6LeVCKgaAAAAAKELQHJMHeWi1g7k592G_xojVRbe" data-callback = "varifycaptcha"></div>
+	        				<div id = 'g-recaptcha-error'></div>
+	                <input class="lezada-button lezada-button--medium" type="submit"  value="Login">
+								</div>
+							</form>
+						</div>
+						<!--Otp tab -->
+						<div id="OTP" class="tabcontent mt-4">
+						  <form action="{% url 'login' %}" method="POST" onsubmit="return submitUserFormForOTP();" name="otp_form">{% csrf_token %}
+<!--						  	<form method="post" action="./?next={{ redirect_to }}">{% csrf_token %}-->
+
+						  	<div class="text-center mb-30" id="otp-message">
+									<span style="color:green">OTP is sent to Your Mobile Number</span>
+								</div>
+								<div class="text-center mb-30" id="otp-error-message">
+									<span id="otp-error" style="color:red"></span>
+								</div>
+								<div class="text-center">
+									<input type="text" name="mobile" id="mobile" placeholder="Mobile No." required />
+								</div>
+								<div class="text-center mt-40 mb-30">
+									<input type="button" id="otp-button" value="Send Code" onclick="send_otp_message();" style="padding: 7px" class="lezada-button lezada-button--medium">
+								</div>
+								<div class="form-group" id="otp-input-field">
+									<input type="text" name="otp" id="otp" placeholder="Mobile OTP" />
+								</div>
+								<div class="text-center mt-40 mb-30" id="otp-captcha">
+	                <input type="hidden" name="next" value="{{valuenext}}"/>
+									<div class="g-recaptcha mb-20 " data-sitekey="6LeVCKgaAAAAAKELQHJMHeWi1g7k592G_xojVRbe" data-callback = "varifycaptcha"></div>
+	        				<div id = 'g-recaptcha-error-otp'></div>
+	                <input class="lezada-button lezada-button--medium" type="submit"  value="Login">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="form-link">
+						<span class="create-ac">
+							<a type=""  href="{% url 'register' %}"><h5>Join Now | </h5></a>
+						</span>
+						<span class="forgot-pwd">
+							<a href="{% url 'password_reset' %}" ><h5>Forgot Password?</h5></a>
+						</span>
+					</div>
+        </div>
+			</div>
+		</div>
+	</div>
+	<!-- Login Modal end -->
+
+	<!-- Signup Modal -->
+	<div class="modal fade" id="signup" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Register</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="submit-form login-form">{% csrf_token %}
+						<form id="signupForm" data-toggle="validator" role="form" action="{% url 'register' %}" method="POST"  novalidate>{% csrf_token %}
+<!--							<form method="post" action="./?next={{ redirect_to }}">{% csrf_token %}-->
+							<div class="form-group">
+								<input type="text" placeholder="First Name*" name="firstname" id="firstname" value="" required />
+								<div class="error alert-error"  id="e_firstname" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Last Name*"  name="lastname" id="lastname" value=""   />
+								<div class="error alert-error"  id="e_lastname" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Email ID*"  name="email" id="email" value=""    required/>
+								<div class="error alert-error"  id="e_email" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Referral Code*"  name="referral_code" id="referral_code" value="" required/>
+								<div class="error alert-error"  id="e_referral_code" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Mobile No.*" id="phone" name="phone"   value="" required/>
+								<div class="error alert-error"  id="e_phone" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Password*" id="password" name="password"  required />
+								<div class="error alert-error"  id="e_password" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Confirm Password*" id="confirmpassword" name="confirmpassword" required />
+								<div class="error alert-error"  id="e_confirmpassword" style="display:none;" ></div>
+							</div>
+							<div class="text-center mt-40 mb-35">
+								<button class="lezada-button lezada-button--medium">Register</button>
+							</div>
+							<div class="text-center mb-10">
+								<a type="button" data-toggle="modal" data-target="#login">Already have account? Login</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Signup Modal end -->
+
+	<!-- Forgot Password Modal -->
+	<div class="modal fade" id="forgotpwd" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Forgot Password</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="submit-form login-form">{% csrf_token %}
+						<form action="#">
+							<div class="form-group">
+								<div class="input-group">
+									<input type="text" placeholder="Email ID " id="email" name="email_id"  />
+									<div class="error alert-error"  id="e_email" style="display:none;" ></div>
+								</div>
+							</div>
+							<div class="text-center mt-40 mb-10">
+								<button class="lezada-button lezada-button--medium">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Forgot Password Modal end -->
+
+	<!-- wishlist overlay -->
+	<div class="wishlist-overlay" id="wishlist-overlay">
+		<div class="wishlist-overlay-close inactive"></div>
+		<div class="wishlist-overlay-content">
+			<!-- close icon -->
+			<span class="close-icon" id="wishlist-close-icon">
+				<a href="javascript:void(0)">
+					<i class="ion-android-close"></i>
+				</a>
+			</span>
+			<!-- End of close icon -->
+
+			<!-- offcanvas wishlist content container -->
+			<div class="offcanvas-cart-content-container">
+				<h3 class="cart-title">Wishlist</h3>
+
+				<div class="cart-product-wrapper">
+					<div class="cart-product-container ps-scroll">
+						<div class="single-cart-product">
+							<span class="cart-close-icon">
+								<a href="#"><i class="ti-close"></i></a>
+							</span>
+							<div class="image">
+								<a href="#">
+									<img src="{% static 'img/cart/01.jpg' %}" class="img-fluid" alt="" />
+								</a>
+							</div>
+							<div class="content">
+								<h5><a href="#">Dark Brown Leather Watch</a></h5>
+								<p><span class="main-price discounted">$200.00</span> <span class="discounted-price">$180.00</span></p>
+							</div>
+						</div>
+						<div class="single-cart-product">
+							<span class="cart-close-icon">
+								<a href="#"><i class="ti-close"></i></a>
+							</span>
+							<div class="image">
+								<a href="#">
+									<img src="{% static 'img/cart/02.jpg' %}" class="img-fluid" alt="" />
+								</a>
+							</div>
+							<div class="content">
+								<h5><a href="#">Dining Chair</a></h5>
+								<p><span class="main-price discounted">$300.00</span> <span class="discounted-price">$220.00</span></p>
+							</div>
+						</div>
+						<div class="single-cart-product">
+							<span class="cart-close-icon">
+								<a href="#"><i class="ti-close"></i></a>
+							</span>
+							<div class="image">
+								<a href="#">
+									<img src="{% static 'img/cart/03.jpg' %}" class="img-fluid" alt="" />
+								</a>
+							</div>
+							<div class="content">
+								<h5><a href="#">Creative Wooden Stand</a></h5>
+								<p><span class="main-price discounted">$100.00</span> <span class="discounted-price">$80.00</span></p>
+							</div>
+						</div>
+					</div>
+
+					<!-- cart buttons -->
+					<div class="cart-buttons">
+						<a href="#">view wishlist</a>
+					</div>
+					<!-- End of cart buttons -->
+				</div>
+			</div>
+			<!-- End of offcanvas wishlist content container -->
+		</div>
+	</div>
+	<!-- End of wishlist overlay -->
+	<!-- cart overlay -->
+	{% if cart_items_count %}
+<div class="cart-overlay" id="cart-overlay">
+		<div class="cart-overlay-close inactive"></div>
+		<div class="cart-overlay-content">
+			<!-- close icon -->
+			<span class="close-icon" id="cart-close-icon">
+				<a href="javascript:void(0)">
+					<i class="ion-android-close"></i>
+				</a>
+			</span>
+			<!-- End of close icon -->
+			<!-- offcanvas cart content container -->
+
+			<div class="offcanvas-cart-content-container">
+				<h3 class="cart-title">Cart</h3>
+				<div class="cart-product-wrapper">
+					{% for username, items in cart_items.items %}
+						{% if is_group_checkout %}
+
+									<h4>{{ username.profile.first_name }}'s cart products</h4>
+							<hr>
+						{% endif %}
+				    {% for item in items %}
+					<div class="cart-product-container ps-scroll">
+						<div class="single-cart-product">
+							<!--<span class="cart-close-icon">-->
+							<!--	<a href="#"><i class="ti-close"></i></a>-->
+							<!--</span>-->
+							<div class="image">
+								<a href="{% url 'show_cart' %}">
+									<img src="{{ item.product.image.url }}" class="img-fluid" alt="" />
+								</a>
+							</div>
+							<div class="content">
+								<h5><a href="{% url 'show_cart' %}">{{ item.product.product_name }}</a></h5>
+								<p><span class="cart-count">{{ item.quantity }} x </span> <span class="discounted-price">{% if user.is_authenticated %}{{  item.discount_price }}{% else %}{{ item.price }}{% endif %}</span></p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					{% endfor %}
+					<!-- subtotal calculation -->
+					<p class="cart-subtotal">
+						<span class="subtotal-title">Subtotal:</span>
+						<span class="subtotal-amount">{% if user.is_authenticated %}{{ a_sub_total }}{% else %}{{ cart_subtotal }}{% endif %}</span>
+					</p>
+					<!-- End of subtotal calculation -->
+					<!-- cart buttons -->
+					<div class="cart-buttons">
+						<a href="{% url 'show_cart' %}">view cart</a>
+<!--						nipur code start-->
+						{% if user.is_authenticated %}
+						<a href="{% url 'checkout' %}">checkout</a>
+						{% if GROUP_CHECKOUT %}
+						<a href="{% url 'group-checkout' %}"> Group Checkout </a>
+						{% endif %}
+						{% endif %}
+<!--						nipur code end-->
+					</div>
+					<!-- End of cart buttons -->
+					<!-- free shipping text -->
+					<p class="free-shipping-text">
+						Free Shipping on All Orders Over ₹{% ship_charge_check %}!
+					</p>
+					<!-- End of free shipping text -->
+				</div>
+			</div>
+
+			<!-- End of offcanvas cart content container -->
+		</div>
+	</div>
+	{% endif %}
+	<!-- End of cart overlay -->
+
+	<!-- search overlay -->
+	<div class="search-overlay" id="search-overlay">
+		<!-- close icon -->
+		<span class="close-icon search-close-icon">
+			<a href="{% url 'search' %}" id="search-close-icon">
+				<i class="ti-close"></i>
+			</a>
+		</span>
+		<!-- End of close icon -->
+		<!-- search overlay content -->
+		<div class="search-overlay-content container">
+			<div class="input-box">
+				<form action="{% url 'search' %}" method="POST" name="mySearch" onsubmit="return validateForm()">{% csrf_token %}
+<!--					<form method="post" action="./?next={{ redirect_to }}">{% csrf_token %}-->
+					<div class="form-group">
+						<div class="input-group">
+							<input type="search" placeholder="Search Products..."  name="search"/>
+							<div class="input-group-append">
+								<input class="input-group-text" type="submit" value="submit" />
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="search-hint">
+			    <span id='name_error' class="text-red"></span></br>
+				<span># Hit enter to search or ESC to close</span>
+			</div>
+		</div>
+		<script>
+function validateForm() {
+  var x = document.forms["mySearch"]["search"].value;
+  if (x == "" || x == null) {
+    nameError ="Enter your search in the box";
+     document.getElementById("name_error").innerHTML = nameError;
+    return false;
+  }
+}
+</script>
+		<!-- End of search overlay content -->
+	</div>
+	<!-- End of search overlay -->
+{% if messages %}
+	<div class="row">
+		<div class="col-lg-12">
+			{% for message in messages %}
+			<div class="alert alert-blue alert-dismissible fade show text-center" role="alert">
+				<strong></strong> {{ message|safe }}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  <span aria-hidden="true">×</span>
+				</button>
+			  </div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+    {% block content %}
+{% endblock %}
+<div class="footer-container footer-one pt-100 pb-30">
+    <div class="container-fluid wide">
+        <div class="row">
+            <!-- copyright -->
+            <div class="col-md-3 footer-single-widget">
+                <div class="logo new_logo">
+                    <img src="{% static 'img/new_logo.png' %}" class="img-fluid" alt="" />
+                </div>
+                <div class="copyright-text">
+                    <p>&copy;2022 Auretics Limited. All Rights Reserved</p>
+                </div>
+<!--            </div>-->
+<!--            <div class="col footer-single-widget">-->
+
+                <div class="footer-nav-container footer-social-links">
+                    <h5 class="widget-title pt-20">FOLLOW US ON</h5>
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/auretics"> <i class="fa fa-facebook"></i> Facebook</a>
+                            </li>
+                             <li>
+                                <a href="https://www.instagram.com/auretics_official/"><i class="fa fa-instagram"></i> Instagram</a>
+                            </li>
+
+                            <li>
+                                <a href="https://twitter.com/auretics/"><i class="fa fa-twitter"></i> Twitter</a>
+                            </li>
+
+                             <li>
+                                <a href="https://www.youtube.com/c/auretics"> <i class="fa fa-youtube"></i> Youtube</a>
+                            </li>
+
+                             <li>
+                                <a href="https://g.page/auretics?gm"> <i class="fa fa-google-plus" aria-hidden="true"></i> Google</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- copyright end -->
+			{% if user.is_authenticated %}
+            <div class="col footer-single-widget">
+                <h5 class="widget-title">BUSINESS TOOLS</h5>
+                <div class="footer-nav-container">
+                    <nav>
+                        <ul>
+                            <li><a href="https://auretics.com/businessplan">Compensation Plan</a></li>
+							<li><a href="https://portal.auretics.com/products/">Products</a></li>
+							<li><a href="https://portal.auretics.com/">Advisor Login</a></li>
+							<li><a href="https://auretics.com/wp-content/uploads/sites/11/2021/06/AL_Price-List_2021.04.01.pdf">Price List</a></li>
+							<li><a href="https://auretics.com/wp-content/uploads/sites/11/2021/06/Auretics-Brochure.pdf">Brochure</a></li>
+							<li><a href="https://auretics.com/wp-content/uploads/sites/11/2021/06/Distributor-Order-Form.pdf">Distributor Order Form</a></li>
+							<li><a href="https://auretics.com/wp-content/uploads/sites/11/2021/06/Customer-Receipt.pdf">Customer Receipt</a></li>
+							<li><a href="https://auretics.com/wp-content/uploads/sites/11/2021/06/Return-Form.pdf">Product Return Form </a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col footer-single-widget">
+                <h5 class="widget-title">USEFUL LINKS</h5>
+                <div class="footer-nav-container">
+                    <nav>
+                        <ul>
+                            <li><a href="https://auretics.com/auretics-as-a-career/">Auretics as a Career</a></li>
+							<li><a href="https://auretics.com/grievance-redressal/">Grievance Redressal</a></li>
+							<li><a href="https://auretics.com/jaago-grahak-jaago/">Jaago Grahak Jaago</a></li>
+							<li><a href="https://auretics.com/direct-selling-company-india">Direct Selling Company India</a></li>
+							<li><a href="https://auretics.com/network-marketing-company-india">Network Marketing Company India</a></li>
+							<li><a href="https://auretics.com/network-marketing-plan">Network Marketing Plan</a></li>
+							<li><a href="https://auretics.com/work-from-home-business-opportunity">Work From Home Business Opportunity</a></li>
+							<li><a href="https://auretics.com/risk-free-business-india">Risk Free Business India</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col footer-single-widget">
+                <h5 class="widget-title">INFORMATION</h5>
+                <div class="footer-nav-container">
+                    <nav>
+                        <ul>
+                            <li><a href="https://auretics.com/orientation-program/">Orientation Program</a></li>
+							<li><a href="https://auretics.com/why-our-products/">Why our Products?</a></li>
+							<li><a href="https://auretics.com/online-academy/">Online Academy</a></li>
+							<li><a href="https://auretics.com/legal">Legal</a></li>
+							<li><a href="https://auretics.com/bankers">Bankers</a></li>
+							<li><a href="https://auretics.com/gallery">Gallery</a></li>
+							<li><a href="https://auretics.com/downloads">Downloads</a></li>
+							<li><a href="https://auretics.com/blog/">Blog</a></li>
+							<li><a href="https://auretics.com/contact-us/">Contact us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+			{% else %}
+			{% endif %}
+
+			<!--AG:: Discalimers-->
+			<div class="clearfix about-hk">
+				<br />
+			<p style="text-align:center;">Auretics.com is India's largest online cosmetic, personal care, home care, health &amp; fitness store for men and women. Shop online from the latest collections from the best brands.</p>
+				<p style="text-align:justify; text-justify: inter-word;"><br> <b>Disclaimer:</b> The information contained on Auretics Limited Website <a style="text-decoration: none;" href="http://myvestige.com" target="_blank">(auretics.com)</a> is provided for informational purposes only and is not meant to substitute for the advice provided by your doctor or other healthcare professional. Information and statements regarding products, supplements, programs, etc. listed on Auretics Website, Social Media Platform, Offline Platforms, Literature, Brochure or Journal have not been evaluated by the Food and Drug Administration or any government authority and are not intended to diagnose, treat, cure, or prevent any disease. Please read product packaging carefully prior to purchase and use. The results from the products will vary from person to person. No individual result should be seen as typical.</p>
+			</div>
+			<br />
+            <div class="col-md-12">
+                <div class="footer-nav-container foot_bottom">
+                    <br /><br />
+                    <nav>
+                        <ul class="list-group list-group-horizontal-md">
+							<!-- AG Shout :: Removed -->
+<!--                            <li><a href="https://auretics.com/disclaimer/">Disclaimer</a></li>-->
+<!--                            <li><a href="https://auretics.com/terms-conditions/">Terms & Conditions</a></li>-->
+<!--                            <li><a href="https://auretics.com/code-of-ethics/">Code of Ethics</a></li>-->
+<!--                            <li><a href="https://auretics.com/refund-policy/">Refund Policy</a></li>-->
+<!--                            <li><a href="https://auretics.com/privacy-policy/">Privacy Policy</a></li>-->
+<!--                            <li><a href="https://auretics.com/sales-marketing-policy/">Sales & Marketing Policy</a></li>-->
+							<!-- AG Shout :: Added -->
+							<li>
+									<a href="https://portal.auretics.com/static/html/profile.html">About Us</a>
+							</li>
+							<li>
+									<a href="https://portal.auretics.com/static/html/disclaimer.html">Disclaimer</a>
+							</li>
+							<!--<li>
+									<a href="https://auretics.com/terms-conditions/">Terms &amp; Conditions</a>
+							</li>
+							<li>
+									<a href="https://auretics.com/code-of-ethics/">Code of Ethics</a>
+							</li>-->
+{#                                                </ul><ul class="ag_list">#}
+							<li>
+									<a href="https://portal.auretics.com/static/html/refund_policy.html">Refund Policy</a>
+							</li>
+							<li>
+									<a href="https://portal.auretics.com/static/html/sale_marketing_policy.html">Sales &amp; Marketing Policy</a>
+							</li>
+							<li>
+									<a href="https://portal.auretics.com/static/html/shipping_payment_policy.html">Shipping &amp; Payment Policy</a>
+							</li>
+							<li>
+									<a href="https://portal.auretics.com/static/html/privacy_policy.html">Privacy Policy</a>
+							</li>
+                         </ul>
+						 <br /><br />
+						 <p style="text-align:center;">For queries contact Customer Care Executive at 1800 889 0360</p><br />
+						 <p style="text-align:center;">
+							 For any grievances kindly contact nodal officer:<br />
+							 <strong>Address: </strong>Plot No. 190, Old Block Near LIC Colony, Mangal Bazar Road, Dilshad Garden, Delhi - 110095<br />
+							 <strong>Email: </strong>support-nodal@auretics.com | <strong>Call: </strong>+91-7840066888
+						 </p>
+                    </nav>
+					<br /><br />
+					<br /> <p style="text-align:right">{% if mc %} MC: {{ mc }} | {% endif %}Cached: {{cache_status}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer area end -->
+<!-- scroll to top -->
+<!--<a href="#" class="scroll-top"></a>-->
+<!-- end of scroll to top -->
+<!-- JS -->
+<!-- jQuery JS -->
+<script src="{% static 'js/vendor/jquery.min.js' %}"></script>
+<!-- Popper JS -->
+<script src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- Plugins JS -->
+<script src="{% static 'js/plugins.js' %}"></script>
+<!-- Main JS -->
+<script src="{% static 'js/main.js' %}"></script>
+
+<script>
+	$(function () {
+		$("#login").modal("hide");
+		$("#signup").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+			$('#e_lastname').hide();
+			$('#e_firstname').hide();
+			$('#e_email').hide();
+			$('#e_referral_code').hide();
+			$('#e_phone').hide();
+			$('#e_password').hide();
+			$('#e_confirmpassword').hide();
+
+			var erro_firstname = false;
+			var erro_lastname = false;
+			var erro_email = false;
+			var erro_referral_code = false;
+			var erro_phone = false;
+			var erro_password = false;
+			$('#firstname').focusout(function () {
+				var user_legth = $('#firstname').val().length;
+				console.log(user_legth)
+				if (user_legth == 0) {
+					$('#e_firstname').html('please enter name');
+					$("#e_firstname").css("display", "block");
+					$('#e_firstname').fadeIn();
+					$('#e_firstname').show();
+					var erro_firstname = true;
+				}
+				else {
+					$('#e_firstname').hide();
+				}
+			});
+			$('#email').focusout(function () {
+				var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+				var emailaddressVal = $("#email").val();
+				if (emailaddressVal == '') {
+					$('#e_email').html('wrong email');
+					$("#e_email").css("display", "block");
+					$('#e_email').fadeIn();
+					$('#e_email').show();
+
+					var erro_email = true;
+
+				}
+
+				else if (!emailReg.test(emailaddressVal)) {
+					$('#e_email').html('email must contain @');
+					$("#e_email").css("display", "block");
+					$('#e_email').fadeIn();
+					$('#e_email').show();
+					var erro_email = true;
+
+				}
+				else {
+					$('#e_email').hide();
+
+				}
+
+
+			});
+
+
+			$('#phone').focusout(function () {
+				var phoneReg = /[0-9 -()+]+$/;
+				var phoneVal = $("#phone").val();
+				if (phoneVal.length <= 9) {
+					$('#e_phone').html('phone numbers should be 10-12 digits in length');
+					$("#e_phone").css("display", "block");
+					$('#e_phone').fadeIn();
+					$('#e_phone').show();
+					var erro_phone = true;
+
+				}
+
+				else if (!phoneReg.test(phoneVal)) {
+					$('#e_phone').html('only numbers are accepted');
+					$("#e_phone").css("display", "block");
+					$('#e_phone').fadeIn();
+					$('#e_phone').show();
+					var erro_phone = true;
+
+				}
+				else {
+					$('#e_phone').hide();
+
+				}
+			});
+
+			$('#confirmpassword').focusout(function () {
+
+				var password = $("#confirmpassword").val();
+				var confirmpassword = $("#confirmpassword").val();
+				if (password.length == '' && confirmpassword.length == '') {
+					$('#e_password').html('Password Field is empty');
+					$("#e_password").css("display", "block");
+					$('#e_password').fadeIn();
+					$('#e_password').show();
+					var erro_password = true;
+
+				}
+
+				else if (password != confirmpassword) {
+					$('#e_confirmpassword').html('Password not match');
+					$("#e_confirmpassword").css("display", "block");
+					$('#e_confirmpassword').fadeIn();
+					$('#e_confirmpassword').show();
+					var erro_password = true;
+
+				}
+				else {
+					$('#e_password').hide();
+					$('#e_confirmpassword').hide();
+
+				}
+
+
+
+			});
+
+
+
+
+			//validator.resetForm();
+
+		});
+	});
+// 		$("#signup").on('show.bs.modal', function (e) {
+// 			$("#login").modal("hide");
+// 		});
+
+		$("#login").on('show.bs.modal', function (e) {
+			$("#signup").modal("hide");
+		});
+
+		$("#login").on('show.bs.modal', function (e) {
+			$("#forgotpwd").modal("hide");
+		});
+
+		$("#forgotpwd").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+		});
+		$("#otp-login").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+		});
+	</script>
+	<script src="{% static 'js/custom.js' %}"></script>
+ 	<script>$(document).ready(function(){
+// 		$('#signup-form').on('submit', function(event){
+// 			event.preventDefault();
+
+// 			$.ajax({
+// 				url: "{% url 'register' %}",
+// 				type: 'POST',
+// 				// headers: {'X-CSRFToken': '{{ csrf_token }}'},
+// 				data: $('#signup-form').serialize(),
+
+// 				beforeSend: function () {
+// 					$("#signup").modal("show");
+// 				},
+
+// 				success: function(data) {
+// 					$('#signup .modal-body').html(data);
+// 				}
+// 			});
+// 		});
+// 	});</script>
+
+<script>
+    $(document).ready(function () {
+			$('input[type=radio][name="filter"]').change(function () {
+
+				// console.log("value change")
+				var aa= '<div class="row product-isotope shop-product-wrap">';
+				var radioValue = $("input[name='filter']:checked").val();
+
+				$.ajax({
+					url: "{% url 'filetr_view' %}",
+					method: 'GET',
+					dataType:'html',
+					data: {
+						radioValue :radioValue
+					},
+					success: function (data) {
+<!--						product = data.all_products ;-->
+<!--						console.log(product);-->
+<!--						for(i=0; i<product.length; i++){-->
+<!--							aa += '<div class="col-sm-6 col-md-3 hot sale"><div class="single-product">	<div class="single-product__image">	<a class="image-wrap" href= "/product/'+product[i].id+'/'+product[i].slug+'/"><img src="/media/'+product[i].image+'"class="img-fluid" alt=""/></a><div class="single-product__floating-badges"><span class="onsale">-10%</span><span class="hot">hot</span></div><div class="single-product__floating-icons"><a class="wishlist" href="/product/'+product[i].id+'/'+product[i].slug+'/"><i class="ion-android-favorite-outline"></i></a></div></div><div class="single-product__content"><div class="title"><a id="productName"href="/product/'+product[i].id+'/'+product[i].slug+'/">'+product[i].product_name+'</a></div><div class="price"><span class="main-price discounted">₹160.00</span><span class="discounted-price">₹'+product[i].price+'</span></div></div></div></div>';-->
+<!--						}-->
+
+<!--						// console.log(product[i].image);-->
+<!--						$("#singleProduct").hide();-->
+<!--						aa += '</div>'-->
+
+						$("#productls").html(data);
+<!--						$("#productls").html(aa);-->
+						$("#sortBy").modal("hide");
+
+
+					},
+					error: function (error) {
+						console.log(error);
+						console.log("error");
+						$("#sortBy").modal("hide");
+					}
+				});
+
+			});
+		});
+
+// 		filter page
+$(document).ready(function () {
+			$("#apply").click(function () {
+				var aa = '<div class="row product-isotope shop-product-wrap">';
+				var checkValue = [];
+				$("input[type=checkbox][name='catcheck']:checked").each(function () {
+					checkValue.push($(this).val());
+				});
+				// var checkValue = $("input[type=checkbox][name='catcheck']:checked").val();
+				console.log(checkValue)
+				var radioValue = $("input[name='price']:checked").val();
+				console.log(radioValue)
+				$.ajax({
+					url: "{% url 'filter_list' %}",
+					method: 'POST',
+					dataType: 'html',
+					data: {
+						radioValue: radioValue,
+						checkValue : checkValue,
+
+					},
+					success: function (data) {
+					    console.log(data);
+<!--					    if(!data){alert("Nothing Found");}-->
+<!--						product = data.all_products;-->
+<!--						for (i = 0; i < product.length; i++) {-->
+<!--							aa += '<div class="col-sm-6 col-md-3 hot sale"><div class="single-product">	<div class="single-product__image">	<a class="image-wrap" href= "/product/' + product[i].id + '/' + product[i].slug + '/"><img src="/media/' + product[i].image + '"class="img-fluid" alt=""/></a><div class="single-product__floating-badges"><span class="onsale">-10%</span><span class="hot">hot</span></div><div class="single-product__floating-icons"><a class="wishlist" href="/product/' + product[i].id + '/' + product[i].slug + '/"><i class="ion-android-favorite-outline"></i></a></div></div><div class="single-product__content"><div class="title"><a id="productName"href="/product/' + product[i].id + '/' + product[i].slug + '/">' + product[i].product_name + '</a></div><div class="price"><span class="main-price discounted">₹ '  + product[i].id +  '</span><span class="discounted-price">₹' + product[i].price + '</span></div></div></div></div>';-->
+<!--						}-->
+<!--						// console.log(product[i].image);-->
+<!--						$("#singleProduct").hide();-->
+<!--						aa += '</div>'-->
+						$("#productls").html(data);
+						$("#filter").trigger("reset");
+						$("#filter").modal("hide");
+						$('#priceFilter')[0].reset();
+
+
+					},
+					error: function (error) {
+						console.log(error);
+						$("#filter").trigger("reset");
+						$('#priceFilter')[0].reset();
+
+					}
+
+				});
+
+			});
+
+		});
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+  function submitUserForm(){
+    var response = grecaptcha.getResponse();
+    console.log(response.length);
+    if(response.length == 0){
+      document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This Field is required </span>';
+      return false;
+    }
+    return true;
+  }
+  function varifycaptcha() {
+  console.log('verified');
+  document.getElementById('g_recaptcha-error').innerHTML = '';
+  }
+</script>
+<script>
+  function submitUserFormForOTP(){
+  	grecaptcha.reset();
+    var response = grecaptcha.getResponse(1);
+    console.log(response.length);
+    if(response.length == 0){
+      document.getElementById('g-recaptcha-error-otp').innerHTML = '<span style="color:red;">This Field is required </span>';
+      return false;
+    }
+    return true;
+  }
+  function varifycaptcha() {
+  console.log('verified');
+  document.getElementById('g_recaptcha-error').innerHTML = '';
+  }
+</script>
+
+	{% block extra_scripts %}
+	<!--Write ur exta script-->
+    {% endblock extra_scripts %}
+
+	<!--Zoho SalesIQ Integration -->
+<script type="text/javascript" id="zsiqchat">var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode: "8292eb86b4542c08ebd3380a36c4d1f77928da588c91102ed5acdc4978a0ece0b6249ad78903684c7957715cf85ed61a", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.in/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);</script>
+
+</body>
+
+<script>
+$(window).scroll(function() {
+var scroll = $(window).scrollTop();
+
+    if (scroll >= 100) {
+        $(".alert-blue").addClass("alert_blue_scroll");
+    }
+});
+</script>
+</html>
+
+<script>
+	
+	$("#otp-input-field").hide();
+	$("#otp-message").hide();
+	$("#otp-captcha").hide();
+	$("#otp-error-message").hide()
+	function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+	}
+
+  function send_otp_message() {
+  	var mobile = document.getElementById('mobile').value;
+  	const csrftoken = getCookie('csrftoken');
+  	var url = "{% url 'send_otp' %}";
+    $.post(url, {'mobile': mobile, csrfmiddlewaretoken: csrftoken}, function (data, status, xhr) {
+    		if (xhr.status == 200) {
+        	$("#otp-error-message").hide()
+        	$("#otp-input-field").show();
+        	$("#otp-message").show();
+        	$("#otp-button").hide();
+        	$("#otp-captcha").show();
+        	document.getElementById("mobile").readOnly = true;
+        }
+    })
+	  .fail(function(error) {
+	  	console.log(error)
+	    if (error.status = 400) {
+	    	$("#otp-error-message").show();
+	    	$('#otp-error').html(error.responseJSON.message);
+	    } else {
+	    	alert(error.statusText)
+	    }
+	    $("#otp-input-field").hide();
+	  	$("#otp-message").hide();
+	  	$("#otp-captcha").hide()();
+		});
+  }
+</script>
+<script>
+function openLogin(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  tabcreate = document.getElementById(cityName)
+  console.log(tabcreate)
+  tabcreate.style.display = "block";
+  evt.currentTarget.className += " active";
+}
+document.getElementById("defaultOpen").click();
+</script>
+
+
+

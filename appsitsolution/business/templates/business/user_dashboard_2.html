@@ -1,0 +1,156 @@
+{% load static %}
+{% include "business/include/header.html" %}
+{% load humanize %}
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Business Details</h2>
+                <h5 class="calc_page_title_1 mb-4"></h5>
+                </div>
+                    <form method="post">
+                        {% csrf_token %}
+                <div class="col-md-12 mt-4">
+                    <div class="user_profile_bonus">
+                    <h1 class="text-center">BUSINESS SUMMARY</h1>
+                    <p class="text-center">Check your group summary by selecting Month and Year</p>
+                        <div class="row">
+                        <div class="col-md-6">
+                    <input type="month" value="{{input_date|date:'Y-m'}}" name="month" id="date_points" class="form-control">
+                            </div>
+                        <div class="col-md-6">
+                    <input type="submit" value="Submit" class="form-control" style="background-color: #222529; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden; color: white;">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    <p><h5 class="bonus_director">Data for the Month of: <span>{{month}} - {{year}}</span></h5></p>
+                  </div>
+                    </div>
+                    </form>
+                  {% if rt_data %}
+             <div class="col-md-4 mt-4">
+             <table class="table user_profile_bonus_1">
+                 <thead class="thead-dark">
+                 <tr>
+                 <th scope="col">Left PV</th>
+                 <th scope="col">Left BV</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 <tr>
+                 <td>{{rt_data.rt_left_pv_month|intcomma}}</td>
+                 <td>{{rt_data.rt_left_bv_month|intcomma}}</td>
+                 </tr>
+                 </tbody>
+             </table>
+             </div>
+
+            <div class="col-md-4 mt-4">
+            <table class="table user_profile_bonus_1">
+                <thead class="thead-dark">
+                <tr>
+                <th scope="col">Super PPV</th>
+                <th scope="col">Super PBV</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>{{rt_data.rt_user_super_ppv|intcomma}}</td>
+                <td>{{rt_data.rt_user_super_pbv|intcomma}}</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <div class="col-md-4 mt-4">
+            <table class="table user_profile_bonus_1">
+                <thead class="thead-dark">
+                <tr>
+                <th scope="col">Right PV</th>
+                <th scope="col">Right BV</th>
+              </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>{{rt_data.rt_right_pv_month|intcomma}}</td>
+                <td>{{rt_data.rt_right_bv_month|intcomma}}</td>
+                </tr>
+                </tbody>
+            </table>
+                </div>
+
+                <div class="col-md-4 mt-4">
+                <table class="table user_profile_bonus_1">
+                    <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">GPV</th>
+                    <th scope="col">GBV</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <td>{{rt_data.rt_gpv_month|intcomma}}</td>
+                    <td>{{rt_data.rt_gbv_month|intcomma}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                <div class="col-md-4 mt-4">
+                <table class="table user_profile_bonus_1">
+                    <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">Infinity PPV</th>
+                    <th scope="col">Infinity PBV</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <td>{{rt_data.rt_user_infinity_ppv|intcomma}}</td>
+                    <td>{{rt_data.rt_user_infinity_pbv|intcomma}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                {% else %}
+                 <h5 class="bonus_director"><span>Organisation or Generational Data is not Available for the selected Month!</span></h5>
+                {% endif %}
+                {% if data %}
+                <div class="col-md-4 mt-4">
+                <table class="table user_profile_bonus_1">
+                    <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">PGPV</th>
+                    <th scope="col">PGBV</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <td>{{data.pgpv|intcomma}}</td>
+                    <td>{{data.pgbv|intcomma}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="col-md-12 mt-4">
+                <h5 class="bonus_director">No. of Qualified Director Legs under me : <span>{{data.no_of_director_legs}}</span></h5>
+                </div>
+                    {% else %}
+                    <h5 class="bonus_director"><span> Personal Group (PGPV/PGBV) Data not Available!</span></h5>
+                    {% endif %}
+                    <div class="col-md-12 mt-4">
+                    </div>
+                    </div>
+                </div>
+                </div>{% include "business/include/acronym.html" %}
+                </form>
+                </div>
+                </div>
+{% include "business/include/footer.html" %}
+

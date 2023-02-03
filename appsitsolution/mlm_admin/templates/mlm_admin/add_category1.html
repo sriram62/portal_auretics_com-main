@@ -1,0 +1,104 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Add Category</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Category Name</label>
+                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Is Parent Category</label>
+                        <select class="form-control" id="is_parent_category" name="is_parent_category">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Parent Category</label>
+                    <select class="form-control" id="parent_category" name="parent_category">
+                            <option value=''>Select Parent Category</option>
+                            {% for i in data %}
+                            <option value={{i.pk}}>{{i.cat_name}}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image"><small class="text-danger">* </small>Image</label>
+                       <input type="file" class="form-control" id="cat_image" name="cat_image" >
+                </div>
+                </div>
+                    </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="description">Description</label>
+                            <textarea type="textarea" class="form-control" id="description" name="description" placeholder="Please Enter Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Commission</label>
+                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">Show On Home Page</label>
+                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">
+                            <option value='Show'>Show</option>
+                            <option value='Not Show'>Not Show</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="Status">Status</label>
+                            <select class="form-control" id="Status" name="status">
+                                <option value="">In Stock</option>
+                                <option value="1">Out Of Stock</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="cat_order">Cat order</label>
+                            <input class="form-control" id="cat_order" name="cat_order">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="discount">discount</label>
+                            <input class="form-control" id="discount" name="discount">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Save </button>
+                <button class="btn btn-danger" type="reset"> Clear </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}

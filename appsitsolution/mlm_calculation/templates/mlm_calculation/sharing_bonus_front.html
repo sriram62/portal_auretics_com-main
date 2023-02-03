@@ -1,0 +1,32 @@
+{% load static %}
+{% include "mlm_calculation/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data" action="{% url 'mlm_calculation_sharig_bonus_front' %}">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h2 class="calc_page_title">Infinity Plan</h2>
+           </div>
+            <div class="modal-body">
+                <div class="form-group super_plan">
+                <div class="row">
+                    <div class="col-md-6 mt-4">
+                      <p><span><h5>Last Public Data is for: </h5></span></p>
+                      <p><span><h5>Last Draft Data is for: </h5></span></p>
+                        <label>Sum total sharing bonus points</label>
+                    <input type="text" value="{{sum_sharing_point}}" class="form-control"  name="sharing_bonus_point">
+                        </div>
+                    <div class="col-md-6 mt-4">
+                        <label>Index</label>
+                    <input type="text" class="form-control"  name="index">
+                       </div>
+                    <div class="col-md-6 mt-4">
+                    <button type="submit">Sharing Bonus:</button>
+                    </div>
+                       </div>
+            </div>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_calculation/include/footer.html" %}

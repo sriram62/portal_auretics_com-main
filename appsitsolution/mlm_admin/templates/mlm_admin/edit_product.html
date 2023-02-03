@@ -1,0 +1,718 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" id="my-form" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Product</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Name</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.product_name}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Alias</label>
+<!--                        <select class="form-control" id="is_parent_category" name="is_parent_category">-->
+<!--                            <option value="Yes">Yes</option>-->
+<!--                            <option value="No">No</option>-->
+<!--                        </select>-->
+                        {{form.slug}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Product Code</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.product_code}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Name In Accounting Software</label>
+<!--                        <select class="form-control" id="is_parent_category" name="is_parent_category">-->
+<!--                            <option value="Yes">Yes</option>-->
+<!--                            <option value="No">No</option>-->
+<!--                        </select>-->
+                        {{form.name_in_accounting_software}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Print Name</label>
+<!--                        <select class="form-control" id="is_parent_category" name="is_parent_category">-->
+<!--                            <option value="Yes">Yes</option>-->
+<!--                            <option value="No">No</option>-->
+<!--                        </select>-->
+                        {{form.print_name}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="category"><small class="text-danger">* </small>Category</label>
+                    <select class="form-control" id="category" name="category">
+                            {% for i in cat %}
+                            <option value={{i.pk}} {% if i.pk == cat_id %} selected {% endif %}>{{i.cat_name}}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+                </div>
+<!--                <div class="col-sm-6">-->
+<!--                    <div class="form-group">-->
+<!--                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Product Code</label>-->
+<!--&lt;!&ndash;                        <select class="form-control" id="is_parent_category" name="is_parent_category">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <option value="Yes">Yes</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <option value="No">No</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </select>&ndash;&gt;-->
+<!--                        {{form.product_code}}-->
+<!--                    </div>-->
+<!--                </div>-->
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">HSN Code</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.hsn_code}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="cgst">CGST</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.cgst}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="sgst">SGST</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.sgst}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">IGST</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.igst}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">VAT</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.vat}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst"><small class="text-danger">* </small>Distributor Price Margin</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.distributor_price}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst"><small class="text-danger">* </small>Point Value Percentage</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.point_value}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst"><small class="text-danger">* </small>Business Value Percentage</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.business_value}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst"><small class="text-danger">* </small>Loyalty Purchase</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.loyalty_purchase}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst"><small class="text-danger">* </small>Loyalty Consume</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.loyalty_consume}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst"><small class="text-danger">* </small>Essential product</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.essential_product}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Minimum Purchase Quantity</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.minimum_purchase_quantity}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">Description</label>
+<!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+<!--                            <option value='Show'>Show</option>-->
+<!--                            <option value='Not Show'>Not Show</option>-->
+<!--                        </select>-->
+                            {{form.description}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst"><small class="text-danger">* </small>Maintain Stock Balance</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.maintain_stock_balance}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Country Of Origin</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.country_of_origin}}
+                        </div>
+                    </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="brand">Brand</label>
+                    {{form.brand}}
+                </div>
+                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Item Package Quantity</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.item_package_quantity}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Ingredients</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.ingredients}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst"><small class="text-danger">* </small>Expiration Dated Product</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.expiration_dated_product}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label" for="igst">Colour</label>
+<!--                            <input class="form-control" id="discount" name="discount">-->
+                            {{form.colour}}
+                        </div>
+                    </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="parent_category"><small class="text-danger">* </small>Size</label>
+                    {{form.size}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="gender"><small class="text-danger">* </small>Gender</label>
+                    <select class="form-control" id="gender" name="gender">
+                             {% for i in gender %}
+                            <option value={{i.pk}} {% if i.pk == gender_id %} selected {% endif %}>{{i.gender_name}}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="variant"><small class="text-danger">* </small>Variant</label>
+                    <select class="form-control" id = 'variant'  name="variant">
+                            <option value='NO' {% if product_qs.product_variant.variant == 'NO' %} selected {% endif %} >NO</option>
+                            <option value='YES' {% if product_qs.product_variant.variant == 'YES' %} selected {% endif %} >YES</option>
+                        </select>
+                </div>
+                </div>
+                <div class="col-sm-6 main_variant_data" id="main_variant" style="display:none;">
+                <div class="form-group">
+                    <label class="floating-label" for="variant"><small class="text-danger">* </small>Main Variant</label>
+                    <select class="form-control  main_variant_data" id="main_variant_data"  name="main_variant_data">
+                            <option value='YES' {% if product_qs.product_variant.main_variant == 'YES' %} selected {% endif %}>YES</option>
+                            <option value='NO' {% if product_qs.product_variant.main_variant == 'NO' %} selected {% endif %}>NO</option>
+                        </select>
+                </div>
+                </div>
+                <div class="col-sm-6 main_variant_data check_variant" style="display:none;">
+                <div class="form-group">
+                    <label class="floating-label" for="variant"><small class="text-danger">* </small>Variant Name</label>
+                    <input class="form-control" name="variant_name" type="text"  value="{{product_qs.product_variant.variant_name}}">
+                    <input class="form-control" name="variant_pk" type="hidden"  value="{{product_qs.product_variant.pk}}">
+                </div>
+                </div>
+                <div class="col-sm-6 main_variant_data check_variant"  style="display:none;">
+                <div class="form-group">
+                    <label class="floating-label" for="product"><small class="text-danger">* </small>Variant Based On</label>
+                    <select class="form-control"  name="variant_based_on">
+                        <option value>Select Option</option>
+                            <option value='size'  {% if product_qs.product_variant.variant_based_on == 'size' %} selected {% endif %}>Size</option>
+                            <option value='colour' {% if product_qs.product_variant.variant_based_on == 'colour' %} selected {% endif %}>Colour</option>
+                            <option value='material' {% if product_qs.product_variant.variant_based_on == 'material' %} selected {% endif %}>Material</option>
+                            <option value='weight' {% if product_qs.product_variant.variant_based_on == 'weight' %} selected {% endif %}>Weight</option>
+                            <option value='flavour' {% if product_qs.product_variant.variant_based_on == 'flavour' %} selected {% endif %}>Flavour</option>
+                            <option value='Other' {% if product_qs.product_variant.variant_based_on == 'Other' %} selected {% endif %}>Other</option>
+                        </select>
+                </div>
+                </div>
+                <div class="col-sm-6 main_variant_data check_variant"  style="display:none;">
+<!--                    <div id="weaklyArea" >-->
+                    <div class="form-group">
+                    <label class="floating-label" for="product"><small class="text-danger">* </small>Other Variant</label>
+                     <select class="form-control variant_tag v_product"  id="product" name="variant_tag" {% if product_qs.product_variant.main_variant == 'YES' %} disabled {% endif %}>
+                            {% for i in product %}
+                            <option value={{i.pk}} {% if product_qs.product_variant.variant_tag.pk == i.pk %} selected {% endif %}>{{i.product_name}}</option>
+                            {% endfor %}
+                        </select>
+                     <select class="form-control variant_tag v_product_1"  id="product_1" name="variant_tag" {% if product_qs.product_variant.main_variant == 'NO' %} disabled {% endif %}>
+                            <option value={{product_qs.pk}} >{{product_qs.product_name}}</option>
+                        </select>
+                </div>
+<!--                        </div>-->
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Material</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.material}}
+                </div>
+                </div>
+
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Flavour</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.flavour}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Weight</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.weight}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Model Number</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.model_number}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="date">Launch Date</label>
+<!--                       <input type="date" class="form-control" id="date" name="date" value="{{date|date:'c'}}" >-->
+                    {{form.launch_date}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Usage</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.usage}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Directions</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.directions}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Indications</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.indications}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Special Feature</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.special_feature}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Safety Warning</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.safety_warning}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Length</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.length}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Width</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.width}}
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label class="floating-label" for="cat_image">Height</label>
+<!--                       <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                    {{form.height}}
+                </div>
+                </div>
+<!--                <div class="col-sm-6">-->
+<!--                <div class="form-group">-->
+<!--                        <label class="floating-label" for="cat_image"><small class="text-danger">* </small>Price</label>-->
+<!--&lt;!&ndash;                       <input type="file" class="form-control" id="cat_image" name="cat_image" >&ndash;&gt;-->
+<!--                    {{form.price}}-->
+<!--                </div>-->
+<!--                </div>-->
+<!--                    </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-sm-6">-->
+<!--                        <div class="form-group fill">-->
+<!--                            <label class="floating-label" for="description">MRP</label>-->
+<!--&lt;!&ndash;                            <textarea type="textarea" class="form-control" id="description" name="description" placeholder="Please Enter Description"></textarea>&ndash;&gt;-->
+<!--                            {{form.mrp}}-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission"><small class="text-danger">* </small>Product Image1</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+                            {% if image %}
+									<img class="col-sm-6 col-md-3" src="{{image.url}}" width="100px" height="100px" />
+                            {% endif %}
+                            {{form.image}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Product Image2</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+<!--                            <input type="file" class="form-control" id="image" name="prod_image">-->
+                            {% if image2 %}
+									<img class="col-sm-6 col-md-3" src="{{image2.url}}" width="100px" height="100px"/>
+                            {% endif %}
+                            {{form.image2}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Product Image3</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+<!--                            <input type="file" class="form-control" id="image" name="prod_image">-->
+                            {% if image3 %}
+									<img class="col-sm-6 col-md-3" src="{{image3.url}}" width="100px" height="100px"/>
+                            {% endif %}
+                            {{form.image3}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Product Image4</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+<!--                            <input type="file" class="form-control" id="image" name="prod_image">-->
+                            {% if image4 %}
+									<img class="col-sm-6 col-md-3" src="{{image4.url}}" width="100px" height="100px"/>
+                            {% endif %}
+                            {{form.image4}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Product Image5</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+<!--                            <input type="file" class="form-control" id="image" name="prod_image">-->
+                            {% if image5 %}
+									<img class="col-sm-6 col-md-3" src="{{image5.url}}" width="100px" height="100px"/>
+                            {% endif %}
+                            {{form.image5}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Product Image6</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+<!--                            <input type="file" class="form-control" id="image" name="prod_image">-->
+                            {% if image6 %}
+									<img class="col-sm-6 col-md-3" src="{{image6.url}}" width="100px" height="100px"/>
+                            {% endif %}
+                            {{form.image6}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Product Image7</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+<!--                            <input type="file" class="form-control" id="image" name="prod_image">-->
+                            {% if image7 %}
+									<img class="col-sm-6 col-md-3" src="{{image7.url}}" width="100px" height="100px"/>
+                            {% endif %}
+                            {{form.image7}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Product Image8</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+<!--                            <input type="file" class="form-control" id="image" name="prod_image">-->
+                            {% if image8 %}
+									<img class="col-sm-6 col-md-3" src="{{image8.url}}" width="100px" height="100px"/>
+                            {% endif %}
+                            {{form.image8}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Product Image9</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+<!--                            <input type="file" class="form-control" id="image" name="prod_image">-->
+                            {% if image9 %}
+									<img class="col-sm-6 col-md-3" src="{{image9.url}}" width="100px" height="100px"/>
+                            {% endif %}
+                            {{form.image9}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Product Image10</label>
+<!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+<!--                            <input type="file" class="form-control" id="image" name="prod_image">-->
+                            {% if image10 %}
+									<img class="col-sm-6 col-md-3" src="{{image10.url}}" width="100px" height="100px"/>
+                            {% endif %}
+                            {{form.image10}}
+                        </div>
+                    </div>
+                </div>
+
+<!--                    <div class="col-sm-6">-->
+<!--                        <div class="form-group">-->
+<!--                            <label class="floating-label" for="igst">Status</label>-->
+<!--&lt;!&ndash;                            <input class="form-control" id="discount" name="discount">&ndash;&gt;-->
+<!--                            {{form.status}}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--            </div>-->
+            <span class="modal-footer">
+                {% if clone_option %}
+                    <span align="left"><a class="btn btn-primary" align="left" style="align:left" type="" href="{% url 'copy_product' myid %}" onclick="return confirm('Are you sure, you want to clone this Product?')">Clone Product</a></span>
+                {% endif %}
+                <button class="btn btn-primary" type="submit">Update </button>
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<!--<script>-->
+<!--    $('document').ready(function(){-->
+<!--        $('#my-form').submit(function(){-->
+<!--          if( document.getElementById("id_image").files.length == 0 ){-->
+<!--                console.log("no files selected");-->
+<!--                alert('Image field is required!');-->
+<!--                return false;-->
+<!--            }-->
+<!--            return true;-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+<script>
+    $("#id_hsn_code").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var pincode = $("#id_hsn_code").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+</script>
+<script>
+
+$('#id_cgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_sgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_igst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_vat').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_distributor_price').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_point_value').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_business_value').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_minimum_purchase_quantity').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_item_package_quantity').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+<!--$('#id_weight').keypress(function(event) {-->
+<!--  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {-->
+<!--    event.preventDefault();-->
+<!--  }-->
+<!--});-->
+<!--$('#id_length').keypress(function(event) {-->
+<!--  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {-->
+<!--    event.preventDefault();-->
+<!--  }-->
+<!--});-->
+$('#id_breath').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+<!--$('#id_height').keypress(function(event) {-->
+<!--  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {-->
+<!--    event.preventDefault();-->
+<!--  }-->
+});
+</script>
+<script>
+$("#id_product_name").keyup(function(){
+        var data = $(this).val();
+        Text = data.toLowerCase();
+        Text = Text.replace(/[^a-zA-Z0-9 ]+/g,'').replace(/\s+/g, '-');
+        $("#id_slug").val(Text);
+        $("#id_print_name").val(data);
+});
+$("#id_slug").keyup(function(){
+        var Text = $(this).val();
+        Text = Text.toLowerCase();
+        Text = Text.replace(/[^a-zA-Z0-9 ]+/g,'').replace(/\s+/g, '-');
+        $("#id_slug").val(Text);
+});
+
+</script>
+<script>
+
+$('#id_igst').keyup(function(){
+  var data = $(this).val()
+  if (data > 100){
+    this.value ='';
+  }
+  value=parseFloat(data)
+  value=value/2
+  $("#id_cgst").val(value);
+  $("#id_sgst").val(value);
+});
+    </script>
+<script>
+    $('document').ready(function(){
+    var numInputs = $("#variant").val();
+	toggleSub(numInputs);
+	// called onclick of checkbox
+function toggleSub(numInputs) {
+    // get reference to related content to display/hide
+    if (numInputs == 'YES') {
+        $('.main_variant_data').show();
+    } else {
+        $('.main_variant_data').hide();
+    }
+}
+});
+$("#variant").change(function () {
+    var numInputs = $(this).val();
+    toggleSub(numInputs);
+// called onclick of checkbox
+function toggleSub(numInputs) {
+    // get reference to related content to display/hide
+    if (numInputs == 'YES') {
+        $('.main_variant_data').show();
+    } else {
+        $('.main_variant_data').hide();
+    }
+}
+});
+</script>
+
+<script>
+    $('document').ready(function(){
+    $(".main_variant_data").change(function () {
+        var numInputs = $('#main_variant_data').val();
+    if(numInputs == 'YES'){
+        $("#product_1").removeAttr('disabled');
+        $("#product").prop("disabled", true);
+<!--      $("#weaklyArea").replaceWith('<div  id="weaklyArea"><div class="form-group"><label class="floating-label" for="product"><small class="text-danger">* </small>Other Variant</label><select class="form-control variant_tag select2" id="product" name="variant_tag"><option value={{product_qs.pk}}>{{product_qs.product_name}}</option></select></div></div></div>')-->
+<!--        $('#product [value={{product_qs.pk}}]').attr('selected', 'true');-->
+        $('.v_product_1').show();
+        $('.v_product').hide();
+        $('.variant_tag').css({pointerEvents: "none"});
+    }
+    else{
+         $('.v_product').show();
+        $('.v_product_1').hide();
+        $("#product").removeAttr('disabled');
+        $("#product_1").prop("disabled", true);
+<!--          $("#weaklyArea").replaceWith('<div  id="weaklyArea"><div class="form-group"><label class="floating-label" for="product"><small class="text-danger">* </small>Other Variant</label><select class="form-control variant_tag select2"  id="product" name="variant_tag">{% for i in product %}<option value={{i.pk}} >{{i.product_name}}</option>{% endfor %}</select></div></div></div>')-->
+        $('.variant_tag').css({pointerEvents: "initial"});
+    }
+    });
+    });
+</script>
+<script>
+    $('document').ready(function(){
+    var numInputs = $('#main_variant_data').val();
+    if(numInputs == 'YES'){
+        $('.v_product_1').show();
+        $('.v_product').hide();
+        $('.variant_tag').css({pointerEvents: "none"});
+    }
+    else{
+         $('.v_product').show();
+        $('.v_product_1').hide();
+        $('.variant_tag').css({pointerEvents: "initial"});
+    }
+    });
+</script>

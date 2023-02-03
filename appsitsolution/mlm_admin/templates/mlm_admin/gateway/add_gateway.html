@@ -1,0 +1,270 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" id="my-form-gateway" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Add Gateway Name</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+
+
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Gateway Code</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.code}}
+                               {% if form.code.errors %}
+                                    <div style="color: red;">
+                                        {% for error in form.code.errors %}
+                                            <span>{{error}}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Gateway Name</label>
+<!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                            {{form.name}}
+                         {% if form.name.errors %}
+                                    <div style="color: red;">
+                                        {% for error in form.name.errors %}
+                                            <span>{{error}}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                {% endif %}
+                    </div>
+                </div>
+                <p><br />Please add your payment Api keys in the settings file.<br />
+                    Then load the fixtures by,<br />
+                    python manage.py loaddata payment_gateway.json<br />
+                    Then you can see the entries in the mlm admin end. There you can follow the urls to manage priority and try checkout items</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Save </button>
+                <button class="btn btn-danger" type="reset"> Clear </button>
+            </div>
+         </form>
+    </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<script>
+    $('document').ready(function(){
+        $('#my-form').submit(function(){
+          if( document.getElementById("id_image").files.length == 0 ){
+                console.log("no files selected");
+                alert('Product Image1 field is required!');
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+<script>
+    $("#id_hsn_code").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var pincode = $("#id_hsn_code").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+</script>
+<script>
+
+$('#id_cgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_sgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_igst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_vat').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_distributor_price').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_point_value').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_business_value').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_minimum_purchase_quantity').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('#id_item_package_quantity').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+<!--$('#id_weight').keypress(function(event) {-->
+<!--  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {-->
+<!--    event.preventDefault();-->
+<!--  }-->
+<!--});-->
+<!--$('#id_length').keypress(function(event) {-->
+<!--  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {-->
+<!--    event.preventDefault();-->
+<!--  }-->
+<!--});-->
+<!--$('#id_width').keypress(function(event) {-->
+<!--  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {-->
+<!--    event.preventDefault();-->
+<!--  }-->
+<!--});-->
+<!--$('#id_height').keypress(function(event) {-->
+<!--  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {-->
+<!--    event.preventDefault();-->
+<!--  }-->
+<!--});-->
+$('#id_distributor_price').keyup(function(){
+  if ($(this).val() > 100){
+    this.value ='';
+  }
+});
+$('#id_point_value').keyup(function(){
+  if ($(this).val() > 100){
+    this.value ='';
+  }
+});
+$('#id_business_value').keyup(function(){
+  if ($(this).val() > 100){
+    this.value ='';
+  }
+});
+</script>
+<!--changes in slug-->
+<script>
+$("#id_product_name").keyup(function(){
+        var data = $(this).val();
+        Text = data.toLowerCase();
+        Text = Text.replace(/[^a-zA-Z0-9 ]+/g,'').replace(/\s+/g, '-'); //change special character to '_' -- '' after +/g,
+        $("#id_slug").val(Text);
+        $("#id_print_name").val(data);
+});
+$("#id_slug").keyup(function(){
+        var Text = $(this).val();
+        Text = Text.toLowerCase();
+        Text = Text.replace(/[^a-zA-Z0-9 ]+/g,'').replace(/\s+/g, '-'); //change special character to '_' -- '' after +/g,
+        $("#id_slug").val(Text);
+});
+
+</script>
+<script>
+$('#id_igst').keyup(function(){
+  var data = $(this).val()
+  if (data > 100){
+    this.value ='';
+  }
+  value=parseFloat(data)
+  value=value/2
+  $("#id_cgst").val(value);
+  $("#id_sgst").val(value);
+});
+    </script>
+<script>
+$("#variant").change(function () {
+    var numInputs = $(this).val();
+    toggleSub(numInputs);
+// called onclick of checkbox
+function toggleSub(numInputs) {
+    // get reference to related content to display/hide
+    if (numInputs == 'YES') {
+        $('.main_variant_data').show();
+    } else {
+        $('.main_variant_data').hide();
+    }
+}
+});
+</script>
+<script>
+    $('document').ready(function(){
+    $(".main_variant_data").change(function () {
+        var numInputs = $('#main_variant_data').val();
+    if(numInputs == 'YES'){
+        $('.variant_tag').css({pointerEvents: "none"});
+    }
+    else{
+        $('.variant_tag').css({pointerEvents: "initial"});
+    }
+    });
+    });
+</script>
+<script>
+    $('document').ready(function(){
+    var numInputs = $('#main_variant_data').val();
+    if(numInputs == 'YES'){
+        $('.variant_tag').css({pointerEvents: "none"});
+    }
+    else{
+        $('.variant_tag').css({pointerEvents: "initial"});
+    }
+    });
+</script>
+
+<script>
+    $('document').ready(function(){
+    var numInputs = $('#main_variant_data').val();
+    if(numInputs == 'YES'){
+        $('.v_product_1').show();
+        $('.v_product').hide();
+        $('.variant_tag').css({pointerEvents: "none"});
+    }
+    else{
+         $('.v_product').show();
+        $('.v_product_1').hide();
+        $('.variant_tag').css({pointerEvents: "initial"});
+    }
+    });
+</script>
+
+<script>
+    $('document').ready(function(){
+    $(".main_variant_data").change(function () {
+        var numInputs = $('#main_variant_data').val();
+    if(numInputs == 'YES'){
+        $("#product_1").removeAttr('disabled');
+        $("#product").prop("disabled", true);
+        $('.v_product_1').show();
+        $('.v_product').hide();
+        $('.variant_tag').css({pointerEvents: "none"});
+    }
+    else{
+         $('.v_product').show();
+        $('.v_product_1').hide();
+        $("#product").removeAttr('disabled');
+        $("#product_1").prop("disabled", true);
+        $('.variant_tag').css({pointerEvents: "initial"});
+    }
+    });
+    });
+</script>

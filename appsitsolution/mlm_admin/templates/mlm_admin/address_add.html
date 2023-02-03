@@ -1,0 +1,235 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+        .task-data i {
+            color: #ffffff !important;
+            font-family: 'fontawesome';
+        }
+
+        .subhtask_tab .dataTables_filter {
+            float: right;
+            margin-bottom: 20px;
+        }
+
+        .subhtask_tab .dataTables_length {
+            white-space: nowrap;
+            line-height: 70px;
+        }
+    </style>
+</head>
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+
+
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">{{title}}</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">MLM Admin</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Address Management</a></li>
+                            <li class="breadcrumb-item"><a href="#!">{{title}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ task-list ] start -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            <div class="text-center">
+                                <strong>Messages: </strong> {{ message }}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        <h5>Address Details</h5>
+                    </div>
+                    <div class="card-body task-data hide_table_row">
+                        <div class="d-flex row add_form" style="display: flex;">
+                            <input type="hidden" name="id" value="{{ad.id}}">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                            <div class="col-md-6 mb-2">
+                                <label>Select User</label>
+                                <input id="advisor" type="text" class="form-control" name="advisor"
+                                    value="{{ad.user.email}}">
+                                <input id="user_email" type="hidden" name="user_email">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>Name</label>
+                                <input type="text" class="form-control" id='name' name='name' placeholder="Name"
+                                    value="{{ad.name}}">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>Mobile</label>
+                                <input type="text" class="form-control" name='mobile' placeholder="Mobile"
+                                    value="{{ad.mobile}}">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>Pincode</label>
+                                <input type="text" class="form-control" name='pincode' placeholder="Enter Pincode"
+                                    value="{{ad.pin}}">
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label>Address (area and street)</label>
+                                {% if not ad_view %}
+                                <textarea class="form-control" name='address_line'rows="3">{{ad.address_line}}</textarea>
+                                {%else%}
+                                <textarea class="form-control" name='address_line'rows="3" readonly>{{ad.address_line}}</textarea>
+                                {%endif%}
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>City/District/Town</label>
+                                <input type="text" class="form-control" name='city' placeholder="Enter City name"
+                                    value="{{ad.city}}">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>State Name</label>
+                                {% if not ad_view %}
+                                <select name="state" class="form-control">
+                                    
+                                    
+                                    <option value="" disabled="" selected>--Select State--
+                                    </option>
+                                    {% for is in all_states %}
+                                    {% if ad.state.state_name == is.state_name %}
+                                    <option value="{{is.state_name}}" selected>{{is.state_name}}</option>
+                                    {% else %}
+                                    <option value="{{is.state_name}}">{{is.state_name}}</option>
+                                    {%endif%}
+                                    {% endfor %}
+                                   
+                                </select>
+                                {%else%}
+                                <input type="text" class="form-control" name="state" value="{{ad.state.state_name}}">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>Landmark (Optional)</label>
+                                <input type="text" class="form-control" name="Landmark" placeholder="Enter Landmark"
+                                    value="{{ad.Landmark}}">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label>Alternate Phone (Optional)</label>
+                                <input type="text" class="form-control" name='alternate_mobile'
+                                    placeholder="Alternate Mobile Number" value="{{ad.alternate_mobile}}">
+                            </div>
+                            {% if ad.default %}
+                            <div class="col-md-6 p-3">
+                                <input type="checkbox" name="default_{{ad.id}}" checked>
+                                <label>Set as Default</label>
+                            </div>
+                            {% else %}
+                            <div class="col-md-6 p-3">
+                                <input type="checkbox" name="default_{{ad.id}}">
+                                <label>Set as Default</label>
+                            </div>
+                            {% endif %}
+                            <div class="col-md-6"></div>
+
+                            {% if not ad_view %}
+                            <div class="col-md-6 mb-2">
+                                <input type="button" class="btn btn-primary rounded" value="Add Address"
+                                    onclick="send_data(this)">
+                            </div>
+                            {% endif %}
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- [ task-list ] end -->
+            </div>
+            <!-- [ Main Content ] end -->
+</section>
+
+{% include "mlm_admin/include/footer.html" %}
+{% if not ad_view %}
+<script>
+    $(function () {
+        var getData = function (request, response) {
+            var url = "{% url 'users_autocomplete' %}";
+            $.post(url, { 'user_keys': request.term, csrfmiddlewaretoken: '{{ csrf_token }}' }, function (data, status, xhr) {
+                console.log(data);
+                response(data);
+            })
+                .fail(function (error) {
+                    console.log(error)
+                });
+        };
+
+        var selectItem = function (event, ui) {
+            $("#user_email").val(ui.item.key)
+            $("#advisor").val(ui.item.value);
+            var text = document.getElementById('name');
+            text.value = ui.item.first_name + ' ' + ui.item.last_name
+            return false;
+        }
+
+        $("#advisor").autocomplete({
+            source: getData,
+            select: selectItem,
+            minLength: 5,
+        });
+    });
+    function send_data(elem) {
+        box = elem.parentElement.parentElement.parentElement;
+        var aInp = box.querySelectorAll('input');
+        var data = {};
+        data['address_line'] = box.querySelector('textarea').value;
+        data['state'] = box.querySelector('select').value;
+        for (let i = 0; i < aInp.length; i++) {
+            if (aInp[i].name !== '') {
+                if ((aInp[i].name).search('default') !== -1) {
+                    data['default'] = aInp[i].checked
+                }
+                else {
+                    data[aInp[i].name] = aInp[i].value
+                }
+            }
+        }
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'update_address'%}",
+            data: data,
+            success: function (response) {
+                console.log(response)
+                window.location.href = "{% url 'address_list' %}";
+            }
+        });
+    };
+</script>
+{%else%}
+<script>
+    var aInp = document.querySelectorAll('input');
+    for (let i = 0; i < aInp.length; i++) {
+        if (aInp[i].name !== '') {
+            if ((aInp[i].name).search('default') !== -1) {
+                aInp[i].disabled = true;
+            }
+            else {
+                aInp[i].readOnly = true;
+            }
+        }
+    }
+
+</script>
+{%endif%}

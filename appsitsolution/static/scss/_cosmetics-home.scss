@@ -1,0 +1,89 @@
+
+/*=============================================
+=            24. cosmetics home            =
+=============================================*/
+
+
+
+/*----------  cosmetics home intro  ----------*/
+
+
+.cosmetics-home-intro{
+    
+    position: relative;
+    p{
+        &.label{
+            font-size: 14px;
+            line-height: 24px;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+
+        &.description{
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        &.shadow-text{
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-size: 77px;
+            line-height: 84px;
+            color: #333;
+            font-weight: 700;
+            opacity: 0.1;
+
+            @media #{$small-mobile}{
+                display: none;
+            }
+
+           
+        }
+    }
+
+    h2{
+        &.title{
+            font-size: 48px;
+            line-height: 72px;
+            color: #333;
+            margin-bottom: 20px;
+
+            @media #{$tablet-device}{
+                font-size: 38px;
+                line-height: 65px;
+            }
+
+            @media #{$extra-small-mobile}{
+                font-size: 32px;
+                line-height: 55px;
+            }
+        }
+    }
+
+    a{
+        &.lezada-shop-link{
+            font-size: 14px;
+            line-height: 18px;
+            color: #333;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #D6D6D6;
+
+            &:hover{
+                border-color: #333;
+            }
+        }
+    }
+
+}
+
+
+
+
+/*=====  End of 24. cosmetics home  ======*/
+

@@ -1,0 +1,565 @@
+{% extends 'shop/base.html' %}
+{% block extra_styles %}
+<style>
+    .regi_inpu select {
+        width: 100%;
+        padding: 14px 11px;
+        border: 1px solid #e5e5e5;
+    }
+
+    .shubh_terms a {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    .shubh_terms a:hover {
+        text-decoration: underline !important;
+    }
+
+</style>
+{% endblock extra_styles %}
+
+{% block content %}
+<!-- End of search overlay -->
+<div class="container">
+    <!-- personal details start-->
+
+    <div class="row regi_header">
+        <div class="col-md-12">
+            <a class="btn btn-success btn-action" href="{% url 'home'  %}">
+                <button type="button" class="btn btn-icon btn-success">
+                    <i class="fa fa-arrow-circle-o-left" style="font-size:30px;color:black"></i></button>
+            </a>
+            <p>{{registration_form}}</p>
+            <span class="ml-80">You can edit unverified details only. In case of any query please contact Auretics
+                Support at 1800 889 0360 or mail at support@auretics.com</span><br /><br />
+            <div class="text-center">
+                <h4><a style=" " class="btn-link text-center" href="{% url 'show_cart' %}?skip_kyc=Y">To skip KYC and
+                        place order, please Click Here.</a></h4>
+            </div>
+        </div>
+    </div>
+
+    <form method="POST" name='registrationform' id="my-form" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+         
+  <div class="row kycbg-bg">
+{#        <div class="col-md-12">#}
+{#       <div class="head_new">#}
+{#           Manual Verification#}
+{#       </div>#}
+{#       </div>#}
+{#       <div class=" container-fluid">#}
+{#           <label for="panno" class="">Manual Verification</label>#}
+{#            #}
+{#           <select class="form-control" id="is_parent_category" name="manual_verify">#}
+{#               <option value="No">No</option>                          #}
+{#               <option value="Yes">Yes</option>#}
+{#                                      #}
+{#                                      #}
+{#                                  </select>#}
+{#            <div class="error alert-error" id="kyc_pan_no" style="display:none;"></div>#}
+{#       </div>#}
+       </div>
+        <!-- kyc details start-->
+        <div class="row kycbg-bg"
+            {% if check_user_qs.check_pan_number and check_user_qs.check_pan_file and  check_user_qs.check_id_proof_type and  check_user_qs.check_id_proof_file and  check_user_qs.check_address_proof_type and  check_user_qs.check_address_proof_file %}
+            hidden {% endif %}>
+            <div class="col-md-12">
+                <div class="head_new">
+                    KYC Details
+                </div>
+                <!--<div class="text-center">
+                        <a style=" " class="btn btn-link text-center" href="{% url 'show_cart' %}?skip_kyc=Y">Skip for now (Note: Changes will be lost)</a>
+                    </div>
+                <div class="head_new"></div>-->
+            </div>
+            <!--remove data  -->
+            <div class="container">
+
+                <from method="POST" action="" enctype="multipart/form-data">
+                    <div class="row">
+
+                        <div class="col-md-6 regi_lab" {% if check_user_qs.check_pan_number %} hidden {% endif %}>
+                            <label for="panno" class="">PAN No.
+                            </label>
+
+                            {{ form.pan_number.errors }}
+                            <div class="regi_inpu">
+                                <input type="text" name="pan_number" value="{{kyc_qs.pan_number}}" maxlength="255"
+                                    required="" id="id_pan_number">
+                            </div>
+                        </div>
+                        <div class="col-md-6  regi_lab">
+                            <label for="id_pan_file" class="">Upload Pan Card
+                            </label>
+                            {% if pan_file %}
+                            <a target="_blank" href="{{pan_file.url}}">
+                                <img class="col-sm-6 col-md-3" src="{{pan_file.url}}" width="100px"
+                                    height="100px" /></a>
+                            {% endif %}
+                            <div class="regi_inpu">
+                                {% if check_user_qs.check_pan_file != True %}
+                                {{ form.pan_file }}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6  regi_lab" {% if check_user_qs.check_id_proof_type  %} hidden {% endif %}>
+                            <label class="">ID Proof Type
+                            </label>
+
+                            <div class="regi_inpu">
+                                {{ form.id_proof_type}}
+                            </div>
+
+                        </div>
+                        <div class="col-md-6  regi_lab">
+                            <label for="id_id_proof_file" class="">Upload Id Proof
+                            </label>
+                            {% if id_proof_file %}
+                            <a target="_blank" href="{{id_proof_file.url}}">
+                                <img class="col-sm-6 col-md-3" src="{{id_proof_file.url}}" width="100px"
+                                    height="100px" /></a>
+                            {% endif %}<br>
+                            <div class="regi_inpu">
+                                {% if check_user_qs.check_id_proof_file != True %}
+                                {{ form.id_proof_file }}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6  regi_lab" {% if check_user_qs.check_address_proof_type %} hidden
+                            {% endif %}>
+                            <label class="">Address Proof Type
+                            </label>
+                            <div class="regi_inpu">
+                                {{ form.address_proof_type }}
+                            </div>
+
+                        </div>
+                        <div class="col-md-6  regi_lab">
+                            <label for="id_address_proof_file" class="">Address Proof Upload
+                            </label>
+                            {% if address_proof_file %}
+                            <a target="_blank" href="{{address_proof_file.url}}">
+                                <img class="col-sm-6 col-md-3" src="{{address_proof_file.url}}" width="100px"
+                                    height="100px" /></a>
+                            {% endif %}<br>
+                            <div class="regi_inpu">
+                                {% if check_user_qs.check_address_proof_file != True %}
+                                {{ form.address_proof_file }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- {{ form }} -->
+                </from>
+            </div>
+        </div>
+        <!--kyc details end-->
+
+                <!--submit-->
+        <div class="row form-footer">
+            <div class="col-md-12">
+                <span>* Required</span>
+                <input type="submit" class="btn btn-secondary btn-lg pull-right regibtn_btn" name="submit" id="submit"
+                    value="Complete Pan Verification" onclick="a();">
+      
+                <!-- <button type="button" class="btn btn-secondary btn-lg pull-right regibtn_btn">Complete Registration</button> -->
+            </div>
+        </div>
+        <!--end-->
+    </form>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+<!--<script>-->
+<!-- $('document').ready(function(){-->
+<!-- var mobile_state = false;-->
+<!-- var email_state = false;-->
+<!-- $('#mobile').on('blur', function(){-->
+<!--  var mobile = $('#mobile').val();-->
+<!--  if (mobile == '') {-->
+<!--  	mobile_state = false;-->
+<!--  	return;-->
+<!--  }-->
+<!--  $.ajax({-->
+<!--    url: '/ajax/validate_mobile/',-->
+<!--    type: 'get',-->
+<!--    data: {-->
+<!--    	'mobile' : mobile,-->
+<!--    },-->
+<!--    success: function(response){-->
+<!--      if (response.code == 200 ) {-->
+<!--      	mobile_state = false;-->
+<!--      	$('#err_mobile').html('Mobile Number already exists.');-->
+<!--		$("#err_mobile").css("display", "block");-->
+<!--		$('#err_mobile').fadeIn();-->
+<!--		$('#err_mobile').show();-->
+<!--      }else if (response.code == 400) {-->
+<!--&lt;!&ndash;        alert('response code 400 h');&ndash;&gt;-->
+<!--        $('#err_mobile').hide();-->
+<!--      	mobile_state = true;-->
+<!--      }-->
+<!--    }-->
+<!--  });-->
+<!-- });-->
+
+<!-- $('#my-form').submit(function(){-->
+<!--    var error_fname = false;-->
+<!--     var error_birthday = false;-->
+<!--     var error_email = false;-->
+<!--     var error_house = false;-->
+<!--     var error_pass = false;-->
+<!--     var error_city = false;-->
+<!--     var error_pincode = false;-->
+<!--     var error_mobile = false;-->
+<!--     var error_email_check = false;-->
+<!--     var error_mobile_check = false;-->
+<!--     var data1 = true;-->
+
+<!--     var fname = $("#id_firstname").val()-->
+<!--      if ( fname !== '') {-->
+<!--      $("#e_fname").hide();-->
+<!--      } else {-->
+<!--         $("#e_fname").html("This field is required");-->
+<!--         $("#e_fname").show();-->
+<!--         error_fname = true;-->
+<!--      }-->
+<!--      var birthday = $("#id_birthday").val().length;-->
+<!--      if (birthday != '' ) {-->
+<!--      $("#err_birthday").hide();-->
+<!--      } else {-->
+<!--         $("#err_birthday").html("This field is required");-->
+<!--         $("#err_birthday").show();-->
+<!--         error_birthday = true;-->
+<!--      }-->
+<!--      var house = $("#house").val()-->
+<!--      if (house !== '') {-->
+<!--         $("#err_house").hide();-->
+<!--      } else {-->
+<!--         $("#err_house").html("This field is required");-->
+<!--         $("#err_house").show();-->
+<!--         error_house = true;-->
+<!--      }-->
+<!--      var referral_code = $("#id_referral_code").val()-->
+<!--      if (referral_code !== '') {-->
+<!--      $("#err_referral_code").hide();-->
+<!--      } else {-->
+<!--         $("#err_referral_code").html("This field is required");-->
+<!--         $("#err_referral_code").show();-->
+<!--         error_referral_code = true;-->
+<!--      }-->
+<!--      var house = $("#house").val()-->
+<!--      if (house !== '') {-->
+<!--         $("#err_house").hide();-->
+<!--      } else {-->
+<!--         $("#err_house").html("This field is required");-->
+<!--         $("#err_house").show();-->
+<!--         error_house = true;-->
+<!--      }-->
+<!--      var pass_length = $("#id_password").val().length;-->
+<!--      if(pass_length < 8) {-->
+<!--         $("#e_pass").html("Atleast 8 Characters");-->
+<!--         $("#e_pass").show();-->
+<!--         error_pass = true;-->
+<!--      } else {-->
+<!--         $("#e_pass").hide();-->
+<!--         }-->
+<!--      var pass = $("#id_password").val().length;-->
+<!--      var cnfpass = $("#id_confirmPassword").val().length;-->
+<!--      if(pass != cnfpass) {-->
+<!--         $("#e_cnfpass").html("Password is not match");-->
+<!--         $("#e_cnfpass").show();-->
+<!--         error_pass = true;-->
+<!--      } else {-->
+<!--         $("#e_cnfpass").hide();-->
+<!--         }-->
+<!--      var city = $("#city").val()-->
+<!--      if (city !== '') {-->
+<!--         $("#err_city").hide();-->
+<!--      } else {-->
+<!--         $("#err_city").html("This field is required");-->
+<!--         $("#err_city").show();-->
+<!--         error_city = true;-->
+<!--      }-->
+<!--      var pincode = $("#pincode").val()-->
+<!--      if (pincode !== '') {-->
+<!--      $("#err_pincode").hide();-->
+<!--      } else {-->
+<!--         $("#err_pincode").html("This field is required");-->
+<!--         $("#err_pincode").show();-->
+<!--         error_pincode = true;-->
+<!--      }-->
+<!--      var mobile = $("#mobile").val().length;-->
+<!--      if (mobile < 11 && mobile > 9) {-->
+<!--         $("#err_mobile").hide();-->
+<!--      } else {-->
+<!--         $("#err_mobile").html("Mobile number must contain 10 digit");-->
+<!--         $("#err_mobile").show();-->
+<!--         error_mobile = true;-->
+<!--      }-->
+<!--&lt;!&ndash;    alert('submit');&ndash;&gt;-->
+<!--&lt;!&ndash; 	alert(mobile_state);&ndash;&gt;-->
+<!--&lt;!&ndash; 	alert(email_state);&ndash;&gt;-->
+<!-- 	if (mobile_state == false || email_state == false || error_fname === true || error_birthday === true || error_email === true  || error_house === true || error_pass == true || error_city === true || error_pincode === true) {-->
+<!--	   $('body, html').animate({scrollTop:$('#my-form').offset().top}, 'slow');-->
+<!--	  return false;-->
+<!--	}else{-->
+<!--      // proceed with form submission-->
+<!--       return true;-->
+<!-- 	}-->
+<!-- });-->
+<!--});-->
+<!--</script>-->
+
+<!--<script>-->
+<!--$("#pincode").on("keypress keyup blur",function (event) {-->
+<!--   $(this).val($(this).val().replace(/[^\d].+/, ""));-->
+<!--   var pincode = $("#pincode").val().length;-->
+<!--    if ((event.which < 48 || event.which > 57)) {-->
+<!--        event.preventDefault();-->
+<!--    }-->
+<!--    if (( pincode > 5)){-->
+<!--        event.preventDefault();-->
+<!--    }-->
+<!--});-->
+<!--</script>-->
+<!--<script>-->
+<!--$("#mobile").on("keypress keyup blur",function (event) {-->
+<!--   $(this).val($(this).val().replace(/[^\d].+/, ""));-->
+<!--   var mobile = $("#mobile").val().length;-->
+<!--    if ((event.which < 48 || event.which > 57)) {-->
+<!--        event.preventDefault();-->
+<!--    }-->
+<!--    if (( mobile > 9)){-->
+<!--        event.preventDefault();-->
+<!--    }-->
+<!--});-->
+<!--</script>-->
+<!--<script>-->
+
+<!--$(document).ready(function() {-->
+<!--    $( "#ageid").prop('checked', true);-->
+<!--    $( "#deid").prop('checked', true);-->
+<!--    $( "#declaration").prop('checked', true);-->
+<!--});-->
+<!--</script>-->
+<!--<script>-->
+<!--$('#id_referral_code').change(function () {-->
+<!--			$('#erro_referral_code').hide();-->
+<!--			var erro_referral_code = false;-->
+<!--				var ref_legth = $('#id_referral_code').val().length;-->
+<!--				var referral_code = $(this).val();-->
+<!--				if (ref_legth == 0) {-->
+<!--					$('#erro_referral_code').html('please enter name');-->
+<!--					$("#erro_referral_code").css("display", "block");-->
+<!--					$('#erro_referral_code').fadeIn();-->
+<!--					$('#erro_referral_code').show();-->
+<!--					var erro_firstname = true;-->
+<!--					$('#submit').attr('disabled',true);-->
+<!--				}-->
+<!--				else {-->
+<!--					$('#erro_referral_code').hide();-->
+<!--					$('#submit').attr('disabled',false);-->
+<!--				}-->
+<!--				$.ajax({-->
+<!--				url: '/ajax/validate_ref/',-->
+<!--				data: {-->
+<!--					'referral_code': referral_code-->
+<!--				},-->
+<!--				dataType: 'json',-->
+<!--				success: function (data) {-->
+<!--					if (data.ref_by) {-->
+<!--						// alert("A user with this username already exists.");-->
+<!--						$('#error_firstname').html('');-->
+<!--					$("#error_firstname").css("display", "block");-->
+<!--					$('#error_firstname').fadeIn();-->
+<!--					$('#error_firstname').show();-->
+<!--					var erro_firstname = true;-->
+<!--					$('#submit').attr('disabled',true);-->
+<!--					}-->
+<!--				}-->
+<!--			});-->
+<!--			});-->
+
+<!--			$('#id_referral_code').focusout(function () {-->
+<!--				var referall_code = $(this).val();-->
+<!--				$("#err_referral_code").hide()-->
+<!--				let aa='';-->
+<!--				$.ajax({-->
+<!--				url: '/ajax/validate_ref/',-->
+<!--				data: {-->
+<!--					'referall_code': referall_code-->
+<!--				},-->
+<!--				dataType: 'json',-->
+<!--				success: function(data){-->
+<!--				    console.log(data.refer_by)-->
+<!--					if (data.code === 200) {-->
+<!--					    aa = data.refer_by-->
+<!--				        $("#referral_code_id").hide();-->
+<!--				        $("#referral_user").css("display", "block");-->
+<!--				        $("#id_referral_user").append(aa);-->
+<!--					}else if(data.code === 404){-->
+<!--						$('#err_referral_code').html('Reference Not matched');-->
+<!--					    $("#err_referral_code").css("display", "block");-->
+<!--					    $("#err_referral_code").show()-->
+<!--					    $('#submit').attr('disabled',true);-->
+
+<!--					}else{-->
+<!--					    $('#err_referral_code').html('Reference Not matched');-->
+<!--					    $("#err_referral_code").css("display", "block");-->
+<!--					    $("#err_referral_code").show();-->
+<!--					    $('#submit').attr('disabled',true);-->
+<!--					}-->
+
+
+<!--				},-->
+<!--				error: function (error) {-->
+<!--						console.log(error);-->
+
+<!--					}-->
+<!--				});-->
+<!--			});-->
+
+<!--	</script>-->
+<!--<script>-->
+
+<!--   $("#id_firstname").focusout(function(){-->
+<!--   check_fname();-->
+<!--   });-->
+<!--   $("#id_birthday").focusout(function(){-->
+<!--   check_birthday();-->
+<!--   });-->
+<!--   $("#id_email").focusout(function(){-->
+<!--   check_email();-->
+<!--   });-->
+<!--   $("#id_referral_code").focusout(function(){-->
+<!--   check_referral_code();-->
+<!--   });-->
+<!--   $("#house").focusout(function(){-->
+<!--   check_house();-->
+<!--   });-->
+<!--   $("#id_password").focusout(function() {-->
+<!--   check_pass();-->
+<!--   });-->
+<!--   $("#id_confirmPassword").focusout(function() {-->
+<!--   check_cnfpass();-->
+<!--   });-->
+<!--   $("#city").focusout(function() {-->
+<!--   check_city();-->
+<!--   });-->
+<!--   $("#pincode").focusout(function() {-->
+<!--   check_pincode();-->
+<!--   });-->
+<!--   $("#mobile").focusout(function() {-->
+<!--   check_mobile();-->
+<!--   });-->
+
+<!--   function check_fname() {-->
+<!--      var fname = $("#id_firstname").val()-->
+<!--      if ( fname !== '') {-->
+<!--      $("#e_fname").hide();-->
+<!--      } else {-->
+<!--         $("#e_fname").html("This field is required");-->
+<!--         $("#e_fname").show();-->
+<!--         error_fname = true;-->
+<!--      }-->
+<!--   }-->
+<!--   function check_birthday() {-->
+<!--      var birthday = $("#id_birthday").val().length;-->
+<!--      if (birthday != '' ) {-->
+<!--      $("#err_birthday").hide();-->
+<!--      } else {-->
+<!--         $("#err_birthday").html("This field is required");-->
+<!--         $("#err_birthday").show();-->
+<!--         error_birthday = true;-->
+<!--      }-->
+<!--   }-->
+<!--   function check_house() {-->
+<!--      var house = $("#house").val()-->
+<!--      if (house !== '') {-->
+<!--         $("#err_house").hide();-->
+<!--      } else {-->
+<!--         $("#err_house").html("This field is required");-->
+<!--         $("#err_house").show();-->
+<!--         error_house = true;-->
+<!--      }-->
+<!--   }-->
+<!--   function check_city() {-->
+<!--      var city = $("#city").val()-->
+<!--      if (city !== '') {-->
+<!--         $("#err_city").hide();-->
+<!--      } else {-->
+<!--         $("#err_city").html("This field is required");-->
+<!--         $("#err_city").show();-->
+<!--         error_city = true;-->
+<!--      }-->
+<!--   }-->
+<!--   function check_mobile() {-->
+<!--      var mobile = $("#mobile").val().length;-->
+<!--      if (mobile < 11 && mobile > 9) {-->
+<!--         $("#err_mobile").hide();-->
+<!--      } else {-->
+<!--         $("#err_mobile").html("Mobile number must contain 10 digit");-->
+<!--         $("#err_mobile").show();-->
+<!--         error_mobile = true;-->
+<!--      }-->
+<!--   }-->
+<!--   function check_referral_code() {-->
+<!--      var referral_code = $("#id_referral_code").val()-->
+<!--      if (referral_code !== '') {-->
+<!--      $("#err_referral_code").hide();-->
+<!--      } else {-->
+<!--         $("#err_referral_code").html("This field is required");-->
+<!--         $("#err_referral_code").show();-->
+<!--         error_referral_code = true;-->
+<!--      }-->
+<!--   }-->
+<!--   function check_pincode() {-->
+<!--      var pincode = $("#pincode").val()-->
+<!--      if (pincode !== '') {-->
+<!--      $("#err_pincode").hide();-->
+<!--      } else {-->
+<!--         $("#err_pincode").html("This field is required");-->
+<!--         $("#err_pincode").show();-->
+<!--         error_pincode = true;-->
+<!--      }-->
+<!--   }-->
+<!--   function check_email() {-->
+<!--    var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;-->
+<!--    var email = $("#id_email").val();-->
+<!--    if ( pattern.test(email) && email !== '') {-->
+<!--      $("#errr_email").hide();-->
+<!--      } else {-->
+<!--      $("#errr_email").html("invalid Email");-->
+<!--      $("#errr_email").show();-->
+<!--      error_email = true;-->
+<!--      }-->
+<!--    }-->
+<!--    function check_pass() {-->
+<!--      var pass_length = $("#id_password").val().length;-->
+<!--      if(pass_length < 8) {-->
+<!--         $("#e_pass").html("Atleast 8 Characters");-->
+<!--         $("#e_pass").show();-->
+<!--         error_pass = true;-->
+<!--      } else {-->
+<!--         $("#e_pass").hide();-->
+<!--         }-->
+<!--      }-->
+<!--    function check_cnfpass() {-->
+<!--      var pass = $("#id_password").val().length;-->
+<!--      var cnfpass = $("#id_confirmPassword").val().length;-->
+<!--      if(pass != cnfpass) {-->
+<!--         $("#e_cnfpass").html("Password is not match");-->
+<!--         $("#e_cnfpass").show();-->
+<!--         error_pass = true;-->
+<!--      } else {-->
+<!--         $("#e_cnfpass").hide();-->
+<!--         }-->
+<!--      }-->
+<!--</script>-->
+
+<!--{% endblock extra_scripts %}-->

@@ -1,0 +1,264 @@
+{% load static %}
+{% load bsiness_tag %}
+{% load humanize %}
+{% include "business/include/header.html" %}
+<script src="/static/js/sort.js"></script>
+<script src="/static/js/xlsx.full.min.js"></script>
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Personal Group Details</h2>
+                <h5 class="calc_page_title_1 mb-4">Please note: This page will show details of only those downlines, where either they have made any purchase or their respective downlines have made any purchase in the selected month.</h5>
+                    <br />
+                <h5 class="calc_page_title_1 mb-4">This page shows the Personal Group Business Volume and Point Value for your Downline, along with Title Qualifications.</h5>
+                </div>
+                <div class="col-md-12 mt-4 box_income box_income_down">
+                    <div class="main_downline mt-4 mb-4">
+                    <div><p>Downline Of :{{referall_code}} {{user_name}}</p></div>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+            <div class="col-md-12 mt-4">
+                <div class="user_profile_bonus">
+                    <div class="row">
+                    <div class="col-md-6">
+                <input type="month" value="{{input_date|date:'Y-m'}}" name="month" id="date_points" class="form-control">
+                        </div>
+                    <div class="col-md-6">
+                <input type="submit" value="Submit" class="form-control" style="background-color: #222529; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden; color: white;">
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                <p><h5 class="bonus_director">Data for the Month of: <span>{{month}} - {{year}}</span></h5></p>
+                </div>
+                <table><tr><td>
+                    <form method="get" action="{% url 'user_dashboard_pgxv' %}" accept-charset="utf-8">
+                        {% csrf_token %}
+                    <input type="search" class="form-control" id="q" name="q" placeholder="Enter ARN Number" /></td><td><button type="submit" class="btn  btn-primary">Search</button></form>
+                </td></tr></table>
+                <p color="red"><span><strong>{{ msg }}</strong></span></p>
+                <!-- AG :: Export to excel taken from https://codepedia.info/javascript-export-html-table-data-to-excel -->
+                <div align="right">
+                    <button onclick="ExportToExcel('xlsx')">Export table to Excel</button><br />
+                    <script>
+                        function ExportToExcel(type, fn, dl) {
+                            var elt = document.getElementById('myTable');
+                            var wb = XLSX.utils.table_to_book(elt, { sheet: "Downline Details" });
+                            return dl ?
+                                XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+                                XLSX.writeFile(wb, fn || ('AureticsDownlineDetail.' + (type || 'xlsx')));
+                        }
+                    </script>
+                    <br />
+                    <h5 class="mb-4" style="align:right"><a href="{% url 'user_dashboard_pgxv_add' self_title.user.id %}?month={{int_month}}&year={{year}}{% if show_inactive_ids %}">Hide Inactive Downlines{% else %}&show_inactive_ids=Y">Show All Downlines{% endif %}</a></h5>
+                </div>
+
+                </div>
+              </form><br />
+                    <p><span><strong>Note: </strong></span><br />
+                    <span>The information was last updated at: <u>{{ self_title.date_added }}</u></span><br />
+                    <span>The information mentioned under this table is subject to change. PGBV/PGPV & Title Qualifications may increase or decrease. The final results appear only after monthly closing.</span><br />
+                    <span></span>
+                    <table class="table user_profile_bonus_1" id="myTable">
+                        <thead class="thead-dark">
+                          <tr>
+                            <td colspan="2">ADVISOR DETAILS</td>
+                            <td colspan="2">PERSONAL</td>
+                            <td colspan="2">TEAM</td>
+                            <td colspan="5">PERSONAL GROUP</td>
+                            <td colspan="2">QUALIFICATION (Tentative)</td>
+                          </tr>
+                          <tr>
+                            <th style="cursor:pointer; vertical-align:middle;">Name of the Person</th>
+                            <th style="cursor:pointer; vertical-align:middle;">ARN No.</th>
+                            <th style="cursor:pointer; vertical-align:middle;">PBV</th>
+                            <th style="cursor:pointer; vertical-align:middle;">PPV</th>
+                            <th style="cursor:pointer; vertical-align:middle;">TBV</th>
+                            <th style="cursor:pointer; vertical-align:middle;">TPV</th>
+                            <th style="cursor:pointer; vertical-align:middle;">PGBV</th>
+                            <th style="cursor:pointer; vertical-align:middle;">PGPV</th>
+                            <th style="cursor:pointer; vertical-align:middle;">Acc. PGBV</th>
+                            <th style="cursor:pointer; vertical-align:middle;">Acc. PGPV</th>
+                            <th style="cursor:pointer; vertical-align:middle;">No. of Director Legs</th>
+                            <th style="cursor:pointer; vertical-align:middle;">Current Month</th>
+                            <th style="cursor:pointer; vertical-align:middle;">Highest Qualification<br /><sup>(As on that month)</sup></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% if self_title.date_model %}
+                        <tr>
+                        <td>{{self_title.user.profile.first_name}} {{self_title.user.profile.last_name}} <b>(SELF)</b></td>
+                        <!--<td>{{title.current_month_qualification}}</td>-->
+                        <td>{{self_title.user.referralcode.referral_code}}</td>
+                        <!--<td>{{self_user.user.email}}</td>-->
+                        <!--<td>+91-{{self_user.user.profile.phone_number}}</td>-->
+                        <td>{{self_title.pbv|intcomma}}</td>
+                        <td>{{self_title.ppv|intcomma}}</td>
+                        <td>{{self_title.tbv|intcomma}}</td>
+                        <td>{{self_title.tpv|intcomma}}</td>
+                        <td>{{self_title.pgbv|intcomma}}</td>
+                        <td>{{self_title.pgpv|intcomma}}</td>
+                        <td>{{self_title.accumulated_pgbv|intcomma}}</td>
+                        <td>{{self_title.accumulated_pgpv|intcomma}}</td>
+                        <td>{{self_title.no_of_director_legs}}</td>
+                        <td>{{self_title.current_month_qualification}}</td>
+                        <td>{{self_title.highest_qualification_ever}}</td>
+                        </tr>
+                        {% endif %}
+
+                        <tr><td colspan="13"></td></tr>
+                        <tr>
+                            <td colspan="13"><b>QUALIFIED DIRECTORS (Tentative)</b></td>
+                        </tr>
+                        {% if not downline_title_director %}
+                        <tr>
+                            <td colspan="13"><b><a href="#">NONE</a></b></td>
+                        </tr>
+                        {% endif %}
+
+                        {% for user in downline_title_director %}
+                        <tr class="item">
+                        <td><a href="{% url 'user_dashboard_pgxv_add' user.user.id %}?month={{int_month}}&year={{year}}">{{user.user.profile.first_name}} {{user.user.profile.last_name}}</a></td>
+                        <!--<td>{{title.current_month_qualification}}</td>-->
+                        <td>{{user.user.referralcode.referral_code}}</td>
+                        <!--<td>{{self_user.user.email}}</td>-->
+                        <!--<td>+91-{{self_user.user.profile.phone_number}}</td>-->
+                        <td>{{user.pbv|intcomma}}</td>
+                        <td>{{user.ppv|intcomma}}</td>
+                        <td>{{user.tbv|intcomma}}</td>
+                        <td>{{user.tpv|intcomma}}</td>
+                        <td>{{user.pgbv|intcomma}}</td>
+                        <td>{{user.pgpv|intcomma}}</td>
+                        <td>{{user.accumulated_pgbv|intcomma}}</td>
+                        <td>{{user.accumulated_pgpv|intcomma}}</td>
+                        <td>{{user.no_of_director_legs}}</td>
+                        <td>{{user.current_month_qualification}}</td>
+                        <td>{{user.highest_qualification_ever}}</td>
+                        </tr>
+                        {% endfor %}
+
+                        <tr><td colspan="13"></td></tr>
+                        <tr>
+                            <td colspan="13"><b>DIRECTOR LEGS (i.e. Downlines with Directors under them)</b></td>
+                        </tr>
+                        {% if not downline_title_with_director %}
+                        <tr>
+                            <td colspan="13"><b><a href="#">NONE</a></b></td>
+                        </tr>
+                        {% endif %}
+
+                        {% for user in downline_title_with_director %}
+                        <tr class="item">
+                        <td><a href="{% url 'user_dashboard_pgxv_add' user.user.id %}?month={{int_month}}&year={{year}}">{{user.user.profile.first_name}} {{user.user.profile.last_name}}</a></td>
+                        <!--<td>{{title.current_month_qualification}}</td>-->
+                        <td>{{user.user.referralcode.referral_code}}</td>
+                        <!--<td>{{self_user.user.email}}</td>-->
+                        <!--<td>+91-{{self_user.user.profile.phone_number}}</td>-->
+                        <td>{{user.pbv|intcomma}}</td>
+                        <td>{{user.ppv|intcomma}}</td>
+                        <td>{{user.tbv|intcomma}}</td>
+                        <td>{{user.tpv|intcomma}}</td>
+                        <td>{{user.pgbv|intcomma}}</td>
+                        <td>{{user.pgpv|intcomma}}</td>
+                        <td>{{user.accumulated_pgbv|intcomma}}</td>
+                        <td>{{user.accumulated_pgpv|intcomma}}</td>
+                        <td>{{user.no_of_director_legs}}</td>
+                        <td>{{user.current_month_qualification}}</td>
+                        <td>{{user.highest_qualification_ever}}</td>
+                        </tr>
+                        {% endfor %}
+
+                        <tr><td colspan="13"></td></tr>
+                        <tr>
+                            <td colspan="13"><b>NON-DIRECTORS & NON-QUALIFIED DIRECTORS (Tentative)</b></td>
+                        </tr>
+                        {% if not downline_title_non_director %}
+                        <tr>
+                            <td colspan="13"><b><a href="#">NONE</a></b></td>
+                        </tr>
+                        {% endif %}
+
+                        {% for user in downline_title_non_director %}
+                        <tr class="item">
+                        <td><a href="{% url 'user_dashboard_pgxv_add' user.user.id %}?month={{int_month}}&year={{year}}">{{user.user.profile.first_name}} {{user.user.profile.last_name}}</a></td>
+                        <!--<td>{{title.current_month_qualification}}</td>-->
+                        <td>{{user.user.referralcode.referral_code}}</td>
+                        <!--<td>{{self_user.user.email}}</td>-->
+                        <!--<td>+91-{{self_user.user.profile.phone_number}}</td>-->
+                        <td>{{user.pbv|intcomma}}</td>
+                        <td>{{user.ppv|intcomma}}</td>
+                        <td>{{user.tbv|intcomma}}</td>
+                        <td>{{user.tpv|intcomma}}</td>
+                        <td>{{user.pgbv|intcomma}}</td>
+                        <td>{{user.pgpv|intcomma}}</td>
+                        <td>{{user.accumulated_pgbv|intcomma}}</td>
+                        <td>{{user.accumulated_pgpv|intcomma}}</td>
+                        <td>{{user.no_of_director_legs}}</td>
+                        <td>{{user.current_month_qualification}}</td>
+                        <td>{{user.highest_qualification_ever}}</td>
+                        </tr>
+                        {% endfor %}
+
+                        {% if show_inactive_ids %}
+                        <tr><td colspan="13"></td></tr>
+                        <tr>
+                            <td colspan="13"><b>INACTIVE DOWNLINES (Tentative)</b></td>
+                        </tr>
+                        {% if not downline_title_inactive %}
+                        <tr>
+                            <td colspan="13"><b><a href="#">NONE</a></b></td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+
+                        {% for user in downline_title_inactive %}
+                        <tr class="item">
+                        <td><a href="{% url 'user_dashboard_pgxv_add' user.user.id %}?month={{int_month}}&year={{year}}">{{user.user.profile.first_name}} {{user.user.profile.last_name}}</a></td>
+                        <!--<td>{{title.current_month_qualification}}</td>-->
+                        <td>{{user.user.referralcode.referral_code}}</td>
+                        <!--<td>{{self_user.user.email}}</td>-->
+                        <!--<td>+91-{{self_user.user.profile.phone_number}}</td>-->
+                        <td>{{user.pbv|intcomma}}</td>
+                        <td>{{user.ppv|intcomma}}</td>
+                        <td>{{user.tbv|intcomma}}</td>
+                        <td>{{user.tpv|intcomma}}</td>
+                        <td>{{user.pgbv|intcomma}}</td>
+                        <td>{{user.pgpv|intcomma}}</td>
+                        <td>{{user.accumulated_pgbv|intcomma}}</td>
+                        <td>{{user.accumulated_pgpv|intcomma}}</td>
+                        <td>{{user.no_of_director_legs}}</td>
+                        <td>{{user.current_month_qualification}}</td>
+                        <td>{{user.highest_qualification_ever}}</td>
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+                        </table>
+                        {% include "business/include/acronym.html" %}
+                            
+                        </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+                <script>
+                $(document).ready(function(){
+                $(".view_downline").click(function(){
+                $(".box_income_down").hide();
+                $(".box_income_down_1").show();
+                });
+                 $(".view_downline_1").click(function(){
+                $(".box_income_down_1").hide();
+                $(".box_income_down_2").show();
+                });
+                 });
+                </script>
+{% include "business/include/footer.html" %}

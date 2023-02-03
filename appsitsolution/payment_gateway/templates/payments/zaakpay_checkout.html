@@ -1,0 +1,21 @@
+
+  <html>
+  <head>
+      <title>Loading...</title>
+  </head>
+
+   <body onload= "document.forms[0].submit()">
+   <form action="https://zaakstaging.zaakpay.com/api/paymentTransact/V8" method ="POST">
+        <input type="hidden" name="amount" value="{{ posted.amount }}">
+        <input type="hidden" name="buyerEmail" value="{{ posted.buyerEmail }}">
+        <input type="hidden" name="currency" value="{{ posted.currency }}">
+        <input type="hidden" name="merchantIdentifier" value="{{ posted.merchantIdentifier }}">
+        <input type="hidden" name="orderId" value="{{ posted.orderId }}">
+       <input type="hidden" name="returnUrl" value="{{ posted.returnUrl }}">
+       <input type="hidden" name="product1Description" value="{{ posted.product1Description }}">
+       <input type="hidden" name="product4Description" value="{{ posted.product4Description }}">
+        <input type="hidden" name="product2Description" value="{{ posted.product2Description }}">
+       <input type="hidden" name="checksum" value="{{ posted.checksum }}">
+   </form>
+  </body>
+  </html>

@@ -1,0 +1,734 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+<body>
+    <div class="wrapper">
+        <div class="inner-wrapper profile shubhinner_marg">
+            <div class="container">
+
+                <form method="POST"  enctype="multipart/form-data" >{% csrf_token %}
+                <div class="row profilebord_top">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                        <div class="section-title section-title--one mb-50 mb-sm-30">
+                            <h2>Profile Setting </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="shubhprop_bord pt-10">
+                        <div class="profile-detail">
+                            <div class="profile-img">
+                                <img src="{{ request.user.profile.avatar.url }}" id="imgPreview" alt="Profile Picture">
+<!--                                <input type="file" id="profile_id" name="profile_name">-->
+<!--                                    {{ form.avatar }}-->
+                            </div>
+                            <div class="profile-content mt-20">
+                                <p><b>Name: {{ request.user.profile.first_name }} {{ request.user.profile.last_name }}</b>
+                                <p><b>Username: {{ request.user|capfirst  }}</b></p>
+                                <p><b>Referal Code: {{ request.user.referralcode.referral_code|capfirst  }}</b></p>
+                                <!--<p>Email: {{ request.user.profile.email }}</p>-->
+                                <ul class="shubhord">
+                                    <li><a href="{% url 'order_summary' %}">Order <i class="fa fa-shopping-bag"></i></a>
+                                    </li>
+                                    <!--<li>Wishlist</li>-->
+                                    <li><a href="{% url 'show_cart' %}">Go to Cart <i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                            <div class="row submit-form">
+                                {{ form.non_field_errors }}
+                                {{ form.source.errors }}
+                                {{ form.source }}
+
+                                <div class="form-group col-6">
+                                    {{ form.first_name.label_tag }}
+                                    {{ form.first_name.errors }}
+                                    {{ form.first_name }}
+                                </div>
+                                <div class="form-group col-6">
+                                    {{ form.last_name.label_tag }}
+                                    {{ form.last_name.errors }}
+                                    {{ form.last_name }}
+                                </div>
+                                <div class="form-group col-6">
+                                    {{ form.email.label_tag }}
+                                    {{ form.email.errors }}
+                                    {{ form.email }}
+                                </div>
+                                <div class="form-group col-6">
+                                    {{ form.phone_number.label_tag }}
+                                    {{ form.phone_number.errors }}
+                                    {{ form.phone_number }}
+                                </div>
+                                <!--<div class="form-group col-6">-->
+                                <!--    {{ form.user_type.label_tag }}-->
+                                <!--    {{ form.user_type.errors }}-->
+                                <!--    {{ form.user_type }}-->
+                                <!--</div>-->
+                                <!--<div class="form-group col-6">-->
+                                <!--    {{ form.status.label_tag }}-->
+                                <!--    {{ form.status.errors }}-->
+                                <!--    {{ form.status }}-->
+                                <!--</div>-->
+                                <!--<div class="form-group col-6">-->
+                                <!--    {{ form.country.label_tag }}-->
+                                <!--    {{ form.country.errors }}-->
+                                <!--    {{ form.country }}-->
+                                <!--</div>-->
+
+
+
+
+
+                                <div class="form-group col-6">
+                                    <label for="referral_code">Referral Code (YOUR ID):</label>
+                                    <input type="text" value="{{ referalForm.referral_code }}" readonly>
+
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="referral_code">Referral By (YOUR UPLINE):</label>
+                                    <input type="text" value="{{ referalForm.referal_by }}({{ referalForm.referal_by.referralcode.referral_code }})" readonly>
+                                </div>
+                                <!-- <div class="form-group col-md-6">-->
+                                <!--    {{ form.phone.label_tag }}user_type-->
+                                <!--    {{ form.phone.errors }}-->
+                                <!--    {{ form.phone }}-->
+                                <!--</div>-->
+                                <div class="form-group col-6">
+                                    {{ address_form.street_address.label_tag }}
+                                    {{ address_form.street_address.errors }}
+                                    {{ address_form.street_address }}
+                                </div>
+                                <div class="form-group col-6">
+                                    {{ address_form.apartment_address.label_tag }}
+                                    {{ address_form.apartment_address.errors }}
+                                    {{ address_form.apartment_address }}
+                                </div>
+                                <!--<div class="form-group col-6">-->
+                                <!--    {{ address_form.country.label_tag }}-->
+                                <!--    {{ address_form.country.errors }}-->
+                                <!--    {{ address_form.country }}-->
+                                <!--</div>-->
+                                <!--<div class="form-group col-6">-->
+                                <!--    {{ address_form.zip.label_tag }}-->
+                                <!--    {{ address_form.zip.errors }}-->
+                                <!--    {{ address_form.zip }}-->
+                                <!--</div>-->
+
+                                <!--<div class="form-group col-6">-->
+                                <!--    {{ address_form.address_type.label_tag }}-->
+                                <!--    {{ address_form.address_type.errors }}-->
+                                <!--    {{ address_form.address_type }}-->
+                                <!--</div>-->
+
+                                 <div class="form-group col-6">
+                                    <!--{{ form }}-->
+                                    <!--{{ address_form }}-->
+                                   <label for="id_house_no">HOUSE NUMBER:</label>
+
+                                    {{ address_form.house_number.errors }}
+                                    {{ address_form.house_number }}
+
+                                </div>
+                                <div class="form-group col-6">
+                                   <label for="id_address">ADDRESS LINE:</label>
+
+                                    {{ address_form.address_line.errors }}
+                                    {{ address_form.address_line }}
+                                </div>
+
+                                <div class="form-group col-6">
+                                   <label for="id_street">STREET:</label>
+
+                                    {{ address_form.street.errors }}
+                                    {{ address_form.street }}
+
+                                </div>
+
+                                <div class="form-group col-6">
+                                   <label for="id_landmark">LANDMARK:</label>
+
+                                    {{ address_form.Landmark.errors }}
+                                    {{ address_form.Landmark }}
+
+                                </div>
+                                <div class="form-group col-6">
+                                   <label for="id_city">CITY:</label>
+
+                                    {{ address_form.city.errors }}
+                                    {{ address_form.city }}
+
+                                </div>
+
+<!--                                <div class="form-group col-6">-->
+<!--                                   <label for="id_country">COUNTRY:</label>-->
+<!--                                   {{ address_form.country }}-->
+
+<!--  &lt;!&ndash;                                 <select name="country" id="country_id">&ndash;&gt;-->
+<!--  &lt;!&ndash;<option value="AF">Afghanistan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AX">Åland Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AL">Albania</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="DZ">Algeria</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AS">American Samoa</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AD">Andorra</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AO">Angola</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AI">Anguilla</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AQ">Antarctica</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AG">Antigua and Barbuda</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AR">Argentina</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AM">Armenia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AW">Aruba</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AU">Australia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AT">Austria</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AZ">Azerbaijan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BS">Bahamas</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BH">Bahrain</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BD">Bangladesh</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BB">Barbados</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BY">Belarus</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BE">Belgium</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BZ">Belize</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BJ">Benin</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BM">Bermuda</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BT">Bhutan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BO">Bolivia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BQ">Bonaire, Sint Eustatius and Saba</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BA">Bosnia and Herzegovina</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BW">Botswana</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BV">Bouvet Island</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BR">Brazil</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="IO">British Indian Ocean Territory</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BN">Brunei</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BG">Bulgaria</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BF">Burkina Faso</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BI">Burundi</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CV">Cabo Verde</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KH">Cambodia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CM">Cameroon</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CA">Canada</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KY">Cayman Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CF">Central African Republic</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TD">Chad</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CL">Chile</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CN">China</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CX">Christmas Island</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CC">Cocos (Keeling) Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CO">Colombia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KM">Comoros</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CG">Congo</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CD">Congo (the Democratic Republic of the)</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CK">Cook Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CR">Costa Rica</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CI">Côte d'Ivoire</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="HR">Croatia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CU">Cuba</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CW">Curaçao</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CY">Cyprus</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CZ">Czechia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="DK">Denmark</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="DJ">Djibouti</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="DM">Dominica</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="DO">Dominican Republic</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="EC">Ecuador</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="EG">Egypt</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SV">El Salvador</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GQ">Equatorial Guinea</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ER">Eritrea</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="EE">Estonia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SZ">Eswatini</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ET">Ethiopia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="FK">Falkland Islands (Malvinas)</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="FO">Faroe Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="FJ">Fiji</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="FI">Finland</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="FR">France</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GF">French Guiana</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PF">French Polynesia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TF">French Southern Territories</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GA">Gabon</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GM">Gambia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GE">Georgia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="DE">Germany</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GH">Ghana</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GI">Gibraltar</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GR">Greece</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GL">Greenland</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GD">Grenada</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GP">Guadeloupe</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GU">Guam</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GT">Guatemala</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GG">Guernsey</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GN">Guinea</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GW">Guinea-Bissau</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GY">Guyana</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="HT">Haiti</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="HM">Heard Island and McDonald Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="VA">Holy See</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="HN">Honduras</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="HK">Hong Kong</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="HU">Hungary</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="IS">Iceland</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="IN">India</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ID">Indonesia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="IR">Iran</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="IQ">Iraq</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="IE">Ireland</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="IM">Isle of Man</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="IL">Israel</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="IT">Italy</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="JM">Jamaica</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="JP">Japan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="JE">Jersey</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="JO">Jordan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KZ">Kazakhstan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KE">Kenya</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KI">Kiribati</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KW">Kuwait</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KG">Kyrgyzstan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LA">Laos</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LV">Latvia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LB">Lebanon</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LS">Lesotho</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LR">Liberia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LY">Libya</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LI">Liechtenstein</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LT">Lithuania</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LU">Luxembourg</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MO">Macao</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MG">Madagascar</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MW">Malawi</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MY">Malaysia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MV">Maldives</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ML">Mali</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MT">Malta</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MH">Marshall Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MQ">Martinique</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MR">Mauritania</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MU">Mauritius</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="YT">Mayotte</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MX">Mexico</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="FM">Micronesia (Federated States of)</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MD">Moldova</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MC">Monaco</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MN">Mongolia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ME">Montenegro</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MS">Montserrat</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MA">Morocco</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MZ">Mozambique</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MM">Myanmar</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NA">Namibia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NR">Nauru</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NP">Nepal</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NL">Netherlands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NC">New Caledonia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NZ">New Zealand</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NI">Nicaragua</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NE">Niger</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NG">Nigeria</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NU">Niue</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NF">Norfolk Island</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KP">North Korea</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MK">North Macedonia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MP">Northern Mariana Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="NO">Norway</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="OM">Oman</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PK">Pakistan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PW">Palau</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PS">Palestine, State of</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PA">Panama</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PG">Papua New Guinea</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PY">Paraguay</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PE">Peru</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PH">Philippines</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PN">Pitcairn</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PL">Poland</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PT">Portugal</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PR">Puerto Rico</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="QA">Qatar</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="RE">Réunion</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="RO">Romania</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="RU">Russia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="RW">Rwanda</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="BL">Saint Barthélemy</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KN">Saint Kitts and Nevis</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LC">Saint Lucia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="MF">Saint Martin (French part)</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="PM">Saint Pierre and Miquelon</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="VC">Saint Vincent and the Grenadines</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="WS">Samoa</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SM">San Marino</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ST">Sao Tome and Principe</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SA">Saudi Arabia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SN">Senegal</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="RS">Serbia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SC">Seychelles</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SL">Sierra Leone</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SG">Singapore</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SX">Sint Maarten (Dutch part)</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SK">Slovakia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SI">Slovenia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SB">Solomon Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SO">Somalia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ZA">South Africa</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GS">South Georgia and the South Sandwich Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="KR">South Korea</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SS">South Sudan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ES">Spain</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="LK">Sri Lanka</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SD">Sudan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SR">Suriname</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SJ">Svalbard and Jan Mayen</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SE">Sweden</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="CH">Switzerland</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="SY">Syria</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TW">Taiwan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TJ">Tajikistan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TZ">Tanzania</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TH">Thailand</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TL">Timor-Leste</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TG">Togo</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TK">Tokelau</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TO">Tonga</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TT">Trinidad and Tobago</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TN">Tunisia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TR">Turkey</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TM">Turkmenistan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TC">Turks and Caicos Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="TV">Tuvalu</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="UG">Uganda</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="UA">Ukraine</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="AE">United Arab Emirates</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="GB">United Kingdom</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="UM">United States Minor Outlying Islands</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="US" selected="">United States of America</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="UY">Uruguay</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="UZ">Uzbekistan</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="VU">Vanuatu</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="VE">Venezuela</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="VN">Vietnam</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="VG">Virgin Islands (British)</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="VI">Virgin Islands (U.S.)</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="WF">Wallis and Futuna</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="EH">Western Sahara</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="YE">Yemen</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ZM">Zambia</option>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;<option value="ZW">Zimbabwe</option>&ndash;&gt;-->
+
+<!--</select>-->
+<!--                                </div>-->
+
+                                <div class="form-group col-6">
+                                   <label for="id_pincode">PINCODE:</label>
+                                    {{ address_form.pin.errors }}
+                                    {{ address_form.pin }}
+                                </div>
+                                <div class="form-group col-6">
+                                   <label for="id_mobile">MOBILE:</label>
+                                    {{ address_form.mobile.errors }}
+                                    {{ address_form.mobile }}
+                                </div>
+                                <div class="form-group col-6">
+                                   <label for="id_alternate_mobile">ALTERNATE MOBILE:</label>
+                                     {{ address_form.alternate_mobile.errors }}
+                                    {{ address_form.alternate_mobile }}
+                                </div>
+
+<!--                                <div class="form-group col-6">-->
+<!--                                   <label for="id_mobile">ADDRESS TYPE:</label>-->
+<!--                                   <select name="address_type" id="id_address_type">-->
+<!--                                        <option value="B" selected="">Billing</option>-->
+
+<!--                                        <option value="S">Shipping</option>-->
+
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                 <div class="form-group col-6">-->
+<!--                                    {{ address_form.default.label_tag }}-->
+<!--                                    {{ address_form.default.errors }}-->
+<!--                                    {{ address_form.default }}-->
+<!--                                </div>-->
+
+<!--                                <div class="form-group col-12 mt-40">-->
+<!--                                    <button class="lezada-button lezada-button&#45;&#45;medium">Save Profile</button>-->
+<!--                                </div>-->
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+   {% endblock %}
+{% block extra_scripts %}
+<script>
+
+$(document).ready(function() {
+	$('#profile_id').change(function(){
+		const file = this.files[0];
+		console.log(file);
+		if (file){
+		let reader = new FileReader();
+		reader.onload = function(event){
+			console.log(event.target.result);
+			$('#imgPreview').attr('src', event.target.result);
+		}
+		reader.readAsDataURL(file);
+		}
+	});
+	});
+
+</script>
+
+{% endblock extra_scripts %}

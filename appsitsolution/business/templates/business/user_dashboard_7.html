@@ -1,0 +1,74 @@
+{% load static %}
+{% include "business/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Upline Details</h2>
+                <h5 class="calc_page_title_1 mb-4">Check out your upline details</h5>
+                </div>
+                <div class="col-md-12 mt-4 box_income">
+                    <table class="table user_profile_bonus_1">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th colspan="2">My Upline is:</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>Name of the Person</td>
+                        <td>{{request.user.referralcode.referal_by.profile.first_name}} {% if request.user.referralcode.referal_by.profile.last_name %}{{request.user.referralcode.referal_by.profile.last_name}}{% endif %}</td>
+                        </tr>
+                        <tr>
+                        <td>E-Mail Address</td>
+                        <td>{{request.user.referralcode.referal_by.email}}</td>
+                        </tr>
+                            {% if request.user.referralcode.referal_by.profile.phone_number %}
+                        <tr>
+                        <td>Phone Number</td>
+                        <td>+91-{{request.user.referralcode.referal_by.profile.phone_number}}</td>
+                        </tr>
+                        {% endif %}
+                        <!--<tr>
+                        <td>Phone Number</td>
+                        <td>+91-{{upline_mobile_number.phone_number}}</td>
+                      </tr>-->
+                        </tbody>
+                    </table>
+                        </div>
+                    {% if request.user.referralcode.parent_id %}
+                    <div class="col-md-12 mt-4 mb-4 box_income">
+                    <!--<table class="table user_profile_bonus_1">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th colspan="2">My Parent Upline is (Super)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>Name of the Person</td>
+                        <td>{{request.user.referralcode.parent_id.profile.first_name}}  {{request.user.referralcode.parent_id.profile.last_name}}</td>
+                        </tr>
+                        <tr>
+                        <td>E-Mail Address</td>
+                        <td>{{request.user.referralcode.parent_id.email}}</td>
+                        </tr>
+                        <tr>
+                        <td>Phone Number</td>
+                        <td>+91-{{request.user.referralcode.parent_id.profile.phone_number}}</td>
+                        </tr>
+                        </tbody>
+                         </table>-->
+                        </div>
+                    {% endif %}
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+{% include "business/include/footer.html" %}

@@ -1,0 +1,504 @@
+<head>
+    <style>
+    .shubh_item input {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 1.25rem + 2px);
+    padding: 0.625rem 1.1875rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-family: "Mada", sans-serif;
+
+}
+.shubh_item textarea {
+    display: block;
+    width: 100%;
+    padding: 0.625rem 1.1875rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-family: "Mada", sans-serif;
+
+}
+
+.shubh_item label {
+    display: block;
+    font-family: "Mada", sans-serif;
+    font-size: 14px;
+    color: #373a3c;
+    font-weight: 400;
+}
+
+.capti {
+    font-size: 18px;
+    padding-bottom: 8px;
+}
+.shubh_item textarea {
+    width: 100%;
+}
+    </style>
+    </head>
+
+{% load static %}
+{% include "distributor/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+            {% if messages %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% for message in messages %}
+                        <div class="alert alert-blue alert-dismissible fade show text-center" role="alert">
+                            {% if message.tags == "error" %}
+                                <p style="color: red"> {{ message|safe }} </p>
+                            {% elif message.tags == "success" %}
+                                <p style="color: green"> {{ message|safe }} </p>
+                            {% else %}
+                                <p> {{ message|safe }} </p>
+                            {% endif %}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="modal-header">
+                <h5 class="modal-title">View Sale</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+        {% if sale_data.order.loyalty_order %}
+            <div class="modal-header" style="text-align:center; align:center; display:table; margin:auto">
+            {% if sale_data.order.is_partial_loyalty_order %}
+                <h5 class="modal-title" style="text-align:center; align:center">NOTE: THIS IS PARTIAL LOYALTY ORDER AND ONLY <U>PARTIAL</U> PAYMENT IS REQUIRED FOR THIS ORDER.</h5>
+            {% else %}
+                <h5 class="modal-title" style="text-align:center; align:center">NOTE: THIS IS LOYALTY ORDER AND <U>NO</U> PAYMENT IS REQUIRED FOR THIS ORDER.</h5>
+            {% endif %}
+            </div>
+        {% endif %}
+            <div class="modal-body">
+
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+	<!--shubh-content-start-->
+	<div class="container">
+		<div class="row shubh_item">
+		   <div class="col-md-6">
+		   <label class="shubh_datee" for="date">Date Of Entry:</label>
+		   <input type="date" id="date_shubh" disabled name="date_of_entry" value="{{sale_data.created_on|date:'c'}}">
+		   </div>
+		   <div class="col-md-6">
+		   <label class="shubh_datee" for="date">Bill Date:</label>
+		   <input type="date" id="date_shubh" disabled name="date" value="{{sale_data.date|date:'c'}}">
+		   </div>
+<!--		   <div class="col-md-6 mt-5">-->
+<!--		   <label class="shubh_datee" for="date">Party Name</label>-->
+<!--		   <input type="text" id="party_name" disabled name="party_name" value="{{sale_data.party_name}}">-->
+<!--		   </div>-->
+		   <div class="col-md-6 mt-5">
+		       <label class="mc_namee" for="mcname">MC Name: </label>
+<!--               <select class="form-control select2" disabled name="material_center_to">-->
+<!--                            {% for i in material_center_to %}-->
+<!--                            <option value={{i.pk}} {% if i.pk == sale_data.material_center_to.pk %} selected {% endif %}>{{i.mc_name}}</option>-->
+<!--                            {% endfor %}-->
+<!--                        </select>-->
+               <input value="{{sale_data.material_center}}" readonly >
+		       </div>
+<!--		   <div class="col-md-6 mt-5">-->
+<!--		       <label class="mc_namee" for="mcname">MC Name From: </label>-->
+<!--               <select class="form-control select2" disabled name="material_center_from">-->
+<!--                            {% for i in material_center_from %}-->
+<!--                            <option value={{i.pk}} {% if i.pk == sale_data.material_center_from.pk %} selected {% endif %}>{{i.mc_name}}</option>-->
+<!--                            {% endfor %}-->
+<!--                        </select>-->
+<!--		       </div>-->
+		   <div class="col-md-6 mt-5">
+		       <label class="mc_namee" for="mcname">Advisor / Distributor: </label>
+<!--               <select class="form-control select2" disabled name="user">-->
+<!--                            {% for i in users %}-->
+<!--                            <option value={{i.pk}} {% if i.pk == sale_data.advisor_distributor_name.pk %} selected {% endif %}>{{i.username}}</option>-->
+<!--                            {% endfor %}-->
+<!--                        </select>-->
+               <input value="{{sale_data.advisor_distributor_name.username}}" readonly>
+		   </div>
+           <div class="col-md-6 mt-5">
+               <label class="mc_namee" for="mcname">Advisor Name: </label>
+               <input type="text" id="advisor_name" value="{{sale_data.advisor_distributor_name.profile.first_name}} {{sale_data.advisor_distributor_name.profile.last_name}}" readonly >
+               <br />
+               Mobile: <b>{{sale_data.advisor_distributor_name.profile.phone_number}}</b>&emsp;|&emsp;ARN: <b>{{sale_data.advisor_distributor_name.referralcode.referral_code}}</b><br />
+                   {% if sale_data.order.billing_address %}
+                       {{sale_data.order.billing_address.house_number}}, {{sale_data.order.billing_address.address_line}},<br />
+                       {{sale_data.order.billing_address.street}}, {{sale_data.order.billing_address.Landmark}},<br />
+                       {{sale_data.order.billing_address.city}}, {{sale_data.order.billing_address.state}}, {{sale_data.order.billing_address.pin}}<br />
+                   {% else %}
+                       {{sale_data.order.shipping_address.house_number}}, {{sale_data.order.shipping_address.address_line}},<br />
+                       {{sale_data.order.shipping_address.street}}, {{sale_data.order.shipping_address.Landmark}},<br />
+                       {{sale_data.order.shipping_address.city}}, {{sale_data.order.shipping_address.state}}, {{sale_data.order.shipping_address.pin}}
+                   {% endif %}
+           </div>
+		   <div class="col-md-6 mt-5" style="display:none;">
+		       <label class="mc_namee" for="mcname">Sale Type: </label>
+               <select class="form-control" id="sale_type" disabled name="sale_type">
+                            <option value=0 {% if sale_data.sale_type == 0 %} selected {% endif %}>With in State</option>
+                            <option value=1 {% if sale_data.sale_type == 1 %} selected {% endif %}>Inter State</option>
+                        </select>
+		       </div>
+		       <div class="col-md-6 mt-5">
+		      <label class="shubh_narratione" for="narration">Narration: </label>
+		       <textarea id="narration" name="narration" disabled rows="4">{{sale_data.narration}}</textarea>
+		           </div>
+		           <div class="col-md-12 mt-5">
+		               <div class="table-responsive-md">
+		                    <div class="capti col-md-12">Item Details
+                                <button class="float-right mb-3"><a href="{% url 'shop_invoice_check' sale_data.order_id %}" target="_blank">Order Summary</a></button>
+                            </div>
+		                    <table class="table table-hover" id="Tbl_dailyreport_data">
+		                      <thead>
+                                <tr>
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Batch No.</th>
+                                <th scope="col">Quantity</th>
+                                {% if sale_data.order.loyalty_order %}
+                                <th scope="col">MRP</th>
+                                {% else %}
+                                <th scope="col">Distributor’s Price</th>
+                                {% endif %}
+                                <th scope="col" style="display:none;">CGST</th>
+                                <th scope="col" style="display:none;">SGST</th>
+                                <th scope="col" class="tigst">IGST</th>
+                                <!-- <th scope="col">VAT</th> -->
+                                {% if sale_data.order.loyalty_order %}
+                                <th scope="col">CRI Consumed</th>
+                                {% else %}
+                                <th scope="col">Total Amount</th>
+                                {% endif %}
+                                <th scope="col">Total PV</th>
+                                <th scope="col">Total BV</th>
+                               </tr>
+                             </thead>
+                             <tbody id="">
+                            {% for k in data %}
+                                <tr class="prod_tbl">
+<!--                                <th scope="row">1</th>-->
+                                <td style="width:100px;">
+                                    <select class="form-control product select2" id="edt{{ forloop.counter }}" disabled name="item" style="width: 300px">
+                                        {% for i in items %}
+                                        <option value={{i.pk}} {% if i.pk == k.product.pk %} selected {% endif %}  >{{i.product_code}} - {{i.product_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                <br />
+                                    <sub>
+                                        {% for i in items %}
+                                            {% if i.pk == k.product.pk %}
+                                                {% if k.product|stringformat:"s"|length|get_digit:"-1" > 45 %}
+                                                    {{ k.product|truncatechars:10 }}{{ k.product|stringformat:"s"|slice:"30:" }}
+                                                {% else %}
+                                                    {{ k.product|truncatechars:45 }}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </sub>
+                                </td>
+                                <td>
+                                    <select class="form-control select2 batches"  id="edtbatch{{ forloop.counter }}" disabled name="batch" style="width: 125px">
+                                    {% for i in batches %}
+                                              {% if i.product.pk == k.product.pk %}
+                                    <option value={{i.pk}}  {% if i.pk == k.batch.pk %} selected {% endif %}>{{i.batch_name}}</option>
+                                            {% endif %}
+                                    {% endfor %}
+                                    </select>
+                                </td>
+                                <td><input type="text" class="quantity" name="quaantity_item" id="edtquantity{{forloop.counter}}" disabled value="{{k.quantity}}" style="width: 75px"></td>
+                                {% if sale_data.order.loyalty_order %}
+                                <td><input type="text" class="price" name="distributor_price" id="edtprice{{forloop.counter}}" disabled value="{{k.batch.mrp}}" readonly></td>
+                                {% else %}
+                                <td><input type="text" class="price" name="distributor_price" id="edtprice{{forloop.counter}}" disabled value="{{k.price}}" readonly></td>
+                                {% endif %}
+{#                                <td style="display:none;"><input type="text" class="cgst" name="cgst_item" id="edtcgst{{forloop.counter}}" disabled value="{{k.cgst}}" readonly></td>#}
+{#                                <td style="display:none;"><input type="text" class="sgst" name="sgst_item" id="edtsgst{{forloop.counter}}" disabled value="{{k.sgst}}" readonly></td>#}
+{#                                <td class="tigst"><input type="text" class="igst" name="igst_item" id="edtigst{{forloop.counter}}" disabled value="{{k.igst}}" readonly></td>#}
+                                <!-- <td><input type="text" class="vat" name="vat_item" id="edtvat{{forloop.counter}}" value="{{k.vat}}" readonly></td> -->
+                                {% if sale_data.order.loyalty_order %}
+                                <td><input type="text" class="totalamount" name="totalamount_item" id="edttotalamount{{forloop.counter}}" disabled value="{% widthratio k.batch.mrp 1 k.quantity %}" readonly></td>
+                                {% else %}
+                                <td><input type="text" class="totalamount" name="totalamount_item" id="edttotalamount{{forloop.counter}}" disabled value="{{k.total_amount}}" readonly></td>
+                                {% endif %}
+
+                                <td><input type="text" class="pv_total" name="pv_total_item" id="pv_total{{forloop.counter}}" disabled value="{{k.pv}}" readonly></td>
+
+                                <td><input type="text" class="bv_total" name="bv_total_item" id="bv_total{{forloop.counter}}" disabled value="{{k.bv}}" readonly><br /></td>
+                            {% endfor %}
+                                </tbody>
+		                        </table>
+		                   </div>
+
+		               </div>
+                <div class="col-md-{% if sale_data.order.loyalty_order %}3{% else %}4{% endif %}">
+                    <label class="grand_total" for="grand_total"><h5>Grand Total</h5></label>
+                    <input type="text" id="grand_total" name="grand_total" value="{{sale_data.grand_total}}" readonly>
+                </div>
+                <div class="col-md-{% if sale_data.order.loyalty_order %}3{% else %}4{% endif %}">
+                    <label class="grand_pv" for="grand_pv"><h5>Grand PV</h5></label>
+                    <input type="text" id="grand_pv" name="grand_pv" value="{{sale_data.order.pv}}" readonly>
+                </div>
+                <div class="col-md-{% if sale_data.order.loyalty_order %}3{% else %}4{% endif %}">
+                    <label class="grand_bv" for="grand_bv"><h5>Grand BV</h5></label>
+                    <input type="text" id="grand_bv" name="grand_bv" value="{{sale_data.order.bv}}" readonly>
+                </div>
+                {% if sale_data.order.loyalty_order %}
+                <div class="col-md-3">
+                    <label class="grand_bv" for="grand_bv"><h5>Loyalty Consumed</h5></label>
+                    <input type="text" id="grand_bv" name="grand_bv" value="{{sale_data.order.consumed_cri}}" readonly>
+                </div>
+                {% endif %}
+                <div class="col-md-12 mt-5">
+                    <label class="payment_mode" for="payment_mode"><h5>Payment Mode</h5></label>
+                    <input type="text" id="grand_total" name="grand_total" value="{{sale_data.payment_mode}}" readonly>
+                </div>
+		  </div>
+		</div>
+		<!--end-->
+        </div>
+        <div class="modal-footer">
+            <p style="text-align:left;">Please click re-calculate value only if you think that the values in this order are incorrect.</p>
+            <p class="btn btn-primary"><a href="{% url 'recalculate_everything' myid %}" style="color:  white"> Re-calculate Values </a></p>
+        </div>
+        </form>
+        </div>
+
+</div>
+{% include "distributor/include/footer.html" %}
+<script>
+	var cnt_multiple_product=2;
+    $(document.body).on('click', '#Additem_data', function () {
+        var url = '/mlm_admin/add_saleField';
+		var $tbody, $row;
+
+	       $.ajax({
+            type: 'POST',
+            url: url,
+			data:{cnt_multiple_product:cnt_multiple_product},
+			beforeSend: function () {
+
+            $(".modalLoader").fadeIn("fast");
+
+        },
+
+        complete: function () {
+
+            $(".modalLoader").fadeOut("fast");
+
+        },
+            success: function (data) {
+			$tbody = $('#Tbl_dailyreport_data.table tbody');
+			$row = $tbody.find('tr:last');
+			$tbody.append(data);
+			cnt_multiple_product = cnt_multiple_product + 1;
+            },
+            error: function (data) {
+            },
+            dataType: 'html'
+        });
+    });
+	$(document.body).on('click', '.dailyreport_dataDelete', function () {
+
+        $(this).closest('tr').remove();
+
+    });
+	 $(document.body).on('keydown', '.quantityval,.rateid,.grossweight', function (event) {
+        if (event.shiftKey == true) {
+            event.preventDefault();
+        }
+
+        if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+            (event.keyCode >= 96 && event.keyCode <= 105) ||
+            event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+            event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190 || event.keyCode == 110) {
+
+        } else {
+            event.preventDefault();
+        }
+
+        if($(this).val().indexOf('.') !== -1 && (event.keyCode == 190 || event.keyCode == 110))
+            event.preventDefault();
+        //if a decimal has been added, disable the "."-button
+
+    });
+
+	$(document.body).on('click', '#datasave', function () {
+
+	var exampleCheck1=   $("#exampleCheck2").val();
+	if (!($('#exampleCheck2').prop('checked')))
+	{
+		$('.help-blockdec').html('* This should be checked !');
+		$('.help-blockdec').css('color','red');
+		return false;
+	}else{
+		$('.help-blockdec').html('');
+	}
+	});
+</script>
+<script>
+
+$('.cgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.sgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.igst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.vat').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.price').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+    $(".quantity").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var quantity = $(".quantity").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+$('.totalamount').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+</script>
+<script>
+$( ".product" ).change(function () {
+    var id = $(this).attr('id')
+    var res = id.slice(3);
+    var product = $("#edt"+res).val()
+    var batch_id = "#edtbatch"+res
+    $.ajax({
+        url: '/mlm_admin/batch_field',
+        data: {
+          'product_id': product,
+          'cnt_multiple_product':res,
+          'myid': id
+        },
+        dataType: 'html',
+        success: function (data) {
+            $(batch_id).html(data);
+        }
+      });
+  });
+
+</script>
+<script>
+$( ".batches" ).change(function () {
+    var id = $(this).attr('id')
+    var res = id.slice(8);
+    var batch = $("#edtbatch"+res).val()
+    var product = $("#edt"+res).val()
+    var sale_type = $("#sale_type").val()
+    var priceval = $("#edttotalamount"+res).val()
+    var grand_total = $("#grand_total").val()
+    $.ajax({
+        url: '/mlm_admin/product_detail',
+        data: {
+          'product_id': product,
+          'batch_id':batch,
+          'sale_type':sale_type,
+          'myid': id
+        },
+        dataType: 'json',
+        success: function (data) {
+        $("#edtprice"+res).val(data['distributor_price']);
+        $("#edtcgst"+res).val(data['cgst']);
+        $("#edtsgst"+res).val(data['sgst']);
+        $("#edtigst"+res).val(data['igst']);
+        $("#edtvat"+res).val(data['vat']);
+        $("#edttotalamount"+res).val(0);
+        $("#pv_total"+res).val(0);
+        $("#bv_total"+res).val(0);
+        $("#edtquantity"+res).val(0);
+        },
+        error: function(data) {
+
+        $("#edtprice"+res).val(data[0]);
+        $("#edtcgst"+res).val(data[0]);
+        $("#edtsgst"+res).val(data[0]);
+        $("#edtigst"+res).val(data[0]);
+        $("#edtvat"+res).val(data[0]);
+        $("#edttotalamount"+res).val(0);
+        $("#pv_total"+res).val(0);
+        $("#bv_total"+res).val(0);
+        $("#edtquantity"+res).val(0);
+        }
+      });
+      if (priceval == '' ){
+            priceval = 0;
+      }
+      priceval=parseFloat(priceval)
+      grand_total=parseFloat(grand_total)
+      alert(priceval)
+        $("#grand_total").val(grand_total - priceval);
+  });
+</script>
+<script>
+    $(".quantity").on("keypress keyup blur",function (event) {
+    var id = $(this).attr('id');
+    var res = id.slice(11);
+    var quantity = $("#"+id).val();
+    var price = $("#edtprice"+res).val();
+    $("#edttotalamount"+res).val(quantity * price);
+});
+    </script>
+<script>
+
+$(document).ready(function() {
+    $(document.body).on('change', '#sale_type', function () {
+		var emval = $('#sale_type').val();
+		if(emval=='1') {
+			$(".tcgst").hide();
+			$(".tigst").show();
+			$(".tsgst").hide();
+		} else {
+			$(".tcgst").show();
+			$(".tigst").hide();
+			$(".tsgst").show();
+		}
+});
+var emval = $('#sale_type').val();
+		if(emval=='1') {
+			$(".tcgst").hide();
+			$(".tigst").show();
+			$(".tsgst").hide();
+		} else {
+			$(".tcgst").show();
+			$(".tigst").hide();
+			$(".tsgst").show();
+		}
+});
+</script>

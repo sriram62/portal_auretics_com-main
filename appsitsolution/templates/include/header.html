@@ -1,0 +1,1099 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Theme Design</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- Favicon -->
+	<link rel="icon" href="{% static 'img/favicon.jpg' %}" />
+
+	<!-- CSS -->
+	<!-- Bootstrap CSS -->
+	<link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet" />
+
+	<!-- Font CSS -->
+	<link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/css/ionicons.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/css/themify-icons.css' %}" rel="stylesheet" />
+
+	<!-- Plugins CSS -->
+	<link href="{% static 'assets/css/plugins.css' %}" rel="stylesheet" />
+
+	<!-- Helper CSS -->
+	<link href="{% static 'assets/css/helper.css' %}" rel="stylesheet" />
+
+	<!-- Main CSS -->
+	<link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/css/custom.css' %}" rel="stylesheet" />
+
+	<!-- Revolution Slider CSS -->
+	<link href="{% static 'assets/revolution/css/settings.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/revolution/css/navigation.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/revolution/custom-setting.css' %}" rel="stylesheet" />
+
+	<!-- Modernizer JS -->
+<!--	<script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+	<style>
+
+
+		.dropdown:hover .dropdown-menu {
+			display: block;
+			margin-top: 0 ;
+		}
+	 .shubh_log {
+    display: block;
+    margin-left: -8px;
+    line-height: 14px;
+    text-align: left;
+}
+.shubh_icon_log {
+    line-height: 14px !important;
+}
+
+	</style>
+</head>
+
+<body>
+	<!-- Header without topbar -->
+	<header class="header header-without-topbar header-sticky">
+		<div class="header-bottom">
+			<div class="container wide">
+				<div class="header-bottom-container">
+					<!-- logo with off canvas -->
+					<div class="logo-with-offcanvas d-flex">
+						<div class="logo">
+							<a href="{% url 'home' %}">
+								<img src="{% static 'img/logo.png' %}" class="img-fluid" alt="" />
+							</a>
+						</div>
+					</div>
+					<!-- End of logo with off canvas -->
+
+					<!-- header bottom navigation -->
+					<div class="header-bottom-navigation">
+						<div class="site-main-nav d-none d-lg-block">
+							<nav class="site-nav center-menu">
+								<ul>
+									<li class="menu-item-has-children">
+										<a href="{% url 'product_list' %}">Products</a>
+										<ul class="sub-menu mega-menu mega-menu-column-4 ecom_head_shubh">
+<!--											<li>-->
+<!--												<a href="javascript:void(0)" class="mega-column-title">All Product</a>-->
+<!--												<ul class="mega-sub-menu">-->
+<!--													<li>-->
+<!--														<a href="{% url 'product_category' 'women' %}">Women</a>-->
+<!--													</li>-->
+<!--													<li>-->
+<!--														<a href="#">Men</a>-->
+<!--													</li>-->
+<!--													<li>-->
+<!--														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+<!--													</li>-->
+<!--													<li>-->
+<!--														<a href="{% url 'product_list' %}">Products</a>-->
+<!--													</li>-->
+<!--												</ul>-->
+<!--											</li>-->
+											{% for i in category %}
+											<li>
+												<a href="javascript:void(0)" class="mega-column-title">{{i.cat_name}}</a>
+												<ul class="mega-sub-menu">
+
+											{% for k in i.category_set.all %}
+											{% if k.delete == False %}
+													<li>
+														<a href="/category/{{i.cat_name}}/{{k.cat_name}}">{{k.cat_name}}</a>
+													</li>
+											{% endif%}
+											{% endfor%}
+												</ul>
+											</li>
+											{% endfor %}
+
+<!--											<li>-->
+<!--												<a href="javascript:void(0)" class="mega-column-title">Heading 3</a>-->
+<!--												<ul class="mega-sub-menu">-->
+<!--													<li>-->
+<!--														<a href="{% url 'product_category' 'women' %}">Women</a>-->
+<!--													</li>-->
+<!--													<li>-->
+<!--														<a href="#">Men</a>-->
+<!--													</li>-->
+<!--													<li>-->
+<!--														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+<!--													</li>-->
+<!--													<li>-->
+<!--														<a href="{% url 'product_list' %}">Products</a>-->
+<!--													</li>-->
+<!--												</ul>-->
+<!--											</li>-->
+<!--											<li>-->
+<!--												<div class="menu-image">-->
+<!--													<img src="{% static 'img/menu/menu-element.png' %}" class="img-fluid" alt="" />-->
+<!--												</div>-->
+<!--											</li>-->
+										</ul>
+									</li>
+									<!--<li class="menu-item-has-children">-->
+									<!--	<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--	<ul class="sub-menu mega-menu mega-menu-column-4">-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 1</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 2</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 3</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'men' %}">Men</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<div class="menu-image">-->
+									<!--				<img src="{% static 'img/menu/menu-element.png' %}" class="img-fluid" alt="" />-->
+									<!--			</div>-->
+									<!--		</li>-->
+									<!--	</ul>-->
+									<!--</li>-->
+									<!--<li class="menu-item-has-children">-->
+									<!--	<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--	<ul class="sub-menu mega-menu mega-menu-column-4">-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 1</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 2</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 3</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'product_category' 'women' %}">Women</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<div class="menu-image">-->
+									<!--				<img src="{% static 'img/menu/menu-element.png' %}" class="img-fluid" alt="" />-->
+									<!--			</div>-->
+									<!--		</li>-->
+									<!--	</ul>-->
+									<!--</li>-->
+									<!--<li class="menu-item-has-children">-->
+									<!--	<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--	<ul class="sub-menu mega-menu mega-menu-column-4">-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 1</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--				    <a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 2</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--				    <a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 3</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--				    <a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<div class="menu-image">-->
+									<!--				<img src="{% static 'img/menu/menu-element.png' %}" class="img-fluid" alt="" />-->
+									<!--			</div>-->
+									<!--		</li>-->
+									<!--	</ul>-->
+									<!--</li>-->
+									<!--<li class="menu-item-has-children">-->
+									<!--	<a href="#">UserProfile</a>-->
+									<!--	<ul class="sub-menu mega-menu mega-menu-column-4">-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Profile</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--			    	<li>-->
+									<!--					<a href="{% url 'profile' %}">Profile </a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="{% url 'edit_profile' %}">Update Profile </a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+
+
+									<!--					<a href="{% url 'order_summary' %}">Order List</a>-->
+									<!--				</li>-->
+
+									<!--			</ul>-->
+									<!--		</li></ul></li>-->
+									<!--<li class="menu-item-has-children">-->
+									<!--	<a href="#">Product 5</a>-->
+									<!--	<ul class="sub-menu mega-menu mega-menu-column-4">-->
+											<!--<li>-->
+											<!--	<a href="javascript:void(0)" class="mega-column-title">Heading 1</a>-->
+											<!--	<ul class="mega-sub-menu">-->
+											<!--		<li>-->
+											<!--			<a href="#">Product Name 1</a>-->
+											<!--		</li>-->
+											<!--		<li>-->
+											<!--			<a href="#">Product Name 2</a>-->
+											<!--		</li>-->
+											<!--		<li>-->
+											<!--			<a href="#">Product Name 3</a>-->
+											<!--		</li>-->
+											<!--		<li>-->
+											<!--			<a href="#">Product Name 4</a>-->
+											<!--		</li>-->
+											<!--	</ul>-->
+											<!--</li>-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 2</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 1</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 2</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 3</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 4</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 3</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 1</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 2</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 3</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 4</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--		<li>-->
+									<!--			<a href="javascript:void(0)" class="mega-column-title">Heading 4</a>-->
+									<!--			<ul class="mega-sub-menu">-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 1</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 2</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 3</a>-->
+									<!--				</li>-->
+									<!--				<li>-->
+									<!--					<a href="#">Product Name 4</a>-->
+									<!--				</li>-->
+									<!--			</ul>-->
+									<!--		</li>-->
+									<!--	</ul>-->
+									<!--</li>-->
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!-- End of header bottom navigation -->
+
+					<!-- headeer right container -->
+					<div class="header-right-container">
+						<div class="header-right-icons d-flex justify-content-end align-items-center h-100">
+							<div class="single-icon search">
+								<a href="javascript:void(0)" id="search-icon">
+									<i class="ion-ios-search-strong"></i>
+								</a>
+							</div>
+							{% if user.is_authenticated %}
+							<div class="dropdown single-icon">
+								<a href="#" class="dropdown-toggle menu" data-toggle="dropdown">
+									{{ request.user.profile.first_name }} {{ request.user.profile.last_name }}
+								</a>
+								<ul class="dropdown-menu">
+
+									<li>
+										<a class="links" href="{% url 'profile' %}">
+											<i class="mdi mdi-help-circle-outline"></i> Profile</a>
+									</li>
+									{%if wallet%}
+									<li>
+									
+										<a class="links" href="{% url 'wallet' %}">
+											<i class="mdi mdi-help-circle-outline"></i> Wallet</a>
+									</li>
+									{%endif%}
+									<li>
+										<a class="links" href="{% url 'edit_profile' %}">
+											<i class="mdi mdi-help-circle-outline"></i> Update Profile</a>
+									</li>
+									<li>
+										<a class="links" href="/mlm_admin/generat_referral/{{user.pk}}">
+											<i class="mdi mdi-help-circle-outline"></i>Generate Referral Code</a>
+									</li>
+									<li>
+										<a class="links" href="{% url 'order_summary' %}">
+											<i href=""></i> Order List</a>
+									</li>
+									<li>
+									    <a type="button" href="{% url 'logout' %}">
+									        <i class="ion-log-out"></i>&nbsp; Log Out
+                                        </a>
+
+									</li>
+								</ul>
+							</div>
+							{% else %}
+							<div class="single-icon user-login shubh_icon_log">
+                                <a class="links" data-toggle="modal" href="#login">
+											<i class="mdi mdi-login-variant"></i></a>
+
+								<a type="button" data-toggle="modal" data-target="#login">
+									<i class="ion-android-person"></i>
+									<div class="shubh_log">login / Join Now</div>
+                                </a>
+							</div>
+
+							{% endif %}
+							<!--<div class="dropdown single-icon user-login">-->
+       <!--                         {% if user.is_authenticated %}-->
+       <!--                         {{request.user}}-->
+       <!--                         <a type="button" href="{% url 'logout' %}">-->
+							<!--		<i class="ion-log-out"></i>-->
+       <!--                         </a>-->
+       <!--                         {% else %}-->
+
+							<!--	<a href="#" class="dropdown-toggle menu" data-toggle="dropdown" aria-expanded="false">-->
+							<!--		<i class="ion-android-person"></i>-->
+							<!--	</a>-->
+							<!--	<ul class="dropdown-menu">-->
+							<!--		<li>-->
+							<!--			<a class="links" data-toggle="modal" href="#login">-->
+							<!--				<i class="mdi mdi-login-variant"></i> Login</a>-->
+							<!--		</li>-->
+							<!--		<li>-->
+							<!--			<a class="links" href="#">-->
+							<!--				<i class="mdi mdi-help-circle-outline"></i> Profile</a>-->
+							<!--		</li>-->
+							<!--		<li>-->
+							<!--			<a class="links" href="#">-->
+							<!--				<i class="mdi mdi-help-circle-outline"></i> Update Profile</a>-->
+							<!--		</li>-->
+							<!--		<li>-->
+							<!--			<a class="links" href="#">-->
+							<!--				<i class="mdi mdi-help-circle-outline"></i> Order List</a>-->
+							<!--		</li>-->
+							<!--	</ul>-->
+       <!--                         {% endif %}-->
+							<!--</div>-->
+							<!-- <div class="single-icon wishlist">
+								<a href="javascript:void(0)" id="offcanvas-wishlist-icon">
+									<i class="ion-android-favorite-outline"></i>
+									<span class="count">2</span>
+								</a>
+							</div>-->
+						 
+							{% if cart_items.count %}
+							<div class="single-icon cart">
+								<a href="javascript:void(0)" id="offcanvas-cart-icon">
+									<i class="ion-ios-cart"></i>
+									<span class="count">{{ cart_items.count }}</span>
+								</a>
+							</div>
+							{% endif %}
+
+							 
+						</div>
+					</div>
+				</div>
+				<!-- End of header bottom container -->
+
+				<!-- Mobile Navigation Start Here -->
+				<div class="site-mobile-navigation d-block d-lg-none">
+					<div id="dl-menu" class="dl-menuwrapper site-mobile-nav">
+						<!--Site Mobile Menu Toggle Start-->
+						<button class="dl-trigger hamburger hamburger--spin">
+							<span class="hamburger-box">
+								<span class="hamburger-inner"></span>
+							</span>
+						</button>
+						<!--Site Mobile Menu Toggle End-->
+						<ul class="dl-menu dl-menu-toggle">
+							<li>
+								<a href="{% url 'product_list' %}">Product List</a>
+								<ul class="dl-submenu">
+									<li>
+										<a href="#">Heading 1</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Heading 2</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Heading 3</a>
+										<ul class="dl-submenu">
+										<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Product 2</a>
+								<ul class="dl-submenu">
+									<li>
+										<a href="#">Heading 1</a>
+										<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+									</li>
+									<li>
+										<a href="#">Heading 2</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Heading 3</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Product 3</a>
+								<ul class="dl-submenu">
+									<li>
+										<a href="#">Heading 1</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Heading 2</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Heading 3</a>
+										<ul class="dl-submenu">
+											<li><a href="#">Product Name 1</a></li>
+											<li><a href="#">Product Name 2</a></li>
+											<li><a href="#">Product Name 3</a></li>
+											<li><a href="#">Product Name 4</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Product 4</a>
+								<ul class="dl-submenu">
+									<li>
+										<a href="#">Heading 1</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Heading 2</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Heading 3</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Product 5</a>
+								<ul class="dl-submenu">
+									<li>
+										<a href="#">Heading 1</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Heading 2</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Heading 3</a>
+										<ul class="dl-submenu">
+											<li>
+														<a href="{% url 'product_category' 'women' %}">Women</a>
+													</li>
+													<li>
+														<a href="#">Men</a>
+													</li>
+													<li>
+														<a href="{% url 'categry_name' 'Sunglasses' %}">Sunglasses</a>
+													</li>
+													<li>
+														<a href="{% url 'product_list' %}">Products</a>
+													</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- Mobile Navigation End Here -->
+			</div>
+		</div>
+		<!-- End of header bottom -->
+	</header>
+	<!-- Header without topbar end -->
+
+	<!-- Login Modal -->
+	<div class="modal fade" id="login" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Login</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="submit-form login-form">
+						<form action="{% url 'login' %}" method="POST" name="login_form">{% csrf_token %}
+							<div class="form-group">
+								<input type="text" name="username" placeholder="Email ID / Mobile No." required />
+							</div>
+							<div class="form-group">
+								<input type="password" name="password" placeholder="Password" required />
+							</div>
+							<div class="text-center mt-40 mb-30">
+							    <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                                <!-- <button class="lezada-button lezada-button--medium">login</button> -->
+                                <input class="lezada-button lezada-button--medium" type="submit" value="Login">
+							</div>
+							<div class="form-link">
+								<span class="create-ac">
+									<a type="button"  href="{% url 'register' %}" >Join Now</a>
+
+								</span>
+								<span class="forgot-pwd">
+									<a href="{% url 'password_reset' %}">Forgot Password?</a>
+								</span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Login Modal end -->
+
+	<!-- Signup Modal -->
+	<div class="modal fade" id="signup" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Register</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="submit-form login-form">
+						<form action="{% url 'register' %}" method="POST" novalidate>{% csrf_token %}
+							<div class="form-group">
+								<input type="text" placeholder="First Name*" name="firstname" id="firstname" value="" required />
+								<div class="error alert-error"  id="e_firstname" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Last Name*"  name="lastname" id="lastname" value=""   />
+								<div class="error alert-error"  id="e_lastname" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Email ID*"  name="email" id="email" value=""    required/>
+								<div class="error alert-error"  id="e_email" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Referral Code*"  name="referral_code" id="referral_code" value="" required/>
+								<div class="error alert-error"  id="e_referral_code" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Mobile No.*" id="phone" name="phone"   value="" required/>
+								<div class="error alert-error"  id="e_phone" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Password*" id="password" name="password"  required />
+								<div class="error alert-error"  id="e_password" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Confirm Password*" id="confirmpassword" name="confirmpassword" required />
+								<div class="error alert-error"  id="e_confirmpassword" style="display:none;" ></div>
+							</div>
+							<div class="text-center mt-40 mb-35">
+								<button class="lezada-button lezada-button--medium">Register</button>
+							</div>
+							<div class="text-center mb-10">
+								<a type="button" data-toggle="modal" data-target="#login">Already have account? Login</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Signup Modal end -->
+
+	<!-- Forgot Password Modal -->
+	<div class="modal fade" id="forgotpwd" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Forgot Password</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="submit-form login-form">
+						<form action="#">
+							<div class="form-group">
+								<div class="input-group">
+									<input type="text" placeholder="Email ID " id="email" name="email_id"  />
+									<div class="error alert-error"  id="e_email" style="display:none;" ></div>
+								</div>
+							</div>
+							<div class="text-center mt-40 mb-10">
+								<button class="lezada-button lezada-button--medium">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Forgot Password Modal end -->
+
+	<!-- wishlist overlay -->
+	<div class="wishlist-overlay" id="wishlist-overlay">
+		<div class="wishlist-overlay-close inactive"></div>
+		<div class="wishlist-overlay-content">
+			<!-- close icon -->
+			<span class="close-icon" id="wishlist-close-icon">
+				<a href="javascript:void(0)">
+					<i class="ion-android-close"></i>
+				</a>
+			</span>
+			<!-- End of close icon -->
+
+			<!-- offcanvas wishlist content container -->
+			<div class="offcanvas-cart-content-container">
+				<h3 class="cart-title">Wishlist</h3>
+
+				<div class="cart-product-wrapper">
+					<div class="cart-product-container ps-scroll">
+						<div class="single-cart-product">
+							<span class="cart-close-icon">
+								<a href="#"><i class="ti-close"></i></a>
+							</span>
+							<div class="image">
+								<a href="#">
+									<img src="{% static 'img/cart/01.jpg' %}" class="img-fluid" alt="" />
+								</a>
+							</div>
+							<div class="content">
+								<h5><a href="#">Dark Brown Leather Watch</a></h5>
+								<p><span class="main-price discounted">$200.00</span> <span class="discounted-price">$180.00</span></p>
+							</div>
+						</div>
+					</div>
+
+					<!-- cart buttons -->
+					<div class="cart-buttons">
+						<a href="{% url 'checkout' %}">Checkout</a>
+					</div>
+					<!-- End of cart buttons -->
+				</div>
+			</div>
+			<!-- End of offcanvas wishlist content container -->
+		</div>
+	</div>
+	<!-- End of wishlist overlay -->
+{% if cart_items.count %}
+	<!-- cart overlay -->
+	<div class="cart-overlay" id="cart-overlay">
+		<div class="cart-overlay-close inactive"></div>
+		<div class="cart-overlay-content">
+			<!-- close icon -->
+			<span class="close-icon" id="cart-close-icon">
+				<a href="javascript:void(0)">
+					<i class="ion-android-close"></i>
+				</a>
+			</span>
+			<!-- End of close icon -->
+
+			<!-- offcanvas cart content container -->
+
+			<div class="offcanvas-cart-content-container">
+				<h3 class="cart-title">Cart</h3>
+				<div class="cart-product-wrapper">
+				    {% for item in cart_items %}
+					<div class="cart-product-container ps-scroll">
+
+						<div class="single-cart-product">
+							<!--<span class="cart-close-icon">-->
+							<!--	<a href="#"><i class="ti-close"></i></a>-->
+							<!--</span>-->
+							<div class="image">
+								<a href="{% url 'show_cart' %}">
+									<img src="{{ item.product.image.url }}" class="img-fluid" alt="" />
+								</a>
+							</div>
+							<div class="content">
+								<h5><a href="{% url 'show_cart' %}">{{ item.product.product_name }}</a></h5>
+								<p><span class="cart-count">{{ item.quantity }} x </span> <span class="discounted-price">{{ item.product.price }}</span></p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+					<!-- subtotal calculation -->
+					<p class="cart-subtotal">
+						<span class="subtotal-title">Subtotal:</span>
+						<span class="subtotal-amount">{{ cart_subtotal }}</span>
+					</p>
+					<!-- End of subtotal calculation -->
+
+					<!-- cart buttons -->
+					<div class="cart-buttons">
+						<a href="{% url 'show_cart' %}">view cart</a>
+<!--						<a href="{% url 'checkout' %}">checkout</a>-->
+<!--						nipur code start-->
+						{% if user.is_authenticated %}
+						<a href="{% url 'checkout' %}">checkout</a>
+						{% endif %}
+<!--						nipur code end-->
+					</div>
+					<!-- End of cart buttons -->
+
+					<!-- free shipping text -->
+					<p class="free-shipping-text">
+						Free Shipping on All Orders Over $100!
+					</p>
+					<!-- End of free shipping text -->
+				</div>
+			</div>
+
+			<!-- End of offcanvas cart content container -->
+		</div>
+	</div>
+	<!-- End of cart overlay -->
+{% endif %}
+	<!-- search overlay -->
+	<div class="search-overlay" id="search-overlay">
+		<!-- close icon -->
+		<span class="close-icon search-close-icon">
+			<a href="{% url 'search' %}" id="search-close-icon">
+				<i class="ti-close"></i>
+			</a>
+		</span>
+		<!-- End of close icon -->
+
+		<!-- search overlay content -->
+		<div class="search-overlay-content container">
+			<div class="input-box">
+				<form action="{% url 'search' %}" method="POST">{% csrf_token %}
+					<div class="form-group">
+						<div class="input-group">
+							<input type="search" placeholder="Search Products..."  name="search"/>
+							<div class="input-group-append">
+								<input class="input-group-text" type="submit" value="submit" />
+
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<div class="search-hint">
+				<span># Hit enter to search or ESC to close</span>
+			</div>
+		</div>
+		<!-- End of search overlay content -->
+	</div>
+	<!-- End of search overlay -->

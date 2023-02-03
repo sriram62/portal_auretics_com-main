@@ -1,0 +1,93 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+
+<div class="pcoded-main-container">
+    <div class="modal-content">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Google Sheet Configuration</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Type</label>
+                            {{form.type}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Project Id</label>
+                            {{form.project_id}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Private Key Id</label>
+                            {{form.private_key_id}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Private Key</label>
+                            {{form.private_key}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Client Email</label>
+                            {{form.client_email}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Clieat Id</label>
+                            {{form.client_id}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Auth Uri</label>
+                            {{form.auth_uri}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Token Uri</label>
+                            {{form.token_uri}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Auth Provider_x509_cert_url</label>
+                            {{form.auth_provider_x509_cert_url}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Client x509_cert_url</label>
+                            {{form.client_x509_cert_url}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Workbook Name</label>
+                            {{form.workbook_name}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="floating-label"><small class="text-danger">* </small>Sheet Name</label>
+                            {{form.sheet_name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Update </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}

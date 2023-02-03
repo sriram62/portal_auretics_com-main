@@ -1,0 +1,330 @@
+
+/*=============================================
+=            39. Newsletter            =
+=============================================*/
+
+.border-top-bottom{
+    border-top: 1px solid #EBEBEB;
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.mc-newsletter-content-container{
+    background-color: #D11830;
+}
+
+.mc-newsletter-content{
+
+
+    border: 1px solid #fff;
+
+    .icon{
+        i{
+            color: #ffffff;
+            font-size: 70px;
+        }
+    }
+
+    .title{
+        h3{
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            line-height: 1.5;
+
+            @media #{$extra-small-mobile}{
+                font-size: 30px;
+            }
+        }
+
+        p{
+            line-height: 1.6;
+            margin-top: 15px;
+            color: #ffffff;
+            font-size: 15px;
+
+            @media #{$extra-small-mobile}{
+                font-size: 13px;
+            }
+        }
+    }
+
+    &--big-icon{
+        border: none;
+
+        .icon{
+            i{
+                color: rgba(34,34,34,0.1);
+                font-size: 150px;  
+            }
+        }
+
+        .title{
+            h3{
+                color: #222222;
+                font-size: 40px;
+            }
+
+            p{
+                color: #999999;
+                font-size: 15px;
+            }
+        }
+
+        .mc-newsletter-form{
+            input{
+                border-bottom-color: #cccccc;
+                color: #333333;
+
+                &:focus{
+                    border-bottom-color: #ccc; 
+                }
+            }
+
+            ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                color: #777;
+                opacity: 1; /* Firefox */
+            }
+            
+            :-ms-input-placeholder { /* Internet Explorer 10-11 */
+                color: #777;
+            }
+            
+            ::-ms-input-placeholder { /* Microsoft Edge */
+                color: #777;
+            }   
+    
+
+            button{
+                color: #333333;
+
+                &:hover{
+                   color: #333;
+                }
+            }
+        }
+
+        .link{
+            a{
+                color: #333333;
+            }
+        }
+    
+    }
+
+    &--fullwidth{
+        border: none;
+
+        .icon{
+            i{
+                color: #ffffff;
+                font-size: 35px;
+            }
+        }
+    }
+}
+
+
+    
+    /*----------  subscription form   ----------*/
+    .mc-newsletter-form{
+        position: relative;
+        max-width: 500px;
+        width: 100%;
+        margin: auto;
+
+       
+
+        @media #{$large-mobile}{
+            max-width: 400px;
+        }
+        @media #{$small-mobile}{
+            max-width: 350px;
+        }
+        @media #{$extra-small-mobile}{
+            max-width: 240px;
+        }
+        
+        input{
+            background: none;
+            border: none;
+            border-bottom: 2px solid #fff;
+            padding: 10px 0;
+            width: 100%;
+            padding-right: 40px;
+            color: #fff;
+            &:focus{
+                border-bottom-color: #fff; 
+            }
+
+        }
+
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #fff;
+            opacity: 0.5; /* Firefox */
+        }
+        
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #fff;
+        }
+        
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            color: #fff;
+        }   
+
+        button{
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none; 
+            color: #fff;
+            font-size: 14px;
+            line-height: 22px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            padding: 0; 
+
+            @media #{$extra-small-mobile}{
+                font-size: 12px;
+            }
+            &:hover{
+                color: #fff; 
+            }
+        }
+
+        &--popup{
+            margin: 0;
+            input{
+                border-bottom: 2px solid #ccc;
+                color: #333;
+                &:focus{
+                    border-bottom-color: #ccc;  
+                }
+            }
+
+            
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #333;
+            opacity: 0.5; /* Firefox */
+        }
+        
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #ccc;
+        }
+        
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            color: #ccc;
+        }  
+
+            button{
+                color: #333;
+                &:hover{
+                    color: #333;
+                }
+            }
+        }
+    }
+
+
+    .link{
+        a{
+            color: #fff; 
+            text-decoration: underline;
+        }
+    }
+
+
+    
+    /*----------  newsletter popup style  ----------*/
+
+    .newsletter-overlay-inactive{
+        .newsletter-content{
+            visibility: hidden;
+            opacity: 0;
+            animation-name: 'fadeOut';
+        }
+    }
+    
+    .newsletter-content{
+        max-width: 870px;
+        width: 100%;
+        position: fixed; 
+        top: 50%;
+        left: 50%;
+        transform: translate(-150%, -50%);
+        z-index: 9999;
+        padding: 50px 60px 70px 400px; 
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.6s;
+
+        @media #{$laptop-device}{
+            max-width: 900px;
+            padding: 50px 60px 70px 400px; 
+        }
+
+        &.show-popup{
+            visibility: visible;
+            opacity: 1;
+            transform: translate(-50%, -50%);
+            transition: 0.6s;
+        }
+
+        &.hide-popup{
+            visibility: hidden;
+            opacity: 0;
+            //animation: slideOutRight 1s forwards;
+        }
+
+        h2{
+            font-size: 34px;
+            line-height: 48px;
+            font-weight: 300;
+            color: #333333;
+
+            @media #{$tablet-device}{
+                font-size: 26px;
+                line-height: 36px;
+            }
+
+            span{
+                font-weight: 600;
+            }
+        }
+
+        p{
+            font-size: 15px;
+            line-height: 26px;
+            letter-spacing: 1px; 
+        }
+
+
+        .close-icon{
+            position: absolute;
+            top: 20px;
+            right: 20px; 
+
+            a{
+                transition: 0.6s;
+
+                &:hover{
+                    transform: rotate(90deg);
+                }
+
+                i{
+                    font-size: 25px;
+                    color: #333333;
+                }
+            }
+        }
+
+        .mailchimp-alerts{
+            position: absolute;
+            bottom: 130px;  
+        }
+    }
+
+/*=====  End of 39. Newsletter  ======*/
+

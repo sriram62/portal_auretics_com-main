@@ -1,0 +1,111 @@
+{% load static %}
+{% load bsiness_tag %}
+{% load humanize %}
+{% load l10n %}
+{% include "business/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Dashboard Tree View</h2>
+                <h5 class="calc_page_title_1 mb-4">Details of all Downline</h5>
+                </div>
+                <div class="col-md-12 mt-4">
+                    <div class="after_tree_bot">
+                    <table align="right">
+                    <tr>
+                        <td align="right">
+
+                            <form name="form" role="search" method="POST" action="{% url 'mlm_admin_user_dashboard_12' %}">
+                            {% csrf_token %}
+                            <table><tr><td align="right"><input type="search" class="form-control" id="q" name="q" placeholder="Enter ARN Number" /></td><td><button type="submit" class="btn  btn-primary">Search</button></td></tr></table>
+                            </form>
+                            <p color="red"><span><strong>{{ msg }}</strong></span></p>
+                                {% if not show_all %}
+                                    <span>This page is currently showing only<span style="color:Green;"> Activated </span>Users.<strong></strong></span><br />
+                                    <span>To see all users, please <strong><a href="?show_all=Y">Click Here</a></strong></span><br />
+                                {% else %}
+                                    <span>This page is showing all Users.<strong></strong></span><br />
+                                    <span>To see only Activated Users, please <strong><a href="{% url 'mlm_admin_general_stracture' rt_detail.user_id.pk arn %}">Click Here</a></strong></span><br />
+                                {% endif %}
+{#                            {% if allow_one_level_above %}<span align="right"><h5><right><a href="{% url 'mlm_admin_general_stracture' refer_by_pk refer_by_arn %}">Go One Level Up</a></right></h5></span>{% endif %}#}
+
+                        </td>
+                    </tr>
+                    </table>
+                    <table>
+                    <tr>
+                        <td>
+                            <p>
+                                <span>Email Id: <strong>{{ user_id }}</strong></span><br />
+                                <span>Current Month GPV: <strong>{{ rt_detail.rt_gpv_month|intcomma }}</strong></span><br />
+                                <span>Current Month GBV: <strong>{{ rt_detail.rt_gbv_month|intcomma }}</strong></span><br />
+                                <span>Current Month Self PV: <strong>{{current_pv|intcomma}}</strong></span><br />
+                                <span>Current Month Self BV: <strong>{{current_bv|intcomma}}</strong></span><br />
+                                <span>Last Month Self PV: <strong>{{last_pv|intcomma}}</strong></span><br />
+                                <span>Last Month Self BV: <strong>{{last_bv|intcomma}}</strong></span><br />
+                            </p>
+                        </td>
+                    </tr>
+                    </table>
+                    <div class="hirera_tree">
+
+                        {% if rt_detail_colour == "GREEN" %}<img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                        {% elif rt_detail_colour == "YELLOW" %}<img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                        {% else %}<img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                        {% endif %}
+                        <h4>{{user_id.profile.first_name|upper|truncatechars:14}} </h4>
+                        <h4>{{user_id.profile.last_name|upper|truncatechars:14}} </h4>
+                        <h4>{{user_id.referralcode.referral_code}}</h4>
+                        <h5>Business Summary</h5>
+                    </div>
+                    </div>
+                        </div>
+                        <div class="col-md-12 mb-5">
+                            <div class="tree_sub_list">
+                            {% for user in cm_active_users %}
+                                <div class="hirera_tree hirera_tree_sub">
+                                    <img src="/static/mlm_admin/images/mlm_dashboard/active_binary.png">
+                                    <h4>{{ user.user_id.profile.first_name|upper|truncatechars:14 }} </h4>
+                                    <h4>{{ user.user_id.profile.last_name|upper|truncatechars:14 }} </h4>
+                                    <h4>{{ user.user_id.realtime_user.rt_ppv }}</h4>
+                                    <h4>{{ user.referral_code }}</h4>
+                                    <h5><a href="{% url 'mlm_admin_general_stracture' user.user_id.pk user.referral_code %}">Business Summary</a></h5>
+                                </div>
+                            {% endfor %}
+                            {% for user in cm_inactive_users %}
+                                <div class="hirera_tree hirera_tree_sub">
+                                    <img src="/static/mlm_admin/images/mlm_dashboard/pre_active_binary.png">
+                                    <h4>{{ user.user_id.profile.first_name|upper|truncatechars:14 }} </h4>
+                                    <h4>{{ user.user_id.profile.last_name|upper|truncatechars:14 }} </h4>
+                                    <h4>{{ user.user_id.realtime_user.rt_ppv }}</h4>
+                                    <h4>{{ user.referral_code }}</h4>
+                                    <h5><a href="{% url 'mlm_admin_general_stracture' user.user_id.pk user.referral_code %}">Business Summary</a></h5>
+                                </div>
+                            {% endfor %}
+                            {% if show_all_rt %}
+                                {% for user in users %}
+                                <div class="hirera_tree hirera_tree_sub">
+                                <img src="/static/mlm_admin/images/mlm_dashboard/inactive_binary.png">
+                                <h4>{{user.user_id.profile.first_name|upper|truncatechars:14}} </h4>
+                                <h4>{{user.user_id.profile.last_name|upper|truncatechars:14}} </h4>
+                                <h4>{{ user.user_id.realtime_user.rt_ppv }}</h4>
+                                <h4>{{user.referral_code}}</h4>
+                                <h5><a href="{% url 'mlm_admin_general_stracture' user.user_id.pk user.referral_code %}?show_all=Y">Business Summary</a></h5>
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+        <div align=center><p><span>Current BV to PV ratio is 10:1. Therefore, if you purchase products worth 1,000BV you will get 100PV</span><br /><span><sup>*BV:PV ratio is subject to change from time to time.</sup></span></p></div>
+            {% include "business/include/acronym.html" %}
+                </form>
+                </div>
+                </div>
+
+{% include "business/include/footer.html" %}

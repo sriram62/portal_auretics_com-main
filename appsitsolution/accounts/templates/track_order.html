@@ -1,0 +1,189 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Track Order </h5>
+            </div>
+           <div class="m-4 text-center" > 
+            Track Order Url:  <a href="{{track_url}}" class="btn btn-primary">{{track_url}}</a>
+            </div>
+            <br>
+            
+            <div class="modal-body">
+                <h3 class="text-center">TRACKING ORDER DETAILS</h3>
+                <br>
+                 <div class="row"> 
+              
+                
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>Track Status</label>
+
+                            {{tracking_data.track_status}}
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Shippment Status</label>
+
+                        {{tracking_data.shipment_status}}
+
+                    </div>
+                </div>
+                </div>
+            <div class="container-fluid">
+                <h4 class="m-3 text-center">Shipment Tracking Data</h4>
+            </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="description">ID</label>
+
+                            {{shipment_track.id}}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">Date</label>
+                            <input type="" class="form-control" value="{{date.date}}" id="commission" name="commission" disabled placeholder="{{date.date}}">
+                        </div>
+                    </div>
+
+                <div class="col-sm-6">
+                <div class="form-group form-primary mb-0">
+                            <label class="floating-label" for="commission">Status</label>
+
+                            {{shipment_track.current_status}}
+
+                                                <span class="form-bar"></span>
+                                            </div>
+                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">Paid</label>
+
+                            {{shipment_track.awb_code}}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">courier_company_id</label>
+
+                            {{shipment_track.courier_company_id}}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">shipment_id</label>
+
+                            {{shipment_track.shipment_id}}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">order_id</label>
+
+                            {{shipment_track.order_id}}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">pickup_date</label>
+
+                            {{shipment_track.pickup_date}}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">delivered_date</label>
+
+                            {{shipment_track.delivered_date}}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">weight</label>
+
+                            {{shipment_track.weight}}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="show_on_home_page">packages</label>
+
+                            {{shipment_track.packages}}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">delivered_to</label>
+
+                            {{shipment_track.delivered_to }}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">destination</label>
+
+                            {{shipment_track.destination }}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">consignee_name</label>
+
+                            {{shipment_track.consignee_name }}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">origin:</label>
+
+                            {{shipment_track.origin }}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="commission">CITY:</label>
+
+                            {{shipment_track.courier_agent_details }}
+
+                        </div>
+                    </div>
+                     
+
+
+						</div>
+                      
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- cart page content end -->
+	</div>
+<!--        show krne walla yha per end h-->
+            </div>
+        </div>
+    </form>
+        </div>
+</div>
+{% endblock %}

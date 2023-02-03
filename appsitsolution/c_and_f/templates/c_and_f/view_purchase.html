@@ -1,0 +1,178 @@
+<head>
+    <style>
+    .shubh_item input {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 1.25rem + 2px);
+    padding: 0.625rem 1.1875rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-family: "Mada", sans-serif;
+
+}
+.shubh_item textarea {
+    display: block;
+    width: 100%;
+    padding: 0.625rem 1.1875rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-family: "Mada", sans-serif;
+
+}
+
+.shubh_item label {
+    display: block;
+    font-family: "Mada", sans-serif;
+    font-size: 14px;
+    color: #373a3c;
+    font-weight: 400;
+}
+
+.capti {
+    font-size: 18px;
+    padding-bottom: 8px;
+}
+.shubh_item textarea {
+    width: 100%;
+}
+    </style>
+    </head>
+
+{% load static %}
+{% include "c_and_f/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">C&F View Purchase</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+	<!--shubh-content-start-->
+	<div class="container">
+		<div class="row shubh_item">
+		   <div class="col-md-6">
+		   <label class="shubh_datee" for="date">Date</label>
+		   <input type="date" id="date_shubh" disabled name="date" value="{{sale_data.date|date:'c'}}">
+		   </div>
+		   <div class="col-md-6">
+		   <label class="shubh_datee" for="date">Party Name</label>
+		   <input type="text" id="party_name" disabled name="party_name" value="{{sale_data.party_name}}">
+		   </div>
+		   <div class="col-md-6 mt-5">
+		       <label class="mc_namee" for="mcname">MC Name To: </label>
+		       <label class="form-control" for="mcname">{{sale_data.material_center_to.mc_name}} </label>
+		       </div>
+		   <div class="col-md-6 mt-5">
+		       <label class="mc_namee" for="mcname">MC Name From: </label>
+		       <label class="form-control" for="mcname">{{sale_data.material_center_from.mc_name }} </label>
+		       </div>
+		   <div class="col-md-6 mt-5">
+		       <label class="mc_namee" for="mcname">Advisor / C&F’s Name: </label>
+		       <label class="form-control" for="mcname">{{sale_data.advisor_cnf_name.username}} </label>
+		       </div>
+		   <div class="col-md-6 mt-5">
+		       <label class="mc_namee" for="mcname">Sale Type: </label>
+               {% if sale_data.sale_type == 0 %}
+               <label class="form-control"  for="mcname">With in State</label>
+               {% elif sale_data.sale_type == 1  %}
+               <label class="form-control" for="mcname">Inter State</label>
+               {% endif %}
+		       </div>
+		       <div class="col-md-6 mt-5">
+		      <label class="shubh_narratione" for="narration">Narration: </label>
+		       <textarea id="narration" name="narration" disabled rows="4">{{sale_data.narration}}</textarea>
+		           </div>
+		           <div class="col-md-12 mt-5">
+		               <div class="table-responsive-md">
+		                    <div class="capti">Item Details</div>
+		                    <table class="table table-hover" id="Tbl_dailyreport_data">
+		                      <thead>
+                                <tr>
+<!--                                <th scope="col">#</th>-->
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Batch No.</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Distributor’s Price</th>
+               {% if sale_data.sale_type == 0 %}
+                                <th scope="col" style="display:none;">CGST</th>
+                                <th scope="col" style="display:none;">SGST</th>
+               {% elif sale_data.sale_type == 1  %}
+                                <th scope="col" style="display:none;">IGST</th>
+               {% endif %}
+                                <!-- <th scope="col">VAT</th> -->
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Total PV</th>
+                                <th scope="col">Total BV</th>
+                               </tr>
+                             </thead>
+                             <tbody id="">
+                            {% for k in data %}
+                                <tr class="prod_tbl">
+<!--                                <th scope="row">1</th>-->
+                                <td>
+               <label class="form-control" for="mcname">{{k.item.product_name}}</label></td>
+                                <td>
+               <label class="form-control" for="mcname">{{ k.batch.batch_name}}</label></td>
+                                <td><label class="form-control" for="mcname">{{k.quantity}}</label></td>
+                                <td><label class="form-control" for="mcname">{{k.distributor_price}}</label></td>
+               {% if sale_data.sale_type == 0 %}
+                                <td style="display:none;"><label class="form-control" for="mcname">{{k.cgst}}</label></td>
+                                <td style="display:none;"><label class="form-control" for="mcname">{{k.sgst}}</label></td>
+               {% elif sale_data.sale_type == 1  %}
+                                <td style="display:none;"><label class="form-control" for="mcname">{{k.igst}}</label></td>
+               {% endif %}
+                                <!-- <td><label class="form-control" for="mcname">{{k.vat}}</label></td> -->
+                                <td><label class="form-control" for="mcname">{{k.total_amount}}</label></td>
+                                <td><label class="form-control">{{k.pv}}</label></td>
+                                <td><label class="form-control">{{k.bv}}</label></td>
+
+                                </tr>
+                            {% endfor %}
+                                </tbody>
+		                        </table>
+		                   </div>
+
+		               </div>
+		   <div class="col-md-4">
+                <label class="shubh_datee" for="date"><h5>Grand Total</h5></label>
+                <label class="form-control" for="mcname">{{sale_data.grand_total}}</label>
+            </div>
+            <div class="col-md-4">
+                <label class="grand_pv" for="grand_pv"><h5>Grand PV</h5></label>
+                <label class="form-control" for="grand_pv">{{sale_data.grand_pv}}</label>
+            </div>
+            <div class="col-md-4">
+                <label class="grand_bv" for="grand_bv"><h5>Grand BV</h5></label>
+                <label class="form-control" for="grand_bv">{{sale_data.grand_bv}}</label>
+            </div>
+		  </div>
+		</div>
+		<!--end-->
+            </div>
+<!--            <div class="modal-footer">-->
+<!--                <button class="btn btn-primary" type="submit"> Accept </button>-->
+<!--            </div>-->
+    </form>
+        </div>
+
+</div>
+{% include "mlm_admin/include/footer.html" %}

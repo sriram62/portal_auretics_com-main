@@ -1,0 +1,86 @@
+from django.urls import path
+from django.contrib.auth import views as auth_views
+from . import views
+from . import dynamic_compression,dynamic_compression_director_page
+from .pgpv_pgbv import *
+from .fortune_bonus import *
+from .retailer_margen import *
+from .nurturing_bonus import calculation_nurturing_bonus,nurturing_bonus_excel,nurturing_bonus_publish
+from .sharing_bonus import calcaltion_sharing_bonus,after_sum_sharing_bonus,sharing_bonus_excel,sharing_bonus_publish
+from .bussiness_master_bonus import calculate_business_master_bonus,after_sum_business_master,bmb_bonus_excel,bmb_bonus_publish
+from .vas import conficonsistent_retailers_income_fn,vas_code,vacation_excel,automobile_excel,shelter_excel,cri_excel,vas_publish,cri_publish
+from .compile_results import *
+
+urlpatterns = [
+    path('', views.calculation, name="mlm_admin_calculation"),
+    path('mlm', views.configurations_super, name="mlm_admin_configurations_super"),
+    path('infinity_plan', views.configurations_infinity, name="mlm_infinity_plan"),
+    path('super_infinity', views.differentiate_super_infinity, name="differentiate_super_infinity"),
+    path('super_infinity/excel/', views.differentiate_super_infinity_excel, name="differentiate_super_infinity_excel"),
+    path('super_infinity/publish/', views.differentiate_super_infinity_publish, name="differentiate_super_infinity_publish"),
+    path('gpv_gbv/',pgpv_pgbv,name = 'mlm_calculation_gpb_gbv_pb'),
+    path('gpv_gbv/excel/',gpv_gbv_pb_excel,name = 'mlm_calculation_gpb_gbv_pb_excel'),
+    path('personal_bonus/publish/',personal_bonus_publish,name = 'mlm_calculatio_personal_publish'),
+    path('direct_bonus', views.direct_bonus, name="direct_bonus"),
+    path('direct_bonus/excel/', views.direct_bonus_excel, name="direct_bonus_excel"),
+    path('direct_bonus/publish/', views.direct_bonus_publish, name="direct_bonus_publish"),
+    path('team_bonus', views.super_team_building_bonus, name="team_bonus"),
+    path('team_bonus/excel/', views.team_building_bonus_excel, name="team_bonus_excel"),
+    path('team_bonus/publish/', views.team_building_bonus_publish, name="team_bonus_publish"),
+    path('leadership/',views.leader_ship_bonus_super_plan,name = 'leadership_bonus'),
+    path('leadership/excel/',views.leader_ship_building_bonus_excel,name = 'leadership_bonus_excel'),
+    path('leadership/publish/',views.leader_ship_building_bonus_publish,name = 'leadership_bonus_publish'),
+    path('life_style/',views.life_style_fund_super_plan_fn,name = 'life_style'),
+    path('life_style/excel/',views.life_style_fund_super_plan_excel,name = 'life_style_excel'),
+    path('life_style/publish/',views.life_style_fund_super_plan_publish,name = 'life_style_publish'),
+    path('retail_margin/',retailer_margin_fn,name = 'mlm_calculation_retail_margin'),
+    path('retail_margin/excel/',retailer_margin_excel,name = 'mlm_calculation_retail_margin_excel'),
+    path('retail_margin/publish/',retailer_margin_publish,name = 'mlm_calculation_retail_margin_publish'),
+    path('fortune_bonus/',calcaltion_fortune_bonus,name = 'mlm_calculation_fortune_bonus'),
+    path('fortune_bonus/excel/',fortune_excel,name = 'mlm_calculation_fortune_bonus_excel'),
+    path('fortune_bonus/publish/',fortune_publish,name = 'mlm_calculation_fortune_bonus_publish'),
+    path('sharing_bonus/',calcaltion_sharing_bonus,name = 'mlm_calculation_sharig_bonus'),
+    path('sharing_bonus/excel/',sharing_bonus_excel,name = 'mlm_calculation_sharig_bonus_excel'),
+    path('sharing_bonus/publish/',sharing_bonus_publish,name = 'mlm_calculation_sharig_bonus_publish'),
+    path('sharing_front/',after_sum_sharing_bonus,name = 'mlm_calculation_sharig_bonus_front'),
+    path('nurturing_bonus/',calculation_nurturing_bonus,name = 'nurturing_bonus'),
+    path('nurturing_bonus/excel/',nurturing_bonus_excel,name = 'nurturing_bonus_excel'),
+    path('nurturing_bonus/publish/',nurturing_bonus_publish,name = 'nurturing_bonus_publish'),
+    path('business_bonus/',calculate_business_master_bonus,name = 'mlm_calculation_bmb_cal'),
+    path('business_bonus/excel/',bmb_bonus_excel,name = 'mlm_calculation_bmb_excel'),
+    path('business_bonus/publish/',bmb_bonus_publish,name = 'mlm_calculation_bmb_publish'),
+    path('bmb_actual_cal/',after_sum_business_master,name = 'mlm_calculation_after_sum_bmb'),
+    path('vas/',vas_code,name = 'mlm_calculation_vas'),
+    path('vaction/excel/',vacation_excel,name = 'mlm_calculation_vacation_excel'),
+    path('automobile/excel/',automobile_excel,name = 'mlm_calculation_automobile_excel'),
+    path('shelter/excel/',shelter_excel,name = 'mlm_calculation_shelter_excel'),
+    path('shelter/publish/',vas_publish,name = 'mlm_calculation_vas_publish'),
+    path('cri_function/',conficonsistent_retailers_income_fn,name = 'mlm_calculation_consistent_retailers_income'),
+    path('cri_function/excel/',cri_excel,name = 'mlm_calculation_consistent_retailers_income_excel'),
+    path('cri_function/publish/',cri_publish,name = 'mlm_calculation_consistent_retailers_income_publish'),
+    path('test_my_skill', views.test_my_skill, name="test_my_skill"),
+    path('dynamic_compression_user', dynamic_compression.dynamic_compression_user, name="dynamic_compression_user"),
+    path('dynamic_compression_user/excel/', dynamic_compression.dynamic_compression_user_excel, name="dynamic_compression_user_excel"),
+    path('dynamic_compression_director', dynamic_compression_director_page.dynamic_compression_director_f, name="dynamic_compression_director"),
+    path('dynamic_compression_director/excel/', dynamic_compression_director_page.dynamic_compression_director_excel, name="dynamic_compression_director_excel"),
+    path('compile_result/',compile_result_fn,name = 'mlm_calculation_compile_result'),
+    path('compile_result_commission_calculation/excel/',commission_calculation_model_excel,name = 'commission_calculation_model_excel'),
+    path('compile_result_commission_wallet/excel/',commission_wallet_model_excel,name = 'commission_wallet_model_excel'),
+    path('compile_result_commission_wallet_amount_out/excel/',commission_wallet_amount_out_detail_model_excel,name = 'commission_wallet_amount_out_detail_model_excel'),
+    path('compile_result/publish/',compile_result_publish,name = 'mlm_calculation_compile_result_publish'),
+    # path('quser_dashboard_1', views.user_dashboard_1, name="mlm_admin_calculation1"),
+    # path('quser_dashboard_2', views.user_dashboard_2, name="mlm_admin_calculation2"),
+    # path('quser_dashboard_3', views.user_dashboard_3, name="mlm_admin_calculation3"),
+    # path('quser_dashboard_4', views.user_dashboard_4, name="mlm_admin_calculation4"),
+    # path('quser_dashboard_5', views.user_dashboard_5, name="mlm_admin_calculation5"),
+    # path('quser_dashboard_6', views.user_dashboard_6, name="mlm_admin_calculation6"),
+    # path('quser_dashboard_7', views.user_dashboard_7, name="mlm_admin_calculation7"),
+    # path('quser_dashboard_8', views.user_dashboard_8, name="mlm_admin_calculation8"),
+    # path('quser_dashboard_9', views.user_dashboard_9, name="mlm_admin_calculation9"),
+    # path('quser_dashboard_10', views.user_dashboard_10, name="mlm_admin_calculation10"),
+    # path('quser_dashboard_11', views.user_dashboard_11, name="mlm_admin_calculation11"),
+    # path('quser_dashboard_12', views.user_dashboard_12, name="mlm_admin_calculation12"),
+    # path('quser_dashboard_11/<int:myid>',views.more_binary,name = 'mlm_calculation_binaryq'),
+    #path('referal_Delete/',views.delete_Data,name = 'derlel'),
+]
+# urlpatterns=[]

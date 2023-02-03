@@ -1,0 +1,44 @@
+{% load static %}
+{% include "mlm_calculation/include/header.html" %}
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Consistent Retailer’s Income</h2>
+                <h5 class="calc_page_title_1 mb-4">Check out your retailer's income details</h5>
+                </div>
+                <div class="col-md-12 mt-4 mb-4">
+                    <table class="table user_profile_bonus_1">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Particulars</th>
+                        <th scope="col">Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>Loyalty Purchase Earned</td>
+                        <td>1500</td>
+                        </tr>
+                        <tr>
+                        <td>Loyalty Purchase Used</td>
+                        <td>2800</td>
+                        </tr>
+                        <tr>
+                        <td><strong>Balance</strong></td>
+                        <td><strong>4000</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                        </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+{% include "mlm_calculation/include/footer.html" %}

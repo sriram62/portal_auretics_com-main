@@ -1,0 +1,224 @@
+{% load static %}
+{% include "mlm_calculation/include/header.html" %}
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Income Statement</h2>
+                <h5 class="calc_page_title_1 mb-4">Check out your income details</h5>
+                </div>
+                <div class="col-md-12">
+                    <div class="user_profile_bonus">
+                    <!--<h1>Select Plan</h1>-->
+                    <!--<p>Check your income by selecting plan, month and year</p>-->
+                    <!--<select id="plan_selector" class="form-control">-->
+                    <!--    <option>Select Plan</option>-->
+                    <!--    <option value="super_plan">Income under Super Plan </option>-->
+                    <!--    <option value="infinity_plan">Income under Infinity Plan</option>-->
+                    <!--    </select>-->
+                        <input type="month" value="2021-05"id="date_points" class="form-control mt-4">
+                    </div>
+                    </div>
+                    <div class="col-md-12 mt-4 box_income">
+                    <table class="table user_profile_bonus_1">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Sub-Income Name</th>
+                        <th scope="col">Month & Years</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/bonus.webp' %}"></td>
+                        <td>Direct Bonus</td>
+                        <td>1500</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/group_user.webp' %}"></td>
+                        <td>Team Building Bonus (TBB)</td>
+                        <td>1600</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/leadership_building.webp' %}"></td>
+                        <td>Leadership Building Bonus (LBB)</td>
+                        <td>2000</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/lifestyle_fund.webp' %}"></td>
+                        <td>Lifestyle Fund</td>
+                        <td>2000</td>
+                        </tr>
+                        <tr class="bonus_total">
+                        <td></td>
+                        <td><strong>Total</strong></td>
+                        <td><strong>2000</strong></td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/retail.webp' %}"></td>
+                        <td>Retail Margin</td>
+                        <td>1800</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/personal_bonus.webp' %}"></td>
+                        <td>Personal Bonus</td>
+                        <td>2000</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/fortune_bonus.webp' %}"></td>
+                        <td>Fortune Bonus (10x)</td>
+                        <td>2200</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/sharing_bonus.webp' %}"></td>
+                        <td>Sharing Bonus</td>
+                        <td>2500</td>
+                        </tr>
+                         <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/nurturing_bonus.webp' %}"></td>
+                        <td>Nurturing Bonus</td>
+                        <td>2500</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/business_master.webp' %}"></td>
+                        <td>Business Master Bonus</td>
+                        <td>2500</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/vacationfund.webp' %}"></td>
+                        <td>Vacation Fund</td>
+                        <td>2500</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/automobilefund.webp' %}"></td>
+                        <td>Automobile Fund</td>
+                        <td>2500</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/shelter_fund.webp' %}"></td>
+                        <td>Shelter Fund</td>
+                        <td>2500</td>
+                        </tr>
+                        <tr>
+                        <td><img src="{% static 'mlm_admin/images/mlm_dashboard/consistent_retailer_income.webp' %}"></td>
+                        <td>Consistent Retailer’s Income</td>
+                        <td>2500</td>
+                        </tr>
+                        <tr class="bonus_total">
+                        <td></td>
+                        <td><strong>Total</strong></td>
+                        <td><strong>25000</strong></td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                        <tr class="bonus_total_1">
+                        <td></td>
+                        <td><strong>Grand Total</strong></td>
+                        <td><strong>250000</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                        </div>
+                    <!--<div class="col-md-12 mt-4 box_income infinity_plan">-->
+                    <!--<table class="table user_profile_bonus_1">-->
+                    <!--    <thead class="thead-dark">-->
+                    <!--    <tr>-->
+                    <!--    <th scope="col"></th>-->
+                    <!--    <th scope="col">Sub-Income Name</th>-->
+                    <!--    <th scope="col">Month & Year</th>-->
+	                   <!-- </tr>-->
+                    <!--    </thead>-->
+                    <!--    <tbody>-->
+                    <!--    <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/retail.webp' %}"></td>-->
+                    <!--    <td>Retail Margin</td>-->
+                    <!--    <td>1800</td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/personal_bonus.webp' %}"></td>-->
+                    <!--    <td>Personal Bonus</td>-->
+                    <!--    <td>2000</td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/fortune_bonus.webp' %}"></td>-->
+                    <!--    <td>Fortune Bonus (10x)</td>-->
+                    <!--    <td>2200</td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/sharing_bonus.webp' %}"></td>-->
+                    <!--    <td>Sharing Bonus</td>-->
+                    <!--    <td>2500</td>-->
+                    <!--    </tr>-->
+                    <!--     <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/nurturing_bonus.webp' %}"></td>-->
+                    <!--    <td>Nurturing Bonus</td>-->
+                    <!--    <td>2500</td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/business_master.webp' %}"></td>-->
+                    <!--    <td>Business Master Bonus</td>-->
+                    <!--    <td>2500</td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/vacationfund.webp' %}"></td>-->
+                    <!--    <td>Vacation Fund</td>-->
+                    <!--    <td>2500</td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/automobilefund.webp' %}"></td>-->
+                    <!--    <td>Automobile Fund</td>-->
+                    <!--    <td>2500</td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/shelter_fund.webp' %}"></td>-->
+                    <!--    <td>Shelter Fund</td>-->
+                    <!--    <td>2500</td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--    <td><img src="{% static 'mlm_admin/images/mlm_dashboard/consistent_retailer_income.webp' %}"></td>-->
+                    <!--    <td>Consistent Retailer’s Income</td>-->
+                    <!--    <td>2500</td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--    <td></td>-->
+                    <!--    <td><strong>Total</strong></td>-->
+                    <!--    <td><strong>25000</strong></td>-->
+                    <!--    </tr>-->
+                    <!--    </tbody>-->
+                    <!--</table>-->
+                    <!--    </div>-->
+
+                    </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<!--                <script>-->
+<!--   jQuery(document).ready(function(){-->
+<!--    jQuery("select").change(function(){-->
+<!--        jQuery(this).find("option:selected").each(function(){-->
+<!--            var optionValue = jQuery(this).attr("value");-->
+<!--            if(optionValue){-->
+<!--                jQuery(".box_income").not("." + optionValue).hide();-->
+<!--                $("." + optionValue).show();-->
+<!--            } else{-->
+<!--                jQuery(".box_income").hide();-->
+<!--            }-->
+<!--        });-->
+<!--    }).change();-->
+<!--});-->
+<!--                </script>-->
+{% include "mlm_calculation/include/footer.html" %}

@@ -1,0 +1,381 @@
+
+/*=============================================
+=            09. Backgrounds            =
+=============================================*/
+
+
+/*----------  lookbook home backgrounds  ----------*/
+
+
+.lookbook-bg-1{
+    background-image: url('../images/parallax-bg/bg-parallax-1.jpg');
+}
+
+.lookbook-bg-2{
+    background-image: url('../images/parallax-bg/bg-parallax-2.jpg');
+}
+
+.lookbook-bg-3{
+    background-image: url('../images/parallax-bg/bg-parallax-3.jpg');
+}
+
+.lookbook-bg-4{
+    background-image: url('../images/parallax-bg/bg-parallax-4.jpg');
+}
+
+.lookbook-bg-5{
+    background-image: url('../images/decor-four/banner-1.jpg');
+}
+
+.lookbook-bg-6{
+    background-image: url('../images/coffee-two/bg-1.jpg');
+}
+
+.lookbook-bg-7{
+    background-image: url('../images/coffee-two/bg-2.jpg');
+}
+
+.lookbook-bg-8{
+    background-image: url('../images/coffee-two/bg-3.jpg');
+}
+
+.lookbook-bg-9{
+    background-image: url('../images/coffee-two/bg-4.jpg');
+}
+
+.lookbook-bg-10{
+    background-image: url('../images/coffee-three/bg-1.jpg');
+}
+
+
+/*----------  about backgrounds  ----------*/
+
+.about-video-bg-1{
+    background-image: url('../images/category/bg-video-about-us-large.png');
+}
+
+.about-video-bg-2{
+    background-image: url('../images/backgrounds/video-about.png');
+}
+
+.about-video-bg-3{
+    background-image: url('../images/jewelry-one/video-bg.png');
+}
+
+.about-bg-4{
+    background-image: url('../images/jewelry-one/section-bg.jpg');
+}
+
+.about-video-bg-5{
+    background-image: url('../images/tyres-two/video-bg.png');
+}
+
+.about-video-bg-6{
+    background-image: url('../images/coffee-four/video-bg.jpg');
+}
+
+.about-video-bg-7{
+    background-image: url('../images/games-one/video-bg.png');
+}
+
+.about-video-bg-8{
+    background-image: url('../images/games-two/video-bg.png');
+}
+
+.about-video-bg-9{
+    background-image: url('../images/health-four/video-bg.jpg');
+}
+
+
+
+/*----------  countdown backgrounds  ----------*/
+
+.countdown-bg-1{
+    background-image: url('../images/countdown/bg-countdown-1.jpg');
+    background-color: #F9F9F9;
+}
+
+.countdown-bg-2{
+    background-image: url('../images/countdown/bg-countdown-2.jpg');
+    background-color: #F9F9F9;
+}
+
+.countdown-bg-3{
+    background-image: url('../images/food-four/banner-1.png');
+    background-color: #F9F9F9;
+}
+
+.countdown-bg-3{
+    background-color: #F9F9F9;
+}
+
+.countdown-bg-4{
+    background-color: #F4F4F4;
+}
+
+
+/*----------  breadcrumb backgrounds   ----------*/
+
+
+.breadcrumb-bg-1 {
+    background-image: url('../images/breadcrumb-bg/01.jpg');
+}
+
+.breadcrumb-bg-2 {
+    background-image: url('../images/breadcrumb-bg/background-heading-page.png');
+}
+
+
+/*----------  testimonial backgrounds  ----------*/
+
+.testimonial-bg-1{
+    background-image: url('../images/backgrounds/bg-testimonials.png');
+    background-repeat: no-repeat;
+}
+
+.testimonial-bg-2{
+    background-image: url('../images/backpack-one/testimonial.jpg');
+    background-repeat: no-repeat;
+}
+
+.testimonial-bg-3{
+    background-image: url('../images/coffee-one/testimonial-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.testimonial-bg-4{
+    background-image: url('../images/fishing-one/testimonial-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.testimonial-bg-5{
+    background-image: url('../images/flower-three/testimonial-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.testimonial-bg-6{
+    background-image: url('../images/pottery-one/testimonial-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+/*----------  page backgrounds  ----------*/
+
+.bg-404{
+    background-image: url('../images/backgrounds/404-bg.jpg');
+}
+
+.bg-coming-soon{
+    background-image: url('../images/backgrounds/bg-coming-soon.png');
+}
+
+.mc-newsletter-blue-bg{
+    background-color: #6D7F96;
+}
+
+.mc-newsletter-red-bg{
+    background-color: #D11830;
+}
+
+.newsletter-content-bg-1{
+    background-image: url('../images/backgrounds/popup.jpg');
+}
+
+
+.newsletter-content{
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+.nothing-found-area{
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    @media #{$tablet-device}{
+        background-position-x: 40%;
+    }
+    
+    @media #{$small-mobile}{
+        background-position-x: 20%;
+    }
+    
+    @media #{$extra-small-mobile}{
+        background-position-x: 45%;
+    }
+}
+
+.coming-soon-area{
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    @media #{$tablet-device}{
+        background-position-x: 70%;
+    }
+    
+    
+    @media #{$large-mobile}{
+        background-position-x: 60%;
+    }
+    
+    @media #{$small-mobile}{
+        background-position-x: 20%;
+    }
+    
+    @media #{$extra-small-mobile}{
+        background-position-x: 45%;
+    }
+}
+
+
+.grey-bg{
+    background-color: #F8F8F8 !important; 
+}
+
+.orange-bg{
+    background-color: #f26522 !important; 
+}
+
+.red-bg{
+    background-color: #FF5A72 !important; 
+}
+
+.grey-bg-two{
+    background-color: #F7F7F7 !important; 
+}
+
+.dark-grey-bg{
+    background-color: #5e5656; 
+}
+
+
+.dark-bg{
+    background-color: #191717; 
+}
+
+.blue-bg{
+    background-color: #404969; 
+}
+
+.green-bg{
+    background-color: #E6F0F4; 
+}
+
+.orange-bg{
+    background-color: #F9D0C2; 
+}
+
+.countdown-background{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.single-lookbook-section{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+
+/*----------  single category textbanner   ----------*/
+
+.single-category-textbanner-bg{
+    background-image: url('../images/category/brand.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+
+/*----------  about video background area  ----------*/
+
+.about-video-bg-area{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+/*=====  End of 09. Backgrounds  ======*/
+
+
+
+/*=============================================
+=            banner background            =
+=============================================*/
+
+.banner-bg-one{
+    background-image: url('../images/jewelry-one/section-bg-2.jpg');
+}
+
+.banner-bg-two{
+    background-image: url('../images/swimsuit-one/slider-bg-image.jpg');
+}
+
+.single-image-text-banner-bg-one{
+    background-image: url('../images/swimsuit-one/banner-bg-1.png');
+}
+
+.single-image-text-banner-bg-two{
+    background-image: url('../images/swimsuit-one/banner-bg-2.png');
+}
+
+/*=====  End of banner background  ======*/
+
+
+
+/*=============================================
+=            footer backgrounds            =
+=============================================*/
+
+.footer-bg-1{
+    background-image: url('../images/coffee-one/footer-bg.jpg');
+    background-repeat: no-repeat;
+}
+
+.footer-bg-2{
+    background-image: url('../images/coffee-four/footer-bg.jpg');
+    background-repeat: no-repeat;
+}
+
+/*=====  End of footer backgrounds  ======*/
+
+
+
+
+
+/*=============================================
+=            lookbook bg overlay            =
+=============================================*/
+
+.homepage-content{
+    &--lookbook-overlay{
+        .single-lookbook-section{
+            position: relative;
+            &:before{
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: $black;
+                content: '';
+                width: 100%;
+                height: 100%;
+                opacity: 0.6;
+            }
+        }
+    }
+}
+
+/*=====  End of lookbook bg overlay  ======*/
+

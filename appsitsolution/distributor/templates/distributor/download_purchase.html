@@ -1,0 +1,77 @@
+{% load static %}
+{% include "distributor/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" id="my-form" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">Download Purchase</h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>From Date</label>
+                        <input type="date" class="form-control"  name="from_date" placeholder="">
+<!--                            {{form.name}}-->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="floating-label" for="category_name"><small class="text-danger">* </small>To Date</label>
+                        <input type="date" class="form-control" id="" name="to_date" placeholder="">
+<!--                        <select class="form-control" id="is_parent_category" name="is_parent_category">-->
+<!--                            <option value="Yes">Yes</option>-->
+<!--                            <option value="No">No</option>-->
+<!--                        </select>-->
+<!--                        {{form.banner}}-->
+                    </div>
+                </div>
+                </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit"> Download </button>
+<!--                <button class="btn btn-danger" type="reset"> Clear </button>-->
+            </div>
+    </form>
+        </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<!--<script>-->
+<!--    $('document').ready(function(){-->
+<!--        $('#my-form').submit(function(){-->
+<!--          if( document.getElementById("id_image").files.length == 0 ){-->
+<!--                console.log("no files selected");-->
+<!--                alert('Image field is required!');-->
+<!--                return false;-->
+<!--            }-->
+<!--            return true;-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<script>
+    $('document').ready(function(){
+        $('#my-form').submit(function(){
+          if( document.getElementById("id_banner").files.length == 0 ){
+                console.log("no files selected");
+                alert('Image field is required!');
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+<script>
+    $("#id_ranking").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var pincode = $("#id_ranking").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+    if (( pincode >1 )){
+        event.preventDefault();
+    }
+});
+</script>

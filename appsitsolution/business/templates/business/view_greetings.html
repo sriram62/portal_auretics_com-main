@@ -1,0 +1,155 @@
+{% load static %}
+{% load humanize %}
+{% include "business/include/header.html" %}
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        {% for message in messages %}
+                        <div class="alert
+                            alert-{% if message.tags == 'error'%}danger{% else %}{{ message.tags }}{% endif %}"
+                             role="alert">
+                            <div class="text-center">
+                                <strong>{{ message.tags|title }}: </strong> {{ message }}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        {% for error in greeting_form.errors %}
+                        <div class="alert alert-error" role="alert">
+                            <div class="text-center">
+                                <strong>Errors: </strong> {{ error }}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        <h5>Change Your Profile Picture</h5>
+                    </div>
+                    <div class="card-body">
+                        <!--                        <div class="modal-content">-->
+                        <div class="dt-responsive table-responsive">
+                            <table id="greetings-list-table" class="table nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Greeting Name</th>
+                                    <th>Greeting Image</th>
+                                    <th>Trigger Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for greeting in greetings %}
+                                <tr>
+                                    <td>
+                                        <div class="d-inline-block align-middle">
+                                            <label>{{greeting.name}}</label>
+                                        </div>
+                                    </td>
+                                    <td onclick="show_preview('{{greeting.image.url}}')">
+                                        <img src="{{greeting.thumbnail.url}}" alt="image for {{greeting.name}}"
+                                             class="img-thumbnail"/>
+                                    </td>
+                                    <td>{{greeting.trigger_date}} <br/>at {{greeting.trigger_time}}</td>
+                                    <td>
+                                        <div class="overlay-edit">
+                                            <a class="btn  btn-primary btn-action" href="#">
+                                                <button type="button" onclick="get_preview_image({{greeting.pk}})"
+                                                        class="btn btn-icon btn-primary"><i
+                                                        class="feather icon-eye"></i></button>
+                                            </a>
+                                            <a class="btn btn-success btn-action"
+                                               href="{% url 'download_greeting' greeting.pk %}">
+                                                <button type="button" class="btn btn-icon btn-success"><i
+                                                        class="feather icon-download"></i></button>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Greeting Name</th>
+                                    <th>Greeting Image</th>
+                                    <th>Trigger Date</th>
+                                    <th>Status</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- [ Preview Modal ] -->
+<div class="modal fade" id="preview_image_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="preview_image_modal_label">Image Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <a href="" id="preview_image_link">
+                    <img id="preview_image" src="" alt_text='preview image' style="width: 80%;"/>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- [ Preview Modal ] -->
+
+{% include "business/include/footer.html" %}
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.confirm-delete', function(){
+            return confirm('Are you sure you want to delete this?');
+        })
+
+    });
+
+    function show_preview(img_url){
+        $('#preview_image').attr('src', img_url);
+        $('#preview_image_link').attr('href', img_url);
+        $("#preview_image_modal").modal('show');
+    }
+
+    function get_preview_image(greeting_id){
+        console.log('Running Ajax now');
+        $.ajax(
+            {
+                url: '/mlm_admin/preview_greeting/'+greeting_id,
+                success: function(result){
+                    $('#preview_image').attr('src', 'data:img/png;base64,' + result['preview_image']);
+                    $('#preview_image_link').attr('href', '');
+                    $("#preview_image_modal").modal('show');
+                },
+                error: function(jq_xhr, textStatus, errorThrown) {
+                    $('#preview_image').attr('src', '');
+                    $('#preview_image').append("There was an error");
+                    $('#preview_image_link').attr('href', '');
+                    $("#preview_image_modal").modal('show');
+                }
+            }
+        );
+    }
+
+
+
+
+</script>

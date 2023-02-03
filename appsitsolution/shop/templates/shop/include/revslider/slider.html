@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+		<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+		<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+		<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+		<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<title>Cosmetic1 - Slider Revolution</title>
+			<meta name="description" content="Slider Revolution Example" />
+			<meta name="keywords" content="fullscreen image, grid layout, flexbox grid, transition" />
+			<meta name="author" content="ThemePunch" />
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+
+			<!-- LOAD JQUERY LIBRARY -->
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+			
+			<!-- LOADING FONTS AND ICONS -->
+			<link href="https://fonts.googleapis.com/css?family=Work+Sans:400&display=swap" rel="stylesheet" property="stylesheet" media="all" type="text/css" >
+
+			
+			<link rel="stylesheet" type="text/css" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+			<link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+			
+			<!-- REVOLUTION STYLE SHEETS -->
+			<link rel="stylesheet" type="text/css" href="css/rs6.css">
+			<!-- REVOLUTION LAYERS STYLES -->
+						<!-- REVOLUTION JS FILES -->
+			
+		<script type="text/javascript">
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+					<script type="text/javascript" src="js/rbtools.min.js"></script>
+			<script type="text/javascript" src="js/rs6.min.js"></script>
+			
+			<script type="text/javascript">function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {				 
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;	
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;	
+				try {								
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);		
+					if(e.layout==="fullscreen" || e.l==="fullscreen") 						
+						newh = Math.max(e.mh,window.RSIH);					
+					else{					
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];					
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,						
+							sl;					
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;					
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];									
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}															
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);					
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";					
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}					   
+			//});
+		  };</script>
+		</head>
+
+		<body>
+		
+
+			<!-- START Cosmetic1 REVOLUTION SLIDER 6.5.8 --><p class="rs-p-wp-fix"></p>
+			<rs-module-wrap id="rev_slider_24_1_wrapper" data-alias="homepage-141" data-source="gallery" style="visibility:hidden;background:transparent;padding:0;margin:0px auto;margin-top:0;margin-bottom:0;max-width:;">
+				<rs-module id="rev_slider_24_1" style="" data-version="6.5.8">
+					<rs-slides>
+						<rs-slide style="position: absolute;" data-key="rs-103" data-title="Slide" data-anim="ms:700,default,default,default,default,default,default,default,default,default;r:,0,0,0,0,0,0,0,0,0;" data-in="x:-100%;e:d,d,d,d,d,d,d,d,d;" data-out="x:60%;e:d,d,d,d,d,d,d,d,d;" data-alttrans="parallaxtoleft,parallaxtotop,parallaxtobottom,parallaxhorizontal,parallaxvertical,fadefromright,fadefromleft,fadefromtop,fadefrombottom">
+							<img src="assets/dummy.png" alt="Slide" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="assets/transparent.png" data-bg="c:#f8f8f8;" data-parallax="off" data-no-retina>
+<!--
+							--><rs-layer
+								id="slider-24-slide-103-layer-23" 
+								class="rs-pxl-1"
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="xo:532px,180px,66px,28px;y:m,t,m,m;yo:0,166px,0,-3px;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:722px,586px,586px,402px;h:537px,436px,436px,299px;"
+								data-frame_0="sX:0.8;sY:0.8;tp:600;"
+								data-frame_1="tp:600;e:power4.out;st:710;sp:2760;sR:710;"
+								data-frame_999="o:0;tp:600;st:w;sR:5530;"
+								data-loop_999="y:20;sp:4000;yym:t;yys:t;yyf:t;"
+								style="z-index:5;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/01/slider-homepage14-img1.png" data-no-retina> 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-103-layer-20" 
+								class="button-under-line rev-btn"
+								data-type="button"
+								data-color="#333333"
+								data-rsp_ch="on"
+								data-xy="x:l,c,c,l;xo:1197px,230px,197px,265px;yo:712px,492px,489px,347px;"
+								data-text="s:14;l:18;ls:1px;a:inherit;"
+								data-padding="b:3;"
+								data-border="bos:solid;boc:#333333;bow:0px,0px,1px,0px;"
+								data-frame_0="y:-100%;o:1;tp:600;"
+								data-frame_0_mask="u:t;"
+								data-frame_1="tp:600;st:1100;sp:1790;sR:1100;"
+								data-frame_1_mask="u:t;"
+								data-frame_999="o:0;tp:600;st:w;sR:6110;"
+								data-frame_hover="c:#d3122a;boc:#d3122a;bor:0px,0px,0px,0px;bos:solid;bow:0px,0px,1px,0px;oX:50;oY:50;"
+								style="z-index:6;font-family:'Work Sans';cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+							>SHOP COLLECTION 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-103-layer-22" 
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="xo:979px,501px,384px,206px;yo:488px,308px,330px,233px;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:585px,453px,368px,261px;h:186px,144px,117px,83px;"
+								data-frame_0="y:50px;tp:600;"
+								data-frame_1="tp:600;st:700;sp:2000;sR:700;"
+								data-frame_999="o:0;tp:600;st:w;sR:6300;"
+								style="z-index:7;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/01/slider-homepage14-img4.png" data-no-retina> 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-103-layer-24" 
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="y:b;yo:0,-44px,-44px,-44px;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:348px,316px,271px,271px;h:195px,177px,152px,152px;"
+								data-frame_0="y:50px;tp:600;"
+								data-frame_1="tp:600;st:1140;sp:1200;sR:1140;"
+								data-frame_999="o:0;tp:600;st:w;sR:6660;"
+								style="z-index:8;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/01/slider-homepage14-img3.png" data-no-retina> 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-103-layer-25" 
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="x:r;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:345px,239px,201px,152px;h:281px,195px,164px,124px;"
+								data-frame_0="tp:600;"
+								data-frame_1="tp:600;st:1820;sp:1200;sR:1820;"
+								data-frame_999="o:0;tp:600;st:w;sR:5980;"
+								style="z-index:9;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/01/slider-homepage14-img2.png" data-no-retina> 
+							</rs-layer><!--
+-->						</rs-slide>
+						<rs-slide style="position: absolute;" data-key="rs-104" data-title="Slide" data-thumb="https://auretics.com/wp-content/uploads/2018/04/home14-slider2-bg.png" data-anim="ms:700,default,default,default,default,default,default;r:,0,0,0,0,0,0;f:nodelay;" data-in="x:(100%);m:true;e:d,d,d,d,d,d;row:d,d,d,d,d,d,d;col:5;" data-alttrans="slotslide-vertical,slotfade-horizontal,slidingoverlayup,slidingoverlaydown,slidingoverlayright,slidingoverlayleft">
+							<img src="assets/dummy.png" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/04/home14-slider2-bg.png" data-parallax="off" data-no-retina>
+<!--
+							--><rs-layer
+								id="slider-24-slide-104-layer-27" 
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="xo:192px;y:b;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:['294px','294px','294px','294px'];h:['176px','176px','176px','176px'];"
+								data-frame_0="y:50px;tp:600;"
+								data-frame_1="tp:600;st:760;sp:1880;sR:760;"
+								data-frame_999="o:0;tp:600;st:w;sR:6360;"
+								style="z-index:5;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/04/home14-slider2-element-2.png" data-no-retina> 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-104-layer-28" 
+								data-type="image"
+								data-rsp_ch="on"
+								data-text="l:22;a:inherit;"
+								data-dim="w:['174px','174px','174px','174px'];h:['129px','129px','129px','129px'];"
+								data-frame_0="y:-50px;tp:600;"
+								data-frame_1="tp:600;st:970;sp:1890;sR:970;"
+								data-frame_999="o:0;tp:600;st:w;sR:6140;"
+								style="z-index:6;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/04/home14-slider2-element-3.png" data-no-retina> 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-104-layer-29" 
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="x:r;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:268px,268px,268px,132px;h:1218px,1218px,1218px,600px;"
+								data-frame_0="x:50px;tp:600;"
+								data-frame_1="tp:600;st:1160;sp:1890;sR:1160;"
+								data-frame_999="o:0;tp:600;st:w;sR:5950;"
+								style="z-index:7;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/04/home14-slider2-element-4.png" data-no-retina> 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-104-layer-25" 
+								data-type="text"
+								data-color="#333333"
+								data-rsp_ch="on"
+								data-xy="x:l,l,c,c;xo:1119px,590px,1px,1px;yo:426px,286px,141px,141px;"
+								data-text="s:18;l:36;a:inherit;"
+								data-frame_0="y:-50px;tp:600;"
+								data-frame_1="tp:600;st:690;sp:1540;sR:690;"
+								data-frame_999="o:0;tp:600;st:w;sR:6770;"
+								style="z-index:8;font-family:'Work Sans';"
+							>Free delivery from $30  
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-104-layer-23" 
+								class="rs-pxl-1"
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="xo:248px,43px,123px,53px;y:m,t,m,m;yo:-12px,45px,124px,126px;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:661px,564auto,564auto,386px;h:863px,736px,736px,504px;"
+								data-frame_0="sX:0.8;sY:0.8;tp:600;"
+								data-frame_1="tp:600;e:power4.out;st:710;sp:2760;sR:710;"
+								data-frame_999="o:0;tp:600;st:w;sR:5530;"
+								data-loop_999="y:20;sp:4000;yym:t;yys:t;yyf:t;"
+								style="z-index:9;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/02/slider-homepage14-img5-1.png" data-no-retina> 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-104-layer-20" 
+								class="button-under-line rev-btn"
+								data-type="button"
+								data-color="#333333"
+								data-rsp_ch="on"
+								data-xy="x:l,c,c,l;xo:1152px,176px,-3px,167px;yo:677px,481px,296px,276px;"
+								data-text="s:14;l:18;ls:1px;a:inherit;"
+								data-padding="b:3;"
+								data-border="bos:solid;boc:#333333;bow:0px,0px,1px,0px;"
+								data-frame_0="y:-100%;o:1;tp:600;"
+								data-frame_0_mask="u:t;"
+								data-frame_1="tp:600;st:950;sp:1790;sR:950;"
+								data-frame_1_mask="u:t;"
+								data-frame_999="o:0;tp:600;st:w;sR:6260;"
+								data-frame_hover="c:#d3122a;boc:#d3122a;bor:0px,0px,0px,0px;bos:solid;bow:0px,0px,1px,0px;oX:50;oY:50;"
+								style="z-index:10;font-family:'Work Sans';cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+							>SHOP COLLECTION 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-104-layer-22" 
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="x:l,l,c,c;xo:870px,435px,0,0;yo:513px,357px,195px,184px;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:684px,499px,447px,384px;h:107px,78px,70px,60px;"
+								data-frame_0="y:-50px;tp:600;"
+								data-frame_1="tp:600;e:power4.inOut;st:700;sp:1330;sR:700;"
+								data-frame_999="o:0;tp:600;st:w;sR:6970;"
+								style="z-index:11;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/02/slider-homepage14-img7.png" data-no-retina> 
+							</rs-layer><!--
+-->						</rs-slide>
+						<rs-slide style="position: absolute;" data-key="rs-105" data-title="Slide" data-anim="ms:700,default,default,default,default,default,default,default,default,default,default;r:,0,0,0,0,0,0,0,0,0,0;" data-in="o:0;x:100%;e:d,d,d,d,d,d,d,d,d,d;" data-out="e:d,d,d,d,d,d,d,d,d,d;" data-alttrans="fadefromleft,fadefromtop,fadefrombottom,fadetoleftfadefromright,fadetorightfadefromleft,fadetotopfadefrombottom,fadetobottomfadefromtop,curtain-1,curtain-2,curtain-3">
+							<img src="assets/dummy.png" alt="Slide" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="assets/transparent.png" data-bg="c:#f9f0ee;" data-parallax="off" data-no-retina>
+<!--
+							--><rs-layer
+								id="slider-24-slide-105-layer-27" 
+								class="tp-shape tp-shapewrapper"
+								data-type="shape"
+								data-rsp_ch="on"
+								data-xy="xo:285px,40px,193px,111px;yo:174px,103px,411px,394px;"
+								data-text="a:inherit;"
+								data-dim="w:620px,493px,417px,279px;h:620px,493,417px,279;"
+								data-border="bor:100%,100%,100%,100%;"
+								data-frame_0="sX:0.9;sY:0.9;tp:600;"
+								data-frame_1="tp:600;e:power2.out;st:680;sp:1000;sR:680;"
+								data-frame_999="o:0;tp:600;st:w;sR:7320;"
+								style="z-index:5;background-color:#ffffff;"
+							> 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-105-layer-25" 
+								data-type="text"
+								data-color="#333333"
+								data-rsp_ch="on"
+								data-xy="x:l,l,c,c;xo:1258px,634px,0,9px;yo:361px,213px,113px,127px;"
+								data-text="s:18,18,18,14;l:36;a:inherit;"
+								data-frame_0="y:-50px;tp:600;"
+								data-frame_1="tp:600;st:690;sp:1540;sR:690;"
+								data-frame_999="o:0;tp:600;st:w;sR:6770;"
+								style="z-index:6;font-family:'Work Sans';"
+							>Free delivery from $30  
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-105-layer-23" 
+								class="rs-pxl-1"
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="xo:345px,68px,207px,130px;y:m,t,m,m;yo:0,77px,239px,201px;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:491px,440px,396px,251px;h:696px,660px,662px,356px;"
+								data-frame_0="sX:0.8;sY:0.8;tp:600;"
+								data-frame_1="tp:600;e:power4.out;st:1220;sp:2760;sR:1220;"
+								data-frame_999="o:0;tp:600;st:w;sR:5020;"
+								data-loop_999="y:20;sp:4000;yym:t;yys:t;yyf:t;"
+								style="z-index:7;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/02/slider-homepage14-img6.png" data-no-retina> 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-105-layer-20" 
+								class="button-under-line rev-btn"
+								data-type="button"
+								data-color="#333333"
+								data-rsp_ch="on"
+								data-xy="x:l,c,c,l;xo:1291px,222px,-2px,174px;yo:718px,506px,353px,331px;"
+								data-text="s:14;l:18;ls:1px;a:inherit;"
+								data-padding="b:3;"
+								data-border="bos:solid;boc:#333333;bow:0px,0px,1px,0px;"
+								data-frame_0="y:-100%;o:1;tp:600;"
+								data-frame_0_mask="u:t;"
+								data-frame_1="tp:600;st:950;sp:1790;sR:950;"
+								data-frame_1_mask="u:t;"
+								data-frame_999="o:0;tp:600;st:w;sR:6260;"
+								data-frame_hover="c:#d3122a;boc:#d3122a;bor:0px,0px,0px,0px;bos:solid;bow:0px,0px,1px,0px;oX:50;oY:50;"
+								style="z-index:8;font-family:'Work Sans';cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+							>SHOP COLLECTION 
+							</rs-layer><!--
+
+							--><rs-layer
+								id="slider-24-slide-105-layer-22" 
+								data-type="image"
+								data-rsp_ch="on"
+								data-xy="x:l,l,c,c;xo:1095px,533px,0,17px;yo:451px,274px,165px,174px;"
+								data-text="l:22;a:inherit;"
+								data-dim="w:511auto,454px,390px,297px;h:215px,191px,164px,125px;"
+								data-frame_0="y:-50px;tp:600;"
+								data-frame_1="tp:600;e:power4.inOut;st:700;sp:1330;sR:700;"
+								data-frame_999="o:0;tp:600;st:w;sR:6970;"
+								style="z-index:9;"
+							><img src="assets/dummy.png" class="tp-rs-img rs-lazyload" data-lazyload="https://auretics.com/wp-content/uploads/2018/02/slider-homepage14-img8.png" data-no-retina> 
+							</rs-layer><!--
+-->						</rs-slide>
+					</rs-slides>
+				</rs-module>
+				<script type="text/javascript">
+					
+				</script>
+<script type="text/javascript">
+		if(typeof revslider_showDoubleJqueryError === "undefined") {function revslider_showDoubleJqueryError(sliderID) {console.log("You have some jquery.js library include that comes after the Slider Revolution files js inclusion.");console.log("To fix this, you can:");console.log("1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on");console.log("2. Find the double jQuery.js inclusion and remove it");return "Double Included jQuery Library";}}
+</script>
+			</rs-module-wrap>
+			<!-- END REVOLUTION SLIDER -->
+
+				<script type="text/javascript">
+					var	tpj = jQuery;
+					if(window.RS_MODULES === undefined) window.RS_MODULES = {};
+					if(RS_MODULES.modules === undefined) RS_MODULES.modules = {};
+					RS_MODULES.modules["revslider241"] = {once: RS_MODULES.modules["revslider241"]!==undefined ? RS_MODULES.modules["revslider241"].once : undefined, init:function() {
+						window.revapi24 = window.revapi24===undefined || window.revapi24===null || window.revapi24.length===0  ? document.getElementById("rev_slider_24_1") : window.revapi24;
+						if(window.revapi24 === null || window.revapi24 === undefined || window.revapi24.length==0) { window.revapi24initTry = window.revapi24initTry ===undefined ? 0 : window.revapi24initTry+1; if (window.revapi24initTry<20) requestAnimationFrame(function() {RS_MODULES.modules["revslider241"].init()}); return;}
+						window.revapi24 = jQuery(window.revapi24);
+						if(window.revapi24.revolution==undefined){ revslider_showDoubleJqueryError("rev_slider_24_1"); return;}
+						revapi24.revolutionInit({
+								revapi:"revapi24",
+								visibilityLevels:"1240,1024,778,480",
+								gridwidth:"1920,1024,778,480",
+								gridheight:"1200,768,960,720",
+								lazyType:"all",
+								spinner:"spinner3",
+								perspectiveType:"local",
+								responsiveLevels:"1240,1024,778,480",
+								ajaxUrl:"https://static.auretics.com/wp-admin/admin-ajax.php",
+								progressBar:{disableProgressBar:true},
+								navigation: {
+									mouseScrollNavigation:false,
+									onHoverStop:false,
+									arrows: {
+										enable:true,
+										style:"metis",
+										hide_onleave:true,
+										left: {
+											v_offset:0
+										},
+										right: {
+
+										}
+									},
+									bullets: {
+										enable:true,
+										tmp:"",
+										style:"custom",
+										v_offset:50,
+										space:20
+									}
+								},
+								parallax: {
+									levels:[5,10,15,20,25,30,35,40,45,46,47,48,49,50,51,55],
+									type:"mouse"
+								},
+								viewPort: {
+									global:true,
+									globalDist:"-200px",
+									enable:false,
+									visible_area:"20%"
+								},
+								fallbacks: {
+									allowHTML5AutoPlayOnAndroid:true
+								},
+						});
+						
+					}} // End of RevInitScript
+					if (window.RS_MODULES.checkMinimal!==undefined) { window.RS_MODULES.checkMinimal();};
+				</script>
+
+
+
+<style type="text/css">#rev_slider_24_1_wrapper .metis.tparrows{background:#ffffff; padding:10px; transition:all 0.3s; -webkit-transition:all 0.3s; width:60px; height:60px; box-sizing:border-box}#rev_slider_24_1_wrapper .metis.tparrows.rs-touchhover{background:rgba(255,255,255,0.75)}#rev_slider_24_1_wrapper .metis.tparrows:before{color:#000000;  transition:all 0.3s; -webkit-transition:all 0.3s}#rev_slider_24_1_wrapper .metis.tparrows.rs-touchhover:before{transform:scale(1.5)}.custom.tp-bullets{}.custom.tp-bullets:before{content:' ';position:absolute;width:100%;height:100%;background:transparent;padding:10px;margin-left:-10px;margin-top:-10px;box-sizing:content-box}.custom .tp-bullet{width:12px;height:12px;position:absolute;background:#aaa; background:rgba(125,125,125,0.5);cursor:pointer;box-sizing:content-box}.custom .tp-bullet.rs-touchhover,.custom .tp-bullet.selected{background:rgb(125,125,125)}.custom .tp-bullet-image{}.custom .tp-bullet-title{}#rev_slider_24_1_wrapper rs-loader.spinner3 div{background-color:#333333 !important}</style>
+		</body>
+				</html>
+		

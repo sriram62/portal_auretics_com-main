@@ -1,0 +1,473 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<style>
+.new_select_drop span.select2-selection.select2-selection--multiple {
+    width: 930px !important;
+    background: #fffafa !important;
+    padding: 4px;
+}
+.bord_new_drop {
+    border: 2px solid #d3d4d4 !important;
+}
+.bord_new_drop_td {
+    border: 1px solid #d3d4d4 !important;
+}
+.bord_new_drop_td .checkbox.checkbox-primary.checkbox-inline {
+    margin-top: 10px;
+}
+</style>
+<div class="pcoded-main-container">
+<div class="content">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="page-header-title">
+<!--					<h4 class="pull-left page-title">Group Add</h4>-->
+					<ol class="breadcrumb pull-right">
+						<li><a href="#">User Configration</a>/
+						</li>
+						<li><a href="#">View User Permission</a>
+						</li>
+<!--						<li class="active">Add Group</li>-->
+					</ol>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+        {% for message in messages   %}
+				  <div class="alert alert-{{ message.tags }} alert-dismissible fade in" role="alert">
+    				<div class="text-center">
+    				<strong>Messages: </strong> {{ message }}
+					   </div>
+    					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      					<span aria-hidden="true">&times;</span>
+    					</button>
+				  </div>
+  				{% endfor %}
+		<div class="row">
+			<div class="col-sm-12">
+				<form action="" method='post'>
+					{% csrf_token %}
+				<div class="panel panel-primary">
+					<div class="panel-body">
+						<div class="search">
+							<label>User Name</label>
+<!--							<select class="form-control" id="parent_category" name="user">-->
+<!--&lt;!&ndash;                            <option value=0>Select Products</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                            {% for i in data1 %}&ndash;&gt;-->
+<!--                            <option  value={{data.pk}} selected>{{data.user.email}}</option>-->
+<!--&lt;!&ndash;                            {% endfor %}&ndash;&gt;-->
+<!--                        </select>-->
+							<input value="{{data.user.email}}" class="form-control" disabled>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+					<div class="panel-group">
+<!--						<div class="panel panel-info panel-color">-->
+<!--							<div class="panel-heading">-->
+<!--								<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-test-1" href="#collapseOne-1" aria-expanded="false" class="collapsed"> Bussiness Module </a></h4>-->
+<!--							</div>-->
+<!--							<div id="collapseOne-1" class="panel-collapse collapse in">-->
+<!--								<div class="panel-body">-->
+<!--									<div class="responsive-table">-->
+<!--										<table class="table table-striped table-bordered">-->
+<!--											<thead>-->
+<!--												<tr>-->
+<!--													<th>-->
+<!--														<div class="checkbox checkbox-primary checkbox-inline">-->
+<!--															<input type="checkbox" id="checkAll" value="" />-->
+<!--															<label for="checkAll"> Menu Name </label>-->
+<!--														</div>-->
+<!--													</th>-->
+<!--													<th>Permission</th>-->
+<!--												</tr>-->
+<!--											</thead>-->
+
+<!--													{% for k in menu %}-->
+<!--											<tbody>-->
+<!--												<tr>-->
+<!--													<td>-->
+<!--														<div class="checkbox checkbox-primary checkbox-inline">-->
+<!--															<input  type="text" name="bussiness" value="{{k.menu_name}}" />-->
+<!--															<label> {{k.menu_name}} </label>-->
+<!--														</div>-->
+<!--													</td>-->
+<!--													<td>-->
+<!--														<select class="form-control select2" name="{{k.pk}}" multiple="multiple" data-placeholder="Select an Option" >-->
+<!--															<option value="1">Add</option>-->
+<!--															<option value="2">Edit</option>-->
+<!--															<option value="3">View</option>-->
+<!--															<option value="4">Delete</option>-->
+<!--														</select>-->
+<!--													</td>-->
+<!--												</tr>-->
+<!--											</tbody>-->
+<!--													{% endfor %}-->
+<!--										</table>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+						<div class="panel panel-info panel-color">
+							<div class="panel-heading">
+								<h4 class="panel-title">User Permission</h4>
+							</div>
+							<div id="" class="">
+								<div class="panel-body">
+									<div class="responsive-table">
+										<table class="table table-striped table-bordered">
+											<thead>
+												<tr>
+													<th>
+														 Menu Name
+													</th>
+													<th>Permission</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Category Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="category_management" data-placeholder="Select an Option" disabled>
+															<option value=1 {% if '1'  in data.category_management %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.category_management %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.category_management %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.category_management %} selected {% endif %}> Delete</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Product Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="product_management" data-placeholder="Select an Option" disabled>
+															<option value=1 {% if '1'  in data.product_management %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.product_management %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.product_management %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.product_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr><tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Product Group Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="product_group_management" data-placeholder="Select an Option" disabled>
+															<option value=1 {% if '1'  in data.product_management %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.product_management %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.product_management %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.product_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+
+
+
+
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Order Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="order_management" data-placeholder="Select an Option" disabled>
+															<option value=1 {% if '1'  in data.order_management %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.order_management %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.order_management %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.order_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Batch Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="batch_management" data-placeholder="Select an Option" disabled >
+															<option value=1 {% if '1'  in data.batch_management %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.batch_management %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.batch_management %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.batch_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>MC Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="mc_management" data-placeholder="Select an Option" disabled>
+															<option value=1 {% if '1'  in data.mc_management %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.mc_management %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.mc_management %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.mc_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>User Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="user_management" data-placeholder="Select an Option" disabled>
+															<option value=1  {% if '1'  in data.user_management %} selected {% endif %}>Add</option>
+															<option value=2  {% if '2'  in data.user_management %} selected {% endif %}>Edit</option>
+															<option value=3  {% if '3'  in data.user_management %} selected {% endif %}>View</option>
+															<option value=4  {% if '4'  in data.user_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Purchase Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="purchase_management" data-placeholder="Select an Option" disabled >
+															<option value=1  {% if '1'  in data.purchase_management %} selected {% endif %}>Add</option>
+															<option value=2  {% if '2'  in data.purchase_management %} selected {% endif %}>Edit</option>
+															<option value=3  {% if '3'  in data.purchase_management %} selected {% endif %}>View</option>
+															<option value=4  {% if '4'  in data.purchase_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Sale Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="sale_management" data-placeholder="Select an Option" disabled>
+															<option value=1  {% if '1'  in data.sale_management %} selected {% endif %}>Add</option>
+															<option value=2  {% if '2'  in data.sale_management %} selected {% endif %}>Edit</option>
+															<option value=3  {% if '3'  in data.sale_management %} selected {% endif %}>View</option>
+															<option value=4  {% if '4'  in data.sale_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Inventory Management</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" name="inventory_management" multiple="multiple" data-placeholder="Select an Option" disabled >
+															<option value=1  {% if '1'  in data.inventory_management %} selected {% endif %}>Add</option>
+															<option value=2  {% if '2'  in data.inventory_management %} selected {% endif %}>Edit</option>
+															<option value=3  {% if '3'  in data.inventory_management %} selected {% endif %}>View</option>
+															<option value=4  {% if '4'  in data.inventory_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Cron Configuration</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" multiple="multiple" name="cron_configuration" data-placeholder="Select an Option" disabled>
+															<option value=1 {% if '1'  in data.cron_management %} selected {% endif %}>Add</option>
+															<option value=2  {% if '2'  in data.cron_management %} selected {% endif %}>Edit</option>
+															<option value=3  {% if '3'  in data.cron_management %} selected {% endif %}>View</option>
+															<option value=4  {% if '4'  in data.cron_management %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Manual Configuration</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" name="manual_configuration" multiple="multiple" data-placeholder="Select an Option" disabled >
+															<option value=1 {% if '1'  in data.manual_configure %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.manual_configure %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.manual_configure %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.manual_configure %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+
+
+                                            <tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Wallet Configuration</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" name="wallet_configuration" multiple="multiple" data-placeholder="Select an Option" disabled >
+															<option value=1 {% if '1'  in data.wallet_configuration %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.wallet_configuration %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.wallet_configuration %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.wallet_configuration %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+                                            <tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>MIS Reports</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" name="mis_report" multiple="multiple" data-placeholder="Select an Option" disabled >
+															<option value=1 {% if '1'  in data.mis_report %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.mis_report %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.mis_report %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.mis_report %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+                                            <tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Pincode</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" name="pincode" multiple="multiple" data-placeholder="Select an Option" disabled >
+															<option value=1 {% if '1'  in data.pincode %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.pincode %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.pincode %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.pincode %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+                                            <tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Calculations</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" name="calculations" multiple="multiple" data-placeholder="Select an Option" disabled >
+															<option value=1 {% if '1'  in data.calculations %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.calculations %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.calculations %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.calculations %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+                                            <tr class="bord_new_drop">
+													<td class="bord_new_drop_td">
+														<div class="checkbox checkbox-primary checkbox-inline">
+															<label>Realtime</label>
+														</div>
+													</td>
+													<td class="new_select_drop">
+														<select class="form-control select2" name="realtime" multiple="multiple" data-placeholder="Select an Option" disabled >
+															<option value=1 {% if '1'  in data.realtime %} selected {% endif %}>Add</option>
+															<option value=2 {% if '2'  in data.realtime %} selected {% endif %}>Edit</option>
+															<option value=3 {% if '3'  in data.realtime %} selected {% endif %}>View</option>
+															<option value=4 {% if '4'  in data.realtime %} selected {% endif %}>Delete</option>
+														</select>
+													</td>
+												</tr>
+
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--<div class="panel panel-info panel-color">-->
+						<!--	<div class="panel-heading">-->
+						<!--		<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-test-1" href="#collapseThree-1" class="collapsed" aria-expanded="false"> Module #3 </a></h4>-->
+						<!--	</div>-->
+						<!--	<div id="collapseThree-1" class="panel-collapse collapse">-->
+						<!--		<div class="panel-body">-->
+						<!--			<div class="responsive-table">-->
+						<!--				<table class="table table-striped table-bordered">-->
+						<!--					<thead>-->
+						<!--						<tr>-->
+						<!--							<th>-->
+						<!--								<div class="checkbox checkbox-primary checkbox-inline">-->
+						<!--									<input type="checkbox" id="checkAll" value="" />-->
+						<!--									<label for="checkAll"> Menu Name </label>-->
+						<!--								</div>-->
+						<!--							</th>-->
+						<!--							<th>Permission</th>-->
+						<!--						</tr>-->
+						<!--					</thead>-->
+						<!--					<tbody>-->
+						<!--						<tr>-->
+						<!--							<td>-->
+						<!--								<div class="checkbox checkbox-primary checkbox-inline">-->
+						<!--									<input class="checkval" type="checkbox" value="" />-->
+						<!--									<label>Data 1</label>-->
+						<!--								</div>-->
+						<!--							</td>-->
+						<!--							<td>-->
+						<!--								<select class="form-control select2" multiple="multiple" data-placeholder="Select an Option" >-->
+						<!--									<option>Add</option>-->
+						<!--									<option>Edit</option>-->
+						<!--									<option>View</option>-->
+						<!--									<option>Delete</option>-->
+						<!--								</select>-->
+						<!--							</td>-->
+						<!--						</tr>-->
+						<!--					</tbody>-->
+						<!--				</table>-->
+						<!--			</div>-->
+						<!--		</div>-->
+						<!--	</div>-->
+						<!--</div>-->
+					</div>
+<!--					<div class="panel panel-primary">-->
+<!--						<div class="panel-body">-->
+<!--							<div class="btn-wrapper text-right">-->
+<!--								<button type="submit" class="btn btn-success m-r-10">Submit</button>-->
+<!--								<button type="reset" class="btn btn-dark">Cancel</button>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<!--<script>-->
+<!--// Select All Checkbox-->
+
+<!--$(document).ready(function () {-->
+<!--    $("#checkAll").click(function () {-->
+<!--        $(".checkval").prop('checked', $(this).prop('checked'));-->
+<!--    });-->
+
+<!--    $(".checkval").change(function(){-->
+<!--        if (!$(this).prop("checked")){-->
+<!--            $("#checkAll").prop("checked",false);-->
+<!--        }-->
+<!--    });-->
+<!--});-->
+<!--</script>-->
+
+{% include "mlm_admin/include/footer.html" %}

@@ -1,0 +1,50 @@
+
+
+/*----------  header offcanvas about     ----------*/
+
+
+.header-offcanvas-about{
+    border-bottom: 1px solid #efefef;
+    position: relative;
+    
+    &:before{
+        position: absolute;
+        top: -3px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        content: "";
+    }
+
+    @media #{$tablet-device}{
+        &::before{
+            display: none;
+        }
+    }
+
+    @media #{$large-mobile}{
+        &::before{
+            display: none;
+        }
+    }
+
+    &.is-sticky{
+        &::before{
+            display: none;
+        }
+    }
+}
+
+
+/* icon  about off canvas*/
+
+.offcanvas-about-icon{
+    a{
+        color: #333;
+        display: inline-block;
+        i{
+            font-size: 30px;
+        }
+    }
+}

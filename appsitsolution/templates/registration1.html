@@ -1,0 +1,1059 @@
+
+
+{% extends 'shop/base.html' %}
+
+
+{% block extra_styles %}
+<style>
+    .regi_inpu select {
+    width: 100%;
+    padding: 14px 11px;
+    border: 1px solid #e5e5e5;
+}
+.shubh_terms a{
+    color:#000;
+    text-decoration:underline;
+}
+.shubh_terms a:hover{
+    text-decoration:underline !important;
+}
+</style>
+{% endblock extra_styles %}
+
+{% block content %}
+<!-- End of search overlay -->
+<div class="container">
+    <!-- personal details start-->
+    <div class="row regi_header">
+        <div class="col-md-12">
+            <p>Registration</p>
+        </div>
+    </div>
+    <form method="POST" name='registrationform' id="my-form"  enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+    <div class="row regibg_bg">
+        <div class="col-md-12">
+            <div class="head_new mt-40"> Personal Details
+            </div>
+        </div>
+          <div class="col-md-6">
+            <label for="firstname" class="regi_lab">First name*</label>
+            <input type="text" id="id_firstname" name="firstname" class="regi_inpu" value="{{ request.user.firstname }}" placeholder="Enter first name" required="required">
+              <div class="error alert-danger"  id="e_fname" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="lastname" class="regi_lab">Last name</label>
+            <input type="text" id="id_lastname" name="lastname" class="regi_inpu" placeholder="Enter last name" value="{{ request.user.lastname }}">
+        </div>
+        <div class="col-md-12">
+            <label for="email" class="regi_lab">Email Id*</label>
+            <input type="email" name="email" class="regi_inpu" id="id_email" placeholder="Enter email id">
+            <div class="error alert-error"  id="errr_email" style="display:none;" ></div>
+            <div class="error alert-danger" id="e_email"></div>
+        </div>
+
+
+        <!--<div class="col-md-6">-->
+        <!--    <label for="referral_code" class="regi_lab">Referrer *</label>-->
+        <!--    <input type="text" id="id_referral" name="referral" class="regi_inpu" placeholder="Enter Referrer">-->
+        <!--</div>-->
+
+        <div class="col-md-6">
+            <label for="password" class="regi_lab">Password*</label>
+            <input type="password" id="id_password" name="password" class="regi_inpu" placeholder="Enter your password">
+            <div class="error alert-error" id="err_password" style="display:none;"></div>
+            <div class="error alert-danger" id="e_pass"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="confirmPassword" class="regi_lab">Re Enter Password</label>
+            <input type="password" id="id_confirmPassword" name='confirmPassword' class="regi_inpu" placeholder="Re Enter Password">
+            <div class="error alert-error" id="err_confirmPassword" style="display:none;"></div>
+            <div class="error alert-danger" id="e_cnfpass"></div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="birthday" class="regi_lab">Birthday*</label>
+            <input type="date" id="id_birthday" name ='birthday' class="regi_inpu" placeholder="choose your dob" >
+            <div class="error alert-error" id="err_birthday" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="co-applicant" class="regi_lab"> Co-Applicant’s Name (if Co-Applying)</label>
+            <input type="text" id="id_co-applicant" name="co_applicant"  class="regi_inpu" placeholder="Enter co-applicant name"
+               >
+            <div class="error alert-error" id="err_coapplicant" style="display:none;"></div>
+        </div>
+    </div>
+    <!-- personal details end-->
+    <!--referral code-start-->
+
+    <!--referral-end-->
+       <div class="row reff_bg pt-20">
+            <div class="col-md-12">
+              <div class="head_new">
+                Referral Details
+              </div>
+             </div>
+             <div class="col-md-12" id="referral_code_id">
+            <label for="referral_code" class="regi_lab">Referral Code*</label>
+            <input type="text" id="id_referral_code" name="referral_code" class="regi_inpu" placeholder="Enter Referral Code">
+            <div class="error alert-error"  id="err_referral_code" style="display:none;" ></div>
+            </div>
+             <div class="col-md-12" id='referral_user' style="display:none;">
+            <label for="referral_code" class="regi_lab">Refer By:</label>
+<span id="id_referral_user" style="color:green;" class="ion-android-done-all"> </span>
+</div>
+            </div>
+    <!-- Address-start -->
+    <div class="row addbg_bg">
+        <div class="col-md-12">
+            <div class="head_new">
+                Address Details
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="house" class="regi_lab">House Number* </label>
+            <input type="text" id="house" class="regi_inpu" name="house" placeholder="Enter house number" >
+            <div class="error alert-error" id="err_house" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="confirm-password" class="regi_lab">Street</label>
+            <input type="street" class="regi_inpu" name="street" id="street" placeholder="Enter street name" >
+            <div class="error alert-error" id="err_street" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="address2" class="regi_lab">Address line 2 </label>
+            <input type="text" id="address2" name="address2" class="regi_inpu" placeholder="Enter address">
+            <div class="error alert-error" id="err_address2" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="confirm-password" class="regi_lab">Landmark</label>
+            <input type="landmark" class="regi_inpu" name="landmark" id="landmark" placeholder="Enter landmark">
+            <div class="error alert-error" id="err_landmark" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="city" class="regi_lab">City*</label>
+            <input type="text" id="city" class="regi_inpu" name="city" placeholder="Enter city">
+            <div class="error alert-error" id="err_city" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="pincode" class="regi_lab">Pin Code*</label>
+            <input type="pincode" class="regi_inpu" id="pincode" name="pincode" placeholder="Enter pincode">
+            <div class="error alert-error" id="err_pincode" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="mobile" class="regi_lab">Mobile No*</label>
+            <input type="number" id="mobile" class="regi_inpu" name="phone" placeholder="Enter mobile no">
+            <div class="error alert-error" id="err_mobile" style="display:none;"></div>
+        </div>
+        <div class="col-md-6">
+            <label for="altmobile" class="regi_lab">Alternate Mobile No.</label>
+            <input type="number" class="regi_inpu" name="altphone" id="altmob" placeholder="Enter Alternate Mobile">
+            <div class="error alert-error" id="alterr_phone" style="display:none;"></div>
+        </div>
+
+
+    </div>
+    <!--address-end-->
+
+    <!-- kyc details start-->
+    <div class="row kycbg-bg">
+        <div class="col-md-12">
+            <div class="head_new">
+                KYC Details
+            </div>
+        </div>
+         <!--remove data  -->
+        <div class="container">
+
+            <from method="POST" enctype="multipart/form-data">
+                <div class="row">
+                <div class="col-md-6">
+
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.non_field_errors }}
+                    {{ form.source.errors }}
+                    {{ form.source }}
+
+
+                </div>
+
+                <div class="col-md-6 regi_inpu regi_lab">
+                    <label for="panno" class="">PAN No.</label>
+                    {{ form.pan_number.errors }}
+                    <div class="regi_inpu"> {{ form.pan_number }}</div>
+
+                </div>
+                <div class="col-md-6 regi_inpu regi_lab">
+                    <label for="id_pan_file" class="">Upload Pan Card</label>
+                    {{ form.pan_file }}
+
+                </div>
+
+                <div class="col-md-6 regi_inpu regi_lab">
+                    <label class="">ID Proof Type</label>
+                    {{ form.id_proof_type}}
+
+                </div>
+                <div class="col-md-6 regi_inpu regi_lab">
+                    <label for="id_id_proof_file" class="">Upload Id Proof</label><br>
+                    {{ form.id_proof_file }}
+                </div>
+
+                <div class="col-md-6 regi_inpu regi_lab">
+                    <label class="">Address Proof Type</label>
+                    {{ form.address_proof_type }}
+
+                </div>
+                <div class="col-md-6 regi_inpu regi_lab">
+                    <label for="id_address_proof_file" class="">Address Proof Upload</label><br>
+                    {{ form.address_proof_file }}
+                </div>
+                </div>
+            <!-- {{ form }} -->
+        </from>
+        </div>
+    </div>
+    <!--kyc details end-->
+
+    <!-- bank details start-->
+    <div class="row bankbg_bg">
+        <!--{{ bank_form }}-->
+        <div class="col-md-12">
+            <div class="head_new">
+                Bank Account Details
+            </div>
+        </div>
+
+        <div class="col-md-6 regi_inpu regi_lab">
+            <label for="Distributor" class="">Distributor’s Name in Bank Account</label>
+            {{ bank_form.distributors_name_in_bank_account }}
+            <!--<input type="text" id="Distributor" class="regi_inpu" placeholder="Enter Distributor name">-->
+        </div>
+        <div class="col-md-6 regi_inpu regi_lab">
+            <label for="ifsccode" class="">IFSC Code</label>
+            {{ bank_form.ifsc_code }}
+            <!--<input type="text" id="IFSCCode" class="regi_inpu" placeholder="Enter ifsc name">-->
+        </div>
+
+        <div class="col-md-6 regi_inpu regi_lab">
+            <label for="birthday" class="">Bank Name</label>
+            {{ bank_form.bank_name }}
+            <!--<input type="bankname" id="bankname" class="regi_inpu" placeholder="Enter bank name">-->
+        </div>
+        <div class="col-md-6 regi_inpu regi_lab">
+            <label for="Branchname" class=""> Branch Name</label>
+            {{ bank_form.branch_name }}
+            <!--<input type="text" id="Branch name" class="regi_inpu" placeholder="Enter branch name">-->
+        </div>
+
+
+        <div class="col-md-6 regi_inpu regi_lab">
+            <label for="birthday" class="">Account Number</label>
+             {{ bank_form.account_number }}
+            <!--<input type="account" id="accountno" class="regi_inpu" placeholder="Enter Account number">-->
+        </div>
+        <div class="col-md-6 regi_inpu regi_lab">
+            <label for="Cheque" class="">Cheque Photo</label><br>
+            {{ bank_form.cheque_photo }}
+            <!--<input type="file" id="choose-cheque-id" size="80">-->
+        </div>
+
+    </div>
+    <!--bank details end-->
+
+    <!--terms & conditions start-->
+    <div class="row terms_condi">
+        <div class="col-md-12">
+            <label>{{ bank_form.age_confirmation}} I am at-least 18 year old</label>
+            <!--<input type="checkbox" value="age">-->
+        </div>
+
+        <div class="col-md-12 shubh_terms">
+            <label>{{ bank_form.self_declaration}} I Accept All the <a href="javascript:void(0)">Terms &amp;
+                    Conditions</a></label>
+        </div>
+    </div>
+    <!--terms & conditions end-->
+    <!--submit-->
+    <div class="row form-footer">
+        <div class="col-md-12">
+            <span>* required</span>
+            <input type="submit" class="btn btn-secondary btn-lg pull-right regibtn_btn" name="submit" id="submit" value="Complete Registration" onclick=storage()>
+            <!-- <button type="button" class="btn btn-secondary btn-lg pull-right regibtn_btn">Complete Registration</button> -->
+        </div>
+    </div>
+    <!--end-->
+    </form>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+
+<!-- Script for range input label -->
+
+<!-- scroll to top -->
+<!--<a href="#" class="scroll-top"></a>-->
+<!-- end of scroll to top -->
+
+<!-- JS -->
+<!-- jQuery JS -->
+<script src="/static/js/vendor/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="/static/js/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="/static/js/bootstrap.min.js"></script>
+
+<!-- Plugins JS -->
+<script src="/static/js/plugins.js"></script>
+
+<!-- Main JS -->
+<script src="/static/js/main.js"></script>
+
+
+<!-- Revolution Slider JS -->
+<script src="/static/revolution/js/jquery.themepunch.revolution.min.js"></script>
+<script src="/static/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script src="/static/revolution/revolution-active.js"></script>
+
+<!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+<script type="text/javascript" src="/static/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script type="text/javascript" src="/static/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script type="text/javascript" src="/static/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script type="text/javascript" src="/static/revolution/js/extensions/revolution.extension.layeranimation.min.87.html"></script>
+<script type="text/javascript" src="/static/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script type="text/javascript" src="/static/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+
+<script>
+	$(function () {
+		$("#login").modal("hide");
+		$("#signup").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+			$('#e_lastname').hide();
+			$('#e_firstname').hide();
+			$('#e_email').hide();
+			$('#e_referral_code').hide();
+			$('#e_phone').hide();
+			$('#e_password').hide();
+			$('#e_confirmpassword').hide();
+
+			var erro_firstname = false;
+			var erro_lastname = false;
+			var erro_email = false;
+			var erro_referral_code = false;
+			var erro_phone = false;
+			var erro_password = false;
+
+
+			$('#firstname').focusout(function () {
+				var user_legth = $('#firstname').val().length;
+				console.log(user_legth)
+				if (user_legth == 0) {
+					$('#e_firstname').html('please enter name');
+					$("#e_firstname").css("display", "block");
+					$('#e_firstname').fadeIn();
+					$('#e_firstname').show();
+					var erro_firstname = true;
+				}
+				else {
+					$('#e_firstname').hide();
+				}
+			});
+
+
+			$('#email').focusout(function () {
+				var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+				var emailaddressVal = $("#email").val();
+				if (emailaddressVal == '') {
+					$('#e_email').html('wrong email');
+					$("#e_email").css("display", "block");
+					$('#e_email').fadeIn();
+					$('#e_email').show();
+
+					var erro_email = true;
+
+				}
+
+				else if (!emailReg.test(emailaddressVal)) {
+					$('#e_email').html('email must contain @');
+					$("#e_email").css("display", "block");
+					$('#e_email').fadeIn();
+					$('#e_email').show();
+					var erro_email = true;
+
+				}
+				else {
+					$('#e_email').hide();
+
+				}
+
+
+			});
+
+
+			$('#phone').focusout(function () {
+				var phoneReg = /[0-9 -()+]+$/;
+				var phoneVal = $("#phone").val();
+				if (phoneVal.length <= 9) {
+					$('#e_phone').html('phone numbers should be 10-12 digits in length');
+					$("#e_phone").css("display", "block");
+					$('#e_phone').fadeIn();
+					$('#e_phone').show();
+					var erro_phone = true;
+
+				}
+
+				else if (!phoneReg.test(phoneVal)) {
+					$('#e_phone').html('only numbers are accepted');
+					$("#e_phone").css("display", "block");
+					$('#e_phone').fadeIn();
+					$('#e_phone').show();
+					var erro_phone = true;
+
+				}
+				else {
+					$('#e_phone').hide();
+
+				}
+			});
+
+			$('#confirmpassword').focusout(function () {
+
+				var password = $("#confirmpassword").val();
+				var confirmpassword = $("#confirmpassword").val();
+				if (password.length == '' && confirmpassword.length == '') {
+					$('#e_password').html('Password Field is empty');
+					$("#e_password").css("display", "block");
+					$('#e_password').fadeIn();
+					$('#e_password').show();
+					var erro_password = true;
+
+				}
+
+				else if (password != confirmpassword) {
+					$('#e_confirmpassword').html('Password not match');
+					$("#e_confirmpassword").css("display", "block");
+					$('#e_confirmpassword').fadeIn();
+					$('#e_confirmpassword').show();
+					var erro_password = true;
+
+				}
+				else {
+					$('#e_password').hide();
+					$('#e_confirmpassword').hide();
+
+				}
+
+
+
+			});
+
+
+
+
+			//validator.resetForm();
+
+		});
+	});
+// 		$("#signup").on('show.bs.modal', function (e) {
+// 			$("#login").modal("hide");
+// 		});
+
+		$("#login").on('show.bs.modal', function (e) {
+			$("#signup").modal("hide");
+		});
+
+		$("#login").on('show.bs.modal', function (e) {
+			$("#forgotpwd").modal("hide");
+		});
+
+		$("#forgotpwd").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+		});
+	</script>
+	<script src="/static/js/custom.js"></script>
+// 	<script>$(document).ready(function(){
+// 		$('#signup-form').on('submit', function(event){
+// 			event.preventDefault();
+
+// 			$.ajax({
+// 				url: "/accounts/register/",
+// 				type: 'POST',
+// 				// headers: {'X-CSRFToken': 'BQHKZ5i6JouYIWd09fK6NxAqknehroRa6lzMQn9v6m5kCw2OHTYnmxtfeBnpWRRa'},
+// 				data: $('#signup-form').serialize(),
+
+// 				beforeSend: function () {
+// 					$("#signup").modal("show");
+// 				},
+
+// 				success: function(data) {
+// 					$('#signup .modal-body').html(data);
+// 				}
+// 			});
+// 		});
+// 	});</script>
+
+<script>
+    $(document).ready(function () {
+			$('input[type=radio][name="filter"]').change(function () {
+
+				// console.log("value change")
+				var aa= '<div class="row product-isotope shop-product-wrap">';
+				var radioValue = $("input[name='filter']:checked").val();
+
+				$.ajax({
+					url: "/filetr_view/",
+					method: 'GET',
+					dataType:'json',
+					data: {
+						radioValue :radioValue
+					},
+					success: function (data) {
+						product = data.all_products ;
+						console.log(product);
+						for(i=0; i<product.length; i++){
+							aa += '<div class="col-sm-6 col-md-3 hot sale"><div class="single-product">	<div class="single-product__image">	<a class="image-wrap" href= "/product/'+product[i].id+'/'+product[i].slug+'/"><img src="/media/'+product[i].image+'"class="img-fluid" alt=""/></a><div class="single-product__floating-badges"><span class="onsale">-10%</span><span class="hot">hot</span></div><div class="single-product__floating-icons"><a class="wishlist" href="/product/'+product[i].id+'/'+product[i].slug+'/"><i class="ion-android-favorite-outline"></i></a></div></div><div class="single-product__content"><div class="title"><a id="productName"href="/product/'+product[i].id+'/'+product[i].slug+'/">'+product[i].product_name+'</a></div><div class="price"><span class="main-price discounted">$160.00</span><span class="discounted-price">$'+product[i].price+'</span></div></div></div></div>';
+						}
+
+						// console.log(product[i].image);
+						$("#singleProduct").hide();
+						aa += '</div>'
+						$("#productls").html(aa);
+						$("#sortBy").modal("hide");
+
+
+					},
+					error: function (error) {
+						console.log(error);
+						console.log("error");
+						$("#sortBy").modal("hide");
+					}
+				});
+
+			});
+		});
+
+// 		filter page
+$(document).ready(function () {
+			$("#apply").click(function () {
+				var aa = '<div class="row product-isotope shop-product-wrap">';
+				var checkValue = [];
+				$("input[type=checkbox][name='catcheck']:checked").each(function () {
+					checkValue.push($(this).val());
+				});
+				// var checkValue = $("input[type=checkbox][name='catcheck']:checked").val();
+				console.log(checkValue)
+				var radioValue = $("input[name='price']:checked").val();
+				console.log(radioValue)
+				$.ajax({
+					url: "/filter_list/",
+					method: 'POST',
+					dataType: 'json',
+					data: {
+						radioValue: radioValue,
+						checkValue : checkValue,
+
+					},
+					success: function (data) {
+					    console.log(data);
+					    if(!data){alert("Nothing Found");}
+						product = data.all_products;
+						for (i = 0; i < product.length; i++) {
+							aa += '<div class="col-sm-6 col-md-3 hot sale"><div class="single-product">	<div class="single-product__image">	<a class="image-wrap" href= "/product/' + product[i].id + '/' + product[i].slug + '/"><img src="/media/' + product[i].image + '"class="img-fluid" alt=""/></a><div class="single-product__floating-badges"><span class="onsale">-10%</span><span class="hot">hot</span></div><div class="single-product__floating-icons"><a class="wishlist" href="/product/' + product[i].id + '/' + product[i].slug + '/"><i class="ion-android-favorite-outline"></i></a></div></div><div class="single-product__content"><div class="title"><a id="productName"href="/product/' + product[i].id + '/' + product[i].slug + '/">' + product[i].product_name + '</a></div><div class="price"><span class="main-price discounted">$160.00</span><span class="discounted-price">$' + product[i].price + '</span></div></div></div></div>';
+						}
+						// console.log(product[i].image);
+						$("#singleProduct").hide();
+						aa += '</div>'
+						$("#productls").html(aa);
+						$("#filter").trigger("reset");
+						$("#filter").modal("hide");
+						$('#priceFilter')[0].reset();
+
+
+					},
+					error: function (error) {
+						console.log(error);
+						$("#filter").trigger("reset");
+						$('#priceFilter')[0].reset();
+
+					}
+
+				});
+
+			});
+
+		});
+</script>
+
+
+
+
+<script>
+    var rangeLabel = document.getElementById("range-label");
+    var experience = document.getElementById("experience");
+
+    function change() {
+        rangeLabel.innerText = experience.value + "K";
+    }
+</script>
+// <script>
+//   function validation(){
+//       var uses = document.getElementById('id_firstname').value;
+//       if(uses = ""){
+//           document.getElementById('error_firstname').innerHTML = "Please enter name";
+//       return false;
+//       }
+// }
+// </script>
+<script src='https://cdn.jsdelivr.net/gh/FThompson/FormPersistence.js@1.0.1/form-persistence.min.js' type='text/javascript'></script>
+<script type='text/javascript'>
+    window.addEventListener('load', () => {
+        let myForm = document.getElementById('my-form')
+        FormPersistence.persist(myForm)
+    })
+</script>
+
+<script>
+function myFunction() {
+    let myForm = document.getElementById('my-form')
+    FormPersistence.persist(myForm)
+}
+</script>
+<script type="text/javascript">
+   var error_fname = false;
+   var error_birthday = false;
+   var error_email = false;
+   var error_referral_code = false;
+   var error_house = false;
+   var error_pass = false;
+   var error_city = false;
+   var error_pincode = false;
+   var error_mobile = false;
+
+   $("#id_firstname").focusout(function(){
+   check_fname();
+   });
+   $("#id_birthday").focusout(function(){
+   check_birthday();
+   });
+   $("#id_email").focusout(function(){
+   check_email();
+   });
+   $("#id_referral_code").focusout(function(){
+   check_referral_code();
+   });
+   $("#house").focusout(function(){
+   check_house();
+   });
+   $("#id_password").focusout(function() {
+   check_pass();
+   });
+   $("#id_confirmPassword").focusout(function() {
+   check_cnfpass();
+   });
+   $("#city").focusout(function() {
+   check_city();
+   });
+   $("#pincode").focusout(function() {
+   check_pincode();
+   });
+   $("#mobile").focusout(function() {
+   check_mobile();
+   });
+
+   function check_fname() {
+      var fname = $("#id_firstname").val()
+      if ( fname !== '') {
+      $("#e_fname").hide();
+      } else {
+         $("#e_fname").html("This field is required");
+         $("#e_fname").show();
+         error_fname = true;
+      }
+   }
+   function check_birthday() {
+      var birthday = $("#id_birthday").val().length;
+      if (birthday != '' ) {
+      $("#err_birthday").hide();
+      } else {
+         $("#err_birthday").html("This field is required");
+         $("#err_birthday").show();
+         error_birthday = true;
+      }
+   }
+   function check_house() {
+      var house = $("#house").val()
+      if (house !== '') {
+         $("#err_house").hide();
+      } else {
+         $("#err_house").html("This field is required");
+         $("#err_house").show();
+         error_house = true;
+      }
+   }
+   function check_city() {
+      var city = $("#city").val()
+      if (city !== '') {
+         $("#err_city").hide();
+      } else {
+         $("#err_city").html("This field is required");
+         $("#err_city").show();
+         error_city = true;
+      }
+   }
+   function check_mobile() {
+      var mobile = $("#mobile").val().length;
+      if (mobile < 11 && mobile > 9) {
+         $("#err_mobile").hide();
+      } else {
+         $("#err_mobile").html("Mobile number must contain 10 digit");
+         $("#err_mobile").show();
+         error_mobile = true;
+      }
+   }
+   function check_referral_code() {
+      var referral_code = $("#id_referral_code").val()
+      if (referral_code !== '') {
+      $("#err_referral_code").hide();
+      } else {
+         $("#err_referral_code").html("This field is required");
+         $("#err_referral_code").show();
+         error_referral_code = true;
+      }
+   }
+   function check_pincode() {
+      var pincode = $("#pincode").val()
+      if (pincode !== '') {
+      $("#err_pincode").hide();
+      } else {
+         $("#err_pincode").html("This field is required");
+         $("#err_pincode").show();
+         error_pincode = true;
+      }
+   }
+   function check_email() {
+    var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    var email = $("#id_email").val();
+    if ( pattern.test(email) && email !== '') {
+      $("#errr_email").hide();
+      } else {
+      $("#errr_email").html("invalid Email");
+      $("#errr_email").show();
+      error_email = true;
+      }
+    }
+    function check_pass() {
+      var pass_length = $("#id_password").val().length;
+      if(pass_length < 8) {
+         $("#e_pass").html("Atleast 8 Characters");
+         $("#e_pass").show();
+         error_pass = true;
+      } else {
+         $("#e_pass").hide();
+         }
+      }
+    function check_cnfpass() {
+      var pass = $("#id_password").val().length;
+      var cnfpass = $("#id_confirmPassword").val().length;
+      if(pass != cnfpass) {
+         $("#e_cnfpass").html("Password is not match");
+         $("#e_cnfpass").show();
+         error_pass = true;
+      } else {
+         $("#e_cnfpass").hide();
+         }
+      }
+      function check_vall() {
+      var email = $('#id_email').val();
+      var mobile = $('#mobile').val();
+      var url = '/ajax/validate_email/';
+      e.preventDefault();
+      data4 = $.ajax({
+        url: url,
+        data: {
+          'email': email,
+          'mobile': mobile,
+        },
+        dataType: 'json',
+        success: function (data) {
+        if (data.code === 200) {
+                        if (data.email != ''){
+						$('#errr_email').html('A user with this username already exists.');
+					    $("#errr_email").css("display", "block");
+					    $('#errr_email').fadeIn();
+					    $('#errr_email').show();
+					    error_email_check = false;
+					    }
+					    else if (data.mobile != ''){
+					    $('#err_mobile').html('Mobile Number already exists.');
+					    $("#err_mobile").css("display", "block");
+					    $('#err_mobile').fadeIn();
+					    $('#err_mobile').show();
+					    error_mobile_check = true;
+					    return true;
+					    }
+					    else {
+					    return false;
+					    }
+					}
+        }
+        });
+      }
+   $("#my-form").submit(function(e) {
+     var error_fname = false;
+     var error_birthday = false;
+     var error_email = false;
+     var error_house = false;
+     var error_pass = false;
+     var error_city = false;
+     var error_pincode = false;
+     var error_mobile = false;
+     var error_email_check = false;
+     var error_mobile_check = false;
+     var data1 = true;
+
+     var fname = $("#id_firstname").val()
+      if ( fname !== '') {
+      $("#e_fname").hide();
+      } else {
+         $("#e_fname").html("This field is required");
+         $("#e_fname").show();
+         error_fname = true;
+      }
+      var birthday = $("#id_birthday").val().length;
+      if (birthday != '' ) {
+      $("#err_birthday").hide();
+      } else {
+         $("#err_birthday").html("This field is required");
+         $("#err_birthday").show();
+         error_birthday = true;
+      }
+      var house = $("#house").val()
+      if (house !== '') {
+         $("#err_house").hide();
+      } else {
+         $("#err_house").html("This field is required");
+         $("#err_house").show();
+         error_house = true;
+      }
+      var referral_code = $("#id_referral_code").val()
+      if (referral_code !== '') {
+      $("#err_referral_code").hide();
+      } else {
+         $("#err_referral_code").html("This field is required");
+         $("#err_referral_code").show();
+         error_referral_code = true;
+      }
+      var house = $("#house").val()
+      if (house !== '') {
+         $("#err_house").hide();
+      } else {
+         $("#err_house").html("This field is required");
+         $("#err_house").show();
+         error_house = true;
+      }
+      var pass_length = $("#id_password").val().length;
+      if(pass_length < 8) {
+         $("#e_pass").html("Atleast 8 Characters");
+         $("#e_pass").show();
+         error_pass = true;
+      } else {
+         $("#e_pass").hide();
+         }
+      var pass = $("#id_password").val().length;
+      var cnfpass = $("#id_confirmPassword").val().length;
+      if(pass != cnfpass) {
+         $("#e_cnfpass").html("Password is not match");
+         $("#e_cnfpass").show();
+         error_pass = true;
+      } else {
+         $("#e_cnfpass").hide();
+         }
+      var city = $("#city").val()
+      if (city !== '') {
+         $("#err_city").hide();
+      } else {
+         $("#err_city").html("This field is required");
+         $("#err_city").show();
+         error_city = true;
+      }
+      var pincode = $("#pincode").val()
+      if (pincode !== '') {
+      $("#err_pincode").hide();
+      } else {
+         $("#err_pincode").html("This field is required");
+         $("#err_pincode").show();
+         error_pincode = true;
+      }
+      var mobile = $("#mobile").val().length;
+      if (mobile < 11 && mobile > 9) {
+         $("#err_mobile").hide();
+      } else {
+         $("#err_mobile").html("Mobile number must contain 10 digit");
+         $("#err_mobile").show();
+         error_mobile = true;
+      }
+      var email = $('#id_email').val();
+      var mobile = $('#mobile').val();
+      var url = '/ajax/validate_email/';
+      $.ajax({
+        url: url,
+        data: {
+          'email': email,
+          'mobile': mobile,
+        },
+        dataType: 'json',
+        success: function (data) {
+        if (data.code === 200) {
+                        if (data.email != ''){
+						$('#errr_email').html('A user with this username already exists.');
+					    $("#errr_email").css("display", "block");
+					    $('#errr_email').fadeIn();
+					    $('#errr_email').show();
+					    error_email_check = false;
+					    $('#submit').attr('disabled',true);
+					    }
+					    else if (data.mobile != ''){
+					    $('#err_mobile').html('Mobile Number already exists.');
+					    $("#err_mobile").css("display", "block");
+					    $('#err_mobile').fadeIn();
+					    $('#err_mobile').show();
+					    error_mobile_check = true;
+					    return true;
+					    }
+					    else {
+					    return false;
+					    }
+					}
+        }
+        });
+      if (error_fname === false && error_birthday === false && error_email === false  && error_house === false && error_pass == false && error_city === false && error_pincode === false && error_mobile === false && error_check_email === false ) {
+      return true;
+      } else {
+      return false;
+      }
+    });
+</script>
+<script>
+$('#id_referral_code').change(function () {
+			$('#erro_referral_code').hide();
+			var erro_referral_code = false;
+				var ref_legth = $('#id_referral_code').val().length;
+				var referral_code = $(this).val();
+				if (ref_legth == 0) {
+					$('#erro_referral_code').html('please enter name');
+					$("#erro_referral_code").css("display", "block");
+					$('#erro_referral_code').fadeIn();
+					$('#erro_referral_code').show();
+					var erro_firstname = true;
+					$('#submit').attr('disabled',true);
+				}
+				else {
+					$('#erro_referral_code').hide();
+					$('#submit').attr('disabled',false);
+				}
+				$.ajax({
+				url: '/ajax/validate_ref/',
+				data: {
+					'referral_code': referral_code
+				},
+				dataType: 'json',
+				success: function (data) {
+					if (data.ref_by) {
+						// alert("A user with this username already exists.");
+						$('#error_firstname').html('');
+					$("#error_firstname").css("display", "block");
+					$('#error_firstname').fadeIn();
+					$('#error_firstname').show();
+					var erro_firstname = true;
+					$('#submit').attr('disabled',true);
+					}
+				}
+			});
+			});
+
+			$('#id_referral_code').focusout(function () {
+				var referall_code = $(this).val();
+				$("#err_referral_code").hide()
+				let aa='';
+				$.ajax({
+				url: '/ajax/validate_ref/',
+				data: {
+					'referall_code': referall_code
+				},
+				dataType: 'json',
+				success: function(data){
+				    console.log(data.refer_by)
+					if (data.code === 200) {
+					    aa = data.refer_by
+				        $("#referral_code_id").hide();
+				        $("#referral_user").css("display", "block");
+				        $("#id_referral_user").append(aa);
+					}else if(data.code === 404){
+						$('#err_referral_code').html('Reference Not matched');
+					    $("#err_referral_code").css("display", "block");
+					    $("#err_referral_code").show()
+					    $('#submit').attr('disabled',true);
+
+					}else{
+					    $('#err_referral_code').html('Reference Not matched');
+					    $("#err_referral_code").css("display", "block");
+					    $("#err_referral_code").show();
+					    $('#submit').attr('disabled',true);
+					}
+
+
+				},
+				error: function (error) {
+						console.log(error);
+
+					}
+				});
+			});
+
+	</script>
+<script>
+$(window).scroll(function() {
+var scroll = $(window).scrollTop();
+
+    if (scroll >= 100) {
+        $(".alert-blue").addClass("alert_blue_scroll");
+    }
+});
+</script>
+<script>
+$("#pincode").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var pincode = $("#pincode").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+    if (( pincode > 5)){
+        event.preventDefault();
+    }
+});
+</script>
+<script>
+$("#mobile").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var mobile = $("#mobile").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+    if (( mobile > 9)){
+        event.preventDefault();
+    }
+});
+</script>
+<script>
+
+$(document).ready(function() {
+    $( "#ageid").prop('checked', true);
+    $( "#deid").prop('checked', true);
+});
+</script>
+
+{% endblock extra_scripts %}

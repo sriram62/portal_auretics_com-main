@@ -1,0 +1,23 @@
+
+<style>
+  .input-group.email_forget {
+    max-width: 600px;
+    margin: 0 auto;
+}
+</style>
+{% extends 'shop/base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="login-area">
+  <div class="submit-form login-form">
+      <div class="section-title--login text-center ">
+
+          <img src="{% static 'img/payment_fail.png' %}">
+        <h2 class="heading">Payment Failure</h2>
+        <p>{{error_Message}}</p>
+      </div>
+  </div>
+</div>
+
+{% endblock %}

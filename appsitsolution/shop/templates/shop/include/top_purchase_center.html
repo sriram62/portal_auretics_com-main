@@ -1,0 +1,31 @@
+{% if user.is_authenticated %}
+    <div class="mt-4" >
+    <p>Jai Hind {{request.user.profile.first_name}} {{request.user.profile.last_name}} Ji!<br />
+        Your Auretics Registration Number (ARN) is - <b id="refr">{{request.user.referralcode.referral_code}}</b></p>
+        {% if request.session.distributor_checkout %}
+            <p>You are purchasing from <strong><font size="+0.5">Distribution Center - <span style="color:black">{{ distributor_checkout_name }}</span></font>.</strong> <br />If you would like to purchase from the Central Warehouse, and get items via courier please <a href="{% url 'remove-distributor-checkout' %}" style="text-decoration: underline;color:black;">Click Here</a>.</p>
+            {% if distributor_mobile %}<p>You may call the Distributor at: {{ distributor_mobile }}</p> {% endif %}
+            <p>You may pick up your items from:<br />
+               {{ distributor_address }}<br />
+               {{ distributor_address_line_2 }}<br />
+               {{ distributor_city }}
+               {{ distributor_state }}
+               {{ distributor_pin_code }}
+            </p>
+        {% else %}
+        {% if product_user_name %}
+            <p>You are adding products for the user: <strong>{{product_user_name.profile.first_name}} {{product_user_name.profile.last_name}}</strong> </p>
+        {% else %}
+              <p>You are adding products for the user: <strong>{{request.user.profile.first_name}} {{request.user.profile.last_name}}</strong> </p>
+        {% endif %}
+            <p>You are purchasing from our <strong><font size="+0.5" style="color:black">Online Portal</font></strong> and your items will be couriered to you. <br />If you would like to purchase from a Distribution Center and pick up the items, please <a href="{% url 'distributor_list' %}" style="text-decoration: underline;color:black;">Click Here</a>.</p>
+        {% endif %}
+        {% if  request.session.is_eligible_for_loyalty_purchase and not request.session.loyalty_purchase_enabled %}
+            <p>You are eligible for a loyalty purchase of {{request.session.cart_total_pv}}. To enable loyalty purchase, Please <a href="{% url 'enable_loyalty_purchase' %}" style="text-decoration: underline;color:black;">Click Here</a>.</p>
+        {% endif %}
+        {% if  request.session.is_eligible_for_loyalty_purchase and request.session.loyalty_purchase_enabled %}
+            <p>You have enabled loyalty purchase up to amount {{request.session.cart_total_pv}} (Remaining: {{request.session.remaining_loyalty_purchase_amount}}). To disable loyalty purchase, Please <a href="{% url 'disable_loyalty_purchase' %}" style="text-decoration: underline;color:black;">Click Here</a>.</p>
+        {% endif %}
+        <br />
+    </div>
+{% endif %}

@@ -1,0 +1,602 @@
+<style>
+    .arju_tab {
+        width: 100%;
+    }
+</style>
+{% load static %}
+{% load shop_tag %}
+{% if page == 'cnf' %}
+{% include "c_and_f/include/header.html" %}
+{% else %}
+{% include "mlm_admin/include/header.html" %}
+{% endif %}<div class="pcoded-main-container">
+    <div class="modal-content">
+        {% for message in messages   %}
+        {% if message.tags == 'error'%}
+        <div class="alert alert-danger" role="alert">
+            {% else %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {%endif%}
+                <div class="text-center">
+                    <strong>Messages: </strong> {{ message }}
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+           {% endfor %}
+           <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title">View Order</h5>
+                <!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--                    <span aria-hidden="true">&times;</span>-->
+                    <!--                </button>-->
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="floating-label" for="category_name"><small class="text-danger">* </small>Material Center:</label>
+                                <b>{{ form.material_center }}</b> <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="floating-label" for="category_name"><small class="text-danger">* </small>Distributor's Name:</label>
+                                <!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                                <b>{{user_profile.first_name}} {{user_profile.last_name}}</b>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Auretics Rregistration Number (ARN):</label>
+                                <b>{{ARN}}</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% if show_complete %}
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="floating-label" for="category_name"><small class="text-danger">* </small>Email Name</label>
+                                <!--                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">-->
+                                {{form.name}}
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Email</label>
+                                {{form.email}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group fill">
+                                <label class="floating-label" for="description">Postal Code</label>
+                                {{form.postal_code}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group fill">
+                                <label class="floating-label" for="commission">Date</label>
+                                <input type="" class="form-control" value="{{date.date}}" id="commission" name="commission" disabled placeholder="123">
+                            </div>
+                        </div>
+
+                        {% if show_complete %}
+                        <div class="col-sm-6">
+                            <div class="form-group form-primary mb-0">
+                                <label class="floating-label" for="commission">Status</label>
+                                <select class="form-control status" id="{{i.pk}}" disabled name="status" required>
+                                    <option value="">Select an option</option>
+                                    <option value="1" {% if status == 1 %} selected {% endif %} >Accept Order</option>
+                                    <option value="2" {% if status == 2 %}  selected {% endif %} >Ready To Dispatch</option>
+                                    <option value="3" {% if status == 3 %}  selected {% endif %} >Dispatched</option>
+                                    <option value="4" {% if status == 4 %}  selected {% endif %} >Delivered</option>
+                                    <option value="5" {% if status == 5 %}  selected {% endif %} >Reject Order</option>
+                                    <option value="6" {% if status == 6 %}  selected {% endif %} >Refund</option>
+                                    <option value="6" {% if status == 7 %}  selected {% endif %} >Return</option>
+                                </select>
+                                <span class="form-bar"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group fill">
+                                <label class="floating-label" for="show_on_home_page">Paid</label>
+                                <!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+                                    <!--                            <option value='Show'>Show</option>-->
+                                    <!--                            <option value='Not Show'>Not Show</option>-->
+                                    <!--                        </select>-->
+                                    {{form.paid}}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group fill">
+                                    <label class="floating-label" for="show_on_home_page">accept_date</label>
+                                    <!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+                                        <!--                            <option value='Show'>Show</option>-->
+                                        <!--                            <option value='Not Show'>Not Show</option>-->
+                                        <!--                        </select>-->
+                                        {{form.accept_date}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group fill">
+                                        <label class="floating-label" for="show_on_home_page">ready_to_dispatch_date</label>
+                                        <!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+                                            <!--                            <option value='Show'>Show</option>-->
+                                            <!--                            <option value='Not Show'>Not Show</option>-->
+                                            <!--                        </select>-->
+                                            {{form.ready_to_dispatch_date}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group fill">
+                                            <label class="floating-label" for="show_on_home_page">dispatched_date</label>
+                                            <!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+                                                <!--                            <option value='Show'>Show</option>-->
+                                                <!--                            <option value='Not Show'>Not Show</option>-->
+                                                <!--                        </select>-->
+                                                {{form.dispatched_date}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group fill">
+                                                <label class="floating-label" for="show_on_home_page">delivered_date</label>
+                                                <!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+                                                    <!--                            <option value='Show'>Show</option>-->
+                                                    <!--                            <option value='Not Show'>Not Show</option>-->
+                                                    <!--                        </select>-->
+                                                    {{form.delivered_date}}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group fill">
+                                                    <label class="floating-label" for="show_on_home_page">rejected_date</label>
+                                                    <!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+                                                        <!--                            <option value='Show'>Show</option>-->
+                                                        <!--                            <option value='Not Show'>Not Show</option>-->
+                                                        <!--                        </select>-->
+                                                        {{form.rejected_date}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group fill">
+                                                        <label class="floating-label" for="show_on_home_page">returned_date</label>
+                                                        <!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+                                                            <!--                            <option value='Show'>Show</option>-->
+                                                            <!--                            <option value='Not Show'>Not Show</option>-->
+                                                            <!--                        </select>-->
+                                                            {{form.returned_date}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group fill">
+                                                            <label class="floating-label" for="show_on_home_page">refunded_date</label>
+                                                            <!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+                                                                <!--                            <option value='Show'>Show</option>-->
+                                                                <!--                            <option value='Not Show'>Not Show</option>-->
+                                                                <!--                        </select>-->
+                                                                {{form.refunded_date}}
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">ADDRESS TYPE:</label>
+                                                                <!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+                                                                {{dataform.address_type }}
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">HOUSE NUMBER:</label>
+                                                                <!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+                                                                {{dataform.house_number }}
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">ADDRESS:</label>
+                                                                <!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+                                                                {{dataform.address_line }}
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">LANDMARK:</label>
+                                                                <!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+                                                                {{dataform.Landmark }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">CITY:</label>
+                                                                <!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+                                                                {{dataform.city }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">STREET:</label>
+                                                                <!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+                                                                {{dataform.street }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">STATE:</label>
+                                                                <!--                            <input type="" class="form-control" id="commission" name="commission" placeholder="123">-->
+                                                                {{dataform.state }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">COUNTRY:</label>
+                                                                {{dataform.country }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">ALTERNATE-MOBILE:</label>
+                                                                {{dataform.alternate_mobile }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">MOBILE:</label>
+                                                                {{dataform.mobile }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">PIN:</label>
+                                                                {{dataform.pin }}
+                                                            </div>
+                                                        </div>
+
+                                                        {% if not show_complete %}
+                                                        <div class="row">
+                                                            {% if not show_prices %}
+                                                            <div class="col-sm-9">
+                                                                <div class="form-group">
+                                                                    <a href="?show_prices=Y"><span><small class="text-danger"># </small>Show Complete Order Detail</span></a>
+                                                                </div>
+                                                            </div>
+                                                            {% endif %}
+                                                            <div class="col-sm-9">
+                                                                <div class="form-group">
+                                                                    <a href="?show_complete=Y"><span><small class="text-danger"># </small>Show Complete Order Information</span></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
+
+                                                        {% if show_prices %}
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">PV:</label>
+                                                                {{form.pv }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission">BV:</label>
+                                                                {{form.bv }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="commission"><h3>Grand Total</h3></label>
+                                                                <br />
+                                                                <input type="text" class="form-control" id="grand_total" name="grand_total" value="{% grand_total order_list %}" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="test">Shipment height in cms</label>
+                                                                {{form.shipment_height }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="test">Shipment Width in cms</label>
+                                                                {{form.shipment_width }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="test">Shipment length in cms</label>
+                                                                {{form.shipment_length }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group fill">
+                                                                <label class="floating-label" for="test">Shipment Weight in kgs</label>
+                                                                {{form.shipment_weight }}
+                                                            </div>
+                                                        </div>
+
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-primary" type="submit"> Save </button>
+                                                    <button class="btn btn-danger" type="reset"> Clear </button>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                       <div class="wrapper">
+                                                          <!-- shop page content -->
+                                                          <div class="shop-page-wrapper">
+                                                             <!-- shop page content -->
+                                                             <div class="shop-page-content">
+                                                                <div class="shopping-cart-area">
+                                                                   <div class="container">
+                                                                      <div class="row">
+                                                                         <div class="col-lg-12">
+                                                                            <!-- cart table -->
+                                                                            <div class="cart-table-container">
+
+                                                                               <table class="cart-table arju_tab">
+                                                                                  <thead>
+                                                                                     <tr>
+                                                                                        <!--											    <th class="product-id">Order Id</th>-->
+                                                                                        <th class="product-name" colspan="2">Product</th>
+                                                                                        {% if show_prices %}<th class="product-price">Price</th>{% endif %}
+                                                                                        <th class="product-quantity">Quantity</th>
+                                                                                        {% if show_prices %}<th class="product-subtotal">Total</th>{% endif %}
+                                                                                        <!--<th class="product-subtotal">Size</th>-->
+                                                                                        <!--<th class="product-subtotal">Order Date</th>-->
+                                                                                        <th class="product-remove">&nbsp;</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                 {% for item in order_list %}
+                                                                                 <!--{{order_list.name}}-->
+                                                                                 <!--	{{order_list.email}}-->
+                                                                                 <tr>
+                                                                                    <!--											    <td class="product-price">-->
+                                                                                        <!--													<span class="price">{{ item.order_id }}</span>-->
+                                                                                        <!--												</td>-->
+                                                                                        <td class="product-thumbnail">
+                                                                                           <a href="{% url 'product_detail' item.product.pk item.product.slug %}">
+                                                                                              <img src="{{ item.product.image.url }}" class="img-fluid"  width="140px" height="140px" alt="">
+                                                                                          </a>
+                                                                                      </td>
+                                                                                      <td class="product-name">
+                                                                                       <a href="{% url 'product_detail' item.product.pk item.product.slug %}">{{ item.product.product_name }}</a>
+                                                                                       <span class="product-variation">Color: {{item.product.colour}}</span>
+                                                                                   </td>
+                                                                                   {% if show_prices %}
+                                                                                   <td class="product-price">
+                                                                                       <span class="price">₹{% dis_price_include_tax item.product %}</span>
+                                                                                   </td>
+                                                                                   {% endif %}
+                                                                                   <td class="product-quantity" style=""align="center">
+
+                                                                                    {{ item.quantity }}
+
+                                                                                </td>
+                                                                                {% if show_prices %}
+                                                                                <td class="total-price">
+                                                                                   <span class="price">₹{% total_of_particular_iteam_price item.price item.quantity %}</span>
+                                                                               </td>
+                                                                               {% endif %}
+												<!--<td class="total-price">
+													<span class="price">{{item.product.size}}</span>
+												</td>-->
+												<!--<td class="total-price">
+													<span class="price">{{ item.date_added|date:"D,d-M-y" }}</span>
+												</td>-->
+
+											</tr>
+
+											{% endfor %}
+										</tbody>
+									</table>
+
+
+
+                              </div>
+                              <div>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="col-sm-6">
+                                            <div class="form-group fill">
+                                                <label class="floating-label" for="show_on_home_page">Special Instructions:</label>
+                                                {{form.card_description}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    {% if order_qs.shipment_height > 0 and order_qs.shipment_width > 0 and order_qs.shipment_length > 0 and order_qs.shipment_weight > 0 %}
+                                    <div class="col">
+                                        {% if order_qs.status == 0 or order_qs.status is null%}
+
+                                        <div class="row align-items-center">
+                                            <div class="col-6">
+                                                <a href="{%url 'accept_order' myid%}" class="btn btn-primary" style="width:100%">
+                                                    <strong>Send To Shiprocket</strong>
+                                                </a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="{%url 'accept_order_dv' myid%}" class="btn mt-2 btn-primary" style="width:100%">
+                                                    <strong>Send To Delhivery</strong>
+                                                </a>
+                                            </div>
+                                            <div class="col">
+                                               <a href="{%url 'accept_order_pkr' myid%}" class="btn mt-2 btn-primary" style="width:100%">
+                                                <strong>Send To Pickrr</strong>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    {%else%}
+                                    <div class="row align-items-center mt-2">
+                                    <div class="col-6">
+                                        <a href="{%url 'send_to_sheet' myid%}" class="btn mt-2 btn-primary" style="width:100%">
+                                            <strong>Send To Excel Sheet</strong>
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="{%url 'mlm_track_order' myid%}" class="btn  btn-primary" style="width:100%">
+                                            <strong>Track Order</strong>
+                                        </a>
+                                    </div>
+                                    </div>
+                                    
+
+                                    {%endif%}
+                                </div>
+                                {% endif %}
+
+                                {% if '2' in request.user.menu_permission.order_management %}
+                                <div class=" col form-group form-primary mb-0">
+                                    <select class="form-control status" id="{{myid}}"  name="status" required>
+                                        <option value="0">Manual Accept</option>
+                                        <option value="1" {% if order_qs.status == 1 %} selected {% endif %} >Accept Order</option>
+                                        <option value="2" {% if order_qs.status == 2 %}  selected {% endif %} >Ready To Dispatch</option>
+                                        <option value="3" {% if order_qs.status == 3 %}  selected {% endif %} >Dispatched</option>
+                                        <option value="4" {% if order_qs.status == 4 %}  selected {% endif %} >Delivered</option>
+                                        {% if '3' in request.user.menu_permission.order_management %}
+                                        <option value="5" {% if order_qs.status == 5 %}  selected {% endif %} >Reject Order</option>
+                                        <option value="6" {% if order_qs.status == 6 %}  selected {% endif %} >Refund</option>
+                                        {% endif %}
+                                    </select>
+                                    <span class="form-bar"></span>
+                                </div>
+                                {% endif %}
+
+                                {% if '2' in request.user.menu_permission.order_management %}
+                                <div class=" col form-group form-primary mb-0">
+                                    <select class="form-control change_mc_status" id="{{ myid }}_mc"  name="change_mc_status" required>
+                                        <option value="0">Change Material Center</option>
+                                    {% for i in mc_cnf %}
+                                        <option value="{{ i.id }}">{{ i }}({{ i.city }})</option>
+                                    {% endfor %}
+                                    </select>
+                                    <span class="form-bar"></span>
+                                </div>
+                                {% endif %}
+
+                            </div>
+                            <br /><br />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="category_name"><small class="text-danger">* </small><strong>Packed By:</strong></label>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small><strong>Checked By:</strong></label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br /><br /><br /><br />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="category_name"><small class="text-danger">* </small><strong>Remarks (if any):</strong></label>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small><strong></strong></label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br /><br /><br /><br />
+                        </div>
+                    </div>
+                </div>
+                </div>
+                            <br /><br /><br /><br />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+            <div>
+                {% if group_user %}
+                    <h5 class="ml-3">The group Checkout users are:</h5>
+                    {% for all_user in group_user %}
+                        <h6 class="ml-5">* {{ all_user }}</h6>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+
+		<!-- cart page content end -->
+	</div>
+<!--        show krne walla yha per end h-->
+            </div>
+        </div>
+    </div>
+
+    <!-- cart page content end -->
+</div>
+<!--        show krne walla yha per end h-->
+</div>
+</div>
+</form>
+</div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+<script src='{% static "tms/js/plugins/jquery.dataTables.min.js" %}'></script>
+<script src='{% static "tms/js/plugins/dataTables.bootstrap4.min.js" %}'></script>
+<script>
+    $( ".status" ).change(function () {
+        var id = $(this).attr('id')
+        var value = $("#"+id).val()
+        $.ajax({
+            url: '/mlm_admin/orderstatus/'+id,
+            data: {
+              'status': value,
+              'myid': id
+          },
+          dataType: 'json',
+          success: function (data) {
+            alert(data.data);
+        }
+    });
+    });
+</script>
+
+<script>
+    $( ".change_mc_status" ).change(function () {
+        var id = $(this).attr('id')
+        var mc_value = $("#"+id).val()
+        $.ajax({
+            url: '/mlm_admin/change_mc_status/'+id,
+            data: {
+              'change_mc_status': mc_value,
+              'myid': id
+          },
+          dataType: 'json',
+          success: function (data) {
+            alert(data.data);
+        }
+    });
+    });
+</script>

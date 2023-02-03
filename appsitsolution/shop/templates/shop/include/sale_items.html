@@ -1,0 +1,45 @@
+<tr class="prod_tbl">
+    <td>
+        <select class="form-control select2 product" id="add{{prod_id}}"  name="item">
+            <option value=0>Select Option</option>
+            {% for i in items %}
+                <option value={{i.pk}} {% if line_item.product_id == i.pk %} selected{% endif %}>{{i.product_code}} - {{i.product_name}}</option>
+            {% endfor %}
+        </select>
+    </td>
+    <td>
+        <select class="form-control select2 batches batch_class" id="batch{{prod_id}}" name="batch">
+            {% for i in batches %}
+                {% if i.product.pk == line_item.product.pk %}
+                    <option value={{i.pk}}  {% if line_item.batch_id == i.pk %} selected {% endif %}>{{i.batch_name}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <br>  
+        <spam class="error alert-danger" id='batch_spam{{prod_id}}'></spam>
+    </td>
+    <td>
+        <input type="text" class="quantity" id="quantity{{prod_id}}" name="quaantity_item" value="{% if line_item.quantity %}{{ line_item.quantity }}{% else %}0{% endif %}"> <spam class="error alert-danger" id = 'quantity_spam{{prod_id}}'></spam>
+        <input type="hidden"  id="quantity_input{{prod_id}}" name="check_quantity" value=0>
+    </td>
+    <td><input type="text" class="price" id="price{{prod_id}}" name="distributor_price" readonly value="{% if line_item.price %}{{ line_item.price }}{% else %}0{% endif %}"></td>
+    <td style="display:none;"><input type="text" class="cgst" id="cgst{{prod_id}}" name="cgst_item" readonly value="{% if line_item.cgst %}{{ line_item.cgst }}{% else %}0{% endif %}"></td>
+    <td style="display:none;"><input type="text" class="sgst" id="sgst{{prod_id}}" name="sgst_item" readonly value="{% if line_item.sgst %}{{ line_item.sgst }}{% else %}0{% endif %}"></td>
+    <td style="display:none;"><input type="text" class="igst" id="igst{{prod_id}}" name="igst_item" readonly value="{% if line_item.igst %}{{ line_item.igst }}{% else %}0{% endif %}"></td>
+    <!-- <td><input type="text" class="vat" id="vat{{prod_id}}" name="vat_item" readonly value=0></td> -->
+    <td>
+        <input type="text" class="totalamount" name="totalamount_item" id="totalamount_item{{prod_id}}" readonly value="{% if line_item.cost %}{{ line_item.cost }}{% else %}0{% endif %}">
+    </td>
+
+    <td style="display:none;"><input type="text" class="pv_hidden" name="pv_hidden" id="pv_hidden{{prod_id}}" readonly value="{{line_item.pv}}"></td>
+
+    <td {% if loyalty %}style="display:none;"{% endif %}><input type="text" class="pv" name="pv_item" id="pv{{prod_id}}" readonly value="{{line_item.pv}}"></td>
+
+    <td style="display:none;"><input type="text" class="bv_hidden" name="bv_hidden" id="bv_hidden{{prod_id}}" readonly value="{{line_item.bv}}"></td>
+
+    <td {% if loyalty %}style="display:none;"{% endif %}><input type="text" class="bv" name="bv_item" id="bv{{prod_id}}" readonly value="{{line_item.bv}}"></td>
+
+    {% if line_item %}
+        <td><i class="fa fa-trash dailyreport_dataDelete" alt="Delete" title="Delete" onclick="return myFunctiondata({{forloop.counter}})"></i></td>
+    {% endif %}
+</tr>

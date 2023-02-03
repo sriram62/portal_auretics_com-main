@@ -1,0 +1,52 @@
+<div class="modal fade" id="signup" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Register</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+<div class="modal-body">
+					<div class="submit-form login-form">
+						<form action="{% url 'register' %}" method="POST" name="" id="signup-form"> {% csrf_token %}
+							{{form}}
+							{{hello}}
+							<!-- <div class="form-group">
+								<input type="text" placeholder="First Name*" name="firstname" id="firstname" value="" />
+								<div class="error alert-error"  id="e_firstname" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Last Name*"  name="lastname" id="lastname" value=""  />
+								<div class="error alert-error"  id="e_lastname" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Email ID*"  name="email" id="email" value=""   />
+								<div class="error alert-error"  id="e_email" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Mobile No.*" id="phone" name="phone"   value=""/>
+								<div class="error alert-error"  id="e_phone" style="display:none;" ></div>
+							</div> 
+							<div class="form-group">
+								<input type="password" placeholder="Password*" id="password" name="password" />
+								<div class="error alert-error"  id="e_password" style="display:none;" ></div>
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Confirm Password*" id="confirmpassword" name="confirmpassword">
+								<div class="error alert-error"  id="e_confirmpassword" style="display:none;" ></div>
+							</div>-->
+							<div class="text-center mt-40 mb-35">
+                              <!-- <button class="lezada-button lezada-button--medium">Register</button> -->
+                                <input class="lezada-button lezada-button--medium" type="submit" value="Register">
+							</div>
+							<div class="text-center mb-10">
+								<a type="button" data-toggle="modal" data-target="#login">Already have account? Login</a>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>

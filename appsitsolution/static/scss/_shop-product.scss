@@ -1,0 +1,618 @@
+
+/*=============================================
+=            26. Shop product            =
+=============================================*/
+
+
+
+.shop-product{
+    
+    /*----------  shop product description  ----------*/
+    &__description{
+        position: relative;
+    }
+
+    
+    /*----------  navigation arrow  ----------*/
+    
+    &__navigation{
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        @media #{$extra-small-mobile}{
+            display: none;
+        }
+
+        a{
+            font-size: 34px;
+            color: #ababab;
+            margin-right: 10px;
+
+            &:last-child{
+                margin-right: 0;
+            }
+
+            &:hover{
+                color: #333;
+            }
+        }
+    }
+
+    
+    /*----------  rating  ----------*/
+    
+    &__rating{
+        .product-rating{
+            i{
+                font-size: 16px;
+                &.active{
+                    color: #f5cc26;
+                }
+            }
+        }
+
+        .review-link{
+            a{
+                color: #7e7e7e;
+                &:hover{
+                    color: #333;
+                }
+            }
+        }
+    }
+
+
+    
+    /*----------  title  ----------*/
+    
+    &__title{
+        h2{
+            font-size: 34px;
+        }
+    }
+
+
+    
+    /*----------  price  ----------*/
+    
+    &__price{
+        .main-price{
+            font-size: 18px;
+            line-height: 28px;
+            font-weight: 600;
+            color: #333;
+
+            &.discounted{
+                font-size: 15px;
+                color: #aaa;
+                text-decoration: line-through;
+                margin-right: 10px;
+            }
+        }
+        .discounted-price{
+            font-size: 18px;
+            line-height: 28px;
+            font-weight: 600;
+            color: #333;
+        }
+    }
+
+    
+    /*----------  short description  ----------*/
+    
+    &__short-desc{
+        font-size: 15px;
+        line-height: 24px;
+    }
+
+    
+    /*----------  buttons  ----------*/
+    
+    &__buttons{
+        .lezada-compare-button{
+            font-size: 0;
+            display: inline-block;
+            height: 44px;
+            width: 44px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid #d8d8d8;
+
+            i{
+                font-size: 20px;
+                color: #ababab;
+                line-height: 40px;
+            }
+
+            &:hover{
+                background-color: #333;
+                border-color: #333;
+
+                i{
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    
+    /*----------  product block  ----------*/
+    
+    &__block{
+        
+        display: flex;
+        align-items: center;
+        &__title{
+            flex-basis: 25%;
+            font-size: 16px;
+            line-height: 32px;
+            color: #333;
+            font-weight: 500;
+
+            @media #{$extra-small-mobile}{
+                flex-basis: 100px;
+            }
+        }
+
+        &__value{
+
+            .shop-product-size-list{
+                .single-size{
+                    font-size: 24px;
+                    line-height: 24px;
+                    color: #ababab;
+                    margin-right: 35px;
+                    cursor: pointer;
+
+                    @media #{$extra-small-mobile}{
+                        margin-right: 25px;    
+                    }
+
+                    &:last-child{
+                        margin-right: 0;
+                    }
+
+                    &.active{
+                        color: #333;
+                    }
+
+                    &:hover{
+                        color: #333;
+                    }
+                }
+            }
+
+            .shop-product-color-list{
+                ul{
+                    li{
+                        a{
+                            span{
+                                height: 24px;
+                                width: 24px;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }  
+    }
+
+
+    
+    /*----------  brands  ----------*/
+    
+    &__brands{
+        display: flex;
+        align-items: center;
+        a{
+            display: block;
+        }
+    }
+
+
+    
+    /*----------  description tab  ----------*/
+    
+    &__description-tab{
+
+
+
+        border-top: 1px solid #ededed;
+
+        &--double-border{
+            border-bottom: 1px solid #ededed;
+        }
+
+        .tab-product-navigation--product-desc{
+            .nav-tabs{
+                a{
+                    font-size: 28px;
+                    line-height: 50px;
+                    color: #ababab;
+
+                    @media #{$tablet-device}{
+                        font-size: 18px;
+                        line-height: 40px;
+                    }
+
+                    @media #{$large-mobile}{
+                        font-size: 18px;
+                        line-height: 40px;
+                    }
+
+                    @media #{$small-mobile}{
+                        font-size: 16px;
+                        line-height: 30px;
+                    }
+
+                    @media #{$extra-small-mobile}{
+                        font-size: 22px;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+    }
+
+    
+    /*----------  long description  ----------*/
+    
+    &__long-desc{
+
+        p{
+            max-width: 70%;
+            margin: 0 auto;
+            
+            @media #{$large-mobile}{
+                max-width: 100%;
+                
+            }
+        }
+        &--wide{
+            p{
+                max-width: 50%;
+
+                @media #{$large-mobile}{
+                    max-width: 100%;
+                    
+                }
+            }
+        }
+    }
+
+    
+    /*----------  additional information  ----------*/
+    
+    &__additional-info{
+        .shop-attributes{
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            font-size: 16px;
+            border-bottom: 1px solid #ededed; 
+
+            th{
+                font-size: 14px;
+                font-weight: 500;
+                color: #333333;
+                border-top: 1px solid #ededed;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            td{
+                font-size: 14px;
+                padding: 6px 10px 6px 0;
+                border-top: 1px solid #ededed;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                text-align: center; 
+
+                &:first-of-type{
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+
+
+    
+    /*----------  review section     ----------*/
+    
+
+    &__review{
+
+        
+        max-width: 70%;
+        margin: 0 auto;
+
+        @media #{$large-mobile}{
+            max-width: 100%;
+    
+        } 
+
+        &--wide{
+            max-width: 50%; 
+            @media #{$large-mobile}{
+                max-width: 100%;
+        
+            } 
+        } 
+
+
+        .review-title{
+            font-size: 24px;
+            line-height: 28px;
+            color: #333;
+            font-weight: 400;
+            text-align: center;
+        }
+    }
+
+ 
+
+    
+    /*----------  lezada form review  ----------*/
+
+    .lezada-form--review{
+        .rating-title{
+            font-size: 14px;
+            line-height: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .product-rating{
+            i{
+                cursor: pointer;
+ 
+            }
+        }
+    }
+
+
+    
+    /*----------  shop product image gallery  ----------*/
+    
+    .shop-product__big-image-gallery-wrapper{
+        position: relative;
+        cursor: crosshair;
+
+        .single-product__floating-badges--shop-product{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .shop-product-rightside-icons{
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 3;
+
+            span{
+                display: flex;
+                flex-direction: column;
+                color: #7e7e7e;
+
+                a{
+                    &:hover{
+                        color: #333;
+                    }
+                }
+            }
+
+            .wishlist-icon{
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+
+            .enlarge-icon{
+                font-size: 30px;
+
+            }
+        }
+    }
+
+
+    
+    /*----------  variation image  ----------*/
+    
+    &__variation-image{
+
+        &__title{
+            a{
+                font-size: 15px;
+                line-height: 24px;
+                font-weight: 600;
+                color: #7e7e7e;
+
+
+                &:hover{
+                    color: #333;
+                }
+            }
+        }
+
+        display: flex;
+        flex-wrap: wrap;
+        .single-image{
+            position: relative;
+            flex-basis: 25%;
+
+            @media #{$tablet-device}{
+                flex-basis: 50%;
+            }
+
+            @media #{$large-mobile}{
+                flex-basis: 50%;
+            }
+            @media #{$extra-small-mobile}{
+                flex-basis: 100%;
+            }
+
+            &:before{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #000;
+                content: "";
+                visibility: hideen;
+                opacity: 0;
+                transition: 0.6s;
+
+            }
+
+            &:after{
+                content: '';
+                height: 1px;
+                width: 0;  
+                position: absolute;
+                left: 22%;
+                top: 50%;
+                background-color: #ffffff;
+                transition-duration: .5s;
+                transform: translate(-50%, -50%);                                                
+            }
+
+            .image-meta{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-55%, -50%);
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: #ffffff;
+                visibility: hidden;
+                opacity: 0;
+                width: 100%;
+                text-align: center;
+                
+            }
+
+            &:hover{
+                &:before{
+                    visibility: visible;
+                    opacity: 0.5;
+                }
+
+                &:after{
+                    width: 30px; 
+                }
+
+                .image-meta{
+                    visibility: visible;
+                    opacity: 1;
+                    transform: translate(-50%, -50%);
+                    
+                }
+            }
+        }
+    }
+
+    
+    /*----------  extra info area  ----------*/
+    
+    &__extra-info-area{
+        background-color: #eee;
+    }
+
+    
+    /*----------  extra info   ----------*/
+    
+    &__extra-info{
+        table{
+            border-collapse: collapse;
+            border-spacing: 0;
+            font-size: 14px;
+            line-height: 2;
+            border-bottom: 1px solid #ededed;
+
+            td{
+                padding: 6px 10px 6px 10px;
+            }
+        }
+    }
+
+    
+    /*----------  extra info video  ----------*/
+    
+    &__extra-info-video{
+        .video-area{
+            height: 800px; 
+
+            @media #{$laptop-device}{
+                height: 600px;
+            }
+
+            @media #{$desktop-device}{
+                height: 500px;
+            }
+
+            @media #{$tablet-device}{
+                height: 300px;
+            }
+
+            @media #{$large-mobile}{
+                height: 300px;
+            }
+        }
+    }
+
+
+}
+
+   
+    /*----------  single review  ----------*/
+    
+    .single-review{
+        
+        display: flex;
+        border-bottom: 1px solid #e8e8e8;
+        padding-bottom: 40px;
+        margin-bottom: 40px;
+
+        
+        &__image{
+            flex-basis: 70px;
+            img{
+                border-radius: 50%;
+            }
+        }
+
+        &__content{
+            flex-basis: calc(100% - 70px);
+            padding-left: 30px;
+
+            .username{
+                font-size: 18px;
+                line-height: 28px;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .date{
+                font-size: 14px;
+                line-height: 22px;
+                color: #777;
+                font-weight: 400;
+                padding-left: 20px;
+            }
+
+            .message{
+                font-size: 18px;
+                line-height: 28px;
+            }
+        }
+    }
+    
+
+/*=====  End of 26. Shop product  ======*/
+

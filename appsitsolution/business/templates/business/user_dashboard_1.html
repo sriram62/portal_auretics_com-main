@@ -1,0 +1,139 @@
+{% load static %}
+{% load humanize %}
+{% include "business/include/header.html" %}
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">DASHBOARD</h2>
+                <h5 class="calc_page_title_1 mb-4">Please make sure that your Details with us are always correct and updated</h5>
+                </div>
+                <div class="col-md-4">
+                    <div class="user_profile">
+                    <img src="https://848271.smushcdn.com/1798447/wp-content/uploads/sites/11/2021/05/Lifestyle-Fund-1.png">
+                    <h1>Profile Details</h1>
+                    <h2><span>Name</span> : {{request.user.profile.first_name}}  {{request.user.profile.last_name}}</h2>
+                    <h3><span>Distributor Id</span> : {{request.user.referralcode.referral_code}}</h3>
+                    <h5><span>Advisor Level</span> : <strong> {% if title_qs != False %} {{title_qs.highest_qualification_ever}} {% else %} Blue Advisor{% endif %}</strong></h5>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="user_profile">
+                    <img src="https://848271.smushcdn.com/1798447/wp-content/uploads/sites/11/2021/01/retail-1.png">
+                    <h1>Contact Details</h1>
+                    <h2><span>Email Id</span> : {{request.user.email}}</h2>
+                    <h3><span>Mobile</span> : +91-{{request.user.profile.phone_number}}</h3>
+                    <h5><span>Address</span> : <strong>{{request.user.profile.shipping_address.city}}, {{request.user.profile.shipping_address.state}}, India</strong></h5>
+                    </div>
+                    </div>
+                     <div class="col-md-4">
+                    <div class="user_profile">
+                    <img src="https://848271.smushcdn.com/1798447/wp-content/uploads/sites/11/2021/01/retail-1.png">
+                    <h1>Bank Details</h1>
+                    <h2><span>Bank Name</span> : {{request.user.bankaccountdetails.bank_name}}</h2>
+                    <h3><span>Branch Name</span> : {{request.user.bankaccountdetails.branch_name}}</h3>
+                    <h5><span>Account Number</span> : <strong>{{request.user.bankaccountdetails.account_number}}</strong></h5>
+                    <h5><span>IFSC Code</span> : <strong>{{request.user.bankaccountdetails.ifsc_code}}</strong></h5>
+                    <h5><span>PAN No</span> : <strong>{{request.user.kyc.pan_number}}</strong></h5>
+                    </div>
+                    </div>
+                <div class="col-md-4 active_status mt-5">
+                     <div class="user_profile_1">
+                    <h1>Your<br />TBV Details</h1><br />
+
+                    <p><strong>TBV (Current Month)</strong> : {{tbv_cm|intcomma}}/-</p>
+                    <p><strong>TBV (Previous Month)</strong> : {{tbv_pm|intcomma}}/-</p>
+                    <p><strong>TBV (Accumulated)</strong> : {{tbv_acc|intcomma}}/-</p><br /><br />
+                    <p><br /></p>
+
+
+                </div>
+                    </div>
+                    <div class="col-md-4 active_status mt-5">
+                      <div class="user_profile_1">
+                      <h1>Total PBV<br />earned in the Current Month</h1><br /><br /><br />
+                      <p><strong>PBV</strong> : {{bv|intcomma}}/-</p>
+  <!--                    <p>Director Status</p>-->
+  <!--                    <div class="btn-group btn-group-toggle" data-toggle="buttons">-->
+  <!--                    <label class="btn btn-secondary active">-->
+  <!--                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Active-->
+  <!--                    </label>-->
+  <!--                    <label class="btn btn-secondary disable">-->
+  <!--                    <input type="radio" name="options" id="option2" autocomplete="off"> Inactive-->
+  <!--                    </label>-->
+  <!--                    </div>-->
+                      </div>
+                    </div>
+                    <div class="col-md-4 active_status mt-5">
+                    <div class="user_profile_1">
+                    <h1>Total PPV<br />earned in the Current Month</h1>
+                    <p><strong>PPV</strong> : {{pv|intcomma}}/-</p>
+                    <p>Advisor Status</p>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    {% if query_qs.minimum_monthly_purchase_to_become_active < pv %}
+                    <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked onclick="return false;" readonly> Active
+                    </label>
+                    {% else %}
+                    <label class="btn btn-secondary disable">
+                    <input type="radio" name="options" id="option2" autocomplete="off" onclick="return false;" readonly> Inactive
+                    </label>
+                    {% endif %}
+                        <p><br /></p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-4 active_status mt-4">
+                      <div class="user_profile_1">
+                      <h1>Note</h1>
+                      <p>In case any change is required, please contact support at: <a href="mailto:support@auretics.com">support@auretics.com</a> or <br>call <a href="tel:18008890360">1800 889 0360</a></p>
+                      </div>
+                    </div>
+                    <div class="col-md-4 active_status mt-5">
+                         <div class="user_profile_1">
+                        <h1>Your<br />Registration Status</h1><br /><br /><br />
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+{#                        <label class="btn btn-secondary active" onclick="return false;">#}
+{#                        <input type="radio" name="options" id="option1" autocomplete="off" onclick="return false;"> Complete#}
+{#                        </label>#}
+{#                        <label class="btn btn-secondary disable" onclick="return false;">#}
+{#                        <input type="radio" name="options" id="option2" autocomplete="off" checked onclick="return false;"> Pending#}
+{#                      </label>#}
+                                {% if registration_status %}
+                                <label class="btn btn-secondary active">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked onclick="return false;" readonly>Complete
+                                </label>
+                            {% else %}
+                            <label class="btn btn-secondary disable">
+                                <input type="radio" name="options" id="option2" autocomplete="off"
+                                       onclick="return false;" readonly>Pending
+                            </label>
+                            {% endif %}
+                            <p><br/></p>
+                        </div>
+                         </div>
+                    </div>
+                    <div class="col-md-4 active_status mt-5">
+                        <div class="user_profile_1">
+                            <img class="img-thumbnail" src="{{ user.profile.avatar.url }}"
+                                 style="width: 100px; height: 100px;">
+                            <h1>Your Profile Picture</h1>
+                            <a href={% url "change_avatar" %} class="btn btn-secondary">Change</a>
+                            <p><br/></p>
+                        </div>
+                    </div>
+                </div>
+
+                    <!--<div class="modal-footer">-->
+                    <!--    <button class="btn btn-primary" type="submit"> Edit </button>-->
+
+                    <!--</div>-->
+                </div>
+    </form>
+
+        </div>
+</div>
+{% include "business/include/footer.html" %}

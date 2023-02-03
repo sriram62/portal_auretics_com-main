@@ -1,0 +1,313 @@
+                        {% load static %}
+                            <tr class="prod_tbl">
+                                <td><select class="form-control select2 product" id="add{{cnt_multiple_product}}"  name="item" style="width: 175px">
+                                    <option value=0>Select Option</option>
+                                    {% for i in items %}
+                                        <option value={{i.pk}}>{{i.product_code}} - {{i.product_name}}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                </td>
+                                <td><select class="form-control batches select2 batch_class" id="batch{{cnt_multiple_product}}" name="batch" style="width: 125px">
+                                    <option value=0>Select Option</option>
+                                </select>
+                                  <br>  <spam class="error alert-danger" id='batch_spam{{cnt_multiple_product}}'></spam>
+                                        </td>
+                                <td><input type="text" class="quantity" id="quantity{{cnt_multiple_product}}" name="quaantity_item" value=0><spam class="error alert-danger" id = 'quantity_spam{{cnt_multiple_product}}'></spam></spam>
+                                    <input type="hidden" name="check_quantity" id="quantity_input{{cnt_multiple_product}}" value=0></td>
+                                <td><input type="text" class="price" id="price{{cnt_multiple_product}}" name="distributor_price" readonly value=0></td>
+                                <!-- <td><input type="text" class="price" id="mrp_price{{cnt_multiple_product}}" name="distributor_mrp_price" readonly value=0></td> -->
+                                <td style="display:none;"><input type="text" class="cgst" id="cgst{{cnt_multiple_product}}" name="cgst_item" readonly value=0></td>
+                                <!-- <td><input type="text" class="vat" id="vat{{cnt_multiple_product}}" name="vat_item" readonly value=0></td> -->
+                                <td style="display:none;"><input type="text" class="sgst" id="sgst{{cnt_multiple_product}}" name="sgst_item" readonly value=0></td>
+                                <td class="tigst"><input type="text" class="igst" id="igst{{cnt_multiple_product}}" name="igst_item" readonly  value=0></td>
+                                <td><input type="text" class="totalamount" name="totalamount_item"  id="totalamount_item{{cnt_multiple_product}}" readonly value=0></td>
+                               <!-- <td><input type="text" class="totalamount" name="total_incurred_amount_item" id="total_incurred_amount_item{{prod_id}}" readonly value=0></td> -->
+                                <td style="display:none;"><input type="hidden" class="pv_hidden" name="pv_hidden" id="pv_hidden{{cnt_multiple_product}}" readonly value=0></td>
+                                <td><input type="text" class="pv" name="pv_item" id="pv{{cnt_multiple_product}}" readonly value=0></td>
+                                <td style="display:none;"><input type="hidden" class="bv_hidden" name="bv_hidden" id="bv_hidden{{cnt_multiple_product}}" readonly value=0></td>
+                                <td><input type="text" class="bv" name="bv_item" id="bv{{cnt_multiple_product}}" readonly value=0></td>
+		                        <td>
+			                        <i class="fa fa-trash dailyreport_dataDelete" alt="Delete" title="Delete"  onclick="return myFunctiondata({{cnt_multiple_product}})"></i>
+		                        </td>
+                                </tr>
+
+<script>
+
+$('.cgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.sgst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+$('.igst').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+// $('.vat').keypress(function(event) {
+//   if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+//     event.preventDefault();
+//   }
+// });
+$('.price').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+    $(".quantity").on("keypress keyup blur",function (event) {
+   $(this).val($(this).val().replace(/[^\d].+/, ""));
+   var quantity = $(".quantity").val().length;
+    if ((event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+$('.totalamount').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+</script>
+<script>
+$( ".batches" ).change(function () {
+    var id = $(this).attr('id')
+    var batch = $("#"+id).val()
+    var res = id.slice(5);
+    var product = $("#add"+res).val()
+    var priceval = $("#totalamount_item"+res).val()
+    var sale_type = $("#sale_type").val()
+    var grand_total = $("#grand_total").val()
+    var material_center = $("#material_center").val()
+    $.ajax({
+        url: '/distributor/product_detail',
+        data: {
+          'product_id': product,
+          'batch_id':batch,
+          'sale_type':sale_type,
+          'myid': id,
+          'material_center': material_center,
+        },
+        dataType: 'json',
+        success: function (data) {
+        $("#price"+res).val(data['distributor_price']);
+        // $("#mrp_price"+res).val(data['mrp']);
+        $("#cgst"+res).val(data['cgst']);
+        $("#sgst"+res).val(data['sgst']);
+        $("#igst"+res).val(data['igst']);
+        $("#pv_hidden"+res).val(data['pv']);
+        // $("#pv"+res).val(data['pv']);
+        $("#bv_hidden"+res).val(data['bv']);
+        // $("#bv"+res).val(data['bv']);
+        // $("#vat"+res).val(data['vat']);
+        $("#quantity_input"+res).val(data['batch_quantity']);
+        $("#quantity_spam" + res).html('maximum : ' + data['batch_quantity']);
+
+        },
+        error: function(data) {
+
+        $("#price"+res).val(data[0]);
+        $("#cgst"+res).val(data[0]);
+        $("#sgst"+res).val(data[0]);
+        $("#igst"+res).val(data[0]);
+        $("#pv_hidden"+res).val(data[0]);
+        // $("#pv"+res).val(data[0]);
+        $("#bv_hidden"+res).val(data[0]);
+        // $("#bv"+res).val(data[0]);
+        // $("#vat"+res).val(data[0]);
+        $("#quantity_input"+res).val();
+        $("#quantity_spam" + res).html('maximum : 0');
+        }
+      });
+      if (priceval == '' ){
+            priceval = 0;
+      }
+        priceval=parseFloat(priceval)
+        $("#grand_total").val(grand_total - priceval);
+        $("#totalamount_item"+res).val(0);
+        $("#quantity"+res).val(0);
+
+
+
+  });
+</script>
+	<script src='{% static "/mlm_admin/js/plugins/select2.full.min.js" %}' type="text/javascript"></script>
+	<script>
+		$(".select2").select2({
+			placeholder: "",
+			allowClear: true
+		});
+	</script>
+<script>
+
+$( ".product" ).change(function () {
+    var id = $(this).attr('id')
+    var product = $("#"+id).val()
+    var res = id.slice(3);
+    var batch_id = "#batch"+res
+    $.ajax({
+        url: '/mlm_admin/batch_field',
+        data: {
+          'product_id': product,
+          'cnt_multiple_product':cnt_multiple_product,
+          'myid': id
+        },
+        dataType: 'html',
+        success: function (data) {
+            $(batch_id).html(data);
+        }
+      });
+  });
+
+</script>
+<script>
+    $(".quantity").focusout(function(){
+    var id = $(this).attr('id');
+    var res = id.slice(8);
+    var quantity = $("#"+id).val();
+    var highestquantity = $("#quantity_input"+res).val();
+    if (quantity == '' || parseInt(quantity) > parseInt(highestquantity) ){
+    console.log(highestquantity);
+    $("#"+id).val(0);
+    quantity = 0
+    }
+    quantity = parseInt(quantity)
+    var price = $("#price"+res).val();
+    // var mrp_price = $("#mrp_price"+res).val();
+    price = parseFloat(price)
+    var igst = $("#igst"+res).val();
+    igst = parseFloat(igst)
+    var cgst = $("#cgst"+res).val();
+    cgst = parseFloat(cgst)
+    var sgst = $("#sgst"+res).val();
+    sgst = parseFloat(sgst)
+    // var vat = $("#vat"+res).val();
+    // vat = parseFloat(vat)
+    var grand_total = $("#grand_total").val();
+    grand_total = parseFloat(grand_total)
+    amount = $("#totalamount_item"+res).val();
+    value = parseFloat(amount)
+    grand_total = (grand_total - amount)
+    var sale_type = $("#sale_type").val()
+    // if (sale_type == '0'){
+    // // var value = quantity * mrp_price
+    // var value = quantity * mrp_price
+    // }
+    // if (sale_type == '1'){
+    // // var value = quantity * (price + igst + vat)
+    // var value = quantity * mrp_price
+    // }
+
+    if (sale_type == '0'){
+    // var value = quantity * (price + cgst + sgst + vat)
+        var value = quantity * (price + cgst + sgst)
+    }
+    if (sale_type == '1'){
+    // var value = quantity * (price + igst + vat)
+        var value = quantity * (price + igst)
+    }
+
+    value = parseFloat(value)
+    value = Math.round(value * 100) / 100
+
+    // Calculate Grand PV and BV (select current grand PV value)
+    var grand_pv = $("#grand_pv").val();
+    grand_pv = parseFloat(grand_pv)
+
+    var grand_bv = $("#grand_bv").val();
+    grand_bv = parseFloat(grand_bv)
+
+    // Select current Total PV and BV value
+    var pv_amount = $("#pv"+res).val();
+    var bv_amount = $("#bv"+res).val();
+
+    // Extract the all other PV and BV values
+    grand_pv_value_left = (grand_pv - pv_amount)
+    grand_bv_value_left = (grand_bv - bv_amount)
+
+    // Calculate total pv
+    var base_pv = $("#pv_hidden"+res).val()
+    base_pv = parseFloat(base_pv)
+    var base_bv = $("#bv_hidden"+res).val()
+    base_bv = parseFloat(base_bv)
+
+    base_pv = base_pv * quantity;
+    base_bv = base_bv * quantity;
+
+    $("#pv"+res).val(base_pv);
+    $("#bv"+res).val(base_bv);
+
+    $("#grand_pv").val(Math.round((grand_pv_value_left + base_pv) * 100) / 100);
+    $("#grand_bv").val(Math.round((grand_bv_value_left + base_bv) * 100) / 100);
+    $("#totalamount_item"+res).val(value);
+    $("#grand_total").val(value + grand_total);
+
+    // var actual_new_grand_total = parseFloat(value-amount +  parseFloat($('#actual_grand_total').val())).toFixed(2);
+    // $('#actual_grand_total').val(actual_new_grand_total);
+    // var totalCri = parseFloat($('#available_cri_fixed').val()).toFixed(2);
+    // console.log('Total CRI '+totalCri+' new grand total '+actual_new_grand_total);
+    // if (parseFloat(totalCri) < parseFloat(actual_new_grand_total)){
+    //  var valueToAdd = 0;
+
+    //  var valueToAdd =  parseFloat(actual_new_grand_total)- parseFloat(totalCri);
+    //  // console.log(' Value '+value+' Value to add '+valueToAdd+' price '+price+' mrp '+mrp_price);
+    //  valueToAdd = quantity * (price * valueToAdd/mrp_price/quantity);
+    //  setAvailableCRIValue(0);
+    //  // $("#total_incurred_amount_item"+res).val(valueToAdd);
+    //  $("#grand_total").val(parseFloat(valueToAdd).toFixed(2));
+
+    //  // pv and bv part
+    //  base_pv = (base_pv * valueToAdd/mrp_price/quantity) * quantity;
+    // base_bv = (base_bv * valueToAdd/mrp_price/quantity) * quantity;
+
+    // $("#pv"+res).val(base_pv);
+    // $("#bv"+res).val(base_bv);
+    // $("#grand_pv").val(Math.round((grand_pv_value_left + base_pv) * 100) / 100);
+    // $("#grand_bv").val(Math.round((grand_bv_value_left + base_bv) * 100) / 100);
+
+
+    //  }
+    //  else {
+    //  console.log('else part');
+    //  decreaseAvailableCRIValue(actual_new_grand_total);
+    //    // $("#total_incurred_amount_item"+res).val(0);
+    //   $("#grand_total").val(0);
+    //  $("#bv"+res).val(0);
+    //  $("#grand_total").val(0);
+    //  $("#grand_pv").val(0);
+    // $("#grand_bv").val(0);
+    //  }
+});
+    </script>
+<script>
+
+$(document).ready(function() {
+
+var value = $('#sale_type').val();
+		if(value=='1') {
+			$(".tigst").show();
+			$(".tsgst").hide();
+			$(".tcgst").hide();
+		} else {
+			$(".tsgst").show();
+			$(".tcgst").show();
+			$(".tigst").hide();
+		}
+    $(document.body).on('change', '#sale_type', function () {
+		var emval = $('#sale_type').val();
+
+		if(emval=='1') {
+			$(".tigst").css("display","block");
+			$(".tsgst").css("display","none");
+			$(".tcgst").css("display","none");
+		} else {
+			$(".tsgst").css("display","block");
+			$(".tcgst").css("display","block");
+			$(".tigst").css("display","none");
+		}
+});
+});
+</script>

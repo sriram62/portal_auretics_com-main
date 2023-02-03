@@ -1,0 +1,54 @@
+{% load static %}
+{% include "business/include/header.html" %}
+
+<div class="pcoded-main-container">
+        <div class="modal-content">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="container-fluid">
+                <div class="row table_bg_bonus">
+                    <div class="col-md-12 mt-4">
+                <h2 class="calc_page_title mb-2">Consistent Retailer’s Income</h2>
+                <h5 class="calc_page_title_1 mb-4">Check out your retailer's income details</h5>
+                </div>
+                <div class="col-md-12 mt-4 mb-4">
+                    <div class="main_downline mt-4 mb-4">
+                        <div><p>Advisor Name: {{referall_code}} {{user_name}}</p></div>
+                    </div>
+                    <table><tr><td>
+                        <form method="get" action="{% url 'mlm_admin_user_dashboard_5' %}" accept-charset="utf-8">
+                            {% csrf_token %}
+                        <input type="search" class="form-control" id="q" name="q" placeholder="Enter ARN Number" /></td><td><button type="submit" class="btn  btn-primary">Search</button></form>
+                    </td></tr></table>
+                    <p color="red"><span><strong>{{ msg }}</strong></span></p>
+                    <br />
+                    <table class="table user_profile_bonus_1">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Particulars</th>
+                        <th scope="col">Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>Loyalty Purchase Earned</td>
+                        <td>{{loyalty_purchase_earned}}</td>
+                        </tr>
+                        <tr>
+                        <td>Loyalty Purchase Used</td>
+                        <td>{{loyalty_purchase_used}}</td>
+                        </tr>
+                        <tr>
+                        <td><strong>Balance</strong></td>
+                        <td><strong>{{balance}}</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                        </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+{% include "business/include/footer.html" %}

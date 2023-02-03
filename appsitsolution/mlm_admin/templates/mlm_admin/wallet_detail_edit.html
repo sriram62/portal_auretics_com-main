@@ -1,0 +1,188 @@
+ 
+
+  <style>
+    .arju_tab {
+    width: 100%;
+}
+</style>
+{% load static %}
+{% load shop_tag %}
+{% include "mlm_admin/include/header.html" %}
+<div class="pcoded-main-container">
+    {% for message in messages   %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+      <div class="text-center">
+      <strong>Messages: </strong> {{ message }}
+         </div>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    {% endfor %}
+    
+
+    <div class="modal-content">
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="modal-header">
+            <h5 class="modal-title">Wallet Configuration </h5>
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+        </div>
+     
+        <br>
+        
+        <div class="modal-body">
+             <h3 class="text-center">Wallet Details</h3>
+            <br>
+            <h3 class="">Edit Balance:  </h3>
+             <br>
+             <div class="row">
+           
+            <div class="col">
+            <h3 class=""> {{wallet_detail.current_balance}}</h3>
+           
+            </div>
+                <div class="col"> <select class="form-control"  name="action">
+                     
+                      <option value= "plus">+</option>
+                      <option value="min">-</option> 
+                                </select>
+                </div>
+                <div class="col">
+                    <input type="number" style="width: 100%;"  class="form-control text-center" id="category_name" name="balance"  >
+    
+                </div>
+                 
+            </div>
+            <hr>
+              <br>
+
+             <div class="row"> 
+          
+            
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="category_name"><small class="text-danger">* </small>ID</label>
+                       <input type="text" value=" {{wallet_detail.id}}" class="form-control" id="category_name" name="category_name" readonly placeholder="">
+                       
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="floating-label" for="is_parent_category"><small class="text-danger">* </small>Username</label>
+<!--                        <select class="form-control" id="is_parent_category" name="is_parent_category">-->
+<!--                            <option value="Yes">Yes</option>-->
+<!--                            <option value="No">No</option>-->
+<!--                        </select>-->
+<input type="" class="form-control" value="{{wallet_detail.user.username}}" id="commission" name="commission" disabled placeholder="">
+
+                </div>
+            </div>
+            </div>
+        <div class="container-fluid">
+            <h4 class="m-3 text-center">Extra Details</h4>
+        </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group fill">
+                        <label class="floating-label" for="description">User Email</label>
+<!--                            <textarea type="textarea" class="form-control" id="description" name="description" placeholder="Please Enter Description"></textarea>-->
+<input type="" class="form-control" value="{{wallet_detail.user.email}}" id="commission" name="commission" disabled placeholder="">
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group fill">
+                        <label class="floating-label" for="commission">User Full Name</label>
+                        <input type="" class="form-control" value="{{wallet_detail.user.profie.first_name}} {{wallet_detail.user.profile.last_name}}" id="commission" name="commission" disabled placeholder="">
+                    </div>
+                </div>
+
+            <div class="col-sm-6">
+            <div class="form-group form-primary mb-0">
+                        <label class="floating-label" for="commission">Wallet Type</label>
+
+<input type="" value="{{wallet_detail.type}}" class="form-control"  id="commission" name="type"   placeholder="">
+
+                                            <!-- <select class="form-control status" id="{{i.pk}}" disabled name="status" required>
+                                                    <option value="">Select an option</option>
+                                                    <option value="1" {% if status == 1 %} selected {% endif %} >Accept Order</option>
+                                                    <option value="2" {% if status == 2 %}  selected {% endif %} >Ready To Dispatch</option>
+                                                    <option value="3" {% if status == 3 %}  selected {% endif %} >Dispatched</option>
+                                                    <option value="4" {% if status == 4 %}  selected {% endif %} >Delivered</option>
+                                                    <option value="5" {% if status == 5 %}  selected {% endif %} >Reject Order</option>
+                                                    <option value="6" {% if status == 6 %}  selected {% endif %} >Refund</option>
+                                                    <option value="6" {% if status == 7 %}  selected {% endif %} >Return</option>
+                                            </select> -->
+                                            <span class="form-bar"></span>
+                                        </div>
+            </div>
+                <div class="col-sm-6">
+                    <div class="form-group fill">
+                        <label class="floating-label" for="show_on_home_page">Narration</label>
+<!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+<!--                            <option value='Show'>Show</option>-->
+<!--                            <option value='Not Show'>Not Show</option>-->
+<!--                        </select>-->
+<input type="" class="form-control"  value="{{wallet_detail.narration}}"  id="commission" name="narration"   placeholder="">
+
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group fill">
+                        <label class="floating-label" for="show_on_home_page">Remarks</label>
+<!--                            <select class="form-control" id="show_on_home_{verify_detail.id_proof_type}}page" name="show_on_home_page">-->
+<!--                            <option value='Show'>Show</option>-->
+<!--                            <option value='Not Show'>Not Show</option>-->
+<!--                        </select>-->
+<input type="" class="form-control" value="{{wallet_detail.remarks}}" id="commission" name="remarks"  placeholder="">
+ 
+                    </div>
+                </div>
+                 
+                 
+                <div class="col-sm-6">
+                    <div class="form-group fill">
+                        <label class="floating-label" for="show_on_home_page">Added by detail</label>
+<!--                            <select class="form-control" id="show_on_home_page" name="show_on_home_page">-->
+<!--                            <option value='Show'>Show</option>-->
+<!--                            <option value='Not Show'>Not Show</option>-->
+<!--                        </select>-->
+<textarea name="added_by_detail"  class="form-control">{{wallet_detail.added_by_detail}}</textarea>
+    
+                    </div>
+                </div>
+                                  
+
+
+                    </div>
+                  
+                    </div>
+                    <div class="container-fluid"> 
+              <div class="text-center"> 
+                        <button  style="width:90%" type="submit"  class="text-center btn btn-primary"  >Submit</button>
+
+          </div>
+                    </div>
+                        <br>
+                <br>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- cart page content end -->
+</div>
+<!--        show krne walla yha per end h-->
+        </div>
+    </div>
+</form>
+    </div>
+</div>
+{% include "mlm_admin/include/footer.html" %}
+ 

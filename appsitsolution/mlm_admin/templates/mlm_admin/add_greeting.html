@@ -1,0 +1,153 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">{{title}}</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">MLM Admin</a></li>
+                            <li class="breadcrumb-item"><a href="#menu_greetings">Greetings</a></li>
+                            <li class="breadcrumb-item"><a href="#menu_greetings">{{title}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        {% for message in messages %}
+                        <div class="alert
+                            alert-{% if message.tags == 'error'%}danger{% else %}{{ message.tags }}{% endif %}"
+                             role="alert">
+                            <div class="text-center">
+                                <strong>{{ message.tags|title }}: </strong> {{ message }}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        {% for error in greeting_form.errors %}
+                        <div class="alert alert-error" role="alert">
+                            <div class="text-center">
+                                <strong>Errors: </strong> {{ error }}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        <h5>Greetings Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <!--                        <div class="modal-content">-->
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="greeting_name"><small
+                                                    class="text-danger">* </small>Greeting Name</label>
+                                            <!--                                <input type="text" class="form-control" id="greeting_name" name="greeting_name" placeholder="Give a name for your greeting">-->
+                                            {{greeting_form.name}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="greeting_image"><small
+                                                    class="text-danger">* </small>Image</label>
+                                            <!--                                <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                                            {{greeting_form.image}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="trigger_date"><small
+                                                    class="text-danger">* </small>Trigger
+                                                Date</label>
+                                            <!--                                <input type="date" class="form-control" id="for_date" name="for_date">-->
+                                            {{greeting_form.trigger_date}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="greeting_status"><small
+                                                    class="text-danger">* </small>Status</label>
+                                            <!--                                <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                                            {{greeting_form.status}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="trigger_time"><small
+                                                    class="text-danger">* </small>Trigger
+                                                Time</label>
+                                            <!--                                <input type="date" class="form-control" id="for_date" name="for_date">-->
+                                            {{greeting_form.trigger_time}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="user_type"><small
+                                                    class="text-danger">* </small>For User (Type)</label>
+                                            <!--                                <input type="file" class="form-control" id="cat_image" name="cat_image" >-->
+                                            {{greeting_form.user_type}}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if greeting_form.instance.id %}
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <span class="border border-5">
+                                        <img src="{{greeting_form.instance.image.url}}"
+                                             class="img-fluid border rounded h-75"/>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="modal-footer">
+                                {% if greeting_form.instance.id%}
+                                <button class="btn btn-primary" type="submit"> Update</button>
+                                {% else %}
+                                <button class="btn btn-primary" type="submit"> Save</button>
+                                {% endif %}
+                                <button class="btn btn-danger" type="reset"> Clear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% include "mlm_admin/include/footer.html" %}
+<script>
+    $(document).ready(function () {
+        // Handler for .ready() called.
+        $('html, body').animate({
+            scrollTop: $('#menu_greetings').offset().top
+        }, 'slow');
+    });
+
+
+</script>

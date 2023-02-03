@@ -1,0 +1,86 @@
+{% load static %}
+{% include "mlm_admin/include/header.html" %}
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">{{title}}</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">MLM Admin</a></li>
+                            <li class="breadcrumb-item"><a href="#menu_greetings">Greetings</a></li>
+                            <li class="breadcrumb-item"><a href="#menu_greetings">{{title}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!--                        <div class="modal-content">-->
+                        <form method="post" enctype="multipart/form-data" id="bulk_send_form">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="csv_file_input"><small
+                                                    class="text-danger">* </small>Upload CSV</label>
+                                            <input type="file" class="form-control" id="csv_file_input"
+                                                   name="csv_file_input"
+                                                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="message"><small
+                                                    class="text-danger">* </small>Message</label>
+                                            <textarea form="bulk_send_form" class="form-control" id="message"
+                                                      name="message"
+                                                      placeholder="Message with field names in double square brackets eg:<<first_name>>"
+                                            ></textarea>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="bulk_image">Upload Image</label>
+                                            <input type="file" class="form-control" id="bulk_image"
+                                                   name="bulk_image">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="submit">Send</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "mlm_admin/include/footer.html" %}
+<script>
+    $(document).ready(function () {
+        // Handler for .ready() called.
+        $('html, body').animate({
+            scrollTop: $('#menu_greetings').offset().top
+        }, 'slow');
+    });
+
+
+
+</script>

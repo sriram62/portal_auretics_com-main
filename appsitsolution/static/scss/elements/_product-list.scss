@@ -1,0 +1,63 @@
+
+/*=============================================
+=            20. Product list            =
+=============================================*/
+
+.column-five{
+    [class*="col-lg-"] {
+        @media only screen and (min-width: 1200px){
+            flex-basis: 20%;
+        }
+    }
+}
+
+
+.col-xl-is-five{
+    @media only screen and (min-width: 1200px){
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
+.col-lg-is-5{
+    @media only screen and (min-width: 992px){
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
+
+/*----------  tab product style  ----------*/
+
+.tab-product-navigation{
+    .nav-tabs{
+        border-bottom: none;
+
+        .nav-link{
+            border: none;
+            font-size: 48px;
+            line-height: 64px;
+            color: #ccc;
+
+            @media #{$large-mobile}{
+                font-size: 38px;
+                line-height: 55px;
+            }
+
+            @media #{$extra-small-mobile}{
+                font-size: 22px;
+                line-height: 32px;
+            }
+
+            &.active{
+                color: #333;
+            }
+
+            &:hover{
+                color: #333;
+            }
+        }
+    }
+}
+/*=====  End of 20. Product list  ======*/
+

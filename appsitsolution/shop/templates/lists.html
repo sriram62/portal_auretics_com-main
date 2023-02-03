@@ -1,0 +1,366 @@
+{% extends 'shop/base.html' %}
+{% load shop_tag %}
+
+{% block content %}
+<div class="wrapper">
+	<nav aria-label="breadcrumb" class="filter_short" style="background: {% if request.session.distributor_checkout %}#FFE28A{% else %}#f7f7f7{% endif %};">
+		<ol class="breadcrumb" style="background: {% if request.session.distributor_checkout %}#FFE28A{% else %}#f7f7f7{% endif %};">
+{#			<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>#}
+{#			<li class="breadcrumb-item active" aria-current="page">Products</li>#}
+		</ol>
+		{% include 'shop/include/top_purchase_center.html' %}
+		<div id="filter-wrapper" class="filter-wrapper filter-icons">
+			<div class="sort-by">
+				<button class="sort-btn" data-toggle="modal" data-target="#sortBy">
+					<i class="ti-arrows-vertical"></i> Sort By
+				</button>
+			</div>
+			<div class="filter-category">
+				<button class="filter-btn" data-toggle="modal" data-target="#filter">
+					<i class="ion-android-funnel"></i> Filter
+				</button>
+			</div>
+		</div>
+	</nav>
+
+
+	<!-- breadcrumb area end -->
+
+	<!-- shop page content -->
+	<div class="shop-page-wrapper">
+		<!-- shop page header -->
+
+		<!-- Sort Modal -->
+		<div class="modal fade sort-modal" id="sortBy" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Sort By</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label class="label-wrapper radiobtn">Price -- Low to High
+							<input class="radio-input" type="radio" name="filter" value="1" checked="checked">
+							<span class="checkmark"></span>
+						</label>
+						<label class="label-wrapper radiobtn">Price -- High to Low
+							<input class="radio-input" type="radio" name="filter" value="2">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Sort Modal end -->
+
+
+		<!-- Filter Modal -->
+		<form id='priceFilter' action=''>
+		<div class="modal fade filter-modal" id="filter" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Filter</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div id="accordion">
+							<div class="card">
+								<div class="card-header">
+									<a class="card-link" data-toggle="collapse" href="#category" aria-expanded="true" role="button">Category</a>
+								</div>
+								<div id="category" class="collapse show" data-parent="#accordion">
+									<div class="card-body">
+										<label class="label-wrapper checkbox">
+											<input class="radio-input2" type="checkbox" name="catcheck" id="selectall" value="allcategories">
+											<span class="checkmark"></span>
+											<span><b>All Categories</b></span>
+										</label>
+										{% for i in category %}
+										{% if i.delete == False and i.status == 'Active'%}
+										<label class="label-wrapper checkbox">
+											<input class="radio-input2 checkboxall" type="checkbox" name="catcheck" id="" value="{{i.cat_name}}">
+											<span class="checkmark"></span>
+											<span><b>{{i.cat_name|title }}</b></span>
+										</label>
+										{% for k in i.category_set.all %}
+										{% if k.delete == False and k.status == 'Active'%}
+										<label class="label-wrapper checkbox">
+											<input class="radio-input2 checkboxall" type="checkbox" name="catcheck" id="" value="{{k.cat_name}}">
+											<span class="checkmark"></span>
+											<span>{{k.cat_name|title }}</span>
+										</label>
+										{% endif %}
+										{% endfor %}
+										{% endif %}
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div>
+							<button class="lezada-button" type="button" id="apply">Apply</button>
+							<button class="lezada-button-outline" type="reset" id="clear">Clear</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<!-- Filter Modal end -->
+		<!-- shop page header end -->
+
+		<!-- shop page content -->
+		<div class="shop-page-content">
+			<div class="container" id ="productls">
+				<div class="row product-isotope shop-product-wrap" id="singleProduct">
+					<!-- single product -->
+
+					<!-- added manually  -->
+					{% for product in products_to_show %}
+					<div class="col-sm-6 col-md-3 hot sale">
+						<div class="single-product">
+							<div class="single-product__image">
+									{% if user_id %}
+								<a class="image-wrap" href="{% url 'product_detail' product.pk product.slug user_id %}">
+									{% else %}
+										<a class="image-wrap" href="{% url 'product_detail' product.pk product.slug %}">
+											{% endif %}
+									<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url  }}"
+                                         srcset ="
+                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url  }} 320w,
+                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image.url  }} 640w,
+{#                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image.url  }} 960w,#}
+{#<!--                                         /cdn-cgi/image/format=auto,metadata=none,width=1280{{ product.image.url  }} 1280w,-->#}
+{#<!--                                         /cdn-cgi/image/format=auto,metadata=none,width=2560{{ product.image.url  }} 2560w,-->#}
+                                                    "
+                                         class="img-fluid" alt="" />
+								</a>
+												{% if user.is_authenticated and  product.distributor_price != 0 %}
+								<div class="single-product__floating-badges">
+									<span class="onsale">-{{product.distributor_price|floatformat:1}}%</span>
+								</div>
+												{% endif%}
+
+							</div>
+							<div class="single-product__content">
+								<div class="title">
+									<a href="{% url 'product_detail' product.pk product.slug %}">{{ product.product_name }}</a>
+								</div>
+								{% if user.is_authenticated and product.distributor_price != 0  %}
+								<div class="price">
+									{% if not request.session.can_use_loyalty_purchase %}
+									<span class="main-price discounted">₹{% check product %}</span>
+									<span class="discounted-price">₹{% dis_price_include_tax product %}</span><br><br>
+									{% else %}
+										<span class="discounted-price">₹{% check product %}</span><br><br>
+									{% endif %}
+									<span class="discounted-price">BV - {% if request.session.can_use_loyalty_purchase %} 0 {% else %}{% business_volue product %} {%endif%}</span><br>
+									<span class="discounted-price">PV -  {% if request.session.can_use_loyalty_purchase %} 0 {% else %} {% point_volue product %} {%endif%}</span>
+								</div>
+								{% else %}
+								<div class="price">
+									<span class="discounted-price">₹{% check product %}</span>
+								</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+                    {% endfor %}
+<!------------------------------------------------------------------------ -->
+					{% for product in all_products %}
+					<div class="col-sm-6 col-md-3 hot sale">
+						<div class="single-product">
+							<div class="single-product__image">
+								{% if user_id %}
+								<a class="image-wrap" href="{% url 'product_detail' product.pk product.slug user_id %}">
+									{% else %}
+										<a class="image-wrap" href="{% url 'product_detail' product.pk product.slug %}">
+											{% endif %}
+
+									<img src="/cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url  }}"
+                                         srcset ="
+                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=320{{ product.image.url  }} 320w,
+                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=640{{ product.image.url  }} 640w,
+{#                                         /cdn-cgi/image/format=auto,fit=scale-down,metadata=none,width=960{{ product.image.url  }} 960w,#}
+{#<!--                                         /cdn-cgi/image/format=auto,metadata=none,width=1280{{ product.image.url  }} 1280w,-->#}
+{#<!--                                         /cdn-cgi/image/format=auto,metadata=none,width=2560{{ product.image.url  }} 2560w,-->#}
+                                                    "
+                                         class="img-fluid" alt="" />
+								</a>
+												{% if user.is_authenticated and  product.distributor_price != 0 %}
+								<div class="single-product__floating-badges">
+									<span class="onsale">-{{product.distributor_price|floatformat:1}}%</span>
+								</div>
+												{% endif%}
+
+							</div>
+							<div class="single-product__content">
+								<div class="title">
+									<a href="{% url 'product_detail' product.pk product.slug %}">{{ product.product_name }}</a>
+								</div>
+								{% if user.is_authenticated and product.distributor_price != 0  %}
+								<div class="price">
+                                    {% if request.session.can_use_loyalty_purchase %}
+									<span class="discounted-price">₹{% check product %}</span><br><br>
+									<span class="discounted-price">BV - 0</span><br>
+									<span class="discounted-price">PV - 0</span>
+                                {% else %}
+                                    <span class="main-price discounted">₹{% check product %}</span>
+									<span class="discounted-price">₹{% dis_price_include_tax product %}</span><br><br>
+									<span class="discounted-price">BV - {% business_volue product %}</span><br>
+									<span class="discounted-price">PV - {% point_volue product %}</span>
+                                  {% endif %}
+
+
+								</div>
+								{% else %}
+								<div class="price">
+									<span class="discounted-price">₹{% check product %}</span>
+								</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+                    {% endfor %}
+					<!-- End of single product -->
+				</div>
+			</div>
+		</div>
+        {% if all_products.has_other_pages %}
+		<dev class="d-flex justify-content-center">
+        <nav class="woocommerce-pagination">
+                            <ul class='pagination'>
+                                {% if all_products.has_previous %}
+                                <li>
+                                    <a class="page-numbers" href="?page={{ all_products.previous_page_number }}">← Previous Page</a>
+                                </li>
+{#                                <li>#}
+{#                                <a class="page-numbers" href="?page={{ all_products.previous_page_number }}">{{ all_products.previous_page_number }}</a>#}
+{#                                </li>#}
+                                {% endif %}
+                                {% for i in all_products.paginator.page_range %}
+                                    {% if all_products.number == i %}
+                                <li>
+                                    <a class="page-numbers current"><u>{{ i }}</u></a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if all_products.has_next %}
+{#                                <li>#}
+{#                                <a class="page-numbers" href="?page={{ all_products.next_page_number }}">{{ all_products.next_page_number }}</a>#}
+{#                                </li>#}
+                                <li>
+                                    <a class="page-numbers" href="?page={{ all_products.next_page_number }}">Next Page →</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <span aria-current="page" class="page-numbers current"></span>
+                                </li>
+                                {% endif %}
+                            </ul>
+            </nav><br />
+		</dev>
+        {% endif %}
+		<!-- shop page content end -->
+	</div>
+	<!-- shop page content end -->
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block extra_scripts %}
+	<script>
+
+	   $("#selectall").click(function(){
+
+        if(this.checked){
+            $('.checkboxall').each(function(){
+                $(".checkboxall").prop('checked', true);
+            })
+        }else{
+            $('.checkboxall').each(function(){
+                $(".checkboxall").prop('checked', false);
+            })
+        }
+
+    });
+
+     $(".checkboxall").click(function(){
+
+         if(!this.checked){
+             $("#selectall").prop('checked', false);
+         }
+
+     });
+
+$(document).ready(function () {
+	$('.checkboxall').each(function(){
+		$("#selectall").prop('checked', true);
+		$(".checkboxall").prop('checked', true);
+	})
+});
+	</script>
+	{% endblock extra_scripts %}
+
+		<!-- shop page content end -->
+	<br> </br/>
+<!--	{{ product_pages}}<br/>-->
+<!--	Has Privious: {{ product_pages.has_previous }}<br/>-->
+<!--	Has Next: {{ product_pages.has_next }}<br/>-->
+<!--	number of pages: {{product_pages.Paginator.num_pages }}<br/>-->
+	</div>
+
+	<!-- scroll to top -->
+<!--	<a href="#" class="scroll-top"></a>-->
+	<!-- end of scroll to top -->
+
+	<!-- JS -->
+	<!-- jQuery JS -->
+	<script src="assets/js/vendor/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="assets/js/popper.min.js"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="assets/js/bootstrap.min.js"></script>
+
+	<!-- Plugins JS -->
+	<script src="assets/js/plugins.js"></script>
+
+	<!-- Main JS -->
+	<script src="assets/js/main.js"></script>
+	<script>
+		$("#signup").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+		});
+
+			$("#signup").modal("hide");
+		});
+
+		$("#login").on('show.bs.modal', function (e) {
+			$("#forgotpwd").modal("hide");
+		});
+
+		$("#forgotpwd").on('show.bs.modal', function (e) {
+			$("#login").modal("hide");
+		});
+	</script>
+	<script>
+	</script>
+
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'sg2plcpnl0196'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script>
+<script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script>
+</html>
